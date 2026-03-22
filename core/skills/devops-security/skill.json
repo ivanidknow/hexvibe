@@ -1,0 +1,31 @@
+{
+  "skill_id": "devops-security",
+  "name": "DevOps Security",
+  "activation_triggers": [
+    "docker-user-nonroot",
+    "docker-no-latest-tag",
+    "docker-no-secret-env",
+    "cb-gost-devsecops",
+    "cb-gost-devsecops-docker",
+    "slsa-provenance",
+    "hermetic-build",
+    "vex-filter",
+    "artifact-signing",
+    "reproducible-build"
+  ],
+  "relevant_extensions": [
+    ".dockerfile",
+    ".yml",
+    ".yaml",
+    ".tf",
+    ".sh"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/devops-security/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/devops_security_vulnerable.Dockerfile",
+  "security_priority": 10
+}

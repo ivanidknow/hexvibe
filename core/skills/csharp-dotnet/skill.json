@@ -1,0 +1,27 @@
+{
+  "skill_id": "csharp-dotnet",
+  "name": "C# / .NET Security",
+  "activation_triggers": [
+    "csh-aspnet-cookie",
+    "csh-dotnet-config",
+    "csh-binaryformatter",
+    "csh-xxe-xmldocument",
+    "csh-process-start",
+    "csh-vsto-security",
+    "csh-binaryformatter-rce",
+    "csh-mass-assignment"
+  ],
+  "relevant_extensions": [
+    ".cs",
+    ".csproj",
+    ".config"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/csharp-dotnet/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/multi_lang_vulnerable/csharp_vulnerable.cs",
+  "security_priority": 5
+}

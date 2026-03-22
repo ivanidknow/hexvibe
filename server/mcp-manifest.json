@@ -1,0 +1,59 @@
+{
+  "name": "HexVibe MCP Security Server",
+  "version": "1.0.0",
+  "description": "HexVibe v1.0 — Cognitive AppSec Guardrail: MCP server with HexVibe Core (1000 security patterns), Semgrep, TruffleHog, and cognitive scoring.",
+  "transport": {
+    "protocol": "json-rpc",
+    "stdio": true
+  },
+  "entrypoint": "server/adapter.py",
+  "core": {
+    "rules_root": "core/skills",
+    "generated_rules": "core/semgrep-rules",
+    "testbed": "core/gold-standard-testbed"
+  },
+  "tools": [
+    {
+      "name": "list_skills",
+      "purpose": "List available security skills, triggers, and tool hints."
+    },
+    {
+      "name": "get_skill_context",
+      "purpose": "Return index and patterns for selected skill for focused RAG/prompt context."
+    },
+    {
+      "name": "ask_hexvibe",
+      "purpose": "Semantic search over HexVibe Core and return top 3 relevant Safe-Patterns with testbed examples."
+    },
+    {
+      "name": "run_check",
+      "purpose": "Run Semgrep static analysis, conditional Syft license checks, and TruffleHog secret scanning."
+    },
+    {
+      "name": "ignore_finding",
+      "purpose": "Persist an accepted false-positive by metric ID + file path + line fingerprint."
+    },
+    {
+      "name": "apply_remediation",
+      "purpose": "Apply Safe-Fix for a metric and file path using the corresponding Safe-Pattern."
+    }
+  ],
+  "capabilities": {
+    "static_analysis": [
+      "semgrep"
+    ],
+    "license_compliance": [
+      "syft"
+    ],
+    "secret_scanning": [
+      "trufflehog"
+    ],
+    "rag": {
+      "source": "core/skills/*/(index.md,patterns.md)",
+      "strategy": "load-by-skill"
+    }
+  },
+  "config": {
+    "trufflehog": "server/config.yaml"
+  }
+}

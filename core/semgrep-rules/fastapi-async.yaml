@@ -1,0 +1,730 @@
+rules:
+  - id: hexvibe.fastapi-async.fas-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @limiter.limit("2/minute")
+          @app.get("/test")
+          async def test(request: Request):
+              return "hi"
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-001\\b'
+    message: |-
+      HexVibe Detection [FAS-001]: SlowApi Documentation, FastAPI > Note: route decorator must be above the limit decorator, not below it
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.get("/limited")
+          @limiter.limit("5/minute")
+          async def limited() -> dict[str, str]:
+              return {"status": "ok"}
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-002\\b'
+    message: |-
+      HexVibe Detection [FAS-002]: SlowApi Documentation, Limitations and known issues > Request argument
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.get("/mars")
+          @limiter.limit("5/minute")
+          async def homepage(request: Request):
+              return {"key": "value"}
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-003\\b'
+    message: |-
+      HexVibe Detection [FAS-003]: SlowApi Documentation, Limitations and known issues > Response type
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий подставляет в SQL значения через f-string/конкатенацию; при отсутствии параметризации выполняет произвольный SQL (CWE-89).
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          query = f"INSERT INTO HighScores(name, score) VALUES ('{name}', {score})"
+          await database.execute(query=query)
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-004\\b'
+    message: |-
+      HexVibe Detection [FAS-004]: EncodeDatabases, contributing > Insert some data
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий подставляет в SQL значения через конкатенацию строк; при отсутствии bind-параметров выполняет произвольный SQL (CWE-89).
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          query = "INSERT INTO HighScores(name, score) VALUES ('" + name + "', " + str(score) + ")"
+          await database.execute(query=query)
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-005\\b'
+    message: |-
+      HexVibe Detection [FAS-005]: EncodeDatabases, contributing > Insert some data
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          await database.execute(query=query1, values=values1)
+          await database.execute(query=query2, values=values2)
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-006\\b'
+    message: |-
+      HexVibe Detection [FAS-006]: EncodeDatabases, tests_and_migrations > Test isolation / force-rollback transactions
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          database.execute(query=query, values=values)
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-007\\b'
+    message: |-
+      HexVibe Detection [FAS-007]: EncodeDatabases, database_queries > Queries / Execute
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.get("/proxy")
+          async def proxy(url: str):
+              async with httpx.AsyncClient() as client:
+                  r = await client.get(url)
+              return {"status": r.status_code}
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-008\\b'
+    message: |-
+      HexVibe Detection [FAS-008]: FastAPI Security Documentation (production-ready resource usage); OWASP API Security Top 10 (API4: Unrestricted Resource Consumption)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          async with httpx.AsyncClient() as client:
+              r = await client.get("https://api.example.internal/data")
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-009\\b'
+    message: |-
+      HexVibe Detection [FAS-009]: FastAPI Security Documentation (availability hardening); OWASP API Security Top 10 (API4: Unrestricted Resource Consumption)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.post("/login")
+          async def login(request: Request):
+              body = await request.json()
+              logger.info("raw_request=%s body=%s", request, body)
+              return {"ok": True}
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-010\\b'
+    message: |-
+      HexVibe Detection [FAS-010]: FastAPI Security Documentation (sensitive data handling); OWASP API Security Top 10 (API3: Broken Object Property Level Authorization / excessive data exposure)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          app = FastAPI(title="HexVibe API")
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-011\\b'
+    message: |-
+      HexVibe Detection [FAS-011]: FastAPI Security Documentation (disable interactive docs in production); OWASP API Security Top 10 (API9: Improper Inventory Management)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          app.add_middleware( 
+              CORSMiddleware,
+              allow_origins=["*"],
+              allow_credentials=True,
+              allow_methods=["*"],
+              allow_headers=["*"],
+          )
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-012\\b'
+    message: |-
+      HexVibe Detection [FAS-012]: FastAPI Security Documentation (CORS); OWASP API Security Top 10 (API8: Security Misconfiguration)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          class RawModel(BaseModel):
+              dangerous: object
+              class Config:
+                  arbitrary_types_allowed = True
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-013\\b'
+    message: |-
+      HexVibe Detection [FAS-013]: FastAPI Security Documentation (input validation); OWASP API Security Top 10 (API8: Security Misconfiguration)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          def send_email_task(email: str, payload: dict[str, object]) -> None:
+              smtp_client.send(email, payload)
+          @app.post("/notify")
+          async def notify(background_tasks: BackgroundTasks):
+              background_tasks.add_task(send_email_task, "user@example.com", {"status": "ok"})
+              return {"queued": True}
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-014\\b'
+    message: |-
+      HexVibe Detection [FAS-014]: FastAPI Security Documentation (BackgroundTasks operational safety); OWASP API Security Top 10 (API10: Unsafe Consumption of APIs)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.post("/upload")
+          async def upload(file: UploadFile):
+              data = await file.read()
+              return {"size": len(data)}
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-015\\b'
+    message: |-
+      HexVibe Detection [FAS-015]: FastAPI Security Documentation (request validation & UploadFile handling); OWASP API Security Top 10 (API4: Unrestricted Resource Consumption)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.get("/tenant")
+          async def tenant_route(request: Request):
+              tenant = request.headers.get("x-tenant-id", "")
+              callback = f"https://{request.headers['host']}/cb/{tenant}"
+              return {"callback": callback}
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-016\\b'
+    message: |-
+      HexVibe Detection [FAS-016]: OWASP API Security Top 10 (API8: Security Misconfiguration); FastAPI Production Readiness (trusted proxy/host header hardening)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        OWASP API Security Top 10 (API3: Broken Object Property Level Authorization); FastAPI Production Readiness (strict input models)
+    pattern-either:
+      - pattern: |-
+          class UserUpdate(BaseModel):
+              email: str
+              is_admin: bool = False
+              balance: int = 0
+          @app.patch("/users/{user_id}")
+          async def patch_user(user_id: int, dto: UserUpdate):
+              await users.update(user_id=user_id, **dto.model_dump())
+              return {"ok": True}
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-017\\b'
+    message: |-
+      HexVibe Detection [FAS-017]: None = None
+      @app.patch("/users/{user_id}")
+      async def patch_user(user_id: int, dto: UserUpdateDTO):
+          allowed = dto.model_dump(exclude_none=True, include={"email", "display_name"})
+          await users.update(user_id=user_id, **allowed)
+          return {"ok": True}
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.post("/files")
+          async def upload(file: UploadFile):
+              path = f"/data/uploads/{file.filename}"
+              content = await file.read()
+              with open(path, "wb") as f:
+                  f.write(content)
+              return {"path": path}
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-018\\b'
+    message: |-
+      HexVibe Detection [FAS-018]: OWASP API Security Top 10 (API8: Security Misconfiguration); FastAPI Production Readiness (secure file upload handling)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.get("/orders/{order_id}")
+          async def get_order(order_id: int):
+              try:
+                  return await service.fetch(order_id)
+              except Exception as exc:
+                  raise HTTPException(status_code=500, detail=str(exc))
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-019\\b'
+    message: |-
+      HexVibe Detection [FAS-019]: OWASP API Security Top 10 (API8: Security Misconfiguration); FastAPI Production Readiness (error handling and information disclosure)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          async def get_db() -> AsyncGenerator[AsyncSession, None]:
+              session = session_factory()
+              yield session
+          @app.get("/users")
+          async def users(db: AsyncSession = Depends(get_db)):
+              return await repo.list_users(db)
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-020\\b'
+    message: |-
+      HexVibe Detection [FAS-020]: OWASP API Security Top 10 (API4: Unrestricted Resource Consumption); FastAPI Production Readiness (dependency lifecycle with yield/finally)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.get("/diag")
+          async def diag(host: str):
+              ...
+              subprocess.run(f"nslookup {host}", shell=True, check=False)
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-021\\b'
+    message: |-
+      HexVibe Detection [FAS-021]: CWE-78
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.post("/import")
+          async def import_blob(payload: str):
+              ...
+              obj = pickle.loads(base64.b64decode(payload))
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-022\\b'
+    message: |-
+      HexVibe Detection [FAS-022]: CWE-502
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.post("/users/me/email")
+          async def change_email(req: dict, request: Request):
+              ...
+              session_id = request.cookies.get("session_id")
+              return await svc.change_email(session_id, req["email"])
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-023\\b'
+    message: |-
+      HexVibe Detection [FAS-023]: CWE-352
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.post("/render")
+          async def render(tpl: str, ctx: dict):
+              ...
+              return Template(tpl).render(**ctx)
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-024\\b'
+    message: |-
+      HexVibe Detection [FAS-024]: CWE-1336
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.post("/calc")
+          async def calc(user_input: str):
+              ...
+              return {"result": eval(user_input)}
+          ...
+          exec(user_input)
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-025\\b'
+    message: |-
+      HexVibe Detection [FAS-025]: CWE-94
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.post("/ops/run")
+          async def run(cmd: str):
+              ...
+              os.system(cmd)
+          ...
+          subprocess.run(cmd, shell=True)
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-026\\b'
+    message: |-
+      HexVibe Detection [FAS-026]: CWE-78
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.get("/plugin")
+          async def plugin(mod: str):
+              ...
+              m = __import__(mod)
+              return {"module": str(m)}
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-027\\b'
+    message: |-
+      HexVibe Detection [FAS-027]: CWE-470
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.get("/users/{id}", response_model=UserModel)
+          async def get_user(id: int):
+              return user
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-028\\b'
+    message: |-
+      HexVibe Detection [FAS-028]: CWE Final Certification
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          return JSONResponse({"detail": str(exc)})
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-029\\b'
+    message: |-
+      HexVibe Detection [FAS-029]: CWE Final Certification
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          return FileResponse(user_path)
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-030\\b'
+    message: |-
+      HexVibe Detection [FAS-030]: CWE Final Certification
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-031
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий присылает файл/строку с ячейкой вроде =SUM(1+1) cmd|' /C calc'!A0; при открытии в Excel формула может выполнить команду на машине жертвы (CWE-1236).
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          writer.writerow([user.name, user.comment])
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-031\\b'
+    message: |-
+      HexVibe Detection [FAS-031]: CWE Final Certification
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-032
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          logger.error("debug=%s", traceback.format_exc())
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-032\\b'
+    message: |-
+      HexVibe Detection [FAS-032]: CWE Final Certification
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-033
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          csv_line = f"{request.query_params['name']},{request.query_params['note']}"
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-033\\b'
+    message: |-
+      HexVibe Detection [FAS-033]: CWE Final Certification
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-034
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          logger.debug("headers=%s body=%s", req.headers, body)
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-034\\b'
+    message: |-
+      HexVibe Detection [FAS-034]: CWE Final Certification
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-035
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use Pydantic response models with explicit field exclusions; map domain entities to public DTOs only.
+    pattern-either:
+      - pattern: |-
+          return {"user": user_auth_data.model_dump()}
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-035\\b'
+    message: |-
+      HexVibe Detection [FAS-035]: CWE-201
+    languages:
+      - python
+    severity: WARNING

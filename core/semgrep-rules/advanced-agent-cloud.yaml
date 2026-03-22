@@ -1,0 +1,802 @@
+rules:
+  - id: hexvibe.advanced-agent-cloud.aac-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ALLOWED_HOSTS = {"cdn.example.com"} u = urlparse(userInput) if u.hostname not in ALLOWED_HOSTS: raise ValueError("url not allowed") await page.goto(userInput)
+    pattern-either:
+      - pattern: |-
+          await page.goto(userInput)
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-001\\b'
+    message: |-
+      HexVibe Detection [AAC-001]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        await context.tracing.start(screenshots=False) или маскирование PII перед экспортом трейса
+    pattern-either:
+      - pattern: |-
+          await context.tracing.start(screenshots=True)
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-002\\b'
+    message: |-
+      HexVibe Detection [AAC-002]: CWE-200
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        const key = process.env.STRIPE_SECRET_KEY (только серверные модули / Route Handlers без NEXT_PUBLIC_)
+    pattern-either:
+      - pattern: |-
+          const key = process.env.NEXT_PUBLIC_STRIPE_SECRET
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-003\\b'
+    message: |-
+      HexVibe Detection [AAC-003]: CWE-20
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        json.loads(raw_job) или msgpack.loads + явная схема данных
+    pattern-either:
+      - pattern: |-
+          pickle.loads(raw_job)
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-004\\b'
+    message: |-
+      HexVibe Detection [AAC-004]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        expires=timedelta(seconds=45) + проверка владельца объекта и method GET-only где возможно
+    pattern-either:
+      - pattern: |-
+          client.presigned_put_object("b", "o", expires=timedelta(days=7))
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-005\\b'
+    message: |-
+      HexVibe Detection [AAC-005]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        claims = jwt.decode(token, key, audience=..., issuer=..., options={"verify_exp": True})
+    pattern-either:
+      - pattern: |-
+          if authorization:
+              headers = {"Authorization": authorization}
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-006\\b'
+    message: |-
+      HexVibe Detection [AAC-006]: CWE-287
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        limit_req zone=api burst=20 nodelay; в том же location или выше по цепочке
+    pattern-either:
+      - pattern: |-
+          location /api/ {
+              proxy_pass http://backend;
+          }
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-007\\b'
+    message: |-
+      HexVibe Detection [AAC-007]: CWE-770
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        HTTP_PROXY/HTTPS_PROXY заданы на уровне контейнера; Session(trust_env=True)
+    pattern-either:
+      - pattern: |-
+          requests.get(url, proxies={"http": None, "https": None})
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-008\\b'
+    message: |-
+      HexVibe Detection [AAC-008]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        logger.info("job=%s", sanitize(redis_raw_payload))
+    pattern-either:
+      - pattern: |-
+          logger.info("job=%s", redis_raw_payload)
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-009\\b'
+    message: |-
+      HexVibe Detection [AAC-009]: CWE-117
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        state-machine: явное consentGiven === true до вызова getUserMedia
+    pattern-either:
+      - pattern: |-
+          navigator.mediaDevices.getUserMedia({ audio: true })
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-010\\b'
+    message: |-
+      HexVibe Detection [AAC-010]: CWE-20
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          Инструмент принимает file_path/command и выполняет без os.path.abspath() + проверки префикса рабочей директории
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-011\\b'
+    message: |-
+      HexVibe Detection [AAC-011]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          def tool_handler(args): без модели BaseModel/валидации типов
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-012\\b'
+    message: |-
+      HexVibe Detection [AAC-012]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          value = redis.get(key)
+          redis.set(key, int(value)+1) в конкурентном воркере
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-013\\b'
+    message: |-
+      HexVibe Detection [AAC-013]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий подделывает JSON от внешнего AI API; без схемы поля трактуются как доверенные (CWE-20/918 цепочки).
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          data = response.json() и прямое использование data["..."] без схемы
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-014\\b'
+    message: |-
+      HexVibe Detection [AAC-014]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Логировать только redacted metadata (hash/id/length), исключать system prompts и полный контекст из telemetry/logs by default.
+    pattern-either:
+      - pattern: |-
+          logger.info("system_prompt=%s", system_prompt)
+          trace.set_attribute("llm.context", full_context)
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-015\\b'
+    message: |-
+      HexVibe Detection [AAC-015]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Перед трассировкой удалять секреты/PII из agent memory и применять denylist sensitive keys (token, secret, api_key).
+    pattern-either:
+      - pattern: |-
+          span.set_attribute("agent.memory", json.dumps(memory_state))
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-016\\b'
+    message: |-
+      HexVibe Detection [AAC-016]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Не логировать скрытые reasoning fields; сохранять только конечный ответ и технические метрики выполнения.
+    pattern-either:
+      - pattern: |-
+          logger.debug("reasoning=%s", llm_response["thinking"])
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-017\\b'
+    message: |-
+      HexVibe Detection [AAC-017]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Шифровать артефакты или отключать persistent prompt dumps в production; включать retention + secure erase policy.
+    pattern-either:
+      - pattern: |-
+          open("debug/prompts.json","w").write(json.dumps(history))
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-018\\b'
+    message: |-
+      HexVibe Detection [AAC-018]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @tool("run_any")
+          subprocess.run(user_cmd, shell=True)
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-019\\b'
+    message: |-
+      HexVibe Detection [AAC-019]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать server-side tenant mapping и immutable namespace binding, запретить namespace from external input.
+    pattern-either:
+      - pattern: |-
+          index.upsert(vectors, namespace=request.user_input)
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-020\\b'
+    message: |-
+      HexVibe Detection [AAC-020]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          tpl = Path(req["template"]).read_text()
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-021\\b'
+    message: |-
+      HexVibe Detection [AAC-021]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          while True: resp = client.responses.create(...)
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-022\\b'
+    message: |-
+      HexVibe Detection [AAC-022]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Нормализовать/санитизировать tool output и разделять роли (system immutable, external data only as user/tool role).
+    pattern-either:
+      - pattern: |-
+          messages=[{"role":"system","content": tool_output}]
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-023\\b'
+    message: |-
+      HexVibe Detection [AAC-023]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Вводить egress allowlist + DNS/IP validation и блокировать link-local/metadata ranges перед запросом.
+    pattern-either:
+      - pattern: |-
+          requests.get(callback_url) где callback_url из tool output
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-024\\b'
+    message: |-
+      HexVibe Detection [AAC-024]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Включать tenant/user scope и policy version в cache key, чтобы исключить cross-tenant data leakage.
+    pattern-either:
+      - pattern: |-
+          cache_key = f"{prompt_hash}"
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-025\\b'
+    message: |-
+      HexVibe Detection [AAC-025]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать безопасный JSON parser + strict schema validation и reject unknown fields до обработки.
+    pattern-either:
+      - pattern: |-
+          payload = eval(tool_result)
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-026\\b'
+    message: |-
+      HexVibe Detection [AAC-026]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Pydantic model_validate на сыром тексте ответа; для base64 — только после явного поля в схеме и max length; в TS — Zod + отказ от Buffer.from(llm, "base64") без policy.
+    pattern-either:
+      - pattern: |-
+          raw = base64.b64decode(llm_json["blob"]) затем json.loads(raw)
+          const buf = Buffer.from(assistantText, "base64")
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-027\\b'
+    message: |-
+      HexVibe Detection [AAC-027]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Как AAC-027: строгая схема ответа, без fromhex/hex decode на необработанной строке модели.
+    pattern-either:
+      - pattern: |-
+          bytes.fromhex(llm_reply.strip())
+          Buffer.from(modelOut, "hex")
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-028\\b'
+    message: |-
+      HexVibe Detection [AAC-028]: CWE-1109
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Pydantic-схема ответа без exec/system; sandbox tool API.
+    pattern-either:
+      - pattern: |-
+          cmd = "".join(chr(c) for c in [114,109,32,45,114,102,32,47])
+          os.system(cmd)
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-029\\b'
+    message: |-
+      HexVibe Detection [AAC-029]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Zod + deny eval/Function на данных модели.
+    pattern-either:
+      - pattern: |-
+          eval(atob(llmChunk))
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-030\\b'
+    message: |-
+      HexVibe Detection [AAC-030]: CWE-1334
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-031
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Allowlist argv; no shell metacharacters from model.
+    pattern-either:
+      - pattern: |-
+          subprocess.run(["powershell", "-EncodedCommand", llm_b64])
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-031\\b'
+    message: |-
+      HexVibe Detection [AAC-031]: CWE-78
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-032
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Парсер JSON + фиксированные команды.
+    pattern-either:
+      - pattern: |-
+          os.system("bash -c "$(echo " + llm_pipe + " | base64 -d)"")
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-032\\b'
+    message: |-
+      HexVibe Detection [AAC-032]: CWE-78
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-033
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        RestrictedPython или no code execution path.
+    pattern-either:
+      - pattern: |-
+          exec(compile(llm_code, "<llm>", "exec"))
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-033\\b'
+    message: |-
+      HexVibe Detection [AAC-033]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-034
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Unicode NFKC + command allowlist.
+    pattern-either:
+      - pattern: |-
+          cmd = llm_text.replace("а", "a") затем run(cmd)
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-034\\b'
+    message: |-
+      HexVibe Detection [AAC-034]: CWE-1335
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-035
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Фиксированный argv template; модель только заполняет allowlisted args.
+    pattern-either:
+      - pattern: |-
+          parts = json.loads(llm_json["p"]); subprocess.run(parts)
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-035\\b'
+    message: |-
+      HexVibe Detection [AAC-035]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-036
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Schema deny raw hex blobs.
+    pattern-either:
+      - pattern: |-
+          exec(bytes.fromhex(llm_hex).decode())
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-036\\b'
+    message: |-
+      HexVibe Detection [AAC-036]: CWE-1337
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-037
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Strict URL parser + block dangerous schemes.
+    pattern-either:
+      - pattern: |-
+          open_url(llm_suggested_link) где link содержит javascript:
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-037\\b'
+    message: |-
+      HexVibe Detection [AAC-037]: CWE-1338
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-038
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Single JSON schema; no chained decoders on model text.
+    pattern-either:
+      - pattern: |-
+          exec(zlib.decompress(base64.b64decode(llm_blob)))
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-038\\b'
+    message: |-
+      HexVibe Detection [AAC-038]: CWE-1340
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-039
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Pydantic model_validate на тексте; deny codecs.decode на LLM fields.
+    pattern-either:
+      - pattern: |-
+          raw = codecs.decode(llm_obj["h"], "hex"); exec(raw.decode())
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-039\\b'
+    message: |-
+      HexVibe Detection [AAC-039]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-040
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Zod schema; block eval/new Function on model-derived buffers.
+    pattern-either:
+      - pattern: |-
+          eval(Buffer.from(assistantChunk, "base64").toString("utf8"))
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-040\\b'
+    message: |-
+      HexVibe Detection [AAC-040]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-041
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        JSON-only; no binary deserialization from assistant output.
+    pattern-either:
+      - pattern: |-
+          pickle.loads(binascii.a2b_hex(llm_field))
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-041\\b'
+    message: |-
+      HexVibe Detection [AAC-041]: CWE-1109
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-042
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Reject raw atob blobs unless schema allows with max length.
+    pattern-either:
+      - pattern: |-
+          new Uint8Array(Uint8Array.from(atob(modelB64), c => c.charCodeAt(0)))
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-042\\b'
+    message: |-
+      HexVibe Detection [AAC-042]: CWE-1109
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-043
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Короткий TTL + rotation; явные leeway/max_age в verifier.
+    pattern-either:
+      - pattern: |-
+          jwt.encode({"sub": svc}, key, algorithm="HS256", headers={"exp": int(time.time()) + 86400 * 7})
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-043\\b'
+    message: |-
+      HexVibe Detection [AAC-043]: CWE-613
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.advanced-agent-cloud.aac-044
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Central HTTP wrapper; no IMDS literals in agent runtime.
+    pattern-either:
+      - pattern: |-
+          httpx.get("http://169.254.169.254/metadata/instance", headers={"Metadata": "true"})
+      - pattern-regex: 'Vulnerable:\\s*AAC\\-044\\b'
+    message: |-
+      HexVibe Detection [AAC-044]: CWE-918
+    languages:
+      - generic
+    severity: WARNING

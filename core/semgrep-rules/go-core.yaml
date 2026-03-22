@@ -1,0 +1,819 @@
+rules:
+  - id: hexvibe.go-core.go-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        action := r.URL.Query().Get("action") allowed := map[string][]string{"uptime": {"uptime"}} ... exec.Command(allowed[action][0]).Run()
+    pattern-either:
+      - pattern: |-
+          cmd := r.URL.Query().Get("cmd")
+          ...
+          exec.Command("sh", "-c", cmd).Run()
+      - pattern-regex: 'Vulnerable:\\s*GO\\-001\\b'
+    message: |-
+      HexVibe Detection [GO-001]: CWE-78
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        host := r.URL.Query().Get("host") if !hostRe.MatchString(host) { return } ... exec.Command("ping", "-c", "1", host).Run()
+    pattern-either:
+      - pattern: |-
+          host := r.URL.Query().Get("host")
+          ...
+          exec.Command("bash", "-c", "ping -c 1 "+host).Run()
+      - pattern-regex: 'Vulnerable:\\s*GO\\-002\\b'
+    message: |-
+      HexVibe Detection [GO-002]: CWE-77
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        order := r.URL.Query().Get("order") if order != "name" && order != "created_at" { order = "name" } ... q := "SELECT * FROM users ORDER BY " + order
+    pattern-either:
+      - pattern: |-
+          order := r.URL.Query().Get("order")
+          ...
+          q := "SELECT * FROM users ORDER BY " + order
+      - pattern-regex: 'Vulnerable:\\s*GO\\-003\\b'
+    message: |-
+      HexVibe Detection [GO-003]: CWE-74
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        m := r.URL.Query().Get("method") if m != "Health" && m != "Status" { return } ... reflect.ValueOf(handler).MethodByName(m).Call(nil)
+    pattern-either:
+      - pattern: |-
+          m := r.URL.Query().Get("method")
+          ...
+          reflect.ValueOf(handler).MethodByName(m).Call(nil)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-004\\b'
+    message: |-
+      HexVibe Detection [GO-004]: CWE-470
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        name := r.URL.Query().Get("plugin") if _, ok := allowedPlugins[name]; !ok { return } ... plugin.Open(allowedPlugins[name])
+    pattern-either:
+      - pattern: |-
+          name := r.URL.Query().Get("plugin")
+          ...
+          plugin.Open(name)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-005\\b'
+    message: |-
+      HexVibe Detection [GO-005]: CWE-470
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        cmd := r.FormValue("cmd") if cmd != "normalize" { return } ... vm.RunString("normalize(input)")
+    pattern-either:
+      - pattern: |-
+          script := r.FormValue("script")
+          ...
+          vm.RunString(script)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-006\\b'
+    message: |-
+      HexVibe Detection [GO-006]: CWE-95
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        name := r.FormValue("template") if _, ok := safeTemplates[name]; !ok { return } ... template.Must(template.ParseFiles(safeTemplates[name]))
+    pattern-either:
+      - pattern: |-
+          tpl := r.FormValue("tpl")
+          ...
+          template.Must(template.New("x").Parse(tpl))
+      - pattern-regex: 'Vulnerable:\\s*GO\\-007\\b'
+    message: |-
+      HexVibe Detection [GO-007]: CWE-94
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        tool := payload["tool"] allowed := map[string][]string{"date": {"date"}} if _, ok := allowed[tool.(string)]; !ok { return } ... exec.Command(allowed[tool.(string)][0]).Run()
+    pattern-either:
+      - pattern: |-
+          tool := payload["tool"]
+          ...
+          exec.Command(tool.(string)).Run()
+      - pattern-regex: 'Vulnerable:\\s*GO\\-008\\b'
+    message: |-
+      HexVibe Detection [GO-008]: CWE-78
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        go func(ctx context.Context) {     for {         select {         case <-ctx.Done():             return         default:             ...         }     } }(ctx)
+    pattern-either:
+      - pattern: |-
+          go func() {
+              for {
+                  ...
+              }
+          }()
+      - pattern-regex: 'Vulnerable:\\s*GO\\-009\\b'
+    message: |-
+      HexVibe Detection [GO-009]: CWE-400
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        name := r.URL.Query().Get("file") clean := filepath.Clean("/" + name) target := filepath.Join(root, clean) if !strings.HasPrefix(target, root) {     return }
+    pattern-either:
+      - pattern: |-
+          name := r.URL.Query().Get("file")
+          ...
+          target := filepath.Join(root, name)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-010\\b'
+    message: |-
+      HexVibe Detection [GO-010]: CWE-22
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        url := r.URL.Query().Get("url") host := parseHost(url) allowed := map[string]bool{"api.example.com": true} if !allowed[host] {     return } resp, _ := http.Get(url)
+    pattern-either:
+      - pattern: |-
+          url := r.URL.Query().Get("url")
+          ...
+          resp, _ := http.Get(url)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-011\\b'
+    message: |-
+      HexVibe Detection [GO-011]: CWE-918
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        buf := make([]byte, n) ... _ = buf[offset:] // avoid unsafe pointer arithmetic
+    pattern-either:
+      - pattern: |-
+          var ptr unsafe.Pointer
+          ...
+          ptr2 := unsafe.Pointer(uintptr(ptr) + offset)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-012\\b'
+    message: |-
+      HexVibe Detection [GO-012]: CWE-242
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ... h := sha256.New()
+    pattern-either:
+      - pattern: |-
+          ...
+          h := md5.New()
+          ...
+          h2 := sha1.New()
+      - pattern-regex: 'Vulnerable:\\s*GO\\-013\\b'
+    message: |-
+      HexVibe Detection [GO-013]: CWE-327
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        next := r.URL.Query().Get("next") if !isRelativeOrAllowed(next) {     next = "/" } http.Redirect(w, r, next, http.StatusFound)
+    pattern-either:
+      - pattern: |-
+          next := r.URL.Query().Get("next")
+          ...
+          http.Redirect(w, r, next, http.StatusFound)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-014\\b'
+    message: |-
+      HexVibe Detection [GO-014]: CWE-601
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        userInput := r.URL.Query().Get("user") safe := strings.NewReplacer("\\n", "\\\\n", "\\r", "\\\\r").Replace(userInput) ... log.Printf("User: %s", safe)
+    pattern-either:
+      - pattern: |-
+          userInput := r.URL.Query().Get("user")
+          ...
+          log.Printf("User: %s", userInput)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-015\\b'
+    message: |-
+      HexVibe Detection [GO-015]: CWE-117
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiKey := os.Getenv("API_KEY") if apiKey == "" {     panic("missing API_KEY") }
+    pattern-either:
+      - pattern: |-
+          const apiKey = "prod-api-key-12345"
+          ...
+          token := "hardcoded-token"
+      - pattern-regex: 'Vulnerable:\\s*GO\\-016\\b'
+    message: |-
+      HexVibe Detection [GO-016]: CWE-798
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ... mu.Lock() counter = counter + 1 mu.Unlock()
+    pattern-either:
+      - pattern: |-
+          ...
+          counter++
+          ...
+          go func() {
+              counter = counter + 1
+          }()
+      - pattern-regex: 'Vulnerable:\\s*GO\\-017\\b'
+    message: |-
+      HexVibe Detection [GO-017]: CWE-362
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {     if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {         return nil, fmt.Errorf("unexpected signing method")     }     return key, nil })
+    pattern-either:
+      - pattern: |-
+          token, _ := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+              return key, nil
+          })
+      - pattern-regex: 'Vulnerable:\\s*GO\\-018\\b'
+    message: |-
+      HexVibe Detection [GO-018]: CWE-287
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        rows, err := db.Query(query) if err != nil {     return err } defer rows.Close() ...
+    pattern-either:
+      - pattern: |-
+          rows, _ := db.Query(query)
+          ...
+          for rows.Next() {
+              ...
+          }
+      - pattern-regex: 'Vulnerable:\\s*GO\\-019\\b'
+    message: |-
+      HexVibe Detection [GO-019]: CWE-770
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        tr := &http.Transport{     TLSClientConfig: &tls.Config{InsecureSkipVerify: false}, }
+    pattern-either:
+      - pattern: |-
+          tr := &http.Transport{
+              TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+          }
+      - pattern-regex: 'Vulnerable:\\s*GO\\-020\\b'
+    message: |-
+      HexVibe Detection [GO-020]: CWE-295
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        f, err := os.Open(path) if err != nil {     return err } defer f.Close() ...
+    pattern-either:
+      - pattern: |-
+          f, _ := os.Open(path)
+          ...
+          data, _ := io.ReadAll(f)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-021\\b'
+    message: |-
+      HexVibe Detection [GO-021]: CWE-404
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        tmpl := template.Must(template.New("x").Parse("Hello {{.Name}}")) ... tmpl.Execute(w, map[string]string{"Name": name})
+    pattern-either:
+      - pattern: |-
+          name := r.URL.Query().Get("name")
+          ...
+          fmt.Fprintf(w, name)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-022\\b'
+    message: |-
+      HexVibe Detection [GO-022]: CWE-116
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        body, _ := io.ReadAll(io.LimitReader(r.Body, maxBytes)) ... _ = body
+    pattern-either:
+      - pattern: |-
+          body, _ := ioutil.ReadAll(r.Body)
+          ...
+          _ = body
+      - pattern-regex: 'Vulnerable:\\s*GO\\-023\\b'
+    message: |-
+      HexVibe Detection [GO-023]: CWE-20
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        if debugEnabled {     mux := http.NewServeMux()     ...     http.ListenAndServe("127.0.0.1:6060", mux) }
+    pattern-either:
+      - pattern: |-
+          import _ "net/http/pprof"
+          ...
+          http.ListenAndServe(":6060", nil)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-024\\b'
+    message: |-
+      HexVibe Detection [GO-024]: CWE-489
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        srv := grpc.NewServer(grpc.UnaryInterceptor(grpc_auth.UnaryServerInterceptor(authFunc))) ... func authFunc(ctx context.Context) (context.Context, error) {     md, _ := metadata.FromIncomingContext(ctx)     ...     return ctx, nil }
+    pattern-either:
+      - pattern: |-
+          func (s *Server) Transfer(ctx context.Context, req *pb.TransferRequest) (*pb.TransferReply, error) {
+              ...
+              return s.svc.Transfer(ctx, req)
+          }
+      - pattern-regex: 'Vulnerable:\\s*GO\\-025\\b'
+    message: |-
+      HexVibe Detection [GO-025]: CWE-285
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        for _, f := range zipReader.File {     targetPath := filepath.Join(dest, f.Name)     clean := filepath.Clean(targetPath)     if !strings.HasPrefix(clean, filepath.Clean(dest)+string(os.PathSeparator)) {         return fmt.Errorf("zip slip detected")     }     writeFile(clean, f) }
+    pattern-either:
+      - pattern: |-
+          for _, f := range zipReader.File {
+              ...
+              targetPath := filepath.Join(dest, f.Name)
+              writeFile(targetPath, f)
+          }
+      - pattern-regex: 'Vulnerable:\\s*GO\\-026\\b'
+    message: |-
+      HexVibe Detection [GO-026]: CWE-22
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        proxy := &httputil.ReverseProxy{     Director: func(req *http.Request) {         ...         req.Header = cloneAllowedHeaders(r.Header)         stripHopByHop(req.Header)     }, }
+    pattern-either:
+      - pattern: |-
+          proxy := &httputil.ReverseProxy{
+              Director: func(req *http.Request) {
+                  ...
+                  req.Header = r.Header
+              },
+          }
+      - pattern-regex: 'Vulnerable:\\s*GO\\-027\\b'
+    message: |-
+      HexVibe Detection [GO-027]: CWE-444
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        func CopyMessage(msg proto.Message) proto.Message {     ...     return proto.Clone(msg) }
+    pattern-either:
+      - pattern: |-
+          func DeepCopy(dst, src interface{}) {
+              ...
+              reflect.ValueOf(dst).Elem().Set(reflect.ValueOf(src).Elem())
+          }
+      - pattern-regex: 'Vulnerable:\\s*GO\\-028\\b'
+    message: |-
+      HexVibe Detection [GO-028]: CWE-20
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        pem, err := os.ReadFile("/etc/ssl/certs/internal-ca.pem") ... pool.AppendCertsFromPEM(pem)
+    pattern-either:
+      - pattern: |-
+          const rootPEM = "-----BEGIN CERTIFICATE-----..."
+          ...
+          pool.AppendCertsFromPEM([]byte(rootPEM))
+      - pattern-regex: 'Vulnerable:\\s*GO\\-029\\b'
+    message: |-
+      HexVibe Detection [GO-029]: CWE-295
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        srv := grpc.NewServer(grpc.MaxRecvMsgSize(4*1024*1024)) ... pb.RegisterApiServer(srv, api)
+    pattern-either:
+      - pattern: |-
+          srv := grpc.NewServer()
+          ...
+          pb.RegisterApiServer(srv, api)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-030\\b'
+    message: |-
+      HexVibe Detection [GO-030]: CWE-770
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-031
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        b := make([]byte, 32) ... if _, err := cryptorand.Read(b); err != nil {     return err }
+    pattern-either:
+      - pattern: |-
+          b := make([]byte, 32)
+          ...
+          for i := range b {
+              b[i] = byte(rand.Intn(256))
+          }
+      - pattern-regex: 'Vulnerable:\\s*GO\\-031\\b'
+    message: |-
+      HexVibe Detection [GO-031]: CWE-327
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-032
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        raw, _ := io.ReadAll(io.LimitReader(r.Body, maxBytes)) ... json.Unmarshal(raw, &payload)
+    pattern-either:
+      - pattern: |-
+          raw, _ := io.ReadAll(r.Body)
+          ...
+          json.Unmarshal(raw, &payload)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-032\\b'
+    message: |-
+      HexVibe Detection [GO-032]: CWE-400
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-033
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        name := r.URL.Query().Get("name") ... db.Where("name = ?", name).Find(&users) ... db.Raw("SELECT * FROM users WHERE name = ?", name).Scan(&users)
+    pattern-either:
+      - pattern: |-
+          name := r.URL.Query().Get("name")
+          ...
+          db.Where("name = '" + name + "'").Find(&users)
+          ...
+          db.Raw("SELECT * FROM users WHERE name = '" + name + "'").Scan(&users)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-033\\b'
+    message: |-
+      HexVibe Detection [GO-033]: CWE-89
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-034
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        input := r.URL.Query().Get("html") tmpl := template.Must(template.New("x").Parse("{{.Content}}")) ... tmpl.Execute(w, map[string]string{"Content": input})
+    pattern-either:
+      - pattern: |-
+          input := r.URL.Query().Get("html")
+          ...
+          unsafeHTML := template.HTML(input)
+          fmt.Fprint(w, unsafeHTML)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-034\\b'
+    message: |-
+      HexVibe Detection [GO-034]: CWE-79
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-035
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        err := someInternalError ... log.Printf("internal error: %v", err) return errors.New("internal server error")
+    pattern-either:
+      - pattern: |-
+          err := someInternalError
+          ...
+          return fmt.Errorf("db=%s secret=%s path=%s", dsn, apiKey, filePath)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-035\\b'
+    message: |-
+      HexVibe Detection [GO-035]: CWE-209
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-036
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        buf := []byte(input) cbuf := C.CBytes(buf) defer C.free(cbuf) ... C.process(cbuf)
+    pattern-either:
+      - pattern: |-
+          ...
+          ptr := unsafe.Pointer(uintptr(cptr) + offset)
+          C.process(ptr)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-036\\b'
+    message: |-
+      HexVibe Detection [GO-036]: CWE-119
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-037
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        allowed := map[string]bool{"name": true, "email": true} for k, v := range incomingMap {     if allowed[k] {         targetMap[k] = v     } }
+    pattern-either:
+      - pattern: |-
+          for k, v := range incomingMap {
+              targetMap[k] = v
+          }
+      - pattern-regex: 'Vulnerable:\\s*GO\\-037\\b'
+    message: |-
+      HexVibe Detection [GO-037]: CWE-915
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-038
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        xmlParser := customxml.NewParser() ... xmlParser.DisableExternalEntities(true) xmlParser.Parse(rawXML)
+    pattern-either:
+      - pattern: |-
+          xmlParser := customxml.NewParser()
+          ...
+          xmlParser.Parse(rawXML)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-038\\b'
+    message: |-
+      HexVibe Detection [GO-038]: CWE-611
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-039
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        if len(longUserInput) > 2048 {     return } re := regexp.MustCompile(userRegex) ... re.MatchString(longUserInput)
+    pattern-either:
+      - pattern: |-
+          re := regexp.MustCompile(userRegex)
+          ...
+          re.MatchString(longUserInput)
+      - pattern-regex: 'Vulnerable:\\s*GO\\-039\\b'
+    message: |-
+      HexVibe Detection [GO-039]: CWE-400
+    languages:
+      - go
+    severity: WARNING
+  - id: hexvibe.go-core.go-040
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        jwtKey := []byte(os.Getenv("JWT_SECRET")) if len(jwtKey) == 0 {     panic("missing JWT_SECRET") }
+    pattern-either:
+      - pattern: |-
+          jwtKey := []byte("my-secret-key")
+      - pattern-regex: 'Vulnerable:\\s*GO\\-040\\b'
+    message: |-
+      HexVibe Detection [GO-040]: CWE-798
+    languages:
+      - go
+    severity: WARNING

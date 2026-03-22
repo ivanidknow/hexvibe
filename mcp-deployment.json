@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "hexvibe": {
+      "description": "HexVibe v1.0 — Cognitive AppSec Guardrail (1000 patterns, MCP JSON-RPC)",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-v",
+        "${PWD}:/app",
+        "hexvibe-ai:latest"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}

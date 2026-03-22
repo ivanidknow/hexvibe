@@ -1,0 +1,562 @@
+rules:
+  - id: hexvibe.integration-security.its-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать authlib.jose.JsonWebKey/jwt.decode с key из JWKS, явные claims_options для iss/aud; запретить verify_signature=False.
+    pattern-either:
+      - pattern: |-
+          jwt.decode(token, options={"verify_signature": False})
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-001\\b'
+    message: |-
+      HexVibe Detection [ITS-001]: CWE-347 OIDC/JWT BCP
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Убрать plaintext: AppRole/K8s auth в Vault; для OAuth-клиентов к внешним IdP использовать authlib.integrations (token storage в защищённом хранилище, не в коде).
+    pattern-either:
+      - pattern: |-
+          vault_token = "s.xxxx"
+          DB_PASS = "prod-pass"
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-002\\b'
+    message: |-
+      HexVibe Detection [ITS-002]: CWE-798 Vault security model
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ESO + backend; секреты для webhook/OAuth подписей хранить в ESO/Vault, не в stringData; ключи HMAC для inbound webhooks — через secret reference.
+    pattern-either:
+      - pattern: |-
+          kind: Secret
+          stringData:
+            password: plain-text
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-003\\b'
+    message: |-
+      HexVibe Detection [ITS-003]: CWE-522 ESO best practices
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Оборачивать исходящие вызовы в circuit breaker + таймауты; для OAuth2 client credentials к внешним API использовать authlib.integrations.httpx_client с лимитами и явной конфигурацией TLS.
+    pattern-either:
+      - pattern: |-
+          resp = requests.post(CLINKER_URL, json=payload)
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-004\\b'
+    message: |-
+      HexVibe Detection [ITS-004]: CWE-400 Resiliency engineering
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        httpx.Client(timeout=..., limits=Limits(...)); для подписанных исходящих запросов использовать middleware/обёртки с фиксированными лимитами и проверкой сертификата (verify=True).
+    pattern-either:
+      - pattern: |-
+          requests.get(url)
+          httpx.AsyncClient()
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-005\\b'
+    message: |-
+      HexVibe Detection [ITS-005]: CWE-400 Reliability patterns (bulkhead/timeout)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Retry с backoff+jitter и circuit state; не повторять запросы с тем же телом без idempotency-key для небезопасных методов.
+    pattern-either:
+      - pattern: |-
+          for _ in range(10): call_api()
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-006\\b'
+    message: |-
+      HexVibe Detection [ITS-006]: CWE-400 Resilience best practices
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Заголовок Idempotency-Key + серверная дедупликация; для webhook-ответов после обработки — идемпотентная запись по event_id.
+    pattern-either:
+      - pattern: |-
+          POST /payments/transfer
+          # no idempotency key
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-007\\b'
+    message: |-
+      HexVibe Detection [ITS-007]: Payment resiliency controls
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Middleware/FastAPI dependency: проверка подписи до парсинга JSON; Python: hmac.compare_digest + секрет из env/ESO; при OAuth/JWS inbound — authlib.jose для проверки JWS; Node: crypto.timingSafeEqual + express middleware.
+    pattern-either:
+      - pattern: |-
+          @app.post("/webhooks/github")
+          async def gh_hook(request: Request):
+              payload = await request.json()
+              return {"ok": True}
+          app.post('/webhooks/stripe')(req, res) => { const body = req.body; ... }
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-008\\b'
+    message: |-
+      HexVibe Detection [ITS-008]: CWE-345, CWE-924
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Убрать verify=False; задать доверенный bundle/CA; для mTLS — cert=(client_cert, key); OAuth между сервисами — authlib + валидный TLS.
+    pattern-either:
+      - pattern: |-
+          client = httpx.Client(verify=False)
+          httpx.get(url, verify=False)
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-009\\b'
+    message: |-
+      HexVibe Detection [ITS-009]: CWE-295
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Все вызовы к IdP/partner API — HTTPS; токены через authlib OAuth2 session с TLS-only metadata URL; не передавать секреты по http://.
+    pattern-either:
+      - pattern: |-
+          requests.post("http://partner.internal/oauth/token", data={"secret": client_secret})
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-010\\b'
+    message: |-
+      HexVibe Detection [ITS-010]: CWE-319
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Валидация URL до запроса; для OAuth callbacks использовать зарегистрированные redirect_uri в authlib OAuth client.
+    pattern-either:
+      - pattern: |-
+          requests.get(req.query_params["callback"])
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-011\\b'
+    message: |-
+      HexVibe Detection [ITS-011]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        authlib OAuth2 client: фиксированный redirect_uri; на сервере — проверка redirect_uri против клиентской регистрации.
+    pattern-either:
+      - pattern: |-
+          return redirect(request.args.get("next"))
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-012\\b'
+    message: |-
+      HexVibe Detection [ITS-012]: CWE-601
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Structured logging без тел ответов; для отладки OAuth использовать authlib tracing hooks без raw tokens.
+    pattern-either:
+      - pattern: |-
+          logger.info("partner_response=%s", resp.text)
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-013\\b'
+    message: |-
+      HexVibe Detection [ITS-013]: CWE-532
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Только JSON/MessagePack с валидацией; для JWE/JWT — authlib.jose.
+    pattern-either:
+      - pattern: |-
+          pickle.loads(partner_blob)
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-014\\b'
+    message: |-
+      HexVibe Detection [ITS-014]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Парсить JSON в типизированные модели; подпись вебхука (middleware + authlib/HMAC) до бизнес-логики.
+    pattern-either:
+      - pattern: |-
+          eval(body["expr"])
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-015\\b'
+    message: |-
+      HexVibe Detection [ITS-015]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        После проверки подписи вебхука маппить action на фиксированные команды; не передавать raw input в subprocess.
+    pattern-either:
+      - pattern: |-
+          subprocess.run(payload["cmd"], shell=True)
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-016\\b'
+    message: |-
+      HexVibe Detection [ITS-016]: CWE-78
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Безопасный XML-парсер; для SAML/OIDC metadata — authlib loaders с проверкой подписи.
+    pattern-either:
+      - pattern: |-
+          xml.etree.ElementTree.fromstring(partner_xml)
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-017\\b'
+    message: |-
+      HexVibe Detection [ITS-017]: CWE-611
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Явно задавать scopes=[...] в Security(...) / OAuth2AuthorizationCodeBearer(..., scopes=...); проверять scope в dependency до бизнес-логики; для machine-to-machine — authlib.integrations + зарегистрированные scopes.
+    pattern-either:
+      - pattern: |-
+          @app.get("/integration/partner")
+          async def partner_data(creds = Security(oauth2_scheme)):
+              return await fetch_partner()
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-018\\b'
+    message: |-
+      HexVibe Detection [ITS-018]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Перенести секреты в headers; для OAuth2 — authlib OAuth2 client с token в Authorization; отключить логирование полных URL.
+    pattern-either:
+      - pattern: |-
+          requests.get(api_url, params={"api_key": api_key})
+          axios.get(url, { params: { access_token: tok } })
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-019\\b'
+    message: |-
+      HexVibe Detection [ITS-019]: CWE-598
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Задать лимит тела для webhook path; комбинировать с таймаутами; для подписанных тел — всё равно ограничивать размер до парсинга.
+    pattern-either:
+      - pattern: |-
+          location /webhooks/ {
+              proxy_pass http://backend;
+          }
+          http_port 3128 accel
+          # request_body_max_size not set for /webhooks
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-020\\b'
+    message: |-
+      HexVibe Detection [ITS-020]: CWE-770
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Короткий access TTL, обязательный iss/aud; authlib.jose.JWTClaims с claims_options для issuer.
+    pattern-either:
+      - pattern: |-
+          ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 48
+          JwtModule.register({ signOptions: { expiresIn: "7d" } })
+          jwt.decode(token, SECRET, algorithms=["HS256"])
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-021\\b'
+    message: |-
+      HexVibe Detection [ITS-021]: CWE-613
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Единый egress wrapper с denylist IP (169.254.0.0/16, …); authlib только для зарегистрированных partner URL.
+    pattern-either:
+      - pattern: |-
+          requests.get("http://169.254.169.254/latest/meta-data/")
+          fetch("http://169.254.169.254/")
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-022\\b'
+    message: |-
+      HexVibe Detection [ITS-022]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Общий egress-клиент с denylist metadata CIDR; authlib redirect только на зарегистрированные URI.
+    pattern-either:
+      - pattern: |-
+          httpx.get("http://169.254.169.254/latest/meta-data/iam/security-credentials/")
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-023\\b'
+    message: |-
+      HexVibe Detection [ITS-023]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        DNS/IP validation + denylist cloud metadata hostnames.
+    pattern-either:
+      - pattern: |-
+          urllib.request.urlopen("http://metadata.google.internal/computeMetadata/v1/")
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-024\\b'
+    message: |-
+      HexVibe Detection [ITS-024]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Центральный HTTP-клиент с blocklist облачных metadata адресов.
+    pattern-either:
+      - pattern: |-
+          axios.get("http://100.100.100.200/latest/meta-data/")
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-025\\b'
+    message: |-
+      HexVibe Detection [ITS-025]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Denylist + SDK вместо raw fetch к IMDS.
+    pattern-either:
+      - pattern: |-
+          fetch("http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01")
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-026\\b'
+    message: |-
+      HexVibe Detection [ITS-026]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Строгий URL parser + denylist перед requests.
+    pattern-either:
+      - pattern: |-
+          requests.get("http://169.254.169.254" + user_path)
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-027\\b'
+    message: |-
+      HexVibe Detection [ITS-027]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Egress allowlist + блок fd00::/8 для metadata-паттернов.
+    pattern-either:
+      - pattern: |-
+          fetch("http://[fd00:ec2::254]/latest/meta-data/")
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-028\\b'
+    message: |-
+      HexVibe Detection [ITS-028]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Общий egress wrapper; запретить literal metadata URL в коде приложения.
+    pattern-either:
+      - pattern: |-
+          async with httpx.AsyncClient() as c:
+              await c.get("http://169.254.169.254/latest/meta-data/")
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-029\\b'
+    message: |-
+      HexVibe Detection [ITS-029]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.integration-security.its-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Фабрика HTTP-клиентов с валидацией baseURL против blocklist.
+    pattern-either:
+      - pattern: |-
+          axios.create({ baseURL: "http://169.254.169.254" }).get("/latest/meta-data/")
+      - pattern-regex: 'Vulnerable:\\s*ITS\\-030\\b'
+    message: |-
+      HexVibe Detection [ITS-030]: CWE-918
+    languages:
+      - generic
+    severity: WARNING

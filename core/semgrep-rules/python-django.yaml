@@ -1,0 +1,181 @@
+rules:
+  - id: hexvibe.python-django.dja-001
+    pattern-either:
+      - pattern: |-
+          @csrf_exempt
+          def update_profile(request):
+              ...
+              return JsonResponse({"ok": True})
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-001\\b'
+    message: 'HexVibe Detection [DJA-001]: CWE-352'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-002
+    pattern-either:
+      - pattern: |-
+          q = "SELECT * FROM users WHERE email = '" + email + "'"
+          ...
+          User.objects.raw(q)
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-002\\b'
+    message: 'HexVibe Detection [DJA-002]: CWE-89'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-003
+    pattern-either:
+      - pattern: |-
+          DEBUG = True
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-003\\b'
+    message: 'HexVibe Detection [DJA-003]: CWE-489'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-004
+    pattern-either:
+      - pattern: |-
+          class UserForm(forms.ModelForm):
+              class Meta:
+                  model = User
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-004\\b'
+    message: 'HexVibe Detection [DJA-004]: CWE-915'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-005
+    pattern-either:
+      - pattern: |-
+          ALLOWED_HOSTS = ["*"]
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-005\\b'
+    message: 'HexVibe Detection [DJA-005]: CWE-346'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-006
+    pattern-either:
+      - pattern: |-
+          return redirect(request.GET.get("next"))
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-006\\b'
+    message: 'HexVibe Detection [DJA-006]: CWE-601'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-007
+    pattern-either:
+      - pattern: |-
+          SESSION_COOKIE_SECURE = False
+          CSRF_COOKIE_SECURE = False
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-007\\b'
+    message: 'HexVibe Detection [DJA-007]: CWE-614'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-008
+    pattern-either:
+      - pattern: |-
+          SECRET_KEY = "django-insecure-hardcoded-secret"
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-008\\b'
+    message: 'HexVibe Detection [DJA-008]: CWE-798'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-009
+    pattern-either:
+      - pattern: |-
+          path = os.path.join("/data/uploads", upload.name)
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-009\\b'
+    message: 'HexVibe Detection [DJA-009]: CWE-22'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-010
+    pattern-either:
+      - pattern: |-
+          try:
+              ...
+          except Exception as e:
+              return JsonResponse({"error": str(e)}, status=500)
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-010\\b'
+    message: 'HexVibe Detection [DJA-010]: CWE-209'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-011
+    pattern-either:
+      - pattern: |-
+          html = mark_safe(user_input)
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-011\\b'
+    message: 'HexVibe Detection [DJA-011]: CWE-79'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-012
+    pattern-either:
+      - pattern: |-
+          SESSION_SERIALIZER = "django.contrib.sessions.serializers.PickleSerializer"
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-012\\b'
+    message: 'HexVibe Detection [DJA-012]: CWE-502'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-013
+    pattern-either:
+      - pattern: |-
+          qs = User.objects.extra(where=["id=%s" % user_id])
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-013\\b'
+    message: 'HexVibe Detection [DJA-013]: CWE-89'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-014
+    pattern-either:
+      - pattern: |-
+          PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-014\\b'
+    message: 'HexVibe Detection [DJA-014]: CWE-330'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-015
+    pattern-either:
+      - pattern: |-
+          LOGOUT_REDIRECT_URL = request.GET.get("next")
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-015\\b'
+    message: 'HexVibe Detection [DJA-015]: CWE-601'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-016
+    pattern-either:
+      - pattern: |-
+          urlpatterns = [
+              re_path(r"^(a+)+$", view),
+          ]
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-016\\b'
+    message: 'HexVibe Detection [DJA-016]: CWE-400'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-017
+    pattern-either:
+      - pattern: |-
+          class AdminForm(forms.ModelForm):
+              class Meta:
+                  model = User
+                  exclude = []
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-017\\b'
+    message: 'HexVibe Detection [DJA-017]: CWE-915'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-django.dja-018
+    pattern-either:
+      - pattern: |-
+          class PaymentsView(View):
+              def dispatch(self, request, *args, **kwargs):
+                  ...
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-018\\b'
+    message: 'HexVibe Detection [DJA-018]: CWE-20'
+    languages:
+      - python
+    severity: WARNING

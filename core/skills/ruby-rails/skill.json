@@ -1,0 +1,24 @@
+{
+  "skill_id": "ruby-rails",
+  "name": "Ruby / Rails Security",
+  "activation_triggers": [
+    "ruby-rails-mass-assign",
+    "ruby-yaml-load",
+    "ruby-open-redirect",
+    "ruby-ssrf-nethttp",
+    "ruby-cookie-secret"
+  ],
+  "relevant_extensions": [
+    ".rb",
+    ".erb",
+    ".yml"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/ruby-rails/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/multi_lang_vulnerable/ruby_vulnerable.rb",
+  "security_priority": 5
+}

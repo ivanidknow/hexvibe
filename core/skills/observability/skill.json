@@ -1,0 +1,26 @@
+{
+  "skill_id": "observability",
+  "name": "Observability & Audit Logging",
+  "activation_triggers": [
+    "log-structured-traceid",
+    "log-audit-siem",
+    "log-redaction-policy",
+    "log-injection-crlf",
+    "log-security-event"
+  ],
+  "relevant_extensions": [
+    ".py",
+    ".ts",
+    ".js",
+    ".yaml",
+    ".yml"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/observability/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/api_vulnerable.py",
+  "security_priority": 5
+}

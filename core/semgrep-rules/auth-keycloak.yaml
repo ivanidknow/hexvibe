@@ -1,0 +1,414 @@
+rules:
+  - id: hexvibe.auth-keycloak.ak-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        from jose import jwt header = jwt.get_unverified_header(token) if header.get(\"alg\") not in {\"RS256\", \"ES256\", \"GOST3410\"}:     raise ValueError(\"unsupported alg\") claims = jwt.decode(     token,     jwk,     algorithms=[\"RS256\", \"ES256\", \"GOST3410\"],     issuer=issuer_url,     audience=client_id,     options={\"verify_signature\": True}, ) # для контура Клинкера включить профиль российских криптоалгоритмов (ГОСТ)
+    pattern-either:
+      - pattern: |-
+          from jose import jwt
+          claims = jwt.decode(token, key="", algorithms=["none"])
+          # либо library defaults без allowlist alg
+      - pattern-regex: 'Vulnerable:\\s*AK\\-001\\b'
+    message: |-
+      HexVibe Detection [AK-001]: Auth0 JWT Handbook, Validate JSON Web Tokens > Manually implement checks (disallow none)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        import jwt claims = jwt.decode(     token,     pub_key,     algorithms=[\"RS256\", \"ES256\"],     issuer=issuer_url,     audience=client_id,     options={\"verify_signature\": True, \"verify_exp\": True, \"verify_nbf\": True, \"verify_iat\": True}, )
+    pattern-either:
+      - pattern: |-
+          import jwt
+          claims = jwt.decode(token, pub_key, algorithms=["RS256"], options={"verify_signature": True, "verify_exp": True})
+      - pattern-regex: 'Vulnerable:\\s*AK\\-002\\b'
+    message: |-
+      HexVibe Detection [AK-002]: Auth0 JWT Handbook, Validate JSON Web Tokens > Issuer Validation + Audience Validation
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        header = jwt.get_unverified_header(token) kid = header.get(\"kid\") trusted_kids = {k[\"kid\"] for k in jwks[\"keys\"]} if kid not in trusted_kids:     raise ValueError(\"untrusted kid\") jwk = next(k for k in jwks[\"keys\"] if k[\"kid\"] == kid) claims = jwt.decode(token, jwk, algorithms=[\"RS256\", \"ES256\"], issuer=issuer_url, audience=client_id)
+    pattern-either:
+      - pattern: |-
+          header = jwt.get_unverified_header(token)
+          jwk = jwks[header["kid"]]
+          claims = jwt.decode(token, jwk, algorithms=["RS256"])
+      - pattern-regex: 'Vulnerable:\\s*AK\\-003\\b'
+    message: |-
+      HexVibe Detection [AK-003]: Auth0 JWT Handbook, Validate JSON Web Tokens > Key ID (kid) Header and JWKS Matching
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        allowed_redirects = {     \"https://app.example.com/oidc/callback\",     \"https://admin.example.com/oidc/callback\", } if redirect_uri not in allowed_redirects:     raise ValueError(\"redirect_uri mismatch\")
+    pattern-either:
+      - pattern: |-
+          allowed_redirects = ["https://app.example.com/*", "http://localhost/*"]
+          if redirect_uri.startswith("https://app.example.com/"):
+              pass
+      - pattern-regex: 'Vulnerable:\\s*AK\\-004\\b'
+    message: |-
+      HexVibe Detection [AK-004]: RFC 6819, section 5.2.3.5
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        import os from keycloak import KeycloakOpenID kc = KeycloakOpenID(     server_url=os.environ[\"KEYCLOAK_URL\"],     realm_name=os.environ[\"KEYCLOAK_REALM\"],     client_id=os.environ[\"KEYCLOAK_CLIENT_ID\"],     client_secret_key=os.environ[\"KEYCLOAK_CLIENT_SECRET\"], )
+    pattern-either:
+      - pattern: |-
+          from keycloak import KeycloakOpenID
+          kc = KeycloakOpenID(
+              server_url="https://id.example.com",
+              realm_name="prod",
+              client_id="backend",
+              client_secret_key="hardcoded-secret",
+          )
+      - pattern-regex: 'Vulnerable:\\s*AK\\-005\\b'
+    message: |-
+      HexVibe Detection [AK-005]: RFC 6819, section 5.2.3.6; OAuth 2.0 (RFC 6749), section 10.1
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        claims = jwt.decode(token, jwk, algorithms=[\"RS256\", \"ES256\"], issuer=issuer_url, audience=client_id, options={\"verify_exp\": True, \"verify_nbf\": True, \"verify_iat\": True}) user = db.get_user_by_id(current_user_id) if claims.get(\"sub\") != user.oidc_sub:     raise ValueError(\"subject mismatch\")
+    pattern-either:
+      - pattern: |-
+          claims = jwt.decode(token, jwk, algorithms=["RS256"], issuer=issuer_url, audience=client_id)
+          user = db.get_user_by_email(claims.get("email"))
+          # sub не проверяется
+      - pattern-regex: 'Vulnerable:\\s*AK\\-006\\b'
+    message: |-
+      HexVibe Detection [AK-006]: Auth0 JWT Handbook, Validate JSON Web Tokens > Validate claims
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        assert request_client_id == stored_client_id_for_code(code) assert request_redirect_uri == stored_redirect_uri_for_code(code) token = exchange_code_for_token(code=code, client_id=request_client_id, redirect_uri=request_redirect_uri)
+    pattern-either:
+      - pattern: |-
+          token = exchange_code_for_token(code=code, client_id=client_id)
+      - pattern-regex: 'Vulnerable:\\s*AK\\-007\\b'
+    message: |-
+      HexVibe Detection [AK-007]: RFC 6819, section 5.2.4.5
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        claims = jwt.decode(token, jwk, algorithms=[\"RS256\", \"ES256\"], issuer=issuer_url, audience=client_id, options={\"verify_exp\": True, \"verify_nbf\": True, \"verify_iat\": True})
+    pattern-either:
+      - pattern: |-
+          claims = jwt.decode(token, jwk, algorithms=["RS256"], issuer=issuer_url, audience=client_id, options={"verify_exp": False, "verify_nbf": False, "verify_iat": False})
+      - pattern-regex: 'Vulnerable:\\s*AK\\-008\\b'
+    message: |-
+      HexVibe Detection [AK-008]: Auth0 JWT Handbook, Validate JSON Web Tokens > JWT validation checks structure, claims, and signature
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        auth_url = f"{issuer}/protocol/openid-connect/auth?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&code_challenge={code_challenge}&code_challenge_method=S256" token = exchange_code(code=code, code_verifier=code_verifier) if not code_verifier:     raise ValueError("pkce required")
+    pattern-either:
+      - pattern: |-
+          auth_url = f"{issuer}/protocol/openid-connect/auth?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}"
+          # token exchange without code_verifier
+          token = exchange_code(code=code)
+      - pattern-regex: 'Vulnerable:\\s*AK\\-009\\b'
+    message: |-
+      HexVibe Detection [AK-009]: FAPI 2.0 Security Profile; ГОСТ 57580.1 (IA); OAuth 2.1 Draft; OWASP ASVS v4.0.3
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        def call_high_risk_api(access_token: str, dpop_proof: str):     if not dpop_proof:         raise ValueError("DPoP proof required")     return client.post("/payments/transfer", headers={"Authorization": f"Bearer {access_token}", "DPoP": dpop_proof}) # DPoP обязателен для высокорисковых операций ЦБ, чтобы снизить риск кражи токенов
+    pattern-either:
+      - pattern: |-
+          def call_high_risk_api(access_token: str):
+              return client.post("/payments/transfer", headers={"Authorization": f"Bearer {access_token}"})
+      - pattern-regex: 'Vulnerable:\\s*AK\\-010\\b'
+    message: |-
+      HexVibe Detection [AK-010]: FAPI 2.0 Security Profile; OAuth 2.1 Draft; OWASP ASVS v4.0.3
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        payload = {"sub": user_id, "role": role, "scope": "api.read"} token = jwt.encode(payload, private_key, algorithm="RS256") # PII moved to userinfo endpoint or encrypted storage
+    pattern-either:
+      - pattern: |-
+          payload = {"sub": user_id, "email": email, "phone": phone, "name": full_name, "role": role}
+          token = jwt.encode(payload, private_key, algorithm="RS256")
+      - pattern-regex: 'Vulnerable:\\s*AK\\-011\\b'
+    message: |-
+      HexVibe Detection [AK-011]: OAuth 2.1 Draft; OWASP ASVS v4.0.3
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        def get_jwk_for_kid(kid: str):     if kid in negative_kid_cache and not negative_kid_cache[kid].expired:         raise ValueError("unknown kid cached")     if not jwks_rate_limiter.allow("jwks_fetch"):         raise RuntimeError("jwks rate limit exceeded")     jwks = requests.get(f"{issuer}/.well-known/jwks.json", timeout=2).json()     # cache keys and unknown kid misses     return select_key_from_jwks(jwks, kid)
+    pattern-either:
+      - pattern: |-
+          def get_jwk_for_kid(kid: str):
+              # every unknown kid triggers upstream call
+              return requests.get(f"{issuer}/.well-known/jwks.json", timeout=2).json()
+      - pattern-regex: 'Vulnerable:\\s*AK\\-012\\b'
+    message: |-
+      HexVibe Detection [AK-012]: OAuth 2.1 Draft; OWASP ASVS v4.0.3
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        def exchange_token(user_jwt: str, audience: str) -> str:     resp = requests.post(f"{issuer}/protocol/openid-connect/token", data={         "grant_type": "urn:ietf:params:oauth:grant-type:token-exchange",         "subject_token": user_jwt,         "subject_token_type": "urn:ietf:params:oauth:token-type:access_token",         "requested_token_type": "urn:ietf:params:oauth:token-type:access_token",         "audience": audience,     }, auth=(client_id, client_secret), cert=(client_cert_path, client_key_path), timeout=5)     resp.raise_for_status()     return resp.json()["access_token"]  def call_internal_service(user_jwt: str):     svc_token = exchange_token(user_jwt, audience="orders-api")     return requests.get("http://orders.internal/api/orders", headers={"Authorization": f"Bearer {svc_token}"}, timeout=5) # token exchange endpoint /token вызывать только по mTLS в профиле ФАПИ.ПАОК
+    pattern-either:
+      - pattern: |-
+          def call_internal_service(user_jwt: str):
+              return requests.get("http://orders.internal/api/orders", headers={"Authorization": f"Bearer {user_jwt}"})
+      - pattern-regex: 'Vulnerable:\\s*AK\\-013\\b'
+    message: |-
+      HexVibe Detection [AK-013]: RFC 8693; FAPI 2.0 Security Profile
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        token_req = {     "grant_type": "authorization_code",     "code": code,     "redirect_uri": redirect_uri,     "resource": "https://api.example.com/orders", } token = requests.post(token_url, data=token_req, auth=(client_id, client_secret), timeout=5) token.raise_for_status()
+    pattern-either:
+      - pattern: |-
+          token_req = {
+              "grant_type": "authorization_code",
+              "code": code,
+              "redirect_uri": redirect_uri,
+          }
+          token = requests.post(token_url, data=token_req, auth=(client_id, client_secret), timeout=5)
+      - pattern-regex: 'Vulnerable:\\s*AK\\-014\\b'
+    message: |-
+      HexVibe Detection [AK-014]: RFC 8707; FAPI 2.0 Security Profile
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.get("/oidc/callback") async def callback(code: str, state: str, request: Request):     expected = request.session.get("oidc_state")     if not expected or state != expected:         raise HTTPException(status_code=401, detail="invalid state")     ...     return await exchange_code(code)
+    pattern-either:
+      - pattern: |-
+          @app.get("/oidc/callback")
+          async def callback(code: str, state: str):
+              ...
+              return await exchange_code(code)
+      - pattern-regex: 'Vulnerable:\\s*AK\\-015\\b'
+    message: |-
+      HexVibe Detection [AK-015]: CWE-384
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        id_claims = jwt.decode(id_token, jwk, algorithms=["RS256","ES256"], audience=client_id, issuer=issuer) expected_nonce = request.session.get("oidc_nonce") if not expected_nonce or id_claims.get("nonce") != expected_nonce:     raise HTTPException(status_code=401, detail="invalid nonce") ... return id_claims
+    pattern-either:
+      - pattern: |-
+          id_claims = jwt.decode(id_token, jwk, algorithms=["RS256"], audience=client_id, issuer=issuer)
+          ...
+          return id_claims
+      - pattern-regex: 'Vulnerable:\\s*AK\\-016\\b'
+    message: |-
+      HexVibe Detection [AK-016]: CWE-346
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        refresh_token_ttl = 86400 if refresh_token_ttl > 86400:     raise ValueError("CB session limit exceeded") enable_backchannel_logout = True enable_frontchannel_logout = True revoke_refresh_token_on_logout = True
+    pattern-either:
+      - pattern: |-
+          refresh_token_ttl = 864000
+          # no back-channel/front-channel logout
+      - pattern-regex: 'Vulnerable:\\s*AK\\-017\\b'
+    message: |-
+      HexVibe Detection [AK-017]: ГОСТ 57580.1 (IA); требования ЦБ по управлению сессиями
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Все межсервисные вызовы выполнять по mTLS (service identity, cert pinning, trust policy), не только token exchange endpoint.
+    pattern-either:
+      - pattern: |-
+          requests.get("http://orders.internal/api")
+          grpc.insecure_channel("billing.internal:50051")
+      - pattern-regex: 'Vulnerable:\\s*AK\\-018\\b'
+    message: |-
+      HexVibe Detection [AK-018]: NIST SP 800-207 (Zero Trust)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Для админ-учетных записей принудительная ротация клиентских секретов, короткий TTL сессий, step-up auth и немедленный revoke при logout/risk events.
+    pattern-either:
+      - pattern: |-
+          admin_session_ttl = 7*24*3600
+          admin_client_secret = "static-secret"
+      - pattern-regex: 'Vulnerable:\\s*AK\\-019\\b'
+    message: |-
+      HexVibe Detection [AK-019]: OWASP ASVS v4.0 (L3), NIST 800-63
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Никогда не отключать проверку подписи; валидировать подпись JWT по JWKS и reject токены с invalid signature.
+    pattern-either:
+      - pattern: |-
+          jwt.decode(token, key, options={"verify_signature": False})
+      - pattern-regex: 'Vulnerable:\\s*AK\\-020\\b'
+    message: |-
+      HexVibe Detection [AK-020]: CWE Final Certification
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.auth-keycloak.ak-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Всегда указывать algorithms=["RS256"] (или строгий allowlist) и запрещать algorithm confusion/fallback.
+    pattern-either:
+      - pattern: |-
+          jwt.decode(token, key, audience=aud, issuer=iss)
+      - pattern-regex: 'Vulnerable:\\s*AK\\-021\\b'
+    message: |-
+      HexVibe Detection [AK-021]: CWE Final Certification
+    languages:
+      - python
+    severity: WARNING

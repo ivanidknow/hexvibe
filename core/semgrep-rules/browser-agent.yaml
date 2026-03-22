@@ -1,0 +1,260 @@
+rules:
+  - id: hexvibe.browser-agent.brw-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        browser = await p.chromium.launch(   args=[],   headless=True, )
+    pattern-either:
+      - pattern: |-
+          browser = await p.chromium.launch(
+            args=["--no-sandbox","--disable-setuid-sandbox"],
+            headless=True,
+          )
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-001\\b'
+    message: |-
+      HexVibe Detection [BRW-001]: Ошибка доступа к @Docs (Playwright/Selenium)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.browser-agent.brw-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        context = await browser.new_context(ignoreHTTPSErrors=False) page = await context.new_page()
+    pattern-either:
+      - pattern: |-
+          context = await browser.new_context(ignoreHTTPSErrors=True)
+          page = await context.new_page()
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-002\\b'
+    message: |-
+      HexVibe Detection [BRW-002]: Ошибка доступа к @Docs (Playwright/Selenium)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.browser-agent.brw-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        browser = await p.chromium.launch(headless=True)
+    pattern-either:
+      - pattern: |-
+          browser = await p.chromium.launch(headless=False)
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-003\\b'
+    message: |-
+      HexVibe Detection [BRW-003]: Ошибка доступа к @Docs (Playwright/Selenium)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.browser-agent.brw-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        await page.route(\"**/*\", lambda route: route.abort() if \"stun\" in route.request.url else route.continue_())
+    pattern-either:
+      - pattern: |-
+          await page.evaluate(() => new RTCPeerConnection().createOffer())
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-004\\b'
+    message: |-
+      HexVibe Detection [BRW-004]: Ошибка доступа к @Docs (Playwright/Selenium)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.browser-agent.brw-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        allowed = {\"scrollToTop\",\"extractText\"} cmd = request.json()[\"cmd\"] if cmd not in allowed: raise ValueError(\"cmd rejected\") await page.evaluate(\"(arg) => window.scrollTo(0,0)\", None)
+    pattern-either:
+      - pattern: |-
+          user_js = request.json()["script"]
+          await page.evaluate(user_js)
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-005\\b'
+    message: |-
+      HexVibe Detection [BRW-005]: Ошибка доступа к @Docs (Playwright/Selenium)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.browser-agent.brw-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        browser = await p.chromium.launch(args=[])
+    pattern-either:
+      - pattern: |-
+          browser = await p.chromium.launch(
+            args=["--disable-web-security","--disable-site-isolation-trials"],
+          )
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-006\\b'
+    message: |-
+      HexVibe Detection [BRW-006]: Ошибка доступа к @Docs (Playwright/Selenium)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.browser-agent.brw-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        target = user_input_url if target.startswith(\"file://\"):     raise ValueError(\"file protocol is forbidden\") await page.goto(target, wait_until=\"domcontentloaded\")
+    pattern-either:
+      - pattern: |-
+          target = user_input_url
+          await page.goto(target)
+          # attacker can pass file:///etc/passwd
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-007\\b'
+    message: |-
+      HexVibe Detection [BRW-007]: Playwright Security Best Practices; OWASP Web Security Testing Guide
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.browser-agent.brw-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        import ipaddress from urllib.parse import urlparse  def _blocked_host(host: str) -> bool:     if host in {\"localhost\"}:         return True     try:         ip = ipaddress.ip_address(host)         return ip.is_loopback or ip.is_private or ip.is_link_local     except ValueError:         return False  parsed = urlparse(url) if _blocked_host(parsed.hostname or \"\") or (parsed.hostname == \"169.254.169.254\"):     raise ValueError(\"blocked destination\") await page.goto(url, wait_until=\"domcontentloaded\")
+    pattern-either:
+      - pattern: |-
+          await page.goto(url)
+          # url may be http://127.0.0.1:... or http://169.254.169.254/...
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-008\\b'
+    message: |-
+      HexVibe Detection [BRW-008]: Playwright Security Best Practices; OWASP Web Security Testing Guide
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.browser-agent.brw-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        context = await browser.new_context() try:     page = await context.new_page()     page.set_default_navigation_timeout(10000)     await page.goto(url, timeout=10000, wait_until=\"domcontentloaded\") finally:     await context.close()
+    pattern-either:
+      - pattern: |-
+          context = await browser.new_context()
+          page = await context.new_page()
+          await page.goto(url)
+          # context.close() missing
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-009\\b'
+    message: |-
+      HexVibe Detection [BRW-009]: Playwright Security Best Practices; OWASP Web Security Testing Guide
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.browser-agent.brw-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        context = await browser.new_context(accept_downloads=False) page = await context.new_page() resp = await page.goto(url, wait_until=\"domcontentloaded\") content_type = (resp.headers.get(\"content-type\", \"\") if resp else \"\") allowed = {\"text/html\", \"application/json\"} if content_type.split(\";\")[0] not in allowed:     raise ValueError(\"blocked MIME type\")
+    pattern-either:
+      - pattern: |-
+          context = await browser.new_context(accept_downloads=True)
+          download = await page.wait_for_event("download")
+          path = await download.path()
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-010\\b'
+    message: |-
+      HexVibe Detection [BRW-010]: Playwright Security Best Practices; OWASP Web Security Testing Guide
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.browser-agent.brw-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        const note = request.body.note ... await page.evaluate((value) => { document.querySelector("#out").textContent = value }, note)
+    pattern-either:
+      - pattern: |-
+          const note = request.body.note
+          ...
+          await page.evaluate((value) => { document.querySelector("#out").innerHTML = value }, note)
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-011\\b'
+    message: |-
+      HexVibe Detection [BRW-011]: CWE-79
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.browser-agent.brw-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        const cmd = request.body.cmd allowed = {"scrollTop":"window.scrollTo(0,0)"} if (!(cmd in allowed)) throw new Error("cmd rejected") ... await page.evaluate(allowed[cmd])
+    pattern-either:
+      - pattern: |-
+          const script = request.body.script
+          ...
+          await page.evaluate((s) => eval(s), script)
+          ...
+          const fn = new Function(script)
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-012\\b'
+    message: |-
+      HexVibe Detection [BRW-012]: CWE-95
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.browser-agent.brw-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        const patch = request.body.patch for (const k of Object.keys(patch)) {   if (["__proto__","constructor","prototype"].includes(k)) throw new Error("blocked key") } ... Object.assign(config, patch)
+    pattern-either:
+      - pattern: |-
+          const patch = request.body.patch
+          ...
+          target.__proto__ = patch
+          ...
+          Object.assign(config, patch)
+      - pattern-regex: 'Vulnerable:\\s*BRW\\-013\\b'
+    message: |-
+      HexVibe Detection [BRW-013]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING

@@ -1,0 +1,25 @@
+{
+  "skill_id": "domain-access-management",
+  "name": "Domain Access Management",
+  "activation_triggers": [
+    "fail-open-auth",
+    "bola-owner-check",
+    "session-cookie-policy",
+    "jwt-claim-validation",
+    "app-auth-architecture"
+  ],
+  "relevant_extensions": [
+    ".py",
+    ".js",
+    ".ts",
+    ".json"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/domain-access-management/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/gap_fill_vulnerable.py",
+  "security_priority": 9
+}

@@ -1,0 +1,25 @@
+{
+  "skill_id": "domain-data-privacy",
+  "name": "Domain Data Privacy",
+  "activation_triggers": [
+    "pii-log-redaction",
+    "secret-log-leak",
+    "privacy-source-map",
+    "sensitive-memory-retention"
+  ],
+  "relevant_extensions": [
+    ".py",
+    ".js",
+    ".ts",
+    ".yaml",
+    ".yml"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/domain-data-privacy/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/gap_fill_vulnerable.py",
+  "security_priority": 8
+}

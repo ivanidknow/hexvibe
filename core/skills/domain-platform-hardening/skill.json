@@ -1,0 +1,27 @@
+{
+  "skill_id": "domain-platform-hardening",
+  "name": "Domain Platform Hardening",
+  "activation_triggers": [
+    "platform-hardening-infra",
+    "flutter-ssl-bypass",
+    "electron-ipc-hardening",
+    "resource-limits-policy"
+  ],
+  "relevant_extensions": [
+    ".yaml",
+    ".yml",
+    ".json",
+    ".dart",
+    ".kt",
+    ".js",
+    ".ts"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/domain-platform-hardening/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/gap_fill_vulnerable.py",
+  "security_priority": 9
+}

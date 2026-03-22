@@ -1,0 +1,7 @@
+# Vulnerable: ITS-003
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+stringData:
+  password: plain-text

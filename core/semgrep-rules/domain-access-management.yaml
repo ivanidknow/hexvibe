@@ -1,0 +1,1023 @@
+rules:
+  - id: hexvibe.domain-access-management.py-100
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          if token == os.getenv("CHAT_TOKEN")
+      - pattern-regex: 'Vulnerable:\\s*PY\\-100\\b'
+    message: |-
+      HexVibe Detection [PY-100]: Access Control SAR
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.py-105
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          return Message.objects.all()
+      - pattern-regex: 'Vulnerable:\\s*PY\\-105\\b'
+    message: |-
+      HexVibe Detection [PY-105]: Access Control SAR
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.njs-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-009\\b'
+    message: |-
+      HexVibe Detection [NJS-009]: JWT Governance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.njs-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          repo.findById(req.params.id)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-016\\b'
+    message: |-
+      HexVibe Detection [NJS-016]: OWASP API1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.njs-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          res.cookie("sid", sid)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-024\\b'
+    message: |-
+      HexVibe Detection [NJS-024]: Session Hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.njs-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          User.create(req.body)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-026\\b'
+    message: |-
+      HexVibe Detection [NJS-026]: OWASP Mass Assignment
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.py-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          decode(token, key) without allowlist
+      - pattern-regex: 'Vulnerable:\\s*PY\\-011\\b'
+    message: |-
+      HexVibe Detection [PY-011]: Auth Baseline
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.py-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          Model(**request.json())
+      - pattern-regex: 'Vulnerable:\\s*PY\\-013\\b'
+    message: |-
+      HexVibe Detection [PY-013]: AuthZ Baseline
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.fts-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          display:none вместо server-side ACL
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-018\\b'
+    message: |-
+      HexVibe Detection [FTS-018]: Client Auth Safety
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.fts-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          role == "admin"
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-019\\b'
+    message: |-
+      HexVibe Detection [FTS-019]: JS Auth Safety
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-100
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Вводить idempotency-key и single-flight для token issue.
+    pattern-either:
+      - pattern: |-
+          Повторная выдача токена на один challenge
+      - pattern-regex: 'Vulnerable:\\s*APP\\-100\\b'
+    message: |-
+      HexVibe Detection [APP-100]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-101
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Обязательный timeout + retry budget + circuit breaker.
+    pattern-either:
+      - pattern: |-
+          HTTP-клиент без timeout
+      - pattern-regex: 'Vulnerable:\\s*APP\\-101\\b'
+    message: |-
+      HexVibe Detection [APP-101]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-102
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Fail-closed при ошибке внешнего IdP.
+    pattern-either:
+      - pattern: |-
+          except: allow()
+      - pattern-regex: 'Vulnerable:\\s*APP\\-102\\b'
+    message: |-
+      HexVibe Detection [APP-102]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-103
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Привязка токена к nonce/device/session fingerprint.
+    pattern-either:
+      - pattern: |-
+          Токен не связан с устройством/контекстом
+      - pattern-regex: 'Vulnerable:\\s*APP\\-103\\b'
+    message: |-
+      HexVibe Detection [APP-103]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-104
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Обязательный MFA gate для high-risk операций.
+    pattern-either:
+      - pattern: |-
+          Step-up не проверяется
+      - pattern-regex: 'Vulnerable:\\s*APP\\-104\\b'
+    message: |-
+      HexVibe Detection [APP-104]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-105
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Re-auth/step-up перед привилегированными операциями.
+    pattern-either:
+      - pattern: |-
+          Долгая сессия без повторной верификации
+      - pattern-regex: 'Vulnerable:\\s*APP\\-105\\b'
+    message: |-
+      HexVibe Detection [APP-105]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-106
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Явный least-privilege allowlist ролей.
+    pattern-either:
+      - pattern: |-
+          role in ["*"]
+      - pattern-regex: 'Vulnerable:\\s*APP\\-106\\b'
+    message: |-
+      HexVibe Detection [APP-106]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-107
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Scope-bound short-lived tokens per service.
+    pattern-either:
+      - pattern: |-
+          Один service-token для разных сервисов
+      - pattern-regex: 'Vulnerable:\\s*APP\\-107\\b'
+    message: |-
+      HexVibe Detection [APP-107]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-108
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Central revocation + backchannel logout.
+    pattern-either:
+      - pattern: |-
+          Logout не инвалидирует downstream-сессии
+      - pattern-regex: 'Vulnerable:\\s*APP\\-108\\b'
+    message: |-
+      HexVibe Detection [APP-108]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-109
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать POST/PUT/PATCH + CSRF guards.
+    pattern-either:
+      - pattern: |-
+          Изменение состояния через GET endpoint
+      - pattern-regex: 'Vulnerable:\\s*APP\\-109\\b'
+    message: |-
+      HexVibe Detection [APP-109]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-110
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Проверять subject/scope до исполнения job.
+    pattern-either:
+      - pattern: |-
+          Worker выполняет команду без ACL
+      - pattern-regex: 'Vulnerable:\\s*APP\\-110\\b'
+    message: |-
+      HexVibe Detection [APP-110]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-111
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Ротация по SLA + автоотзыв компрометированных ключей.
+    pattern-either:
+      - pattern: |-
+          Неограниченный lifetime ключей
+      - pattern-regex: 'Vulnerable:\\s*APP\\-111\\b'
+    message: |-
+      HexVibe Detection [APP-111]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-112
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Rate-limit + progressive delay + lockout.
+    pattern-either:
+      - pattern: |-
+          Бесконечные попытки входа
+      - pattern-regex: 'Vulnerable:\\s*APP\\-112\\b'
+    message: |-
+      HexVibe Detection [APP-112]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-113
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Включать tenant claim + enforce в policy layer.
+    pattern-either:
+      - pattern: |-
+          token не содержит tenant context
+      - pattern-regex: 'Vulnerable:\\s*APP\\-113\\b'
+    message: |-
+      HexVibe Detection [APP-113]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-114
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Централизованный security audit log.
+    pattern-either:
+      - pattern: |-
+          Нет событий login/privilege escalation
+      - pattern-regex: 'Vulnerable:\\s*APP\\-114\\b'
+    message: |-
+      HexVibe Detection [APP-114]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-115
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Signed delegation token + bounded TTL + audit.
+    pattern-either:
+      - pattern: |-
+          Админ-имперсонация без traceability
+      - pattern-regex: 'Vulnerable:\\s*APP\\-115\\b'
+    message: |-
+      HexVibe Detection [APP-115]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-116
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Явная обработка ошибок + forced re-auth.
+    pattern-either:
+      - pattern: |-
+          Ошибки refresh маскируются
+      - pattern-regex: 'Vulnerable:\\s*APP\\-116\\b'
+    message: |-
+      HexVibe Detection [APP-116]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-117
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Risk-based controls, captcha/behavioral checks.
+    pattern-either:
+      - pattern: |-
+          Нет device/risk checks
+      - pattern-regex: 'Vulnerable:\\s*APP\\-117\\b'
+    message: |-
+      HexVibe Detection [APP-117]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-118
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Явный consent prompt + least-scope default.
+    pattern-either:
+      - pattern: |-
+          Делегированные scope без подтверждения
+      - pattern-regex: 'Vulnerable:\\s*APP\\-118\\b'
+    message: |-
+      HexVibe Detection [APP-118]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.app-119
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Cache key по subject+scope+tenant+ttl.
+    pattern-either:
+      - pattern: |-
+          Кэш auth-решений без key scoping
+      - pattern-regex: 'Vulnerable:\\s*APP\\-119\\b'
+    message: |-
+      HexVibe Detection [APP-119]: Architecture Risks
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.py-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          random.random() for token
+      - pattern-regex: 'Vulnerable:\\s*PY\\-010\\b'
+    message: |-
+      HexVibe Detection [PY-010]: Python secrets guidance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.py-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          session.execute(f"SELECT * FROM t WHERE id={id}")
+      - pattern-regex: 'Vulnerable:\\s*PY\\-012\\b'
+    message: |-
+      HexVibe Detection [PY-012]: CWE-89
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.py-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.post("/login") without limiter
+      - pattern-regex: 'Vulnerable:\\s*PY\\-017\\b'
+    message: |-
+      HexVibe Detection [PY-017]: OWASP API4
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.py-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          browser.new_page() reused globally
+      - pattern-regex: 'Vulnerable:\\s*PY\\-023\\b'
+    message: |-
+      HexVibe Detection [PY-023]: Playwright isolation
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.py-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          logger.info("token=%s", token)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-026\\b'
+    message: |-
+      HexVibe Detection [PY-026]: OWASP Logging
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.py-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          state change endpoint without CSRF check
+      - pattern-regex: 'Vulnerable:\\s*PY\\-028\\b'
+    message: |-
+      HexVibe Detection [PY-028]: OWASP CSRF
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.dja-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          SESSION_COOKIE_SECURE = False
+          CSRF_COOKIE_SECURE = False
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-007\\b'
+    message: |-
+      HexVibe Detection [DJA-007]: CWE-614
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.dja-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          SESSION_SERIALIZER = "django.contrib.sessions.serializers.PickleSerializer"
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-012\\b'
+    message: |-
+      HexVibe Detection [DJA-012]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.dja-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-014\\b'
+    message: |-
+      HexVibe Detection [DJA-014]: CWE-330
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.mob-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Исключить вывод токенов даже в debug-режиме, применять редактирование/маскирование чувствительных данных в логах.
+    pattern-either:
+      - pattern: |-
+          if (kDebugMode) {
+            print('token - $token');
+          }
+      - pattern-regex: 'Vulnerable:\\s*MOB\\-010\\b'
+    message: |-
+      HexVibe Detection [MOB-010]: Silk Mobile SAR
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.dsk-105
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Для чувствительных операций использовать ipcMain.handle + строгую валидацию payload и проверку источника/role.
+    pattern-either:
+      - pattern: |-
+          ipcMain.on("export-secrets", (event, payload) => { ... })
+      - pattern-regex: 'Vulnerable:\\s*DSK\\-105\\b'
+    message: |-
+      HexVibe Detection [DSK-105]: Insight SAR
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.njs-032
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const secret = process.env.JWT_SECRET
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-032\\b'
+    message: |-
+      HexVibe Detection [NJS-032]: JWT Secret Management
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.njs-033
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          https.request({ rejectUnauthorized: false })
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-033\\b'
+    message: |-
+      HexVibe Detection [NJS-033]: TLS/mTLS Hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.fts-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          localStorage.setItem("jwt", token)
+          sessionStorage.setItem("snils", value)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-002\\b'
+    message: |-
+      HexVibe Detection [FTS-002]: OWASP ASVS Session Management
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.fts-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          console.log("token", token)
+          console.error("user profile", profile)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-003\\b'
+    message: |-
+      HexVibe Detection [FTS-003]: OWASP Logging Cheat Sheet
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.fts-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          if (user.role === "admin") price = 0
+          if (clientAmount < limit) approve()
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-005\\b'
+    message: |-
+      HexVibe Detection [FTS-005]: OWASP Top 10 A04 Insecure Design
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.fts-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const token = Math.random().toString(36)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-014\\b'
+    message: |-
+      HexVibe Detection [FTS-014]: Web Crypto API Guidance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.cwe-755-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          def verify_token(token):
+              try:
+                  return decode_token(token)
+              except Exception:
+                  logger.error("auth failed")
+              return True
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-755\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-755-PY]: CWE Compliance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.cwe-384-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          login(request, user) без request.session.cycle_key()
+          # no rotate_token(request)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-384\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-384-PY]: CWE Compliance - Logic/Resources
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.cwe-613-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          SESSION_COOKIE_AGE = 60*60*24*30
+          # no idle timeout / absolute timeout
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-613\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-613-PY]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.cwe-770-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.post("/login") без limiter/throttle
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-770\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-770-PY]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.cwe-770-js
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          app.post("/login", handler) без limiter middleware
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-770\\-JS\\b'
+    message: |-
+      HexVibe Detection [CWE-770-JS]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.cwe-20-orm-mass-assign
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Для create/update использовать явный whitelist полей (DTO/pick), блокировать системные/привилегированные атрибуты и валидировать типы.
+    pattern-either:
+      - pattern: |-
+          Model(**request.json)
+          Model.create(req.body)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-20\\-ORM\\-MASS\\-ASSIGN\\b'
+    message: |-
+      HexVibe Detection [CWE-20-ORM-MASS-ASSIGN]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.cwe-287-keycloak-jwt-aud-iss
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          jwt.decode(token, key, algorithms=["RS256"]) без audience/issuer
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-287\\-KEYCLOAK\\-JWT\\-AUD\\-ISS\\b'
+    message: |-
+      HexVibe Detection [CWE-287-KEYCLOAK-JWT-AUD-ISS]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.cwe-613-keycloak-session-checks
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          Проверка JWT без контроля exp/nbf и политики сессии realm/client
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-613\\-KEYCLOAK\\-SESSION\\-CHECKS\\b'
+    message: |-
+      HexVibe Detection [CWE-613-KEYCLOAK-SESSION-CHECKS]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-access-management.cwe-862-nextjs-server-action
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          "use server" функция без getServerSession(...)/auth() в начале
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-862\\-NEXTJS\\-SERVER\\-ACTION\\b'
+    message: |-
+      HexVibe Detection [CWE-862-NEXTJS-SERVER-ACTION]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING

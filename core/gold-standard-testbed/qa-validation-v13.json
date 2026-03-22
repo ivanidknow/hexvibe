@@ -1,0 +1,161 @@
+{
+  "version": "v13.0 Fortress",
+  "coverage_audit": {
+    "rules_total": 500,
+    "with_testbed_example": 500,
+    "missing_examples": 0,
+    "missing_ids": [],
+    "status": "PASS"
+  },
+  "rag_efficiency": {
+    "selected_queries": 10,
+    "max_elapsed_ms": 9.125,
+    "all_within_200ms": true,
+    "relevance_100pct": true,
+    "checks": [
+      {
+        "query": "Dockerfile runs as root in container",
+        "elapsed_ms": 7.211,
+        "expected_any": [
+          "DOCK-010",
+          "DOCK-011",
+          "DVS-001"
+        ],
+        "top_ids": [
+          "DOCK-010",
+          "DOCK-011",
+          "DVS-001"
+        ],
+        "relevant": true
+      },
+      {
+        "query": "C# JWT ValidateIssuer and ValidateAudience",
+        "elapsed_ms": 6.432,
+        "expected_any": [
+          "CSH-025"
+        ],
+        "top_ids": [
+          "CSH-025",
+          "ITS-001",
+          "GO-036"
+        ],
+        "relevant": true
+      },
+      {
+        "query": "FastAPI route без response_model: что делать?",
+        "elapsed_ms": 7.423,
+        "expected_any": [
+          "PY-020",
+          "FAS-"
+        ],
+        "top_ids": [
+          "PY-020",
+          "BRW-004",
+          "PY-001"
+        ],
+        "relevant": true
+      },
+      {
+        "query": "Squid egress proxy allow all issue",
+        "elapsed_ms": 7.353,
+        "expected_any": [
+          "SQD-001"
+        ],
+        "top_ids": [
+          "SQD-001",
+          "AAC-008",
+          "SQD-010"
+        ],
+        "relevant": true
+      },
+      {
+        "query": "Как настроить безопасный egress-прокси в Squid и убрать root из Docker?",
+        "elapsed_ms": 8.713,
+        "expected_any": [
+          "SQD-001",
+          "DOCK-010",
+          "DOCK-011"
+        ],
+        "top_ids": [
+          "SQD-001",
+          "DOCK-010",
+          "DOCK-011"
+        ],
+        "relevant": true
+      },
+      {
+        "query": "Nginx TLS 1.3 and HSTS hardening",
+        "elapsed_ms": 7.222,
+        "expected_any": [
+          "NGX-001",
+          "NGX-006",
+          "INF-5.1.2-TLS"
+        ],
+        "top_ids": [
+          "INF-5.1.2-TLS",
+          "INF-5.2.1",
+          "INF-2.5.1"
+        ],
+        "relevant": true
+      },
+      {
+        "query": "Как в C# убрать BinaryFormatter.Deserialize и RCE риск?",
+        "elapsed_ms": 8.005,
+        "expected_any": [
+          "CSH-019"
+        ],
+        "top_ids": [
+          "CSH-019",
+          "INS-004",
+          "CSH-009"
+        ],
+        "relevant": true
+      },
+      {
+        "query": "Kubernetes seccomp and AppArmor baseline",
+        "elapsed_ms": 7.044,
+        "expected_any": [
+          "K8S-016",
+          "K8S-017",
+          "INF-5.6.2"
+        ],
+        "top_ids": [
+          "K8S-016",
+          "K8S-017",
+          "DOCK-020"
+        ],
+        "relevant": true
+      },
+      {
+        "query": "Kubernetes NetworkPolicy default deny",
+        "elapsed_ms": 6.582,
+        "expected_any": [
+          "K8S-021",
+          "INF-5.3.1"
+        ],
+        "top_ids": [
+          "K8S-021",
+          "K8S-016",
+          "INF-5.3.1-NGX"
+        ],
+        "relevant": true
+      },
+      {
+        "query": "GO-033 SQL raw query injection in Go service",
+        "elapsed_ms": 9.125,
+        "expected_any": [
+          "GO-033",
+          "GO-001",
+          "GO-002"
+        ],
+        "top_ids": [
+          "GO-033",
+          "NST-004",
+          "CSH-006"
+        ],
+        "relevant": true
+      }
+    ]
+  },
+  "overall_status": "PASS"
+}

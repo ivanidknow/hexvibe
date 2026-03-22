@@ -1,0 +1,2759 @@
+rules:
+  - id: hexvibe.desktop-vsto-suite.ins-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          webPreferences: { contextIsolation: false }
+      - pattern-regex: 'Vulnerable:\\s*INS\\-001\\b'
+    message: |-
+      HexVibe Detection [INS-001]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          webPreferences: { nodeIntegration: true }
+      - pattern-regex: 'Vulnerable:\\s*INS\\-002\\b'
+    message: |-
+      HexVibe Detection [INS-002]: CWE-200
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          ipcMain.on('data', (event, arg) => eval(arg))
+      - pattern-regex: 'Vulnerable:\\s*INS\\-003\\b'
+    message: |-
+      HexVibe Detection [INS-003]: CWE-749
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          new BinaryFormatter().Deserialize(stream)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-004\\b'
+    message: |-
+      HexVibe Detection [INS-004]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var doc = new XmlDocument();
+          doc.Load(stream);
+      - pattern-regex: 'Vulnerable:\\s*INS\\-005\\b'
+    message: |-
+      HexVibe Detection [INS-005]: CWE-611
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          !include "MUI2.nsh"
+      - pattern-regex: 'Vulnerable:\\s*INS\\-006\\b'
+    message: |-
+      HexVibe Detection [INS-006]: CWE-427
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          connectionString="Server=.;User ID=sa;Password=secret123"
+      - pattern-regex: 'Vulnerable:\\s*INS\\-007\\b'
+    message: |-
+      HexVibe Detection [INS-007]: CWE-312
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          mainWindow.webContents.openDevTools()
+      - pattern-regex: 'Vulnerable:\\s*INS\\-008\\b'
+    message: |-
+      HexVibe Detection [INS-008]: CWE-489
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          new BinaryFormatter().Deserialize(stream)
+          new JavaScriptSerializer().Deserialize<T>(data)
+          new XmlSerializer(type).Deserialize(untrustedStream)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-009\\b'
+    message: |-
+      HexVibe Detection [INS-009]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Assembly.LoadFrom(basePath + userInput)
+          Type.GetType("Plugin." + userType)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-010\\b'
+    message: |-
+      HexVibe Detection [INS-010]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          [DllImport("mylib.dll")]
+          LoadLibrary(userPath) без LOAD_LIBRARY_SEARCH_SYSTEM32/absolute path
+      - pattern-regex: 'Vulnerable:\\s*INS\\-011\\b'
+    message: |-
+      HexVibe Detection [INS-011]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var doc = new XmlDocument(); doc.Load(xml);
+          new XmlTextReader(stream)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-012\\b'
+    message: |-
+      HexVibe Detection [INS-012]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          MD5.Create()
+          new SHA1Managed()
+          new DESCryptoServiceProvider()
+      - pattern-regex: 'Vulnerable:\\s*INS\\-013\\b'
+    message: |-
+      HexVibe Detection [INS-013]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          if (File.Exists(path)) { using var fs = File.Open(path, ...); }
+      - pattern-regex: 'Vulnerable:\\s*INS\\-014\\b'
+    message: |-
+      HexVibe Detection [INS-014]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var ctx = WindowsIdentity.Impersonate(token); (без finally { ctx.Undo(); })
+      - pattern-regex: 'Vulnerable:\\s*INS\\-015\\b'
+    message: |-
+      HexVibe Detection [INS-015]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          byte* p = stackalloc byte[len]; p[i + offset] = value;
+      - pattern-regex: 'Vulnerable:\\s*INS\\-016\\b'
+    message: |-
+      HexVibe Detection [INS-016]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          int size = count * elementSize; var buf = new byte[size];
+      - pattern-regex: 'Vulnerable:\\s*INS\\-017\\b'
+    message: |-
+      HexVibe Detection [INS-017]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var fs = new FileStream(...);
+          var ev = new AutoResetEvent(false); (без using/dispose)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-018\\b'
+    message: |-
+      HexVibe Detection [INS-018]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Registry.SetValue(userKey, name, userValue)
+          RegistryKey.OpenSubKey(userPath)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-019\\b'
+    message: |-
+      HexVibe Detection [INS-019]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          lock(this)
+          lock(typeof(Service))
+          lock("global")
+      - pattern-regex: 'Vulnerable:\\s*INS\\-020\\b'
+    message: |-
+      HexVibe Detection [INS-020]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var p = Marshal.AllocHGlobal(size); Marshal.StructureToPtr(obj, p, false); (без FreeHGlobal)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-021\\b'
+    message: |-
+      HexVibe Detection [INS-021]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          new NamedPipeServerStream("pipe")
+          new Mutex(false, "Global\\Name")
+      - pattern-regex: 'Vulnerable:\\s*INS\\-022\\b'
+    message: |-
+      HexVibe Detection [INS-022]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var pipe = "svc_" + userInput; new NamedPipeServerStream(pipe)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-023\\b'
+    message: |-
+      HexVibe Detection [INS-023]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          NativeCall(control.Handle)
+          NativeCall(proc.Handle)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-024\\b'
+    message: |-
+      HexVibe Detection [INS-024]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          [DllImport("msvcrt.dll")] static extern IntPtr strcpy(...)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-025\\b'
+    message: |-
+      HexVibe Detection [INS-025]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Activator.CreateInstance(null, typeName)
+          AppDomain.CreateInstance(..., typeName)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-026\\b'
+    message: |-
+      HexVibe Detection [INS-026]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          string apiKey = "..."
+          string password = input
+      - pattern-regex: 'Vulnerable:\\s*INS\\-027\\b'
+    message: |-
+      HexVibe Detection [INS-027]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          try { ... } catch { }
+      - pattern-regex: 'Vulnerable:\\s*INS\\-028\\b'
+    message: |-
+      HexVibe Detection [INS-028]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          if (!NativeCall(...)) отсутствует проверка
+          HRESULT игнорируется
+      - pattern-regex: 'Vulnerable:\\s*INS\\-029\\b'
+    message: |-
+      HexVibe Detection [INS-029]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var app = new Microsoft.Office.Interop... без release в finally
+      - pattern-regex: 'Vulnerable:\\s*INS\\-030\\b'
+    message: |-
+      HexVibe Detection [INS-030]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-031
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          static readonly byte[] Key = {...}; aes.Key = Key;
+      - pattern-regex: 'Vulnerable:\\s*INS\\-031\\b'
+    message: |-
+      HexVibe Detection [INS-031]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-032
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var rnd = new Random(); для IV/паролей/токенов
+      - pattern-regex: 'Vulnerable:\\s*INS\\-032\\b'
+    message: |-
+      HexVibe Detection [INS-032]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-033
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          new RSACryptoServiceProvider(1024)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-033\\b'
+    message: |-
+      HexVibe Detection [INS-033]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-034
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var aes = new AesManaged { Key = keyBytes, IV = ivBytes }; где keyBytes/ivBytes заданы как static literals
+      - pattern-regex: 'Vulnerable:\\s*INS\\-034\\b'
+    message: |-
+      HexVibe Detection [INS-034]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-035
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          new Random().Next(...) для auth token / salt / reset code
+      - pattern-regex: 'Vulnerable:\\s*INS\\-035\\b'
+    message: |-
+      HexVibe Detection [INS-035]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-036
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          dynamic obj = JsonConvert.DeserializeObject<dynamic>(input) и последующий direct access
+      - pattern-regex: 'Vulnerable:\\s*INS\\-036\\b'
+    message: |-
+      HexVibe Detection [INS-036]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-037
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var xml = new XmlDocument(); xml.LoadXml(untrusted) без XmlResolver = null и запрета DTD
+      - pattern-regex: 'Vulnerable:\\s*INS\\-037\\b'
+    message: |-
+      HexVibe Detection [INS-037]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-038
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          webBrowser.Navigate(userInputUrl) без Uri.TryCreate и uri.Scheme == Uri.UriSchemeHttps
+      - pattern-regex: 'Vulnerable:\\s*INS\\-038\\b'
+    message: |-
+      HexVibe Detection [INS-038]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-039
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          [Conditional("DEBUG")] void DisableSslValidation(){...}
+          [Conditional("DEBUG")] void BypassLicense(){...}
+      - pattern-regex: 'Vulnerable:\\s*INS\\-039\\b'
+    message: |-
+      HexVibe Detection [INS-039]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-040
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Task.Run(() => Globals.ThisAddIn.Application.ActiveDocument...)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-040\\b'
+    message: |-
+      HexVibe Detection [INS-040]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-041
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          В main process не задан CSP или CSP без frame-ancestors 'none'
+      - pattern-regex: 'Vulnerable:\\s*INS\\-041\\b'
+    message: |-
+      HexVibe Detection [INS-041]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-042
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var p = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(IntPtr))) для структуры большего размера
+      - pattern-regex: 'Vulnerable:\\s*INS\\-042\\b'
+    message: |-
+      HexVibe Detection [INS-042]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-043
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Marshal.AllocHGlobal(input.Length) для wide-char строк
+      - pattern-regex: 'Vulnerable:\\s*INS\\-043\\b'
+    message: |-
+      HexVibe Detection [INS-043]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-044
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          AllocHGlobal(16); Marshal.StructureToPtr(largeStruct, ptr, false)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-044\\b'
+    message: |-
+      HexVibe Detection [INS-044]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-045
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Marshal.Copy(src, 0, ptr, userLen)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-045\\b'
+    message: |-
+      HexVibe Detection [INS-045]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-046
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          logger.Error(ex.ToString())
+          MessageBox.Show(ex.ToString()) в production path
+      - pattern-regex: 'Vulnerable:\\s*INS\\-046\\b'
+    message: |-
+      HexVibe Detection [INS-046]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-047
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          app.commandLine.appendSwitch("enable-logging", "stderr") + export raw crash details
+      - pattern-regex: 'Vulnerable:\\s*INS\\-047\\b'
+    message: |-
+      HexVibe Detection [INS-047]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-048
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          session.setPermissionRequestHandler((_wc,_perm,cb)=>cb(true))
+      - pattern-regex: 'Vulnerable:\\s*INS\\-048\\b'
+    message: |-
+      HexVibe Detection [INS-048]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-049
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          shell.openExternal(userUrl)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-049\\b'
+    message: |-
+      HexVibe Detection [INS-049]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-050
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          new BrowserWindow({ webPreferences: { sandbox: false } })
+      - pattern-regex: 'Vulnerable:\\s*INS\\-050\\b'
+    message: |-
+      HexVibe Detection [INS-050]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-051
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          ipcMain.handle("cmd", (_e,args)=>run(args))
+      - pattern-regex: 'Vulnerable:\\s*INS\\-051\\b'
+    message: |-
+      HexVibe Detection [INS-051]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-052
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          autoUpdater.setFeedURL(userControlledUrl)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-052\\b'
+    message: |-
+      HexVibe Detection [INS-052]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-053
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          if(doc.BuiltInDocumentProperties["Company"]=="Trusted"){LoadPlugin();}
+      - pattern-regex: 'Vulnerable:\\s*INS\\-053\\b'
+    message: |-
+      HexVibe Detection [INS-053]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-054
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          [DllImport("contoso_helper.dll")]
+          [DllImport(@"plugins\myext.dll")]
+      - pattern-regex: 'Vulnerable:\\s*INS\\-054\\b'
+    message: |-
+      HexVibe Detection [INS-054]: CWE-427
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-055
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Log.Info(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
+          logger.Debug($"Local={Environment.GetFolderPath(SpecialFolder.LocalApplicationData)}")
+      - pattern-regex: 'Vulnerable:\\s*INS\\-055\\b'
+    message: |-
+      HexVibe Detection [INS-055]: CWE-497
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-056
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          LoadLibrary(Path.Combine(Path.GetTempPath(), userDll))
+      - pattern-regex: 'Vulnerable:\\s*INS\\-056\\b'
+    message: |-
+      HexVibe Detection [INS-056]: CWE-427
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-057
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Assembly.LoadFile(Path.Combine(Environment.GetFolderPath(SpecialFolder.UserProfile), "Downloads\\ext.dll"))
+      - pattern-regex: 'Vulnerable:\\s*INS\\-057\\b'
+    message: |-
+      HexVibe Detection [INS-057]: CWE-427
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-058
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          pathText.Text = Environment.GetFolderPath(SpecialFolder.Desktop)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-058\\b'
+    message: |-
+      HexVibe Detection [INS-058]: CWE-497
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-059
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          MessageBox.Show(Environment.GetFolderPath(SpecialFolder.Personal))
+      - pattern-regex: 'Vulnerable:\\s*INS\\-059\\b'
+    message: |-
+      HexVibe Detection [INS-059]: CWE-497
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-060
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          this.Text = dlg.FileName
+      - pattern-regex: 'Vulnerable:\\s*INS\\-060\\b'
+    message: |-
+      HexVibe Detection [INS-060]: CWE-497
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-061
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          [DllImport("kernel32", SetLastError=true)] + SetDllDirectory(Path.GetTempPath())
+      - pattern-regex: 'Vulnerable:\\s*INS\\-061\\b'
+    message: |-
+      HexVibe Detection [INS-061]: CWE-427
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-062
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          lblPath.Text = Assembly.GetExecutingAssembly().Location
+      - pattern-regex: 'Vulnerable:\\s*INS\\-062\\b'
+    message: |-
+      HexVibe Detection [INS-062]: CWE-497
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-063
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          win.setTitle(filePaths[0])
+      - pattern-regex: 'Vulnerable:\\s*INS\\-063\\b'
+    message: |-
+      HexVibe Detection [INS-063]: CWE-497
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-064
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          NativeLibrary.Load("plugins\\native.dll")
+      - pattern-regex: 'Vulnerable:\\s*INS\\-064\\b'
+    message: |-
+      HexVibe Detection [INS-064]: CWE-427
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-065
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          statusLabel.Text = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-065\\b'
+    message: |-
+      HexVibe Detection [INS-065]: CWE-497
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-066
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          if (File.Exists(path)) { using var s = File.OpenRead(path); }
+      - pattern-regex: 'Vulnerable:\\s*INS\\-066\\b'
+    message: |-
+      HexVibe Detection [INS-066]: CWE-367
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-067
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          [DllImport("contoso_native.dll", CallingConvention = CallingConvention.Cdecl)] без LoadLibrary из Path.Combine(AppContext.BaseDirectory, "native", "contoso_native.dll")
+      - pattern-regex: 'Vulnerable:\\s*INS\\-067\\b'
+    message: |-
+      HexVibe Detection [INS-067]: CWE-427
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-068
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          File.Open(path, FileMode.Open, FileAccess.ReadWrite) без FileShare.Read/Delete policy
+      - pattern-regex: 'Vulnerable:\\s*INS\\-068\\b'
+    message: |-
+      HexVibe Detection [INS-068]: CWE-367
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-069
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Span<byte> buf = stackalloc byte[userLen]; без checked и верхней границы
+      - pattern-regex: 'Vulnerable:\\s*INS\\-069\\b'
+    message: |-
+      HexVibe Detection [INS-069]: CWE-131
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-070
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Log.Debug(Environment.GetEnvironmentVariables().ToString())
+      - pattern-regex: 'Vulnerable:\\s*INS\\-070\\b'
+    message: |-
+      HexVibe Detection [INS-070]: CWE-497
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-071
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          TelemetryClient.TrackTrace(string.Join(" ", Environment.GetCommandLineArgs()))
+      - pattern-regex: 'Vulnerable:\\s*INS\\-071\\b'
+    message: |-
+      HexVibe Detection [INS-071]: CWE-497
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-072
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Prefix formula-meta chars in .xlsx exports; central sanitizeForExcelCell() for all user/DB fields.
+    pattern-either:
+      - pattern: |-
+          ws['A1'] = userCell
+          без префикса ' и без strip =+-@
+      - pattern-regex: 'Vulnerable:\\s*INS\\-072\\b'
+    message: |-
+      HexVibe Detection [INS-072]: CWE-1236
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-073
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Map all values through sanitize before json_to_sheet / aoa_to_sheet.
+    pattern-either:
+      - pattern: |-
+          XLSX.utils.json_to_sheet(rows) где rows из API
+      - pattern-regex: 'Vulnerable:\\s*INS\\-073\\b'
+    message: |-
+      HexVibe Detection [INS-073]: CWE-1236
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-074
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Never write raw user strings to xlsx cells; apply CSV/Excel injection defenses.
+      fix_template: |-
+        CWE-1236
+    pattern-either:
+      - pattern: |-
+          XLSX.writeFile(wb, outPath) после заполнения из БД
+      - pattern-regex: 'Vulnerable:\\s*INS\\-074\\b'
+    message: |-
+      HexVibe Detection [INS-074]: Insight/Node/xlsx
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-075
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        On re-export pipeline, treat every cell as untrusted input.
+    pattern-either:
+      - pattern: |-
+          XLSX.read затем sheet_to_json → обратно json_to_sheet
+      - pattern-regex: 'Vulnerable:\\s*INS\\-075\\b'
+    message: |-
+      HexVibe Detection [INS-075]: CWE-1236
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-076
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Enforce max doc size before mammoth; reject oversized ZIP/docx.
+    pattern-either:
+      - pattern: |-
+          mammoth.convertToHtml({ path: userPath })
+      - pattern-regex: 'Vulnerable:\\s*INS\\-076\\b'
+    message: |-
+      HexVibe Detection [INS-076]: CWE-409
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-077
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Pre-validate docx zip and XML parts; disable entity expansion in XML pipeline.
+    pattern-either:
+      - pattern: |-
+          mammoth.extractRawText({ path: p }) на недоверенном файле
+      - pattern-regex: 'Vulnerable:\\s*INS\\-077\\b'
+    message: |-
+      HexVibe Detection [INS-077]: CWE-611
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-078
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Enforce max uncompressed size and compression ratio for OOXML containers.
+    pattern-either:
+      - pattern: |-
+          new PizZip(buf) / getDocument без лимитов
+      - pattern-regex: 'Vulnerable:\\s*INS\\-078\\b'
+    message: |-
+      HexVibe Detection [INS-078]: CWE-409
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-079
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Track cumulative uncompressed bytes; abort on threshold (zip bomb).
+    pattern-either:
+      - pattern: |-
+          zip.loadAsync(buf) затем file.async('string')
+      - pattern-regex: 'Vulnerable:\\s*INS\\-079\\b'
+    message: |-
+      HexVibe Detection [INS-079]: CWE-409
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-080
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Cap PDF bytes and pages; stream with limits.
+    pattern-either:
+      - pattern: |-
+          pdfjsLib.getDocument({ url: userUrl })
+      - pattern-regex: 'Vulnerable:\\s*INS\\-080\\b'
+    message: |-
+      HexVibe Detection [INS-080]: CWE-409
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-081
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Host pdf.worker.js from same origin; integrity attribute.
+    pattern-either:
+      - pattern: |-
+          GlobalWorkerOptions.workerSrc = 'http://cdn.../pdf.worker.js'
+      - pattern-regex: 'Vulnerable:\\s*INS\\-081\\b'
+    message: |-
+      HexVibe Detection [INS-081]: CWE-611
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-082
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Timeout + size limit around word-extractor; reject huge binaries.
+    pattern-either:
+      - pattern: |-
+          extractor.extract(path) на сетевом каталоге
+      - pattern-regex: 'Vulnerable:\\s*INS\\-082\\b'
+    message: |-
+      HexVibe Detection [INS-082]: CWE-409
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-083
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Parse OOXML with XXE-safe XML settings; no external entities.
+    pattern-either:
+      - pattern: |-
+          parseString(xml, { mergeAttrs: true })
+      - pattern-regex: 'Vulnerable:\\s*INS\\-083\\b'
+    message: |-
+      HexVibe Detection [INS-083]: CWE-611
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-084
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Sanitize ExcelJS rows before commit; same rules as SheetJS.
+    pattern-either:
+      - pattern: |-
+          worksheet.addRow([user])
+      - pattern-regex: 'Vulnerable:\\s*INS\\-084\\b'
+    message: |-
+      HexVibe Detection [INS-084]: CWE-1236
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-085
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Do not pass user-controlled styleMap to mammoth; allowlist only.
+    pattern-either:
+      - pattern: |-
+          convertToHtml({ styleMap: userMap })
+      - pattern-regex: 'Vulnerable:\\s*INS\\-085\\b'
+    message: |-
+      HexVibe Detection [INS-085]: CWE-611
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-086
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Same zip-bomb defenses as docx for pptx OOXML.
+    pattern-either:
+      - pattern: |-
+          unzipper.Open.buffer(buf)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-086\\b'
+    message: |-
+      HexVibe Detection [INS-086]: CWE-409
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-087
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Limit entries and total bytes when using fflate/unzip on xlsx.
+    pattern-either:
+      - pattern: |-
+          unzipSync(buf)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-087\\b'
+    message: |-
+      HexVibe Detection [INS-087]: CWE-409
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-088
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Treat PDF metadata as untrusted; never HTML-embed without encode.
+    pattern-either:
+      - pattern: |-
+          metadata.info.Title в innerHTML
+      - pattern-regex: 'Vulnerable:\\s*INS\\-088\\b'
+    message: |-
+      HexVibe Detection [INS-088]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-089
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Strict allowlist for embedded image resolution in mammoth.
+    pattern-either:
+      - pattern: |-
+          embedImage: (id) => readUserFile(id)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-089\\b'
+    message: |-
+      HexVibe Detection [INS-089]: CWE-611
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-090
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий внедряет формулу в CSV до экспорта в xlsx; при открытии в Excel возможна команда/внешняя ссылка (CWE-1236).
+      fix_template: |-
+        Apply CSV injection rules before promoting to xlsx.
+    pattern-either:
+      - pattern: |-
+          XLSX.read CSV FSF затем writeFile xlsx
+      - pattern-regex: 'Vulnerable:\\s*INS\\-090\\b'
+    message: |-
+      HexVibe Detection [INS-090]: CWE-1236
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-091
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий подсовывает извлечённый текст в innerHTML; при отсутствии DOMPurify возможен XSS (CWE-1027).
+      fix_template: |-
+        Never assign extracted text to innerHTML without sanitization.
+    pattern-either:
+      - pattern: |-
+          extractor.extract(path).then(t=>div.innerHTML=t)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-091\\b'
+    message: |-
+      HexVibe Detection [INS-091]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-092
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use json_schema response_format or validate with Zod before branching logic.
+    pattern-either:
+      - pattern: |-
+          openai.chat.completions.create({ messages }) затем JSON.parse(content)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-092\\b'
+    message: |-
+      HexVibe Detection [INS-092]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-093
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Never branch security on model-supplied role strings; server-side allowlist.
+    pattern-either:
+      - pattern: |-
+          if (msg.role === 'system') по ответу модели
+      - pattern-regex: 'Vulnerable:\\s*INS\\-093\\b'
+    message: |-
+      HexVibe Detection [INS-093]: CWE-1109
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-094
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate structured output; reject unknown fields; no shell exec from model text.
+    pattern-either:
+      - pattern: |-
+          exec(JSON.parse(content).cmd)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-094\\b'
+    message: |-
+      HexVibe Detection [INS-094]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-095
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Finalize streamed LLM output with schema validation.
+    pattern-either:
+      - pattern: |-
+          on('chunk') + merge без safeParse
+      - pattern-regex: 'Vulnerable:\\s*INS\\-095\\b'
+    message: |-
+      HexVibe Detection [INS-095]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-096
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Per-tool Zod schema for JSON arguments from OpenAI.
+    pattern-either:
+      - pattern: |-
+          JSON.parse(toolCall.function.arguments)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-096\\b'
+    message: |-
+      HexVibe Detection [INS-096]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-097
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Redact system/developer prompts from electron-log; structured logging without secrets.
+    pattern-either:
+      - pattern: |-
+          log.info('prompt', messages)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-097\\b'
+    message: |-
+      HexVibe Detection [INS-097]: CWE-201
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-098
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Ban console logging of system prompts outside sealed dev diagnostics.
+    pattern-either:
+      - pattern: |-
+          console.log(systemPrompt)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-098\\b'
+    message: |-
+      HexVibe Detection [INS-098]: CWE-201
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-099
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate OpenAI payloads before IPC; duplicate validation in main.
+    pattern-either:
+      - pattern: |-
+          ipcRenderer.send('ai', completion)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-099\\b'
+    message: |-
+      HexVibe Detection [INS-099]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-100
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Always set nodeIntegration: false and contextIsolation: true explicitly in main.
+    pattern-either:
+      - pattern: |-
+          new BrowserWindow({ webPreferences: { preload } })
+      - pattern-regex: 'Vulnerable:\\s*INS\\-100\\b'
+    message: |-
+      HexVibe Detection [INS-100]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-101
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Explicit contextIsolation: true for every BrowserWindow.
+    pattern-either:
+      - pattern: |-
+          webPreferences: { preload: path }
+      - pattern-regex: 'Vulnerable:\\s*INS\\-101\\b'
+    message: |-
+      HexVibe Detection [INS-101]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-102
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        CWE-749
+      fix_template: |-
+        Insight/Electron
+    pattern-either:
+      - pattern: |-
+          ipcMain.handle('api', async (_e, args) => {...})
+      - pattern-regex: 'Vulnerable:\\s*INS\\-102\\b'
+    message: |-
+      HexVibe Detection [INS-102]: event.senderFrame.url !== trusted) return error.
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-103
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Pair IPC handlers with sender frame / origin checks.
+    pattern-either:
+      - pattern: |-
+          ipcMain.handle('x', (e, a) => e.sender)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-103\\b'
+    message: |-
+      HexVibe Detection [INS-103]: CWE-749
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-104
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Never load preload from user-controlled paths; allowlist under app package.
+    pattern-either:
+      - pattern: |-
+          preload: userConfig.preloadPath
+      - pattern-regex: 'Vulnerable:\\s*INS\\-104\\b'
+    message: |-
+      HexVibe Detection [INS-104]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-105
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Keep webSecurity: true except rare dev-only exceptions.
+    pattern-either:
+      - pattern: |-
+          webPreferences: { webSecurity: false }
+      - pattern-regex: 'Vulnerable:\\s*INS\\-105\\b'
+    message: |-
+      HexVibe Detection [INS-105]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-106
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate URLs before openExternal from IPC payloads.
+    pattern-either:
+      - pattern: |-
+          shell.openExternal(urlFromIpc)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-106\\b'
+    message: |-
+      HexVibe Detection [INS-106]: CWE-749
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-107
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Immutable hardened webPreferences; ignore user overrides for security keys.
+    pattern-either:
+      - pattern: |-
+          webPreferences: { ...userPrefs }
+      - pattern-regex: 'Vulnerable:\\s*INS\\-107\\b'
+    message: |-
+      HexVibe Detection [INS-107]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-108
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Default deny; explicit allowlist for media/geolocation.
+    pattern-either:
+      - pattern: |-
+          cb(true)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-108\\b'
+    message: |-
+      HexVibe Detection [INS-108]: CWE-749
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-109
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate file paths in custom protocols; prevent traversal.
+    pattern-either:
+      - pattern: |-
+          callback({ path: req.url })
+      - pattern-regex: 'Vulnerable:\\s*INS\\-109\\b'
+    message: |-
+      HexVibe Detection [INS-109]: CWE-22
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-110
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Gate screen capture behind explicit user consent.
+    pattern-either:
+      - pattern: |-
+          desktopCapturer.getSources
+      - pattern-regex: 'Vulnerable:\\s*INS\\-110\\b'
+    message: |-
+      HexVibe Detection [INS-110]: CWE-200
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-111
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Sanitize CSV exports from xlsx before messaging.
+    pattern-either:
+      - pattern: |-
+          XLSX.utils.sheet_to_csv(sheet) в body
+      - pattern-regex: 'Vulnerable:\\s*INS\\-111\\b'
+    message: |-
+      HexVibe Detection [INS-111]: CWE-1236
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-112
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Sanitize mammoth HTML before DOM insertion.
+    pattern-either:
+      - pattern: |-
+          innerHTML = result.value
+      - pattern-regex: 'Vulnerable:\\s*INS\\-112\\b'
+    message: |-
+      HexVibe Detection [INS-112]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-113
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Parameterize DB; treat PDF text as untrusted.
+    pattern-either:
+      - pattern: |-
+          page.getTextContent() → db.query(\...\${t}\)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-113\\b'
+    message: |-
+      HexVibe Detection [INS-113]: CWE-89
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-114
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Escape template fields for docx generation.
+    pattern-either:
+      - pattern: |-
+          doc.setData({ user: raw })
+      - pattern-regex: 'Vulnerable:\\s*INS\\-114\\b'
+    message: |-
+      HexVibe Detection [INS-114]: CWE-1236
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-115
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict JSON schema where API allows.
+    pattern-either:
+      - pattern: |-
+          response_format без strict
+      - pattern-regex: 'Vulnerable:\\s*INS\\-115\\b'
+    message: |-
+      HexVibe Detection [INS-115]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-116
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Redact OpenAI message bodies in logs.
+    pattern-either:
+      - pattern: |-
+          logger.info(messages)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-116\\b'
+    message: |-
+      HexVibe Detection [INS-116]: CWE-201
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-117
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate IPC args in preload bridge and main.
+    pattern-either:
+      - pattern: |-
+          exposeInMainWorld('api', { run: (x)=>ipc.invoke('x',x)})
+      - pattern-regex: 'Vulnerable:\\s*INS\\-117\\b'
+    message: |-
+      HexVibe Detection [INS-117]: CWE-749
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-118
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Prefer handle with sender validation over legacy on.
+    pattern-either:
+      - pattern: |-
+          ipcMain.on('evt', ...)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-118\\b'
+    message: |-
+      HexVibe Detection [INS-118]: CWE-749
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-119
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Block unbounded base64 PDF from user input.
+    pattern-either:
+      - pattern: |-
+          getDocument({ data: atob(userB64) })
+      - pattern-regex: 'Vulnerable:\\s*INS\\-119\\b'
+    message: |-
+      HexVibe Detection [INS-119]: CWE-409
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-120
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Restrict UNC/network paths for extraction.
+    pattern-either:
+      - pattern: |-
+          extractor.extract('\\\\srv\\share\\doc.doc')
+      - pattern-regex: 'Vulnerable:\\s*INS\\-120\\b'
+    message: |-
+      HexVibe Detection [INS-120]: CWE-22
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-121
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Do not apply user-controlled styles that embed formulas.
+    pattern-either:
+      - pattern: |-
+          cell.s = userStyle
+      - pattern-regex: 'Vulnerable:\\s*INS\\-121\\b'
+    message: |-
+      HexVibe Detection [INS-121]: CWE-1236
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-122
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Sanitize markdown output from mammoth.
+    pattern-either:
+      - pattern: |-
+          innerHTML = md.render(mdText)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-122\\b'
+    message: |-
+      HexVibe Detection [INS-122]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-123
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate hyperlinks in generated docx.
+    pattern-either:
+      - pattern: |-
+          new Hyperlink(userUrl)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-123\\b'
+    message: |-
+      HexVibe Detection [INS-123]: CWE-20
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-124
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Limit parallel tool execution from model.
+    pattern-either:
+      - pattern: |-
+          parallel_tool_calls: true
+      - pattern-regex: 'Vulnerable:\\s*INS\\-124\\b'
+    message: |-
+      HexVibe Detection [INS-124]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-125
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Encrypt cached LLM responses; no plaintext PII.
+    pattern-either:
+      - pattern: |-
+          fs.writeFileSync(cachePath, content)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-125\\b'
+    message: |-
+      HexVibe Detection [INS-125]: CWE-311
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-126
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate paths for nativeImage loads.
+    pattern-either:
+      - pattern: |-
+          nativeImage.createFromPath(userPath)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-126\\b'
+    message: |-
+      HexVibe Detection [INS-126]: CWE-22
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-127
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate URLs in menu handlers.
+    pattern-either:
+      - pattern: |-
+          shell.openExternal(userUrl) в menu
+      - pattern-regex: 'Vulnerable:\\s*INS\\-127\\b'
+    message: |-
+      HexVibe Detection [INS-127]: CWE-749
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-128
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Sanitize shared strings when merging workbooks.
+    pattern-either:
+      - pattern: |-
+          Уязвимость при merge
+      - pattern-regex: 'Vulnerable:\\s*INS\\-128\\b'
+    message: |-
+      HexVibe Detection [INS-128]: CWE-1236
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-129
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Sanitize user text in pptxgenjs slides.
+    pattern-either:
+      - pattern: |-
+          slide.addText(user)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-129\\b'
+    message: |-
+      HexVibe Detection [INS-129]: CWE-1236
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-130
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Restrict embedded fonts to trusted sources.
+    pattern-either:
+      - pattern: |-
+          embedFont(fs.readFileSync(userFont))
+      - pattern-regex: 'Vulnerable:\\s*INS\\-130\\b'
+    message: |-
+      HexVibe Detection [INS-130]: CWE-22
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-131
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Bound sampling params for production AI paths.
+    pattern-either:
+      - pattern: |-
+          temperature: 2
+      - pattern-regex: 'Vulnerable:\\s*INS\\-131\\b'
+    message: |-
+      HexVibe Detection [INS-131]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-132
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use seed for reproducibility when policy requires.
+    pattern-either:
+      - pattern: |-
+          create({...})
+      - pattern-regex: 'Vulnerable:\\s*INS\\-132\\b'
+    message: |-
+      HexVibe Detection [INS-132]: CWE-1109
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-133
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Gate system events on IPC.
+    pattern-either:
+      - pattern: |-
+          powerMonitor.on('suspend', ()=>ipc.send(...))
+      - pattern-regex: 'Vulnerable:\\s*INS\\-133\\b'
+    message: |-
+      HexVibe Detection [INS-133]: CWE-200
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-134
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Mediate clipboard IPC in main.
+    pattern-either:
+      - pattern: |-
+          clipboard.writeText(user)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-134\\b'
+    message: |-
+      HexVibe Detection [INS-134]: CWE-749
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-135
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Sanitize cheerio HTML from mammoth.
+    pattern-either:
+      - pattern: |-
+          cheerio.load(html)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-135\\b'
+    message: |-
+      HexVibe Detection [INS-135]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-136
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Rate-limit xlsx password attempts.
+    pattern-either:
+      - pattern: |-
+          XLSX.read(data, {password: guess})
+      - pattern-regex: 'Vulnerable:\\s*INS\\-136\\b'
+    message: |-
+      HexVibe Detection [INS-136]: CWE-307
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-137
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Do not log PDF operator lists in production.
+    pattern-either:
+      - pattern: |-
+          console.log(opList)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-137\\b'
+    message: |-
+      HexVibe Detection [INS-137]: CWE-201
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-138
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Minimize OpenAI request metadata.
+    pattern-either:
+      - pattern: |-
+          metadata: { email: user.email }
+      - pattern-regex: 'Vulnerable:\\s*INS\\-138\\b'
+    message: |-
+      HexVibe Detection [INS-138]: CWE-201
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-139
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate focus before global shortcuts.
+    pattern-either:
+      - pattern: |-
+          globalShortcut.register
+      - pattern-regex: 'Vulnerable:\\s*INS\\-139\\b'
+    message: |-
+      HexVibe Detection [INS-139]: CWE-749
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-140
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate save dialog paths before opening.
+    pattern-either:
+      - pattern: |-
+          shell.openExternal(savedPath)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-140\\b'
+    message: |-
+      HexVibe Detection [INS-140]: CWE-749
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-141
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Handle CSV delimiter injection in xlsx roundtrip.
+    pattern-either:
+      - pattern: |-
+          sep=; in cell
+      - pattern-regex: 'Vulnerable:\\s*INS\\-141\\b'
+    message: |-
+      HexVibe Detection [INS-141]: CWE-1236
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-142
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Safe XML/HTML for headers/footers.
+    pattern-either:
+      - pattern: |-
+          header.addHtml(user)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-142\\b'
+    message: |-
+      HexVibe Detection [INS-142]: CWE-611
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-143
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Treat PDF annotations as untrusted.
+    pattern-either:
+      - pattern: |-
+          annotation без validate
+      - pattern-regex: 'Vulnerable:\\s*INS\\-143\\b'
+    message: |-
+      HexVibe Detection [INS-143]: CWE-1027
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-144
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Test tools + JSON schema together.
+    pattern-either:
+      - pattern: |-
+          mixed
+      - pattern-regex: 'Vulnerable:\\s*INS\\-144\\b'
+    message: |-
+      HexVibe Detection [INS-144]: CWE-1109
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-145
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Set full webPreferences on BrowserView.
+    pattern-either:
+      - pattern: |-
+          new BrowserView()
+      - pattern-regex: 'Vulnerable:\\s*INS\\-145\\b'
+    message: |-
+      HexVibe Detection [INS-145]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-146
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate utility process arguments.
+    pattern-either:
+      - pattern: |-
+          utilityProcess.fork(path, userArgv)
+      - pattern-regex: 'Vulnerable:\\s*INS\\-146\\b'
+    message: |-
+      HexVibe Detection [INS-146]: CWE-749
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-147
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Combine mammoth options with size caps.
+    pattern-either:
+      - pattern: |-
+          ignoreEmptyParagraphs: false
+      - pattern-regex: 'Vulnerable:\\s*INS\\-147\\b'
+    message: |-
+      HexVibe Detection [INS-147]: CWE-409
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-148
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Do not use user input as defval in sheet_to_json.
+    pattern-either:
+      - pattern: |-
+          defval: userDef
+      - pattern-regex: 'Vulnerable:\\s*INS\\-148\\b'
+    message: |-
+      HexVibe Detection [INS-148]: CWE-1236
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-149
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Bound max_tokens for interactive flows.
+    pattern-either:
+      - pattern: |-
+          max_tokens: 65536
+      - pattern-regex: 'Vulnerable:\\s*INS\\-149\\b'
+    message: |-
+      HexVibe Detection [INS-149]: CWE-409
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-150
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        No plaintext fallback when safeStorage unavailable.
+    pattern-either:
+      - pattern: |-
+          safeStorage unavailable → plaintext
+      - pattern-regex: 'Vulnerable:\\s*INS\\-150\\b'
+    message: |-
+      HexVibe Detection [INS-150]: CWE-312
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-151
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Run npm audit in CI for Insight stack.
+    pattern-either:
+      - pattern: |-
+          # skip npm audit
+      - pattern-regex: 'Vulnerable:\\s*INS\\-151\\b'
+    message: |-
+      HexVibe Detection [INS-151]: CWE-1104
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-vsto-suite.ins-152
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Ban @electron/remote; use contextBridge.
+    pattern-either:
+      - pattern: |-
+          require('@electron/remote')
+      - pattern-regex: 'Vulnerable:\\s*INS\\-152\\b'
+    message: |-
+      HexVibe Detection [INS-152]: CWE-94
+    languages:
+      - generic
+    severity: WARNING

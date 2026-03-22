@@ -1,0 +1,496 @@
+rules:
+  - id: hexvibe.ru-regulatory.rrc-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать редактирование/маскирование до логирования (например, redact_email, redact_snils), а также уровень логов без PII по умолчанию.
+    pattern-either:
+      - pattern: |-
+          print(f"user={user.email}")
+          logger.info("pii", extra={"fio": fio, "snils": snils, "email": email})
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-001\\b'
+    message: |-
+      HexVibe Detection [RRC-001]: 152-ФЗ (PII in logs)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Обезличить/агрегировать ПДн перед отправкой, отделить идентификаторы и payload, добавить контроль/аудит передачи данных.
+    pattern-either:
+      - pattern: |-
+          requests.post("https://api.openai.com", json={"text": pii})
+          fetch("https://api.anthropic.com", { body: pii })
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-002\\b'
+    message: |-
+      HexVibe Detection [RRC-002]: RU policy: residency & anonymization
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать сертифицированные средства криптографии / GOST-совместимые библиотеки, соответствующие требованиям контура КИИ.
+    pattern-either:
+      - pattern: |-
+          from cryptography.hazmat.primitives.ciphers import Cipher
+          import Crypto.Cipher
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-003\\b'
+    message: |-
+      HexVibe Detection [RRC-003]: RU KII: certified crypto requirement
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Уйти от hardcoded metadata: использовать абстракции конфигурации/переменные окружения и единый механизм discovery для целевого облака.
+    pattern-either:
+      - pattern: |-
+          http://169.254.169.254/latest/meta-data/
+          AWS_INSTANCE_ID (или запросы к IMDS)
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-004\\b'
+    message: |-
+      HexVibe Detection [RRC-004]: Import substitution: portability risk
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать российские или внутренние корпоративные DNS/NTP резолверы (например, 10.0.0.53, ntp.local).
+    pattern-either:
+      - pattern: |-
+          nameserver 8.8.8.8
+          server pool.ntp.org iburst
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-005\\b'
+    message: |-
+      HexVibe Detection [RRC-005]: FSTEC/FSB hardening: trusted infra dependencies
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        В CI/CD разрешать только доверенные внутренние зеркала/репозитории артефактов (Nexus/Artifactory/internal registry).
+    pattern-either:
+      - pattern: |-
+          pip install -i https://pypi.org/simple ...
+          npm config set registry https://registry.npmjs.org/
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-006\\b'
+    message: |-
+      HexVibe Detection [RRC-006]: Supply-chain policy: trusted mirrors only
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Возвращать обобщенное сообщение пользователю; детали и stacktrace писать только во внутренние журналы.
+    pattern-either:
+      - pattern: |-
+          return {"error": str(e), "stack": traceback.format_exc()}
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-007\\b'
+    message: |-
+      HexVibe Detection [RRC-007]: Secure error handling policy
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Централизованно логировать неудачные входы, смену паролей и чувствительные события безопасности (SIEM/audit bus).
+    pattern-either:
+      - pattern: |-
+          except AuthError:
+              return {"ok": False}
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-008\\b'
+    message: |-
+      HexVibe Detection [RRC-008]: Security audit logging requirement
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Перед запуском проверять цифровую подпись/доверенную цепочку и хэш (особенно на критических узлах).
+    pattern-either:
+      - pattern: |-
+          subprocess.run(["/opt/bin/tool"])
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-009\\b'
+    message: |-
+      HexVibe Detection [RRC-009]: Critical node integrity policy
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Перед удалением перезаписать файл нулями/случайными данными, затем удалить (fsync + remove) с учетом политики хранения.
+    pattern-either:
+      - pattern: |-
+          os.remove(pii_file)
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-010\\b'
+    message: |-
+      HexVibe Detection [RRC-010]: CWE-226
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать subprocess.run([...], shell=False, check=True) с фиксированным whitelist аргументов.
+    pattern-either:
+      - pattern: |-
+          os.system(user_cmd)
+          subprocess.Popen(user_cmd, shell=True)
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-011\\b'
+    message: |-
+      HexVibe Detection [RRC-011]: CWE-676
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Проверять SHA-256/HMAC целостность конфигурации при старте; при mismatch — fail closed и аудит-событие.
+    pattern-either:
+      - pattern: |-
+          settings = json.load(open("config.json"))
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-012\\b'
+    message: |-
+      HexVibe Detection [RRC-012]: CWE-353
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать токены УДИ/УДА (OIDC/OAuth2, client credentials, mTLS-bound tokens), запрет static user/pass в интеграциях и сервис-аккаунтах.
+    pattern-either:
+      - pattern: |-
+          KEYCLOAK_USER=admin
+          KEYCLOAK_PASSWORD=admin123
+          auth = {"user": "...", "pass": "..."}
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-013\\b'
+    message: |-
+      HexVibe Detection [RRC-013]: ГОСТ 57580.1, требования ЦБ по ИАМ/идентификации
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Обязательная короткоживущая токен-модель, ротация, revoke/introspection, аудит выдачи и использования токенов.
+    pattern-either:
+      - pattern: |-
+          token = "hardcoded-long-lived"
+          expires_in = 99999999
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-014\\b'
+    message: |-
+      HexVibe Detection [RRC-014]: Внутренние стандарты ЦБ ИБ (токены и жизненный цикл)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать Authorization Code Flow + PKCE, а для межсервисного взаимодействия включать mTLS (client cert/key) и проверку FAPI-профиля.
+    pattern-either:
+      - pattern: |-
+          response_type=token
+          grant_type=implicit
+          curl https://idp/token (без mTLS client cert)
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-015\\b'
+    message: |-
+      HexVibe Detection [RRC-015]: FAPI Security Profile, ГОСТ 57580.1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Явно создавать непривилегированного пользователя и переключаться на него (RUN useradd -m appuser, USER appuser).
+    pattern-either:
+      - pattern: |-
+          # Dockerfile
+          FROM python:3.11
+          USER root или отсутствие USER
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-016\\b'
+    message: |-
+      HexVibe Detection [RRC-016]: Docker CIS + ГОСТ 57580.1 hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать kind: ExternalSecret (ESO) + backend Vault; исключить plaintext секреты в Git/YAML.
+    pattern-either:
+      - pattern: |-
+          kind: Secret
+          stringData:
+            password: plain-text
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-017\\b'
+    message: |-
+      HexVibe Detection [RRC-017]: Vault policy + ESO + ГОСТ 57580.1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Для новых микросервисов использовать поддерживаемый стек (Python >= 3.10, без legacy PHP), фиксировать baseline в архитектурном стандарте.
+    pattern-either:
+      - pattern: |-
+          FROM python:3.9
+          php:7.4-fpm
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-018\\b'
+    message: |-
+      HexVibe Detection [RRC-018]: Internal tech baseline / Клинкер
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Все внутренние API должны проходить через middleware аутентификации Keycloak (VerifyToken/аналог), deny-by-default.
+    pattern-either:
+      - pattern: |-
+          @app.get("/internal/payments")
+          def handler(): ... (без VerifyToken)
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-019\\b'
+    message: |-
+      HexVibe Detection [RRC-019]: Keycloak middleware policy / Клинкер / ГОСТ 57580.1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Перед запуском проверять SHA-256/ГОСТ-хэш исполняемого файла и критичных конфигов; при mismatch — fail closed и аудит-событие (Приказ 239).
+    pattern-either:
+      - pattern: |-
+          app = load_binary("/opt/bin/service")
+          config = open("/etc/service/config.yaml").read()
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-020\\b'
+    message: |-
+      HexVibe Detection [RRC-020]: Приказ ФСТЭК №239, ГОСТ Р 56939
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Перед запуском проверять наличие и работоспособность СЗИ (антивирус, IDS/IPS, EDR агент), логировать статус и блокировать старт при критическом отказе.
+    pattern-either:
+      - pattern: |-
+          start_service()
+          # no AV/IDS health check
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-021\\b'
+    message: |-
+      HexVibe Detection [RRC-021]: Приказ ФСТЭК №235/239
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Обязательная фиксация результатов SAST/SCA в артефактах CI (лог/отчет), подпись и хранение для аудита SDL по ГОСТ Р 56939.
+    pattern-either:
+      - pattern: |-
+          ci_stage("build")
+          run_semgrep()
+          # result not persisted
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-022\\b'
+    message: |-
+      HexVibe Detection [RRC-022]: ГОСТ Р 56939, ФСТЭК SDL practice
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Для криптографических ключей задать и контролировать rotation_period, автоматическую ротацию и журналировать события смены ключей.
+    pattern-either:
+      - pattern: |-
+          key_policy = {"name": "payments-key"}
+          # no rotation_period
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-023\\b'
+    message: |-
+      HexVibe Detection [RRC-023]: NIST SP 800-57, ЦБ 683-П
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Включить строгий CSP, SRI для внешних скриптов и проверки целостности DOM/critical forms для защиты ДБО от overlay/injection атак.
+    pattern-either:
+      - pattern: |-
+          <script src="https://cdn.example.com/widget.js"></script>
+          # no Content-Security-Policy
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-024\\b'
+    message: |-
+      HexVibe Detection [RRC-024]: ЦБ 683-П
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Фиксировать hash реквизитов на этапе create и сравнивать перед sign/submit; при несовпадении — reject + audit event.
+    pattern-either:
+      - pattern: |-
+          payment.amount = req.amount
+          sign(payment)
+          # payload can change before signing
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-025\\b'
+    message: |-
+      HexVibe Detection [RRC-025]: ЦБ 719-П
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.ru-regulatory.rrc-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Вести инвентаризацию криптопримитивов, план гибридных схем и процедуру миграции ключей/сертификатов под PQ-ready профиль.
+    pattern-either:
+      - pattern: |-
+          crypto_profile = "rsa2048-only"
+      - pattern-regex: 'Vulnerable:\\s*RRC\\-026\\b'
+    message: |-
+      HexVibe Detection [RRC-026]: NIST SP 800-57 migration guidance
+    languages:
+      - generic
+    severity: WARNING

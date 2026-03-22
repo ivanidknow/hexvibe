@@ -1,0 +1,24 @@
+{
+  "skill_id": "browser-agent",
+  "name": "Browser Agent Security",
+  "activation_triggers": [
+    "brw-playwright-sandbox",
+    "brw-selenium-driver",
+    "brw-headless-flags",
+    "brw-browser-ssrf",
+    "brw-dom-injection"
+  ],
+  "relevant_extensions": [
+    ".py",
+    ".js",
+    ".ts"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/browser-agent/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/browser_vulnerable.js",
+  "security_priority": 5
+}

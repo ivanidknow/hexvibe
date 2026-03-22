@@ -1,0 +1,186 @@
+rules:
+  - id: hexvibe.license-compliance.lic-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Заменить AGPL зависимость на совместимую по лицензии (MIT/BSD/Apache-2.0) и проверить транзитивные зависимости (lockfile/SBOM).
+    pattern-either:
+      - pattern: |-
+          "license": "AGPL-3.0"
+          AGPL-3.0
+      - pattern-regex: 'Vulnerable:\\s*LIC\\-001\\b'
+    message: |-
+      HexVibe Detection [LIC-001]: Policy: strong copyleft (AGPL-3.0)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.license-compliance.lic-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Исключить SSPL зависимости в облачном контуре, заменить на permissive варианты и подтвердить лицензионную совместимость (SBOM/scan).
+    pattern-either:
+      - pattern: |-
+          SSPL
+          "license": "SSPL"
+      - pattern-regex: 'Vulnerable:\\s*LIC\\-002\\b'
+    message: |-
+      HexVibe Detection [LIC-002]: Policy: SSPL risk for hosted services
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.license-compliance.lic-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Обновить библиотеку до поддерживаемой версии, либо заменить на альтернативу с активным мейнтейном; фиксировать версии в lockfile.
+    pattern-either:
+      - pattern: |-
+          deprecated: true
+          last_updated: "2021-01-01"
+      - pattern-regex: 'Vulnerable:\\s*LIC\\-003\\b'
+    message: |-
+      HexVibe Detection [LIC-003]: Policy: dependency maintenance SLA (2y)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.license-compliance.lic-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Разрешать только явно идентифицированные SPDX-лицензии; блокировать сборку при UNKNOWN/NOASSERTION.
+    pattern-either:
+      - pattern: |-
+          "license": "UNKNOWN"
+          license: null
+      - pattern-regex: 'Vulnerable:\\s*LIC\\-004\\b'
+    message: |-
+      HexVibe Detection [LIC-004]: SPDX policy baseline
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.license-compliance.lic-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать только доверенные внутренние registry/mirror и фиксировать источник в CI policy.
+    pattern-either:
+      - pattern: |-
+          pip install --index-url https://pypi.org/simple
+          npm config set registry https://registry.npmjs.org/
+      - pattern-regex: 'Vulnerable:\\s*LIC\\-005\\b'
+    message: |-
+      HexVibe Detection [LIC-005]: Supply-chain trusted source policy
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.license-compliance.lic-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Добавить CI gate: syft + policy check (block on AGPL/GPL/SSPL according to org policy).
+    pattern-either:
+      - pattern: |-
+          # build runs without syft/license stage
+      - pattern-regex: 'Vulnerable:\\s*LIC\\-006\\b'
+    message: |-
+      HexVibe Detection [LIC-006]: CI/CD license governance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.license-compliance.lic-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Генерировать SBOM через syft в формате CycloneDX/SPDX и сохранять как артефакт релиза.
+    pattern-either:
+      - pattern: |-
+          # no sbom artifact generated
+      - pattern-regex: 'Vulnerable:\\s*LIC\\-008\\b'
+    message: |-
+      HexVibe Detection [LIC-008]: SBOM requirement (CycloneDX/SPDX)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.license-compliance.lic-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Анализировать syft-отчет на транзитивные copyleft-лицензии и блокировать релиз до remediation/exception approval.
+    pattern-either:
+      - pattern: |-
+          # syft output includes GPL/AGPL transitive packages
+      - pattern-regex: 'Vulnerable:\\s*LIC\\-009\\b'
+    message: |-
+      HexVibe Detection [LIC-009]: Transitive license risk management
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.license-compliance.lic-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Для бинарных зависимостей проверять наличие license metadata/attestation и подтверждать источник/право использования.
+    pattern-either:
+      - pattern: |-
+          # bundled .so/.dll without embedded license evidence
+      - pattern-regex: 'Vulnerable:\\s*LIC\\-010\\b'
+    message: |-
+      HexVibe Detection [LIC-010]: Binary provenance and license policy
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.license-compliance.lic-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Enable central package management + lockfile; verify package hashes in CI; verify binary signatures for external DLLs.
+    pattern-either:
+      - pattern: |-
+          # dotnet restore without packages.lock.json integrity gate
+      - pattern-regex: 'Vulnerable:\\s*LIC\\-011\\b'
+    message: |-
+      HexVibe Detection [LIC-011]: CWE-347, CWE-1104
+    languages:
+      - generic
+    severity: WARNING

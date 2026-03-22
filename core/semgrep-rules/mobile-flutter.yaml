@@ -1,0 +1,37 @@
+rules:
+  - id: hexvibe.mobile-flutter.mob-001
+    pattern-either:
+      - pattern: |-
+          HttpOverrides.global = MyHttpOverrides();
+          class MyHttpOverrides extends HttpOverrides {
+            bool badCertificateCallback(...) => true;
+          }
+      - pattern-regex: 'Vulnerable:\\s*MOB\\-001\\b'
+    message: 'HexVibe Detection [MOB-001]: Silk Mobile SAR'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.mobile-flutter.mob-010
+    pattern-either:
+      - pattern: |-
+          if (kDebugMode) {
+            print('token - $token');
+          }
+      - pattern-regex: 'Vulnerable:\\s*MOB\\-010\\b'
+    message: 'HexVibe Detection [MOB-010]: Silk Mobile SAR'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.mobile-flutter.mob-021
+    pattern-either:
+      - pattern: |-
+          class MainActivity: FlutterActivity() {
+            override fun onCreate(...) {
+              super.onCreate(...)
+            }
+          }
+      - pattern-regex: 'Vulnerable:\\s*MOB\\-021\\b'
+    message: 'HexVibe Detection [MOB-021]: Silk Mobile SAR'
+    languages:
+      - generic
+    severity: WARNING

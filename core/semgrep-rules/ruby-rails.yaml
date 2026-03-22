@@ -1,0 +1,378 @@
+rules:
+  - id: hexvibe.ruby-rails.ruby-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        expr = params[:expr] raise "invalid" unless expr =~ /\\A[0-9+\\-*\\/(). ]{1,64}\\z/ ... result = safe_math_eval(expr)
+    pattern-either:
+      - pattern: |-
+          expr = params[:expr]
+          ...
+          result = eval(expr)
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-001\\b'
+    message: |-
+      HexVibe Detection [RUBY-001]: CWE-94
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        action = params[:action] allowed = { "uptime" => ["uptime"] } raise "blocked" unless allowed.key?(action) ... Open3.capture2e(*allowed[action])
+    pattern-either:
+      - pattern: |-
+          cmd = params[:cmd]
+          ...
+          system(cmd)
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-002\\b'
+    message: |-
+      HexVibe Detection [RUBY-002]: CWE-78
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        host = params[:host] raise "invalid" unless host =~ /\\A[a-zA-Z0-9.-]{1,255}\\z/ ... out, _ = Open3.capture2e("ping", "-c", "1", host)
+    pattern-either:
+      - pattern: |-
+          host = params[:host]
+          ...
+          out = ping -c 1 #{host}
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-003\\b'
+    message: |-
+      HexVibe Detection [RUBY-003]: CWE-77
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        allow = { "HealthHandler" => HealthHandler } key = params[:klass] raise "blocked" unless allow.key?(key) ... allow[key].new.call
+    pattern-either:
+      - pattern: |-
+          klass = params[:klass].constantize
+          ...
+          klass.new.call
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-004\\b'
+    message: |-
+      HexVibe Detection [RUBY-004]: CWE-470
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        method = params[:method] allowed = %w[health status] raise "blocked" unless allowed.include?(method) ... service.public_send(method)
+    pattern-either:
+      - pattern: |-
+          method = params[:method]
+          ...
+          service.send(method)
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-005\\b'
+    message: |-
+      HexVibe Detection [RUBY-005]: CWE-74
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        name = params[:template_name] allowed = %w[welcome invoice] raise "blocked" unless allowed.include?(name) ... render template: "safe/#{name}"
+    pattern-either:
+      - pattern: |-
+          tpl = params[:template]
+          ...
+          ERB.new(tpl).result(binding)
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-006\\b'
+    message: |-
+      HexVibe Detection [RUBY-006]: CWE-94
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        order = params[:order] order = "name" unless %w[name created_at].include?(order) ... User.order(order)
+    pattern-either:
+      - pattern: |-
+          order = params[:order]
+          ...
+          User.order(order)
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-007\\b'
+    message: |-
+      HexVibe Detection [RUBY-007]: CWE-74
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        blob = params[:blob] ... obj = YAML.safe_load(blob, permitted_classes: [], aliases: false)
+    pattern-either:
+      - pattern: |-
+          blob = params[:blob]
+          ...
+          obj = YAML.load(blob)
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-008\\b'
+    message: |-
+      HexVibe Detection [RUBY-008]: CWE-95
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        allowed = params.require(:user).permit(:email, :display_name) user.update(allowed)
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-009\\b'
+    message: |-
+      HexVibe Detection [RUBY-009]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        name = params[:name] raise "blocked" unless %w[home about].include?(name) render template: "pages/#{name}"
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-010\\b'
+    message: |-
+      HexVibe Detection [RUBY-010]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        obj = YAML.safe_load(params[:payload], permitted_classes: [], aliases: false)
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-011\\b'
+    message: |-
+      HexVibe Detection [RUBY-011]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        allowed = {"uptime" => ["uptime"]} cmd = params[:action] raise "blocked" unless allowed.key?(cmd) Open3.capture2e(*allowed[cmd])
+    pattern-either:
+      - pattern: |-
+          out = %x(#{params[:cmd]})
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-012\\b'
+    message: |-
+      HexVibe Detection [RUBY-012]: CWE-78
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        next_url = params[:next] next_url = root_path unless next_url&.start_with?("/") redirect_to next_url
+    pattern-either:
+      - pattern: |-
+          redirect_to params[:next]
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-013\\b'
+    message: |-
+      HexVibe Detection [RUBY-013]: CWE-601
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        cookies[:session] = { value: token, httponly: true, secure: true, same_site: :strict }
+    pattern-either:
+      - pattern: |-
+          cookies[:session] = token
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-014\\b'
+    message: |-
+      HexVibe Detection [RUBY-014]: CWE-614
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        JWT_SECRET = ENV.fetch("JWT_SECRET")
+    pattern-either:
+      - pattern: |-
+          JWT_SECRET = "prod-secret-123"
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-015\\b'
+    message: |-
+      HexVibe Detection [RUBY-015]: CWE-798
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Digest::SHA256.hexdigest(password + salt)
+    pattern-either:
+      - pattern: |-
+          Digest::MD5.hexdigest(password)
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-016\\b'
+    message: |-
+      HexVibe Detection [RUBY-016]: CWE-327
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        uri = URI(params[:url]) raise "blocked" unless ALLOWED_HOSTS.include?(uri.host) Net::HTTP.get(uri)
+    pattern-either:
+      - pattern: |-
+          uri = URI(params[:url])
+          Net::HTTP.get(uri)
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-017\\b'
+    message: |-
+      HexVibe Detection [RUBY-017]: CWE-918
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        allow = {"ReportJob" => ReportJob} klass = allow.fetch(params[:klass])
+    pattern-either:
+      - pattern: |-
+          klass = params[:klass].constantize
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-018\\b'
+    message: |-
+      HexVibe Detection [RUBY-018]: CWE-470
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        if Rails.env.development?   get "/debug/env", to: "debug#env" end
+    pattern-either:
+      - pattern: |-
+          get "/debug/env", to: proc { [200, {}, [ENV.to_h.to_s]] }
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-019\\b'
+    message: |-
+      HexVibe Detection [RUBY-019]: CWE-489
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.ruby-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Rails.logger.error(e.full_message) render json: { error: "internal server error" }, status: 500
+    pattern-either:
+      - pattern: |-
+          render json: { error: e.message, backtrace: e.backtrace }, status: 500
+      - pattern-regex: 'Vulnerable:\\s*RUBY\\-020\\b'
+    message: |-
+      HexVibe Detection [RUBY-020]: CWE-209
+    languages:
+      - ruby
+    severity: WARNING

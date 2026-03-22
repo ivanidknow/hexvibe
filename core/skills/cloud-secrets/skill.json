@@ -1,0 +1,28 @@
+{
+  "skill_id": "cloud-secrets",
+  "name": "Cloud & Secrets",
+  "activation_triggers": [
+    "sec-imds-169254",
+    "sec-k8s-configmap-secret",
+    "sec-vault-token",
+    "sec-kms-policy-star",
+    "sec-env-leak-log",
+    "sec-eso-external-secret",
+    "sec-vault-agent-injector"
+  ],
+  "relevant_extensions": [
+    ".py",
+    ".yaml",
+    ".yml",
+    ".tf",
+    ".json"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/cloud-secrets/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/cloud_secrets_vulnerable.yaml",
+  "security_priority": 10
+}

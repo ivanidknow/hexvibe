@@ -1,0 +1,30 @@
+{
+  "skill_id": "infra-k8s-helm",
+  "name": "Infra / Kubernetes / Helm",
+  "activation_triggers": [
+    "inf-k8s-privileged",
+    "inf-helm-values",
+    "inf-dockerfile-root",
+    "inf-nginx-method-limit",
+    "inf-k8s-networkpolicy",
+    "k8s-seccomp-apparmor",
+    "dock-readonly-rootfs",
+    "ngx-header-hardening",
+    "squid-egress-policy"
+  ],
+  "relevant_extensions": [
+    ".yaml",
+    ".yml",
+    ".tpl",
+    ".dockerfile",
+    ".conf"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/infra-k8s-helm/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/infra_vulnerable.yaml",
+  "security_priority": 5
+}

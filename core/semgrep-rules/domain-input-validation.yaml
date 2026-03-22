@@ -1,0 +1,2894 @@
+rules:
+  - id: hexvibe.domain-input-validation.py-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий указывает внутренний URL/метаданные; SSRF к IMDS или внутренним сервисам (CWE-918).
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          requests.get(user_url)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-007\\b'
+    message: |-
+      HexVibe Detection [PY-007]: Input Validation
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          execute(f"...{id}...")
+      - pattern-regex: 'Vulnerable:\\s*PY\\-012\\b'
+    message: |-
+      HexVibe Detection [PY-012]: Input Validation
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          open(base + "/" + filename)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-014\\b'
+    message: |-
+      HexVibe Detection [PY-014]: Input Validation
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          eval(user_expr)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-015\\b'
+    message: |-
+      HexVibe Detection [PY-015]: Input Validation
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          text(f"SELECT ... {name}")
+      - pattern-regex: 'Vulnerable:\\s*PY\\-021\\b'
+    message: |-
+      HexVibe Detection [PY-021]: Input Validation
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          body processed without HMAC validation
+      - pattern-regex: 'Vulnerable:\\s*PY\\-025\\b'
+    message: |-
+      HexVibe Detection [PY-025]: Input Validation
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-110
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          join(MEDIA_ROOT, file_path)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-110\\b'
+    message: |-
+      HexVibe Detection [PY-110]: Input Validation
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          exec("tar " + userArchive)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-001\\b'
+    message: |-
+      HexVibe Detection [NJS-001]: Input Validation
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          fs.readFile(base + "/" + file)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-002\\b'
+    message: |-
+      HexVibe Detection [NJS-002]: Input Validation
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          fetch(req.body.url)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-007\\b'
+    message: |-
+      HexVibe Detection [NJS-007]: Input Validation
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          app = FastAPI(debug=True)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-001\\b'
+    message: |-
+      HexVibe Detection [PY-001]: FastAPI deployment hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий передаёт сериализованный объект; при небезопасной десериализации выполняет код на сервере (CWE-502).
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          pickle.loads(data)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-003\\b'
+    message: |-
+      HexVibe Detection [PY-003]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий подставляет команду в shell=True; выполняет произвольные команды ОС (CWE-78).
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          subprocess.run(cmd, shell=True)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-004\\b'
+    message: |-
+      HexVibe Detection [PY-004]: CWE-78
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          yaml.load(data, Loader=yaml.Loader)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-005\\b'
+    message: |-
+      HexVibe Detection [PY-005]: PyYAML security
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          tempfile.mktemp()
+      - pattern-regex: 'Vulnerable:\\s*PY\\-006\\b'
+    message: |-
+      HexVibe Detection [PY-006]: CWE-377
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          requests.get(url)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-008\\b'
+    message: |-
+      HexVibe Detection [PY-008]: Reliability/security baseline
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          Model(**request.json())
+      - pattern-regex: 'Vulnerable:\\s*PY\\-013\\b'
+    message: |-
+      HexVibe Detection [PY-013]: OWASP Mass Assignment
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          allow_origins=["*"], allow_credentials=True
+      - pattern-regex: 'Vulnerable:\\s*PY\\-016\\b'
+    message: |-
+      HexVibe Detection [PY-016]: CORS hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          async def ...: requests.get(...)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-018\\b'
+    message: |-
+      HexVibe Detection [PY-018]: Async runtime safety
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          browser = p.chromium.launch(args=["--no-sandbox"])
+      - pattern-regex: 'Vulnerable:\\s*PY\\-019\\b'
+    message: |-
+      HexVibe Detection [PY-019]: Browser automation hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @app.get("/users/{id}")
+          return db_user
+      - pattern-regex: 'Vulnerable:\\s*PY\\-020\\b'
+    message: |-
+      HexVibe Detection [PY-020]: FastAPI response_model safety
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          UserModel.model_construct(**payload)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-022\\b'
+    message: |-
+      HexVibe Detection [PY-022]: Pydantic security
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          pickle serializer enabled in worker
+      - pattern-regex: 'Vulnerable:\\s*PY\\-029\\b'
+    message: |-
+      HexVibe Detection [PY-029]: Celery security
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.py-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          return RedirectResponse(next_url)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-030\\b'
+    message: |-
+      HexVibe Detection [PY-030]: OWASP Open Redirect
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.dja-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          @csrf_exempt
+          def update_profile(request):
+              ...
+              return JsonResponse({"ok": True})
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-001\\b'
+    message: |-
+      HexVibe Detection [DJA-001]: CWE-352
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.dja-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          q = "SELECT * FROM users WHERE email = '" + email + "'"
+          ...
+          User.objects.raw(q)
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-002\\b'
+    message: |-
+      HexVibe Detection [DJA-002]: CWE-89
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.dja-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий провоцирует ошибку; при DEBUG=True получает детали стека и конфигурации (CWE-489).
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          DEBUG = True
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-003\\b'
+    message: |-
+      HexVibe Detection [DJA-003]: CWE-489
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.dja-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          class UserForm(forms.ModelForm):
+              class Meta:
+                  model = User
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-004\\b'
+    message: |-
+      HexVibe Detection [DJA-004]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.dja-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          ALLOWED_HOSTS = ["*"]
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-005\\b'
+    message: |-
+      HexVibe Detection [DJA-005]: CWE-346
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.dja-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          return redirect(request.GET.get("next"))
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-006\\b'
+    message: |-
+      HexVibe Detection [DJA-006]: CWE-601
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.dja-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          path = os.path.join("/data/uploads", upload.name)
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-009\\b'
+    message: |-
+      HexVibe Detection [DJA-009]: CWE-22
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.dja-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          html = mark_safe(user_input)
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-011\\b'
+    message: |-
+      HexVibe Detection [DJA-011]: CWE-79
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.dja-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          qs = User.objects.extra(where=["id=%s" % user_id])
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-013\\b'
+    message: |-
+      HexVibe Detection [DJA-013]: CWE-89
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.dja-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          urlpatterns = [
+              re_path(r"^(a+)+$", view),
+          ]
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-016\\b'
+    message: |-
+      HexVibe Detection [DJA-016]: CWE-400
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.dja-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          class AdminForm(forms.ModelForm):
+              class Meta:
+                  model = User
+                  exclude = []
+      - pattern-regex: 'Vulnerable:\\s*DJA\\-017\\b'
+    message: |-
+      HexVibe Detection [DJA-017]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.dsk-100
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Исключить динамическое исполнение строкового JS из недоверенных данных; передавать данные через безопасный IPC API с валидацией схемы.
+    pattern-either:
+      - pattern: |-
+          mainWindow.webContents.executeJavaScript(
+            "window.render(" + JSON.stringify(userInput) + ")"
+          )
+      - pattern-regex: 'Vulnerable:\\s*DSK\\-100\\b'
+    message: |-
+      HexVibe Detection [DSK-100]: Insight SAR
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          app.get("/data", (req,res) => { const x = fs.readFileSync(p) })
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-003\\b'
+    message: |-
+      HexVibe Detection [NJS-003]: Node.js Event Loop Safety
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const obj = serialize.unserialize(payload)
+          eval("(" + body + ")")
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-004\\b'
+    message: |-
+      HexVibe Detection [NJS-004]: OWASP Deserialization Security
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          res.redirect(req.query.next)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-006\\b'
+    message: |-
+      HexVibe Detection [NJS-006]: OWASP Open Redirect
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          cors({ origin: "*", credentials: true })
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-008\\b'
+    message: |-
+      HexVibe Detection [NJS-008]: OWASP CORS Security
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          deepMerge(config, req.body)
+          querystring.parse(req.url) без фильтра ключей
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-011\\b'
+    message: |-
+      HexVibe Detection [NJS-011]: Prototype Pollution Server-Side
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий подставляет строку в SQL через шаблон; при отсутствии параметров выполняет произвольный SQL (CWE-89).
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const b = Buffer.allocUnsafe(size)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-012\\b'
+    message: |-
+      HexVibe Detection [NJS-012]: Node.js Buffer Security
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const id = req.query.id
+          if (id.includes("admin")) ...
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-013\\b'
+    message: |-
+      HexVibe Detection [NJS-013]: OWASP Input Validation
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(untrustedCode, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-014\\b'
+    message: |-
+      HexVibe Detection [NJS-014]: Node.js Sandbox Security
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const re = /(a+)+$/
+          if (re.test(req.body.input))
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-015\\b'
+    message: |-
+      HexVibe Detection [NJS-015]: OWASP ReDoS (Server Side)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          "lib-x": "git+https://github.com/org/lib-x.git" (без commit hash)
+          # no package-lock.json/npm-shrinkwrap.json
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-017\\b'
+    message: |-
+      HexVibe Detection [NJS-017]: Supply Chain Security
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          app.disable("x-powered-by") отсутствует
+          helmet() не подключен
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-018\\b'
+    message: |-
+      HexVibe Detection [NJS-018]: HTTP Header Hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          fs.unlink(req.body.filePath, cb)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-020\\b'
+    message: |-
+      HexVibe Detection [NJS-020]: CWE-73 / File Path Control
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          bcrypt.hash(password, 4)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-022\\b'
+    message: |-
+      HexVibe Detection [NJS-022]: OWASP Password Storage
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          User.find({ email: req.body.email }) (без schema/type guard)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-023\\b'
+    message: |-
+      HexVibe Detection [NJS-023]: OWASP NoSQL Injection
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          cors({ methods: "*", allowedHeaders: "*" })
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-025\\b'
+    message: |-
+      HexVibe Detection [NJS-025]: CORS Hardening Best Practices
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          await User.create(req.body)
+          await User.update(req.body, { where: ... })
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-026\\b'
+    message: |-
+      HexVibe Detection [NJS-026]: OWASP Mass Assignment
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const buf = Buffer.from(input)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-027\\b'
+    message: |-
+      HexVibe Detection [NJS-027]: Node.js Buffer Safety
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          "scripts": { "build": "tsc", "test": "jest" } (без npm audit/snyk/socket)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-028\\b'
+    message: |-
+      HexVibe Detection [NJS-028]: Supply Chain SCA Controls
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          <%- userContent %> (EJS)
+          != userContent (Pug)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-029\\b'
+    message: |-
+      HexVibe Detection [NJS-029]: SSTI/XSS Template Security
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-031
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const merged = { ...defaults, ...req.body }
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-031\\b'
+    message: |-
+      HexVibe Detection [NJS-031]: Prototype Pollution (Object Spread)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.njs-035
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          let passwordPlain = req.body.password (долгоживущая переменная)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-035\\b'
+    message: |-
+      HexVibe Detection [NJS-035]: Sensitive Data Memory Hygiene
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.fts-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          dangerouslySetInnerHTML={{ __html: userHtml }}
+          <div v-html="content"></div>
+          el.innerHTML = payload
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-001\\b'
+    message: |-
+      HexVibe Detection [FTS-001]: OWASP XSS Prevention Cheat Sheet
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.fts-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          window.addEventListener("message", (e) => handle(e.data))
+          target.postMessage(data, "*")
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-004\\b'
+    message: |-
+      HexVibe Detection [FTS-004]: OWASP HTML5 Security Cheat Sheet
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.fts-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          <meta http-equiv="Content-Security-Policy" content="">
+          script-src 'unsafe-inline' 'unsafe-eval'
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-006\\b'
+    message: |-
+      HexVibe Detection [FTS-006]: CSP Level 3 guidance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.fts-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          # no frame-ancestors / X-Frame-Options policy
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-007\\b'
+    message: |-
+      HexVibe Detection [FTS-007]: OWASP Clickjacking Defense
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.fts-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          self.addEventListener("fetch", (event) => event.respondWith(caches.match(req)))
+          # no cache key validation / stale cache fallback
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-010\\b'
+    message: |-
+      HexVibe Detection [FTS-010]: PWA security guidance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.fts-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          eval(userInput)
+          new Function(code)
+          setTimeout("run()", 100)
+          setInterval("tick()", 1000)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-011\\b'
+    message: |-
+      HexVibe Detection [FTS-011]: OWASP JavaScript Security Guidelines
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.fts-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          deepMerge(target, payload)
+          obj[key] = value (без фильтра __proto__/constructor/prototype)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-012\\b'
+    message: |-
+      HexVibe Detection [FTS-012]: Prototype Pollution Prevention
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.fts-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          leakedVar = 1
+          Array.prototype.custom = fn
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-013\\b'
+    message: |-
+      HexVibe Detection [FTS-013]: JavaScript Secure Coding
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.fts-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const re = /(a+)+$/
+          re.test(input)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-015\\b'
+    message: |-
+      HexVibe Detection [FTS-015]: OWASP ReDoS
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.fts-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          for (const id of ids) { await fetchUser(id) }
+          items.map(async (i) => await apiCall(i))
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-016\\b'
+    message: |-
+      HexVibe Detection [FTS-016]: JS Async Performance/Safety
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-78-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          os.system(user_cmd)
+          os.popen(user_cmd)
+          subprocess.Popen(user_cmd, shell=True)
+          subprocess.run(user_cmd, shell=True)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-78\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-78-PY]: CWE-78
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-89-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          cursor.execute(f"SELECT * FROM users WHERE id = {user_id}")
+          cursor.execute("... %s" % user_input)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-89\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-89-PY]: CWE-89
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-94-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          eval(user_code)
+          exec(user_code)
+          compile(user_code, "<x>", "exec")
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-94\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-94-PY]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-78-js
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          child_process.exec(userInput)
+          child_process.spawn(cmd, args, { shell: true })
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-78\\-JS\\b'
+    message: |-
+      HexVibe Detection [CWE-78-JS]: CWE-78
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-79-js
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          dangerouslySetInnerHTML={{ __html: userHtml }}
+          <div v-html="userHtml"></div>
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-79\\-JS\\b'
+    message: |-
+      HexVibe Detection [CWE-79-JS]: CWE-79
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-94-js
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          new Function(userCode)
+          eval(userCode)
+          setTimeout(userCode, 1000)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-94\\-JS\\b'
+    message: |-
+      HexVibe Detection [CWE-94-JS]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-22-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          full_path = os.path.join(base_dir, user_path)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-22\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-22-PY]: CWE Compliance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-434-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          name = request.FILES["file"].name
+          save("/uploads/" + name)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-434\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-434-PY]: CWE Compliance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-22-js
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const p = path.join(baseDir, ipcPayload.userPath)
+          fs.readFileSync(p)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-22\\-JS\\b'
+    message: |-
+      HexVibe Detection [CWE-22-JS]: CWE Compliance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-614-js
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          res.cookie("sid", sid, { secure: false })
+          document.cookie = "sid="+sid
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-614\\-JS\\b'
+    message: |-
+      HexVibe Detection [CWE-614-JS]: CWE Compliance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-611-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          lxml.etree.parse(xml_path)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-611\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-611-PY]: CWE Compliance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-502-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          pickle.loads(payload)
+          marshal.loads(payload)
+          yaml.load(data, Loader=yaml.Loader)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-502\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-502-PY]: CWE Compliance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1321-js
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          Object.assign(target, userObj)
+          merge(target, userObj)
+          extend({}, userObj)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1321\\-JS\\b'
+    message: |-
+      HexVibe Detection [CWE-1321-JS]: CWE Compliance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-502-js
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          serialize.unserialize(input)
+          serializeJavascript(input) на недоверенных данных
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-502\\-JS\\b'
+    message: |-
+      HexVibe Detection [CWE-502-JS]: CWE Compliance
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-918-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          requests.get(user_url)
+          requests.post(target_url, json=data)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-918\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-918-PY]: CWE Compliance Final
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-918-js
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          axios.get(userUrl)
+          fetch(targetUrl)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-918\\-JS\\b'
+    message: |-
+      HexVibe Detection [CWE-918-JS]: CWE Compliance Final
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1333-js
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const re = new RegExp(userInput)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1333\\-JS\\b'
+    message: |-
+      HexVibe Detection [CWE-1333-JS]: CWE Compliance Final
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-601-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          HttpResponseRedirect(request.GET.get("next"))
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-601\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-601-PY]: CWE Compliance - Logic/Resources
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-601-js
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          res.redirect(req.query.url)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-601\\-JS\\b'
+    message: |-
+      HexVibe Detection [CWE-601-JS]: CWE Compliance - Logic/Resources
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-91-py
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          xml = "<root>" + user_input + "</root>"
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-91\\-PY\\b'
+    message: |-
+      HexVibe Detection [CWE-91-PY]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-918-py-proto
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          requests.get(url) где url может быть file://, gopher://, ftp://
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-918\\-PY\\-PROTO\\b'
+    message: |-
+      HexVibe Detection [CWE-918-PY-PROTO]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-918-js-proto
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          fetch(userUrl)/axios.get(userUrl) без проверки new URL(userUrl).protocol
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-918\\-JS\\-PROTO\\b'
+    message: |-
+      HexVibe Detection [CWE-918-JS-PROTO]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-91-py-identity
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          if token is expected_token:
+          if status is 200:
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-91\\-PY\\-IDENTITY\\b'
+    message: |-
+      HexVibe Detection [CWE-91-PY-IDENTITY]: CWE Compliance Final
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1025-js
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          if (req.headers["x-token"] == expected)
+          if (role == "admin")
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1025\\-JS\\b'
+    message: |-
+      HexVibe Detection [CWE-1025-JS]: CWE Compliance Final
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-89-py-dja-raw
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          User.objects.extra(where=["email='" + email + "'"])
+          User.objects.raw("SELECT * FROM users WHERE id=" + user_id)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-89\\-PY\\-DJA\\-RAW\\b'
+    message: |-
+      HexVibe Detection [CWE-89-PY-DJA-RAW]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-89-js-orm-raw
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          sequelize.literal("id = " + userId)
+          knex.raw("SELECT * FROM users WHERE id = " + req.query.id)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-89\\-JS\\-ORM\\-RAW\\b'
+    message: |-
+      HexVibe Detection [CWE-89-JS-ORM-RAW]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-20-universal-nullbyte
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Перед системными вызовами удалять/блокировать \\x00 и управляющие символы, нормализовать input и применять allowlist форматов аргументов.
+    pattern-either:
+      - pattern: |-
+          subprocess.run(["cat", user_path]) где user_path может содержать %00/\\x00
+          execFile("ls", [userArg]) без фильтра control chars
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-20\\-UNIVERSAL\\-NULLBYTE\\b'
+    message: |-
+      HexVibe Detection [CWE-20-UNIVERSAL-NULLBYTE]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-20-hpp
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Нормализовать/валидировать тип параметров (single-value), отклонять массивы/дубликаты в критичных auth/ACL полях.
+    pattern-either:
+      - pattern: |-
+          role = req.query.role (ожидается строка, приходит массив role=user&role=admin)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-20\\-HPP\\b'
+    message: |-
+      HexVibe Detection [CWE-20-HPP]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-611-py-minidom
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          xml.dom.minidom.parse(xml_file)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-611\\-PY\\-MINIDOM\\b'
+    message: |-
+      HexVibe Detection [CWE-611-PY-MINIDOM]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-611-py-elementtree
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          xml.etree.ElementTree.parse(path)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-611\\-PY\\-ELEMENTTREE\\b'
+    message: |-
+      HexVibe Detection [CWE-611-PY-ELEMENTTREE]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-611-js-libxmljs-noent
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          libxmljs.parseXml(data, { noent: true })
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-611\\-JS\\-LIBXMLJS\\-NOENT\\b'
+    message: |-
+      HexVibe Detection [CWE-611-JS-LIBXMLJS-NOENT]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-91-universal-xml-concat
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Строить XML через безопасные builder API и обязательно экранировать спецсимволы (<, >, &, ', ").
+    pattern-either:
+      - pattern: |-
+          xml = "<root>" + user_input + "</root>"
+          const x = "<tag>" + input + "</tag>"
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-91\\-UNIVERSAL\\-XML\\-CONCAT\\b'
+    message: |-
+      HexVibe Detection [CWE-91-UNIVERSAL-XML-CONCAT]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-85-174-universal-once
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Выполнять нормализацию до фиксированной точки (loop until stable), затем строгую canonicalization-проверку и allowlist-валидацию итогового значения.
+    pattern-either:
+      - pattern: |-
+          path = path.replace("../", "")
+          clean = re.sub(r"<script>", "", payload)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-85\\-174\\-UNIVERSAL\\-ONCE\\b'
+    message: |-
+      HexVibe Detection [CWE-85-174-UNIVERSAL-ONCE]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-85-js-slash-filter
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          if (url.includes("/")) reject()
+          safe = input.replace("/", "")
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-85\\-JS\\-SLASH\\-FILTER\\b'
+    message: |-
+      HexVibe Detection [CWE-85-JS-SLASH-FILTER]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-79-py-django-safe
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Python
+      fix_template: |-
+        safe к данным пользователя; использовать autoescaping по умолчанию и серверную санитизацию trusted-allowlist подходом.
+    pattern-either:
+      - pattern: |-
+          safe filter with request-controlled variables
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-79\\-PY\\-DJANGO\\-SAFE\\b'
+    message: |-
+      HexVibe Detection [CWE-79-PY-DJANGO-SAFE]: Не применять
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-79-py-django-autoescape-off
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          {% autoescape off %}{{ request.GET.msg }}{% endautoescape %}
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-79\\-PY\\-DJANGO\\-AUTOESCAPE\\-OFF\\b'
+    message: |-
+      HexVibe Detection [CWE-79-PY-DJANGO-AUTOESCAPE-OFF]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-79-py-htmlresponse
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          return HTMLResponse(f"<div>{user_input}</div>")
+          return render_template_string("<p>"+name+"</p>")
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-79\\-PY\\-HTMLRESPONSE\\b'
+    message: |-
+      HexVibe Detection [CWE-79-PY-HTMLRESPONSE]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-79-js-ssr-raw
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          <%- userContent %>
+          {{{comment}}}
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-79\\-JS\\-SSR\\-RAW\\b'
+    message: |-
+      HexVibe Detection [CWE-79-JS-SSR-RAW]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-80-universal-nosniff
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Для динамических ответов всегда добавлять X-Content-Type-Options: nosniff и корректный Content-Type, исключая MIME sniffing.
+    pattern-either:
+      - pattern: |-
+          res.send(dynamicContent) без X-Content-Type-Options
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-80\\-UNIVERSAL\\-NOSNIFF\\b'
+    message: |-
+      HexVibe Detection [CWE-80-UNIVERSAL-NOSNIFF]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1336-py-jinja2-rts
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          render_template_string(user_input)
+          jinja2.Template(user_input)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1336\\-PY\\-JINJA2\\-RTS\\b'
+    message: |-
+      HexVibe Detection [CWE-1336-PY-JINJA2-RTS]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1336-py-mako-rts
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          mako.template.Template(user_input)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1336\\-PY\\-MAKO\\-RTS\\b'
+    message: |-
+      HexVibe Detection [CWE-1336-PY-MAKO-RTS]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1336-js-pug-ejs-rts
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          pug.compile(userInput)
+          ejs.render(userInput)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1336\\-JS\\-PUG\\-EJS\\-RTS\\b'
+    message: |-
+      HexVibe Detection [CWE-1336-JS-PUG-EJS-RTS]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1336-js-lodash-template
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          _.template(userInput)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1336\\-JS\\-LODASH\\-TEMPLATE\\b'
+    message: |-
+      HexVibe Detection [CWE-1336-JS-LODASH-TEMPLATE]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-943-py-mongo-dict
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          db.users.find(request.json)
+          Model.objects(__raw__=request.json).update(**request.json)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-943\\-PY\\-MONGO\\-DICT\\b'
+    message: |-
+      HexVibe Detection [CWE-943-PY-MONGO-DICT]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-943-py-django-kwargs
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          User.objects.filter(**request.GET.dict())
+          User.objects.get(**payload)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-943\\-PY\\-DJANGO\\-KWARGS\\b'
+    message: |-
+      HexVibe Detection [CWE-943-PY-DJANGO-KWARGS]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-943-js-mongo-filter
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          User.find(req.body)
+          collection.find(req.query)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-943\\-JS\\-MONGO\\-FILTER\\b'
+    message: |-
+      HexVibe Detection [CWE-943-JS-MONGO-FILTER]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-943-js-sequelize-where
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          User.findAll({ where: req.query })
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-943\\-JS\\-SEQUELIZE\\-WHERE\\b'
+    message: |-
+      HexVibe Detection [CWE-943-JS-SEQUELIZE-WHERE]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-23-py-template-file
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          render(request, request.GET["tpl"])
+          send_file(request.args.get("path"))
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-23\\-PY\\-TEMPLATE\\-FILE\\b'
+    message: |-
+      HexVibe Detection [CWE-23-PY-TEMPLATE-FILE]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-23-js-express-sendfile
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          res.sendFile(req.query.path)
+          res.render(req.params.view)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-23\\-JS\\-EXPRESS\\-SENDFILE\\b'
+    message: |-
+      HexVibe Detection [CWE-23-JS-EXPRESS-SENDFILE]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-23-js-dynamic-require
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          require(req.query.module)
+          await import(req.body.path)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-23\\-JS\\-DYNAMIC\\-REQUIRE\\b'
+    message: |-
+      HexVibe Detection [CWE-23-JS-DYNAMIC-REQUIRE]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-89-py-sqlalchemy-text
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          session.execute(text("SELECT ... " + user_input))
+          .filter(text("id=" + user_input))
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-89\\-PY\\-SQLALCHEMY\\-TEXT\\b'
+    message: |-
+      HexVibe Detection [CWE-89-PY-SQLALCHEMY-TEXT]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-89-py-sqlalchemy-orderby
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          query.order_by(user_input)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-89\\-PY\\-SQLALCHEMY\\-ORDERBY\\b'
+    message: |-
+      HexVibe Detection [CWE-89-PY-SQLALCHEMY-ORDERBY]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-89-js-orm-queryraw
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          queryRaw("SELECT ... " + input)
+          sequelize.literal("id=" + req.query.id)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-89\\-JS\\-ORM\\-QUERYRAW\\b'
+    message: |-
+      HexVibe Detection [CWE-89-JS-ORM-QUERYRAW]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-89-pg-copy-program
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        CWE Final Certification
+      fix_template: |-
+        Python/Node.js/PostgreSQL
+    pattern-either:
+      - pattern: |-
+          COPY t FROM PROGRAM 'cat '
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-89\\-PG\\-COPY\\-PROGRAM\\b'
+    message: |-
+      HexVibe Detection [CWE-89-PG-COPY-PROGRAM]: Запретить динамические PROGRAM/file path из внешнего ввода, использовать fixed allowlist операций и параметризованные запросы без конкатенации.
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-89-plpgsql-execute
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        CWE Final Certification
+      fix_template: |-
+        PostgreSQL/PLpgSQL
+    pattern-either:
+      - pattern: |-
+          EXECUTE 'SELECT ... '
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-89\\-PLPGSQL\\-EXECUTE\\b'
+    message: |-
+      HexVibe Detection [CWE-89-PLPGSQL-EXECUTE]: В PL/pgSQL использовать quote_ident()/quote_literal() или format('%I/%L', ...), исключать прямую конкатенацию в dynamic SQL.
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-943-redis-cmd
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          redis.execute_command(req.body.cmd, ...)
+          redis.send_command(req.query.cmd, ...)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-943\\-REDIS\\-CMD\\b'
+    message: |-
+      HexVibe Detection [CWE-943-REDIS-CMD]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-943-redis-lua-eval
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          redis.eval("return " + user_input, ...)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-943\\-REDIS\\-LUA\\-EVAL\\b'
+    message: |-
+      HexVibe Detection [CWE-943-REDIS-LUA-EVAL]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-89-py-sqlalchemy-async-text
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          await session.execute(text("SELECT ... " + user_input))
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-89\\-PY\\-SQLALCHEMY\\-ASYNC\\-TEXT\\b'
+    message: |-
+      HexVibe Detection [CWE-89-PY-SQLALCHEMY-ASYNC-TEXT]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-943-redis-rq-iredis-cmd
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          redis.execute_command(req.body.cmd, req.body.arg)
+          ioredis.send_command(req.query.cmd, [...])
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-943\\-REDIS\\-RQ\\-IREDIS\\-CMD\\b'
+    message: |-
+      HexVibe Detection [CWE-943-REDIS-RQ-IREDIS-CMD]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-943-redis-rq-iredis-eval
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          redis.eval("return " + req.body.expr, 0)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-943\\-REDIS\\-RQ\\-IREDIS\\-EVAL\\b'
+    message: |-
+      HexVibe Detection [CWE-943-REDIS-RQ-IREDIS-EVAL]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-918-nextjs-axios-ssrf
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          await axios.get(req.query.url)
+          await axios.post(userInput, data)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-918\\-NEXTJS\\-AXIOS\\-SSRF\\b'
+    message: |-
+      HexVibe Detection [CWE-918-NEXTJS-AXIOS-SSRF]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-346-axios-withcredentials
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          axios.defaults.withCredentials = true
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-346\\-AXIOS\\-WITHCREDENTIALS\\b'
+    message: |-
+      HexVibe Detection [CWE-346-AXIOS-WITHCREDENTIALS]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-79-react-dangerouslysethtml
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          <div dangerouslySetInnerHTML={{ __html: html }} />
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-79\\-REACT\\-DANGEROUSLYSETHTML\\b'
+    message: |-
+      HexVibe Detection [CWE-79-REACT-DANGEROUSLYSETHTML]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1321-ts-deepmerge
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          deepMerge(target, source) без проверки опасных ключей
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1321\\-TS\\-DEEPMERGE\\b'
+    message: |-
+      HexVibe Detection [CWE-1321-TS-DEEPMERGE]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-94-openrouter-prompt-concat
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          messages=[{"role":"user","content":"..."+user_input}]
+          prompt = system + user_input
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-94\\-OPENROUTER\\-PROMPT\\-CONCAT\\b'
+    message: |-
+      HexVibe Detection [CWE-94-OPENROUTER-PROMPT-CONCAT]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-116-llm-html-untrusted
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          dangerouslySetInnerHTML={{__html: llmText}}
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-116\\-LLM\\-HTML\\-UNTRUSTED\\b'
+    message: |-
+      HexVibe Detection [CWE-116-LLM-HTML-UNTRUSTED]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-915-node-assign-merge
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          Object.assign(target, req.body)
+          _.merge(config, req.body)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-915\\-NODE\\-ASSIGN\\-MERGE\\b'
+    message: |-
+      HexVibe Detection [CWE-915-NODE-ASSIGN-MERGE]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-915-sqlmodel-mass-assign
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          User.model_validate(request.json())
+          User.from_orm(payload)
+          User(**request.json())
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-915\\-SQLMODEL\\-MASS\\-ASSIGN\\b'
+    message: |-
+      HexVibe Detection [CWE-915-SQLMODEL-MASS-ASSIGN]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-89-sqlmodel-text-fstring
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          select(User).where(text(f"id = {user_id}"))
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-89\\-SQLMODEL\\-TEXT\\-FSTRING\\b'
+    message: |-
+      HexVibe Detection [CWE-89-SQLMODEL-TEXT-FSTRING]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-601-csh-process-start-url
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Process.Start(userUrl)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-601\\-CSH\\-PROCESS\\-START\\-URL\\b'
+    message: |-
+      HexVibe Detection [CWE-601-CSH-PROCESS-START-URL]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-81-csh-webbrowser-xss
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          webBrowser.DocumentText = userHtml
+          webBrowser.Document.InvokeScript("render", new[]{userInput})
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-81\\-CSH\\-WEBBROWSER\\-XSS\\b'
+    message: |-
+      HexVibe Detection [CWE-81-CSH-WEBBROWSER-XSS]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1321-csh-dynamic-expando
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          dynamic obj = JsonConvert.DeserializeObject<ExpandoObject>(json)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1321\\-CSH\\-DYNAMIC\\-EXPANDO\\b'
+    message: |-
+      HexVibe Detection [CWE-1321-CSH-DYNAMIC-EXPANDO]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-749-csh-comvisible-dangerous
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          [ComVisible(true)] public void Run(string x){ Process.Start(x); }
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-749\\-CSH\\-COMVISIBLE\\-DANGEROUS\\b'
+    message: |-
+      HexVibe Detection [CWE-749-CSH-COMVISIBLE-DANGEROUS]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-123-py-tempfile-toctou
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Атомарные temp API; для concurrent writes — file locks; валидировать path после mkstemp.
+    pattern-either:
+      - pattern: |-
+          if os.path.exists(tmp):
+              os.remove(tmp)
+          open(tmp, "w").write(data)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-123\\-PY\\-TEMPFILE\\-TOCTOU\\b'
+    message: |-
+      HexVibe Detection [CWE-123-PY-TEMPFILE-TOCTOU]: CWE-123
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-124-js-arraybuffer-slice
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Проверять start/end против buffer.byteLength; отклонять отрицательные/NaN индексы; использовать typed array helpers с валидацией.
+    pattern-either:
+      - pattern: |-
+          new Uint8Array(buf).subarray(userStart, userEnd) без clamp к byteLength
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-124\\-JS\\-ARRAYBUFFER\\-SLICE\\b'
+    message: |-
+      HexVibe Detection [CWE-124-JS-ARRAYBUFFER-SLICE]: CWE-124
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-20-py-val-extra-01
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          limit = float(request.query_params["limit"]) без upper bound
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-20\\-PY\\-VAL\\-EXTRA\\-01\\b'
+    message: |-
+      HexVibe Detection [CWE-20-PY-VAL-EXTRA-01]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-20-py-val-extra-02
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          p = (body.get("path") or "").strip() затем open(p) без deny empty
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-20\\-PY\\-VAL\\-EXTRA\\-02\\b'
+    message: |-
+      HexVibe Detection [CWE-20-PY-VAL-EXTRA-02]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-20-js-val-extra-01
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const n = parseInt(req.query.depth)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-20\\-JS\\-VAL\\-EXTRA\\-01\\b'
+    message: |-
+      HexVibe Detection [CWE-20-JS-VAL-EXTRA-01]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-20-js-val-extra-02
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const cfg = JSON.parse(req.body) без schema
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-20\\-JS\\-VAL\\-EXTRA\\-02\\b'
+    message: |-
+      HexVibe Detection [CWE-20-JS-VAL-EXTRA-02]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-89-py-val-extra-01
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          ORDER BY {user_col} где user_col из query
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-89\\-PY\\-VAL\\-EXTRA\\-01\\b'
+    message: |-
+      HexVibe Detection [CWE-89-PY-VAL-EXTRA-01]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-79-js-val-extra-01
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          <a href={item.url}> без sanitizeUrl
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-79\\-JS\\-VAL\\-EXTRA\\-01\\b'
+    message: |-
+      HexVibe Detection [CWE-79-JS-VAL-EXTRA-01]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-918-py-val-extra-01
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          ipaddress.ip_address(host) затем socket.connect
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-918\\-PY\\-VAL\\-EXTRA\\-01\\b'
+    message: |-
+      HexVibe Detection [CWE-918-PY-VAL-EXTRA-01]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-502-py-val-extra-01
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          yaml.load(uploaded_text)
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-502\\-PY\\-VAL\\-EXTRA\\-01\\b'
+    message: |-
+      HexVibe Detection [CWE-502-PY-VAL-EXTRA-01]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-611-py-val-extra-01
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          lxml.etree.fromstring(ext_xml) без resolve_entities=False
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-611\\-PY\\-VAL\\-EXTRA\\-01\\b'
+    message: |-
+      HexVibe Detection [CWE-611-PY-VAL-EXTRA-01]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-20-py-val-extra-03
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          int(request.form["chunk_index"]) без range check
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-20\\-PY\\-VAL\\-EXTRA\\-03\\b'
+    message: |-
+      HexVibe Detection [CWE-20-PY-VAL-EXTRA-03]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1268-py-ipc-channel
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          sock.connect((host, port)) где host из конфига без pinning
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1268\\-PY\\-IPC\\-CHANNEL\\b'
+    message: |-
+      HexVibe Detection [CWE-1268-PY-IPC-CHANNEL]: CWE-1268
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1271-py-signed-err
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          verify_sig(blob) or True
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1271\\-PY\\-SIGNED\\-ERR\\b'
+    message: |-
+      HexVibe Detection [CWE-1271-PY-SIGNED-ERR]: CWE-1271
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1280-py-mark-critical
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          if optional: skip_tls_check()
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1280\\-PY\\-MARK\\-CRITICAL\\b'
+    message: |-
+      HexVibe Detection [CWE-1280-PY-MARK-CRITICAL]: CWE-1280
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.domain-input-validation.cwe-1285-py-negotiation
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
+    pattern-either:
+      - pattern: |-
+          if not tls: use_http()
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1285\\-PY\\-NEGOTIATION\\b'
+    message: |-
+      HexVibe Detection [CWE-1285-PY-NEGOTIATION]: CWE-1285
+    languages:
+      - generic
+    severity: WARNING

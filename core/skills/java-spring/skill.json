@@ -1,0 +1,23 @@
+{
+  "skill_id": "java-spring",
+  "name": "Java / Spring Security",
+  "activation_triggers": [
+    "java-spring-spel",
+    "java-jackson-typing",
+    "java-servlet-redirect",
+    "java-jwt-verifier"
+  ],
+  "relevant_extensions": [
+    ".java",
+    ".xml",
+    ".properties"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/java-spring/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/multi_lang_vulnerable/java_vulnerable.java",
+  "security_priority": 5
+}

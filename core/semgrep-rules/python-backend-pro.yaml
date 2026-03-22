@@ -1,0 +1,30 @@
+rules:
+  - id: hexvibe.python-backend-pro.py-100
+    pattern-either:
+      - pattern: |-
+          if token == os.getenv("CHAT_TOKEN"):
+              return True
+      - pattern-regex: 'Vulnerable:\\s*PY\\-100\\b'
+    message: 'HexVibe Detection [PY-100]: Silk Backend SAR'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-backend-pro.py-105
+    pattern-either:
+      - pattern: |-
+          def get_queryset(self):
+              return Message.objects.all()
+      - pattern-regex: 'Vulnerable:\\s*PY\\-105\\b'
+    message: 'HexVibe Detection [PY-105]: Silk Backend SAR'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-backend-pro.py-110
+    pattern-either:
+      - pattern: |-
+          file_full_path = path.join(settings.MEDIA_ROOT, file_path)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-110\\b'
+    message: 'HexVibe Detection [PY-110]: Silk Backend SAR'
+    languages:
+      - python
+    severity: WARNING

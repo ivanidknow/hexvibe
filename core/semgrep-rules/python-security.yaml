@@ -1,0 +1,284 @@
+rules:
+  - id: hexvibe.python-security.py-001
+    pattern-either:
+      - pattern: |-
+          app = FastAPI(debug=True)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-001\\b'
+    message: 'HexVibe Detection [PY-001]: FastAPI deployment hardening'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-002
+    pattern-either:
+      - pattern: |-
+          try:
+              ...
+          except Exception as e:
+              return dict(error=str(e))
+      - pattern-regex: 'Vulnerable:\\s*PY\\-002\\b'
+    message: 'HexVibe Detection [PY-002]: OWASP Error Handling'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-003
+    pattern-either:
+      - pattern: |-
+          pickle.loads(data)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-003\\b'
+    message: 'HexVibe Detection [PY-003]: CWE-502'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-004
+    pattern-either:
+      - pattern: |-
+          subprocess.run(cmd, shell=True)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-004\\b'
+    message: 'HexVibe Detection [PY-004]: CWE-78'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-005
+    pattern-either:
+      - pattern: |-
+          yaml.load(data, Loader=yaml.Loader)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-005\\b'
+    message: 'HexVibe Detection [PY-005]: PyYAML security'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-006
+    pattern-either:
+      - pattern: |-
+          tempfile.mktemp()
+      - pattern-regex: 'Vulnerable:\\s*PY\\-006\\b'
+    message: 'HexVibe Detection [PY-006]: CWE-377'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-007
+    pattern-either:
+      - pattern: |-
+          requests.get(user_url)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-007\\b'
+    message: 'HexVibe Detection [PY-007]: OWASP SSRF'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-008
+    pattern-either:
+      - pattern: |-
+          requests.get(url)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-008\\b'
+    message: 'HexVibe Detection [PY-008]: Reliability/security baseline'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-009
+    pattern-either:
+      - pattern: |-
+          SECRET_KEY = "dev-secret"
+      - pattern-regex: 'Vulnerable:\\s*PY\\-009\\b'
+    message: 'HexVibe Detection [PY-009]: CWE-798'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-010
+    pattern-either:
+      - pattern: |-
+          token = str(random.random())
+      - pattern-regex: 'Vulnerable:\\s*PY\\-010\\b'
+    message: 'HexVibe Detection [PY-010]: Python secrets guidance'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-011
+    pattern-either:
+      - pattern: |-
+          jwt.decode(token, key, options={"verify_signature": True})
+      - pattern-regex: 'Vulnerable:\\s*PY\\-011\\b'
+    message: 'HexVibe Detection [PY-011]: JWT BCP'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-012
+    pattern-either:
+      - pattern: |-
+          session.execute(f"SELECT * FROM t WHERE id={id}")
+      - pattern-regex: 'Vulnerable:\\s*PY\\-012\\b'
+    message: 'HexVibe Detection [PY-012]: CWE-89'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-013
+    pattern-either:
+      - pattern: |-
+          Model(**request.json())
+      - pattern-regex: 'Vulnerable:\\s*PY\\-013\\b'
+    message: 'HexVibe Detection [PY-013]: OWASP Mass Assignment'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-014
+    pattern-either:
+      - pattern: |-
+          open(base + "/" + filename)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-014\\b'
+    message: 'HexVibe Detection [PY-014]: CWE-22'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-015
+    pattern-either:
+      - pattern: |-
+          eval(user_expr)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-015\\b'
+    message: 'HexVibe Detection [PY-015]: CWE-95'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-016
+    pattern-either:
+      - pattern: |-
+          allow_origins=["*"], allow_credentials=True
+      - pattern-regex: 'Vulnerable:\\s*PY\\-016\\b'
+    message: 'HexVibe Detection [PY-016]: CORS hardening'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-017
+    pattern-either:
+      - pattern: |-
+          @app.post("/login")
+          async def login():
+              ...
+      - pattern-regex: 'Vulnerable:\\s*PY\\-017\\b'
+    message: 'HexVibe Detection [PY-017]: OWASP API4'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-018
+    pattern-either:
+      - pattern: |-
+          async def $F():
+              ...
+              requests.get(...)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-018\\b'
+    message: 'HexVibe Detection [PY-018]: Async runtime safety'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-019
+    pattern-either:
+      - pattern: |-
+          browser = p.chromium.launch(args=["--no-sandbox"])
+      - pattern-regex: 'Vulnerable:\\s*PY\\-019\\b'
+    message: 'HexVibe Detection [PY-019]: Browser automation hardening'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-020
+    pattern-either:
+      - pattern: |-
+          @app.get("/users/{id}")
+          async def get_user(id: int):
+              return db_user
+      - pattern-regex: 'Vulnerable:\\s*PY\\-020\\b'
+    message: 'HexVibe Detection [PY-020]: FastAPI response_model safety'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-021
+    pattern-either:
+      - pattern: |-
+          text(f"SELECT * FROM users WHERE name='{name}'")
+      - pattern-regex: 'Vulnerable:\\s*PY\\-021\\b'
+    message: 'HexVibe Detection [PY-021]: SQLAlchemy text injection'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-022
+    pattern-either:
+      - pattern: |-
+          UserModel.model_construct(**payload)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-022\\b'
+    message: 'HexVibe Detection [PY-022]: Pydantic security'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-023
+    pattern-either:
+      - pattern: |-
+          SHARED_PAGE = browser.new_page()
+      - pattern-regex: 'Vulnerable:\\s*PY\\-023\\b'
+    message: 'HexVibe Detection [PY-023]: Playwright isolation'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-024
+    pattern-either:
+      - pattern: |-
+          httpx.Client(verify=False)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-024\\b'
+    message: 'HexVibe Detection [PY-024]: TLS hardening'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-025
+    pattern-either:
+      - pattern: |-
+          def handle_hook(body: bytes):
+              data = json.loads(body)
+              return data
+      - pattern-regex: 'Vulnerable:\\s*PY\\-025\\b'
+    message: 'HexVibe Detection [PY-025]: Webhook security'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-026
+    pattern-either:
+      - pattern: |-
+          logger.info("token=%s", token)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-026\\b'
+    message: 'HexVibe Detection [PY-026]: OWASP Logging'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-027
+    pattern-either:
+      - pattern: |-
+          limit = int(request.args["limit"])
+      - pattern-regex: 'Vulnerable:\\s*PY\\-027\\b'
+    message: 'HexVibe Detection [PY-027]: Resource abuse prevention'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-028
+    pattern-either:
+      - pattern: |-
+          @app.post("/account/delete")
+          async def delete_account():
+              ...
+      - pattern-regex: 'Vulnerable:\\s*PY\\-028\\b'
+    message: 'HexVibe Detection [PY-028]: OWASP CSRF'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-029
+    pattern-either:
+      - pattern: |-
+          CELERY_TASK_SERIALIZER = "pickle"
+      - pattern-regex: 'Vulnerable:\\s*PY\\-029\\b'
+    message: 'HexVibe Detection [PY-029]: Celery security'
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.python-security.py-030
+    pattern-either:
+      - pattern: |-
+          return RedirectResponse(next_url)
+      - pattern-regex: 'Vulnerable:\\s*PY\\-030\\b'
+    message: 'HexVibe Detection [PY-030]: OWASP Open Redirect'
+    languages:
+      - python
+    severity: WARNING

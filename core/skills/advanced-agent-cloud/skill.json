@@ -1,0 +1,27 @@
+{
+  "skill_id": "advanced-agent-cloud",
+  "name": "Advanced Agent & Cloud",
+  "activation_triggers": [
+    "aac-playwright-egress",
+    "aac-next-public-env",
+    "aac-rq-pickle",
+    "aac-minio-presign",
+    "aac-nginx-rate",
+    "aac-webrtc-vad"
+  ],
+  "relevant_extensions": [
+    ".py",
+    ".ts",
+    ".js",
+    ".yaml",
+    ".yml"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/advanced-agent-cloud/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/aac_vulnerable.py",
+  "security_priority": 5
+}

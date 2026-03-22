@@ -1,0 +1,21 @@
+{
+  "skill_id": "fastapi-async",
+  "name": "FastAPI / Async Security",
+  "activation_triggers": [
+    "fas-fastapi-route",
+    "fas-slowapi-limit",
+    "fas-encode-databases",
+    "fas-pydantic-schema"
+  ],
+  "relevant_extensions": [
+    ".py"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/fastapi-async/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/api_vulnerable.py",
+  "security_priority": 5
+}

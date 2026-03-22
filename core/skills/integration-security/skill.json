@@ -1,0 +1,30 @@
+{
+  "skill_id": "integration-security",
+  "name": "Integration Security",
+  "activation_triggers": [
+    "keycloak-jwt-verify",
+    "vault-no-hardcode",
+    "external-secrets-operator",
+    "udi-uda-token-flow",
+    "circuit-breaker",
+    "bulkhead-timeout",
+    "retry-jitter",
+    "idempotency-key"
+  ],
+  "relevant_extensions": [
+    ".py",
+    ".ts",
+    ".js",
+    ".yaml",
+    ".yml",
+    ".json"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/integration-security/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/integration_security_vulnerable.py",
+  "security_priority": 9
+}

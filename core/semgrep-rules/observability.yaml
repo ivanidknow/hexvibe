@@ -1,0 +1,381 @@
+rules:
+  - id: hexvibe.observability.log-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        try:     await repo.save(event) except Exception:     logger.exception("audit-save-failed", extra={"event_type": event.type})     raise
+    pattern-either:
+      - pattern: |-
+          try:
+              await repo.save(event)
+          except Exception:
+              pass
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-001\\b'
+    message: |-
+      HexVibe Detection [LOG-001]: OWASP Top 10 (2021) A09 Security Logging and Monitoring Failures; OWASP ASVS v4.0.3 V7 Error Handling and Logging
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        trace_id = request.headers.get("x-trace-id") or str(uuid4()) logger.info("request accepted", extra={"trace_id": trace_id, "path": request.url.path}) response.headers["X-Trace-ID"] = trace_id
+    pattern-either:
+      - pattern: |-
+          logger.info("request accepted")
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-002\\b'
+    message: |-
+      HexVibe Detection [LOG-002]: OWASP Top 10 (2021) A09 Security Logging and Monitoring Failures; OWASP ASVS v4.0.3 V7
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        logger.warning("auth_failed", extra={"trace_id": trace_id, "user": username, "ip": client_ip, "reason": "bad_credentials"})
+    pattern-either:
+      - pattern: |-
+          logger.error(f"login failed for {username}")
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-003\\b'
+    message: |-
+      HexVibe Detection [LOG-003]: OWASP API Security Top 10 (2023) API10 Unsafe Consumption of APIs; OWASP ASVS v4.0.3 V7
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        safe = {"username": payload.get("username"), "mfa": payload.get("mfa")} logger.info("auth payload sanitized", extra={"trace_id": trace_id, "payload": safe})
+    pattern-either:
+      - pattern: |-
+          logger.info("auth payload=%s", payload)
+          # payload may include password/token
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-004\\b'
+    message: |-
+      HexVibe Detection [LOG-004]: OWASP Top 10 (2021) A02 Cryptographic Failures; OWASP Top 10 (2021) A09
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        except Exception:     logger.exception("unhandled error", extra={"trace_id": trace_id})     raise HTTPException(status_code=500, detail="internal server error")
+    pattern-either:
+      - pattern: |-
+          except Exception as exc:
+              raise HTTPException(status_code=500, detail=traceback.format_exc())
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-005\\b'
+    message: |-
+      HexVibe Detection [LOG-005]: OWASP Top 10 (2021) A09 Security Logging and Monitoring Failures; OWASP API Security Top 10 (2023) API8 Security Misconfiguration
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.post("/admin/users/{uid}/role") async def set_role(uid: int, role: str, actor=Depends(current_user)):     await repo.set_role(uid, role)     await audit_log.write({"event": "role_change", "actor_id": actor.id, "target_user_id": uid, "new_role": role, "trace_id": trace_id})
+    pattern-either:
+      - pattern: |-
+          @app.post("/admin/users/{uid}/role")
+          async def set_role(uid: int, role: str):
+              await repo.set_role(uid, role)
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-006\\b'
+    message: |-
+      HexVibe Detection [LOG-006]: OWASP Top 10 (2021) A09; OWASP ASVS v4.0.3 V7 Logging
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        if not auth_ok:     await audit_log.write({"event": "auth_failed", "username": username, "ip": client_ip, "trace_id": trace_id})     await risk_counter.bump(f"auth:{username}:{client_ip}")     raise HTTPException(status_code=401, detail="invalid credentials")
+    pattern-either:
+      - pattern: |-
+          if not auth_ok:
+              raise HTTPException(status_code=401, detail="invalid credentials")
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-007\\b'
+    message: |-
+      HexVibe Detection [LOG-007]: OWASP Top 10 (2021) A07 Identification and Authentication Failures; OWASP Top 10 (2021) A09
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.middleware("http") async def m(request: Request, call_next):     started = time.perf_counter()     response = await call_next(request)     elapsed_ms = (time.perf_counter() - started) * 1000     logger.info("http_access", extra={"trace_id": request.state.trace_id, "path": request.url.path, "status": response.status_code, "latency_ms": round(elapsed_ms, 2)})     return response
+    pattern-either:
+      - pattern: |-
+          @app.middleware("http")
+          async def m(request, call_next):
+              return await call_next(request)
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-008\\b'
+    message: |-
+      HexVibe Detection [LOG-008]: OWASP Top 10 (2021) A09 Security Logging and Monitoring Failures
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        record = {"event": "payment_approved", "id": pid, "trace_id": trace_id, "ts": datetime.now(timezone.utc).isoformat()} record["sig"] = hmac_sha256(audit_signing_key, json.dumps(record, sort_keys=True)) await append_only_audit_store.write(record)
+    pattern-either:
+      - pattern: |-
+          await audit_log.write({"event": "payment_approved", "id": pid})
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-009\\b'
+    message: |-
+      HexVibe Detection [LOG-009]: OWASP ASVS v4.0.3 V10 Malicious Code and Business Logic; OWASP Top 10 (2021) A09
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.exception_handler(Exception) async def handle_exc(request: Request, exc: Exception):     trace_id = getattr(request.state, "trace_id", "n/a")     logger.exception("unhandled", extra={"trace_id": trace_id, "path": request.url.path})     return JSONResponse(status_code=500, content={"detail": "internal server error", "trace_id": trace_id})
+    pattern-either:
+      - pattern: |-
+          @app.get("/x")
+          async def x():
+              raise RuntimeError("db password is wrong: secret=...")
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-010\\b'
+    message: |-
+      HexVibe Detection [LOG-010]: OWASP Top 10 (2021) A09; OWASP ASVS v4.0.3 V7 Error Handling
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        def sanitize_for_log(value: str) -> str:     return value.replace("\\r", "\\\\r").replace("\\n", "\\\\n") @app.get("/search") async def search(q: str):     safe_q = sanitize_for_log(q)     logger.info("search query=%s", safe_q)     return {"ok": True}
+    pattern-either:
+      - pattern: |-
+          @app.get("/search")
+          async def search(q: str):
+              logger.info("search query=%s", q)
+              return {"ok": True}
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-011\\b'
+    message: |-
+      HexVibe Detection [LOG-011]: OWASP Top 10 (2021) A09 Security Logging and Monitoring Failures; OWASP ASVS v4.0.3 V8 Logging and Error Handling; CWE-117
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        except Exception:     logger.exception("failed", extra={"trace_id": trace_id, "context": {"operation": "payment_create"}})     raise # production logger must not capture locals or full frame dumps
+    pattern-either:
+      - pattern: |-
+          except Exception:
+              logger.exception("failed", extra={"locals": locals()})
+              raise
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-012\\b'
+    message: |-
+      HexVibe Detection [LOG-012]: OWASP Top 10 (2021) A09 Security Logging and Monitoring Failures; OWASP ASVS v4.0.3 V8 Logging and Error Handling
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        async def security_heartbeat_task() -> None:     while True:         await audit_log.write({"event": "security_heartbeat", "service": "api", "status": "ok", "ts": datetime.now(timezone.utc).isoformat()})         await asyncio.sleep(60) @app.on_event("startup") async def start_heartbeat() -> None:     asyncio.create_task(security_heartbeat_task())
+    pattern-either:
+      - pattern: |-
+          # no periodic liveness/integrity security event
+          pass
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-013\\b'
+    message: |-
+      HexVibe Detection [LOG-013]: OWASP Top 10 (2021) A09 Security Logging and Monitoring Failures; OWASP ASVS v4.0.3 V8 Logging and Error Handling
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.post("/admin/users/{uid}/disable") async def disable_user(uid: int, actor=Depends(current_user)):     logger.info("admin action requested", extra={"trace_id": trace_id, "actor_id": actor.id})     await security_audit_log.write({"event": "admin_user_disable", "actor_id": actor.id, "target_user_id": uid, "trace_id": trace_id, "ts": datetime.now(timezone.utc).isoformat()})
+    pattern-either:
+      - pattern: |-
+          @app.post("/admin/users/{uid}/disable")
+          async def disable_user(uid: int):
+              logger.info("disabled user %s", uid)
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-014\\b'
+    message: |-
+      HexVibe Detection [LOG-014]: OWASP Top 10 (2021) A09 Security Logging and Monitoring Failures; OWASP ASVS v4.0.3 V8 Logging and Error Handling
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Structured logging + redaction filter для password fields.
+    pattern-either:
+      - pattern: |-
+          syslog.syslog(syslog.LOG_INFO, f"user_pass={password}")
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-015\\b'
+    message: |-
+      HexVibe Detection [LOG-015]: CWE-312
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Log scrubber sidecar; deny print(environ) in prod.
+    pattern-either:
+      - pattern: |-
+          print(os.environ) в startup лог
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-016\\b'
+    message: |-
+      HexVibe Detection [LOG-016]: CWE-532
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Token hash or presence flag only in EventLog.
+    pattern-either:
+      - pattern: |-
+          EventLog.WriteEntry("Auth", $"token={accessToken}")
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-017\\b'
+    message: |-
+      HexVibe Detection [LOG-017]: CWE-312
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Redact Authorization/Cookie keys globally.
+    pattern-either:
+      - pattern: |-
+          logger.info({"Authorization": f"Bearer {tok}"})
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-018\\b'
+    message: |-
+      HexVibe Detection [LOG-018]: CWE-532
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        OTel semantic conventions + scrubbing processor.
+    pattern-either:
+      - pattern: |-
+          span.set_attribute("user.password", pwd)
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-019\\b'
+    message: |-
+      HexVibe Detection [LOG-019]: CWE-532
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.observability.log-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Sampling + redaction; max body length 0 in prod logs.
+    pattern-either:
+      - pattern: |-
+          logger.debug("upstream=%s", response.text)
+      - pattern-regex: 'Vulnerable:\\s*LOG\\-020\\b'
+    message: |-
+      HexVibe Detection [LOG-020]: CWE-779
+    languages:
+      - generic
+    severity: WARNING

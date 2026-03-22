@@ -1,0 +1,29 @@
+{
+  "skill_id": "auth-keycloak",
+  "name": "Auth / Keycloak / OIDC",
+  "activation_triggers": [
+    "ak-keycloak-oidc",
+    "ak-jwks-kid",
+    "ak-pkce-flow",
+    "ak-token-exchange-rfc8693",
+    "ak-dpop-proof",
+    "fapi-sec",
+    "fapi-paok",
+    "clinker-auth",
+    "gost-crypto-jwt"
+  ],
+  "relevant_extensions": [
+    ".py",
+    ".ts",
+    ".js",
+    ".java"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/auth-keycloak/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/api_vulnerable.py",
+  "security_priority": 10
+}

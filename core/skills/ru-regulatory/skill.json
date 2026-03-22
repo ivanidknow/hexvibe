@@ -1,0 +1,41 @@
+{
+  "skill_id": "ru-regulatory",
+  "name": "RU Regulatory (152-FZ / КИИ)",
+  "activation_triggers": [
+    "rrc-152fz-pdn",
+    "rrc-1c-personal-data",
+    "rrc-gost-crypto",
+    "rrc-data-residency-ru",
+    "rrc-secure-delete",
+    "cb-683-p",
+    "cb-719-p",
+    "fstek-kii",
+    "post-quantum"
+  ],
+  "relevant_extensions": [
+    ".py",
+    ".cs",
+    ".1c",
+    ".bsl",
+    ".xml",
+    ".json",
+    ".yaml",
+    ".yml",
+    ".js",
+    ".ts",
+    ".tsx",
+    ".html",
+    ".dockerfile",
+    "dockerfile",
+    "deployment.yaml",
+    "externalsecret.yaml"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/ru-regulatory/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/ru_regulatory_vulnerable.py",
+  "security_priority": 10
+}

@@ -1,0 +1,22 @@
+{
+  "skill_id": "go-core",
+  "name": "Go Core Security",
+  "activation_triggers": [
+    "go-nethttp-ssrf",
+    "go-grpc-auth",
+    "go-goroutine-leak",
+    "go-unsafe-pointer"
+  ],
+  "relevant_extensions": [
+    ".go",
+    ".mod"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/go-core/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/multi_lang_vulnerable/go_vulnerable.go",
+  "security_priority": 5
+}

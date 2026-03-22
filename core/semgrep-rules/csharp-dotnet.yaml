@@ -1,0 +1,1084 @@
+rules:
+  - id: hexvibe.csharp-dotnet.csh-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var expr = request.Query["expr"];
+          ...
+          var result = await CSharpScript.EvaluateAsync(expr);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-001\\b'
+    message: |-
+      HexVibe Detection [CSH-001]: CWE-94
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var host = request.Query["host"];
+          ...
+          Process.Start("cmd.exe", "/c ping " + host);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-002\\b'
+    message: |-
+      HexVibe Detection [CSH-002]: CWE-78
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var cmd = request.Query["cmd"];
+          ...
+          Process.Start(new ProcessStartInfo("bash", "-c " + cmd) { UseShellExecute = true });
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-003\\b'
+    message: |-
+      HexVibe Detection [CSH-003]: CWE-77
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var typeName = request.Query["type"];
+          ...
+          var t = Type.GetType(typeName);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-004\\b'
+    message: |-
+      HexVibe Detection [CSH-004]: CWE-470
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var method = request.Query["method"];
+          ...
+          target.GetType().GetMethod(method).Invoke(target, null);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-005\\b'
+    message: |-
+      HexVibe Detection [CSH-005]: CWE-74
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий контролирует ORDER BY через query string; подставляет выражение, ведущее к утечке данных или обходу логики (CWE-89).
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var order = request.Query["order"];
+          ...
+          var sql = $"SELECT * FROM users ORDER BY {order}";
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-006\\b'
+    message: |-
+      HexVibe Detection [CSH-006]: CWE-74
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var code = request.Form["code"];
+          ...
+          CompileAndRun(code);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-007\\b'
+    message: |-
+      HexVibe Detection [CSH-007]: CWE-94
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var js = request.Form["script"];
+          ...
+          engine.Execute(js);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-008\\b'
+    message: |-
+      HexVibe Detection [CSH-008]: CWE-95
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          ...
+          var obj = formatter.Deserialize(stream);
+          ...
+          JsonConvert.DeserializeObject(json, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All })
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-009\\b'
+    message: |-
+      HexVibe Detection [CSH-009]: CWE-502
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий подсовывает XML с внешней сущностью/DTD; при включённом XmlResolver читает файлы или достаёт секреты (CWE-611 XXE).
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var doc = new XmlDocument();
+          ...
+          doc.XmlResolver = new XmlUrlResolver();
+          doc.Load(reader);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-010\\b'
+    message: |-
+      HexVibe Detection [CSH-010]: CWE-611
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var opts = new CookieOptions { Path = "/" };
+          ...
+          Response.Cookies.Append("session", token, opts);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-011\\b'
+    message: |-
+      HexVibe Detection [CSH-011]: CWE-614
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var defaultConnection = "Server=db;User=sa;Password=SuperSecret123";
+          ...
+          var apiKey = "prod-api-key-12345";
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-012\\b'
+    message: |-
+      HexVibe Detection [CSH-012]: CWE-798
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          ...
+          using (var md5 = MD5.Create())
+          ...
+          using (var sha1 = SHA1.Create())
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-013\\b'
+    message: |-
+      HexVibe Detection [CSH-013]: CWE-327
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var url = Request.Query["redirect"];
+          ...
+          return Redirect(url);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-014\\b'
+    message: |-
+      HexVibe Detection [CSH-014]: CWE-601
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var handler = new HttpClientHandler();
+          ...
+          handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-015\\b'
+    message: |-
+      HexVibe Detection [CSH-015]: CWE-295
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          ...
+          var bytes = Encoding.UTF8.GetBytes(password);
+          ...
+          SHA256.Create().ComputeHash(bytes)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-016\\b'
+    message: |-
+      HexVibe Detection [CSH-016]: CWE-916
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          mailItem.HTMLBody = userHtml;
+          worksheet.Cells[row, col].Formula = "=" + userInput;
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-017\\b'
+    message: |-
+      HexVibe Detection [CSH-017]: Office Add-in Security
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Globals.ThisAddIn.Application.Run(userMacro)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-018\\b'
+    message: |-
+      HexVibe Detection [CSH-018]: VSTO hardening
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          new BinaryFormatter().Deserialize(stream)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-019\\b'
+    message: |-
+      HexVibe Detection [CSH-019]: .NET BinaryFormatter ban
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          dataSet.ReadXml(userStream)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-020\\b'
+    message: |-
+      HexVibe Detection [CSH-020]: CWE-611 / XML hardening
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          [DllImport("user32.dll")] static extern int MessageBox(string text);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-021\\b'
+    message: |-
+      HexVibe Detection [CSH-021]: Interop security
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Assembly.LoadFrom(pathFromRequest)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-022\\b'
+    message: |-
+      HexVibe Detection [CSH-022]: CWE-114
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          public IActionResult Update(UserEntity entity)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-023\\b'
+    message: |-
+      HexVibe Detection [CSH-023]: OWASP Mass Assignment
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          CreateMap<UserDto, UserEntity>();
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-024\\b'
+    message: |-
+      HexVibe Detection [CSH-024]: Object mapping security
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          ValidateIssuer = false; ValidateAudience = false;
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-025\\b'
+    message: |-
+      HexVibe Detection [CSH-025]: JWT BCP / ASP.NET Auth
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          context.Response.Redirect(returnUrl)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-026\\b'
+    message: |-
+      HexVibe Detection [CSH-026]: OAuth redirect security
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var path = Path.Combine(uploadDir, file.FileName);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-027\\b'
+    message: |-
+      HexVibe Detection [CSH-027]: OWASP File Upload
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          return PhysicalFile(basePath + name, ...)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-028\\b'
+    message: |-
+      HexVibe Detection [CSH-028]: CWE-22
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          [HttpPost]
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-029\\b'
+    message: |-
+      HexVibe Detection [CSH-029]: OWASP CSRF
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var opts = new CookieOptions { Secure = false, HttpOnly = false };
+          ...
+          Response.Cookies.Append("session", token, opts);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-030\\b'
+    message: |-
+      HexVibe Detection [CSH-030]: Session management
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-031
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          TypeNameHandling.Auto/All
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-031\\b'
+    message: |-
+      HexVibe Detection [CSH-031]: Json.NET hardening
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-032
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          validateRequest="false"
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-032\\b'
+    message: |-
+      HexVibe Detection [CSH-032]: ASP.NET config security
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-033
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          SecurityProtocol = SecurityProtocolType.Ssl3
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-033\\b'
+    message: |-
+      HexVibe Detection [CSH-033]: TLS hardening
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-034
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var token = new Random().Next();
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-034\\b'
+    message: |-
+      HexVibe Detection [CSH-034]: CWE-338
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-035
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          logger.LogInformation("pwd={pwd}", pwd)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-035\\b'
+    message: |-
+      HexVibe Detection [CSH-035]: OWASP Logging
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-036
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          "(uid=" + user + ")"
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-036\\b'
+    message: |-
+      HexVibe Detection [CSH-036]: CWE-90
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-037
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий подаёт вход, провоцирующий катастрофический backtracking regex; возможен ReDoS (обычно не прямой RCE).
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          new Regex("(a+)+$")
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-037\\b'
+    message: |-
+      HexVibe Detection [CSH-037]: ReDoS defense
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-038
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          signedXml.CheckSignature()
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-038\\b'
+    message: |-
+      HexVibe Detection [CSH-038]: XMLDSIG security
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-039
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var role = context.RequestHeaders.GetValue("role");
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-039\\b'
+    message: |-
+      HexVibe Detection [CSH-039]: gRPC security
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-040
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Field("ssn").Resolve(ctx => ctx.Source.InternalSsn)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-040\\b'
+    message: |-
+      HexVibe Detection [CSH-040]: GraphQL security
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-041
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          FromSqlRaw($"...{id}...")
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-041\\b'
+    message: |-
+      HexVibe Detection [CSH-041]: EF Core SQLi
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-042
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          activity.SetTag("user.password", password);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-042\\b'
+    message: |-
+      HexVibe Detection [CSH-042]: Observability security
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-043
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          new WebClient().DownloadString(url)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-043\\b'
+    message: |-
+      HexVibe Detection [CSH-043]: .NET networking hardening
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-044
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          var svcPass = "hardcoded-service-secret";
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-044\\b'
+    message: |-
+      HexVibe Detection [CSH-044]: CWE-798
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-045
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          return await _repo.GetByIdAsync(id);
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-045\\b'
+    message: |-
+      HexVibe Detection [CSH-045]: OWASP API1 BOLA
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-046
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          File.Delete(userPath)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-046\\b'
+    message: |-
+      HexVibe Detection [CSH-046]: CWE-73
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-047
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          new BinaryFormatter().Deserialize(stream)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-047\\b'
+    message: |-
+      HexVibe Detection [CSH-047]: CWE Final Certification
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-048
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          Assembly.LoadFrom(userPath)
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-048\\b'
+    message: |-
+      HexVibe Detection [CSH-048]: CWE Final Certification
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-049
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          await _http.GetStringAsync("http://169.254.169.254/latest/meta-data/")
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-049\\b'
+    message: |-
+      HexVibe Detection [CSH-049]: CWE-918
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-050
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          WebRequest.CreateHttp("http://metadata.google.internal/computeMetadata/v1/")
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-050\\b'
+    message: |-
+      HexVibe Detection [CSH-050]: CWE-918
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-051
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          new RestClient("http://169.254.169.254").Execute(new RestRequest("/latest/meta-data/"))
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-051\\b'
+    message: |-
+      HexVibe Detection [CSH-051]: CWE-918
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-052
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input.
+    pattern-either:
+      - pattern: |-
+          await client.GetStringAsync("http://169.254.169.254/metadata/instance")
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-052\\b'
+    message: |-
+      HexVibe Detection [CSH-052]: CWE-918
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-053
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Replace == on secrets with CryptographicOperations.FixedTimeEquals or verified KDF APIs only.
+    pattern-either:
+      - pattern: |-
+          return storedHash == computedHash;
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-053\\b'
+    message: |-
+      HexVibe Detection [CSH-053]: CWE-613
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-054
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Enable lifetime validation and align clock skew with token issuer SLA.
+    pattern-either:
+      - pattern: |-
+          ValidateLifetime = false
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-054\\b'
+    message: |-
+      HexVibe Detection [CSH-054]: CWE-924
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-055
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Avoid TimeSpan.Zero unless IdP mandates; document skew rationale.
+    pattern-either:
+      - pattern: |-
+          ClockSkew = TimeSpan.Zero
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-055\\b'
+    message: |-
+      HexVibe Detection [CSH-055]: CWE-613
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-056
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Create temp files under app-controlled dir with explicit ACL, not default shared temp.
+    pattern-either:
+      - pattern: |-
+          var tmp = Path.GetTempFileName();
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-056\\b'
+    message: |-
+      HexVibe Detection [CSH-056]: CWE-377
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-057
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Always quote/structure paths with spaces; avoid single-string overloads for untrusted paths.
+    pattern-either:
+      - pattern: |-
+          Process.Start("C:\\Program Files\\Vendor\\tool.exe");
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-057\\b'
+    message: |-
+      HexVibe Detection [CSH-057]: CWE-428
+    languages:
+      - csharp
+    severity: WARNING
+  - id: hexvibe.csharp-dotnet.csh-058
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Quote service binary paths in registry; validate against allowlist.
+    pattern-either:
+      - pattern: |-
+          Registry.SetValue(key, "ImagePath", "C:\\Program Files\\App\\svc.exe");
+      - pattern-regex: 'Vulnerable:\\s*CSH\\-058\\b'
+    message: |-
+      HexVibe Detection [CSH-058]: CWE-428
+    languages:
+      - csharp
+    severity: WARNING

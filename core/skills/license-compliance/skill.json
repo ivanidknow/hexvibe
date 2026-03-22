@@ -1,0 +1,28 @@
+{
+  "skill_id": "license-compliance",
+  "name": "License Compliance",
+  "activation_triggers": [
+    "lic-sbom-syft",
+    "lic-agpl-license",
+    "lic-gpl-family",
+    "lic-sspl-license",
+    "lic-transitive-copyleft",
+    "lic-binary-license-metadata"
+  ],
+  "relevant_extensions": [
+    ".json",
+    ".lock",
+    ".txt",
+    ".toml",
+    ".yaml",
+    ".yml"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/license-compliance/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/license_compliance_vulnerable.py",
+  "security_priority": 5
+}

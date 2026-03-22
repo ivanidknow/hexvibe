@@ -1,0 +1,30 @@
+rules:
+  - id: hexvibe.desktop-electron-pro.dsk-100
+    pattern-either:
+      - pattern: |-
+          mainWindow.webContents.executeJavaScript(
+            "window.render(" + JSON.stringify(userInput) + ")"
+          )
+      - pattern-regex: 'Vulnerable:\\s*DSK\\-100\\b'
+    message: 'HexVibe Detection [DSK-100]: Insight SAR'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-electron-pro.dsk-105
+    pattern-either:
+      - pattern: |-
+          ipcMain.on("export-secrets", (event, payload) => { ... })
+      - pattern-regex: 'Vulnerable:\\s*DSK\\-105\\b'
+    message: 'HexVibe Detection [DSK-105]: Insight SAR'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.desktop-electron-pro.dsk-110
+    pattern-either:
+      - pattern: |-
+          "xlsx": "0.18.5"
+      - pattern-regex: 'Vulnerable:\\s*DSK\\-110\\b'
+    message: 'HexVibe Detection [DSK-110]: Insight SAR'
+    languages:
+      - generic
+    severity: WARNING

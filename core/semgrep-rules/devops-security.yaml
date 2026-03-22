@@ -1,0 +1,393 @@
+rules:
+  - id: hexvibe.devops-security.dvs-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Создать непривилегированного пользователя (useradd -m appuser) и запускать контейнер через USER appuser.
+    pattern-either:
+      - pattern: |-
+          FROM python:3.11
+          ...
+          USER root
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-001\\b'
+    message: |-
+      HexVibe Detection [DVS-001]: Docker CIS Benchmark
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Фиксировать образ по версии/диджесту (FROM node:20.12.2, FROM alpine@sha256:...).
+    pattern-either:
+      - pattern: |-
+          FROM node:latest
+          FROM alpine:latest
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-002\\b'
+    message: |-
+      HexVibe Detection [DVS-002]: Supply-chain hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать runtime secret injection (Vault/ESO/K8s Secret), исключить секреты из Docker build layers.
+    pattern-either:
+      - pattern: |-
+          ENV DB_PASSWORD=supersecret
+          ARG AWS_SECRET_ACCESS_KEY=...
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-003\\b'
+    message: |-
+      HexVibe Detection [DVS-003]: CWE-798, Vault best practices
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Генерировать provenance-аттестацию (builder, source, digest, timestamp, workflow id) и сохранять ее как обязательный артефакт релиза.
+    pattern-either:
+      - pattern: |-
+          docker build -t app:1.0 .
+          # no provenance attestation
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-004\\b'
+    message: |-
+      HexVibe Detection [DVS-004]: SLSA v1.0 (L1/L2)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Блокировать релиз при High/Critical CVE, учитывать результаты Syft/SCA в policy gate и сохранять решение в CI logs.
+    pattern-either:
+      - pattern: |-
+          pip install vulnerable-lib==1.2.0
+          # syft report ignored
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-005\\b'
+    message: |-
+      HexVibe Detection [DVS-005]: NIST SSDF, supply-chain policy
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        sh
+    pattern-either:
+      - pattern: |-
+          RUN apt-get update && curl https://example.com/install.sh
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-006\\b'
+    message: |-
+      HexVibe Detection [DVS-006]: SLSA L3 build integrity
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        При policy-gate учитывать VEX-аттестации; CVE со статусом not_affected маркировать как исключение с audit trail.
+    pattern-either:
+      - pattern: |-
+          if cve.severity >= "HIGH": fail_build()
+          # ignores VEX not_affected
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-007\\b'
+    message: |-
+      HexVibe Detection [DVS-007]: VEX / CSAF, NIST SSDF
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Обязательная подпись артефактов (например, cosign), валидация подписи при деплое и хранение attestations.
+    pattern-either:
+      - pattern: |-
+          docker push registry/app:1.0.0
+          # no cosign/signature
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-008\\b'
+    message: |-
+      HexVibe Detection [DVS-008]: SLSA L3, NIST SSDF
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Пинning base images/dependencies, deterministic flags и периодическая проверка reproducibility hash между сборками.
+    pattern-either:
+      - pattern: |-
+          FROM base:latest
+          RUN pip install -r requirements.txt
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-009\\b'
+    message: |-
+      HexVibe Detection [DVS-009]: Supply chain reproducibility controls
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.cwe-1104
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Обновлять зависимости до поддерживаемых версий (например, django>=3.2, pillow>=10.3.0) и включать SCA gate в CI.
+    pattern-either:
+      - pattern: |-
+          django==2.2.28
+          pillow==9.0.0
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-1104\\b'
+    message: |-
+      HexVibe Detection [CWE-1104]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.cwe-798-alembic-url
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Убрать plaintext credentials из alembic.ini, использовать env/secret manager и подстановку URL только через защищенный runtime config.
+    pattern-either:
+      - pattern: |-
+          sqlalchemy.url = postgresql://user:password@db/app
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-798\\-ALEMBIC\\-URL\\b'
+    message: |-
+      HexVibe Detection [CWE-798-ALEMBIC-URL]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.cwe-116-vite-proxy-header-fwd
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          server.proxy["/api"] = { target: "https://external", changeOrigin: true } + неконтролируемый proxyReq headers pass-through
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-116\\-VITE\\-PROXY\\-HEADER\\-FWD\\b'
+    message: |-
+      HexVibe Detection [CWE-116-VITE-PROXY-HEADER-FWD]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.cwe-427-nsis-exec-relative
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать только абсолютные/канонизированные пути в кавычках, проверять подпись/хэш и исключать запуск бинарников из непроверенных относительных путей.
+    pattern-either:
+      - pattern: |-
+          ExecWait tools\\helper.exe
+          Exec ..\\bin\\setup.exe
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-427\\-NSIS\\-EXEC\\-RELATIVE\\b'
+    message: |-
+      HexVibe Detection [CWE-427-NSIS-EXEC-RELATIVE]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.cwe-377-nsis-outpath-perm
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Избегать записи в системные каталоги без проверки прав/контекста, явно задавать безопасные SetDefaultLibAttributes и контролировать install target policy.
+    pattern-either:
+      - pattern: |-
+          SetOutPath $WINDIR\\System32 без проверок
+          отсутствует SetDefaultLibAttributes
+      - pattern-regex: 'Vulnerable:\\s*CWE\\-377\\-NSIS\\-OUTPATH\\-PERM\\b'
+    message: |-
+      HexVibe Detection [CWE-377-NSIS-OUTPATH-PERM]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        После скачивания обязательно проверять sha256sum -c (или подпись), прерывать pipeline при mismatch.
+    pattern-either:
+      - pattern: |-
+          curl -L https://example.com/tool.sh -o /usr/local/bin/tool
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-015\\b'
+    message: |-
+      HexVibe Detection [DVS-015]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        CWE Final Certification
+      fix_template: |-
+        DevOps/Supply Chain
+    pattern-either:
+      - pattern: |-
+          bash installer pattern without integrity pinning (CWE-353)
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-016\\b'
+    message: |-
+      HexVibe Detection [DVS-016]: Исключить pipe-to-shell; скачивать артефакт отдельно и валидировать sha256/signature перед выполнением.
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        CWE Final Certification
+    pattern-either:
+      - pattern: |-
+          RUN curl -fsSL https://vendor/bin -o /tmp/bin && chmod +x /tmp/bin
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-017\\b'
+    message: |-
+      HexVibe Detection [DVS-017]: DevOps/Supply Chain
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Использовать dependency lockfiles/hashes (--require-hashes) и trusted registries вместо direct URL execution.
+    pattern-either:
+      - pattern: |-
+          python -m pip install https://.../package.whl без hash pin
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-018\\b'
+    message: |-
+      HexVibe Detection [DVS-018]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Обязательно задавать checksum/signature verification и policy-gate, блокирующий unverified bootstrap artifacts.
+    pattern-either:
+      - pattern: |-
+          ansible.builtin.get_url без checksum
+          remote-exec с raw URL script
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-019\\b'
+    message: |-
+      HexVibe Detection [DVS-019]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Только verified artifacts: hash/signature gate до execute; запрет pipe-to-shell в Dockerfile.
+    pattern-either:
+      - pattern: |-
+          RUN curl -fsSL https://vendor/install.sh | bash
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-020\\b'
+    message: |-
+      HexVibe Detection [DVS-020]: CWE-494
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.devops-security.dvs-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Lockfile + immutable commit refs; policy deny git+https без SHA.
+    pattern-either:
+      - pattern: |-
+          pip install git+https://github.com/user/repo.git
+          npm install git+https://github.com/x/y.git
+      - pattern-regex: 'Vulnerable:\\s*DVS\\-021\\b'
+    message: |-
+      HexVibe Detection [DVS-021]: CWE-829
+    languages:
+      - generic
+    severity: WARNING

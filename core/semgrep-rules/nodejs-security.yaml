@@ -1,0 +1,326 @@
+rules:
+  - id: hexvibe.nodejs-security.njs-001
+    pattern-either:
+      - pattern: |-
+          exec("tar -xf " + userArchive)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-001\\b'
+    message: 'HexVibe Detection [NJS-001]: OWASP Command Injection'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-002
+    pattern-either:
+      - pattern: |-
+          fs.readFile(baseDir + "/" + req.query.file)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-002\\b'
+    message: 'HexVibe Detection [NJS-002]: CWE-22 Path Traversal'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-003
+    pattern-either:
+      - pattern: |-
+          app.get("/data", (req,res) => { const x = fs.readFileSync(p) })
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-003\\b'
+    message: 'HexVibe Detection [NJS-003]: Node.js Event Loop Safety'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-004
+    pattern-either:
+      - pattern: |-
+          const obj = serialize.unserialize(payload)
+          eval("(" + body + ")")
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-004\\b'
+    message: 'HexVibe Detection [NJS-004]: OWASP Deserialization Security'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-005
+    pattern-either:
+      - pattern: |-
+          # no process.on("uncaughtException")
+          # no process.on("unhandledRejection")
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-005\\b'
+    message: 'HexVibe Detection [NJS-005]: Node.js Production Hardening'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-006
+    pattern-either:
+      - pattern: |-
+          res.redirect(req.query.next)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-006\\b'
+    message: 'HexVibe Detection [NJS-006]: OWASP Open Redirect'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-007
+    pattern-either:
+      - pattern: |-
+          await fetch(req.body.url)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-007\\b'
+    message: 'HexVibe Detection [NJS-007]: OWASP SSRF Prevention'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-008
+    pattern-either:
+      - pattern: |-
+          cors({ origin: "*", credentials: true })
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-008\\b'
+    message: 'HexVibe Detection [NJS-008]: OWASP CORS Security'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-009
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-009\\b'
+    message: 'HexVibe Detection [NJS-009]: JWT BCP'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-010
+    pattern-either:
+      - pattern: |-
+          res.status(500).json({ error: err.stack })
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-010\\b'
+    message: 'HexVibe Detection [NJS-010]: OWASP Error Handling'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-011
+    pattern-either:
+      - pattern: |-
+          deepMerge(config, req.body)
+          querystring.parse(req.url) без фильтра ключей
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-011\\b'
+    message: 'HexVibe Detection [NJS-011]: Prototype Pollution Server-Side'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-012
+    pattern-either:
+      - pattern: |-
+          const b = Buffer.allocUnsafe(size)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-012\\b'
+    message: 'HexVibe Detection [NJS-012]: Node.js Buffer Security'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-013
+    pattern-either:
+      - pattern: |-
+          const id = req.query.id
+          if (id.includes("admin")) ...
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-013\\b'
+    message: 'HexVibe Detection [NJS-013]: OWASP Input Validation'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-014
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(untrustedCode, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-014\\b'
+    message: 'HexVibe Detection [NJS-014]: Node.js Sandbox Security'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-015
+    pattern-either:
+      - pattern: |-
+          const re = /(a+)+$/
+          if (re.test(req.body.input))
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-015\\b'
+    message: 'HexVibe Detection [NJS-015]: OWASP ReDoS (Server Side)'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-016
+    pattern-either:
+      - pattern: |-
+          const order = await repo.findById(req.params.id)
+          return res.json(order)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-016\\b'
+    message: 'HexVibe Detection [NJS-016]: OWASP API1 BOLA/IDOR'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-017
+    pattern-either:
+      - pattern: |-
+          "lib-x": "git+https://github.com/org/lib-x.git" (без commit hash)
+          # no package-lock.json/npm-shrinkwrap.json
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-017\\b'
+    message: 'HexVibe Detection [NJS-017]: Supply Chain Security'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-018
+    pattern-either:
+      - pattern: |-
+          app.disable("x-powered-by") отсутствует
+          helmet() не подключен
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-018\\b'
+    message: 'HexVibe Detection [NJS-018]: HTTP Header Hardening'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-019
+    pattern-either:
+      - pattern: |-
+          if (process.env.VIP_MODE === "1") approveTransfer()
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-019\\b'
+    message: 'HexVibe Detection [NJS-019]: Twelve-Factor + Secure Config'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-020
+    pattern-either:
+      - pattern: |-
+          fs.unlink(req.body.filePath, cb)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-020\\b'
+    message: 'HexVibe Detection [NJS-020]: CWE-73 / File Path Control'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-021
+    pattern-either:
+      - pattern: |-
+          app.use(express.json()) (без limit)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-021\\b'
+    message: 'HexVibe Detection [NJS-021]: OWASP API4 Resource Consumption'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-022
+    pattern-either:
+      - pattern: |-
+          bcrypt.hash(password, 4)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-022\\b'
+    message: 'HexVibe Detection [NJS-022]: OWASP Password Storage'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-023
+    pattern-either:
+      - pattern: |-
+          User.find({ email: req.body.email }) (без schema/type guard)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-023\\b'
+    message: 'HexVibe Detection [NJS-023]: OWASP NoSQL Injection'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-024
+    pattern-either:
+      - pattern: |-
+          res.cookie("sid", sid)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-024\\b'
+    message: 'HexVibe Detection [NJS-024]: OWASP Session Management'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-025
+    pattern-either:
+      - pattern: |-
+          cors({ methods: "*", allowedHeaders: "*" })
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-025\\b'
+    message: 'HexVibe Detection [NJS-025]: CORS Hardening Best Practices'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-026
+    pattern-either:
+      - pattern: |-
+          await User.create(req.body)
+          await User.update(req.body, { where: ... })
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-026\\b'
+    message: 'HexVibe Detection [NJS-026]: OWASP Mass Assignment'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-027
+    pattern-either:
+      - pattern: |-
+          const buf = Buffer.from(input)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-027\\b'
+    message: 'HexVibe Detection [NJS-027]: Node.js Buffer Safety'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-028
+    pattern-either:
+      - pattern: |-
+          "scripts": { "build": "tsc", "test": "jest" } (без npm audit/snyk/socket)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-028\\b'
+    message: 'HexVibe Detection [NJS-028]: Supply Chain SCA Controls'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-029
+    pattern-either:
+      - pattern: |-
+          <%- userContent %> (EJS)
+          != userContent (Pug)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-029\\b'
+    message: 'HexVibe Detection [NJS-029]: SSTI/XSS Template Security'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-030
+    pattern-either:
+      - pattern: |-
+          app.use(bodyParser.json()) без limit и depth checks
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-030\\b'
+    message: 'HexVibe Detection [NJS-030]: API Resource Consumption Defense'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-031
+    pattern-either:
+      - pattern: |-
+          const merged = { ...defaults, ...req.body }
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-031\\b'
+    message: 'HexVibe Detection [NJS-031]: Prototype Pollution (Object Spread)'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-032
+    pattern-either:
+      - pattern: |-
+          const secret = process.env.JWT_SECRET
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-032\\b'
+    message: 'HexVibe Detection [NJS-032]: JWT Secret Management'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-033
+    pattern-either:
+      - pattern: |-
+          https.request({ rejectUnauthorized: false })
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-033\\b'
+    message: 'HexVibe Detection [NJS-033]: TLS/mTLS Hardening'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-034
+    pattern-either:
+      - pattern: |-
+          readable.pipe(writable) (без .on("error"))
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-034\\b'
+    message: 'HexVibe Detection [NJS-034]: Node.js Streams Security'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-security.njs-035
+    pattern-either:
+      - pattern: |-
+          let passwordPlain = req.body.password (долгоживущая переменная)
+      - pattern-regex: 'Vulnerable:\\s*NJS\\-035\\b'
+    message: 'HexVibe Detection [NJS-035]: Sensitive Data Memory Hygiene'
+    languages:
+      - generic
+    severity: WARNING

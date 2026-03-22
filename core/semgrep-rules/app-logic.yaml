@@ -1,0 +1,445 @@
+rules:
+  - id: hexvibe.app-logic.biz-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.get("/orders/{order_id}") async def get_order(order_id: int, user=Depends(current_user)):     order = await repo.get_order(order_id)     if not order or order.owner_id != user.id:         raise HTTPException(status_code=404, detail="not found")     return order
+    pattern-either:
+      - pattern: |-
+          @app.get("/orders/{order_id}")
+          async def get_order(order_id: int):
+              order = await repo.get_order(order_id)
+              return order
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-001\\b'
+    message: |-
+      HexVibe Detection [BIZ-001]: OWASP API Security Top 10 (2023) API1: Broken Object Level Authorization; OWASP ASVS v4.0.3 V4 Access Control
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.get("/profile") async def profile(user=Depends(current_user)):     return await repo.get_profile(user.id)
+    pattern-either:
+      - pattern: |-
+          @app.get("/profile")
+          async def profile(user_id: int):
+              return await repo.get_profile(user_id)
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-002\\b'
+    message: |-
+      HexVibe Detection [BIZ-002]: OWASP API Security Top 10 (2023) API1: Broken Object Level Authorization
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        OWASP API Security Top 10 (2023) API3: Broken Object Property Level Authorization
+    pattern-either:
+      - pattern: |-
+          class AccountUpdate(BaseModel):
+              email: str
+              is_admin: bool = False
+              balance: int = 0
+          @app.patch("/accounts/{account_id}")
+          async def patch_account(account_id: int, dto: AccountUpdate):
+              await repo.update_account(account_id, **dto.model_dump())
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-003\\b'
+    message: |-
+      HexVibe Detection [BIZ-003]: None = None
+      @app.patch("/accounts/{account_id}")
+      async def patch_account(account_id: int, dto: AccountUpdatePublic, user=Depends(current_user)):
+          account = await repo.get_account(account_id)
+          if not account or account.owner_id != user.id:
+              raise HTTPException(status_code=404, detail="not found")
+          payload = dto.model_dump(exclude_none=True, include={"email", "display_name"})
+          await repo.update_account(account_id, **payload)
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.post("/admin/promote") async def promote(dto: PromoteUserDTO, actor=Depends(current_user)):     if actor.role != "admin":         raise HTTPException(status_code=403, detail="forbidden")     if dto.role not in {"manager", "auditor"}:         raise HTTPException(status_code=400, detail="invalid role")     await repo.update_user(dto.user_id, role=dto.role)
+    pattern-either:
+      - pattern: |-
+          @app.post("/admin/promote")
+          async def promote(dto: dict):
+              await repo.update_user(dto["user_id"], role=dto["role"])
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-004\\b'
+    message: |-
+      HexVibe Detection [BIZ-004]: OWASP Top 10 (2021) A01 Broken Access Control; OWASP API Security Top 10 (2023) API5 Broken Function Level Authorization
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.post("/payments/{payment_id}/confirm") async def confirm(payment_id: int, user=Depends(current_user)):     if not user.step_up_verified_at or user.step_up_verified_at < datetime.now(timezone.utc) - timedelta(minutes=5):         raise HTTPException(status_code=401, detail="step-up required")     return await payments.confirm(payment_id, user.id)
+    pattern-either:
+      - pattern: |-
+          @app.post("/payments/{payment_id}/confirm")
+          async def confirm(payment_id: int, user=Depends(current_user)):
+              return await payments.confirm(payment_id, user.id)
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-005\\b'
+    message: |-
+      HexVibe Detection [BIZ-005]: OWASP API Security Top 10 (2023) API2 Broken Authentication; OWASP ASVS v4.0.3 V2 Authentication
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.post("/mfa/verify") async def verify(req: MFAVerifyRequest, user=Depends(current_user)):     challenge = await mfa.get_challenge(req.challenge_id)     if not challenge or challenge.user_id != user.id or challenge.context != req.context:         raise HTTPException(status_code=400, detail="invalid challenge")     if not await mfa.verify_code(user.id, req.code):         raise HTTPException(status_code=401, detail="invalid code")     await mfa.mark_step_up(user.id, context=req.context)     return {"ok": True}
+    pattern-either:
+      - pattern: |-
+          @app.post("/mfa/verify")
+          async def verify(code: str, user=Depends(current_user)):
+              if await mfa.verify_code(user.id, code):
+                  return {"ok": True}
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-006\\b'
+    message: |-
+      HexVibe Detection [BIZ-006]: OWASP ASVS v4.0.3 V2; OWASP API Security Top 10 (2023) API2 Broken Authentication
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ALLOWED = {"draft": {"submitted"}, "submitted": {"approved"}, "approved": {"paid"}} @app.post("/orders/{order_id}/pay") async def pay(order_id: int, user=Depends(current_user)):     order = await repo.get_order(order_id)     if not order or order.owner_id != user.id:         raise HTTPException(status_code=404, detail="not found")     if "paid" not in ALLOWED.get(order.status, set()):         raise HTTPException(status_code=409, detail="invalid transition")     await repo.update_order(order_id, status="paid")
+    pattern-either:
+      - pattern: |-
+          @app.post("/orders/{order_id}/pay")
+          async def pay(order_id: int):
+              await repo.update_order(order_id, status="paid")
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-007\\b'
+    message: |-
+      HexVibe Detection [BIZ-007]: OWASP API Security Top 10 (2023) API6 Unrestricted Access to Sensitive Business Flows
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.post("/transfers") async def transfer(req: TransferRequest, request: Request, user=Depends(current_user)):     idem = request.headers.get("Idempotency-Key", "").strip()     if not idem:         raise HTTPException(status_code=400, detail="missing idempotency key")     if await idem_store.exists(user.id, idem):         raise HTTPException(status_code=409, detail="duplicate request")     result = await svc.transfer(user.id, req.target_id, req.amount)     await idem_store.save(user.id, idem)     return result
+    pattern-either:
+      - pattern: |-
+          @app.post("/transfers")
+          async def transfer(req: TransferRequest, user=Depends(current_user)):
+              return await svc.transfer(user.id, req.target_id, req.amount)
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-008\\b'
+    message: |-
+      HexVibe Detection [BIZ-008]: OWASP API Security Top 10 (2023) API6 Unrestricted Access to Sensitive Business Flows; OWASP ASVS v4.0.3 V3 Session Management
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.get("/invoices/{invoice_id}") async def invoice(invoice_id: int, user=Depends(current_user)):     inv = await repo.get_invoice(invoice_id)     if not inv or inv.tenant_id != user.tenant_id:         raise HTTPException(status_code=404, detail="not found")     return inv
+    pattern-either:
+      - pattern: |-
+          @app.get("/invoices/{invoice_id}")
+          async def invoice(invoice_id: int):
+              return await repo.get_invoice(invoice_id)
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-009\\b'
+    message: |-
+      HexVibe Detection [BIZ-009]: OWASP Top 10 (2021) A01 Broken Access Control; OWASP API Security Top 10 (2023) API1 Broken Object Level Authorization
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.post("/users/me/change-email") async def change_email(req: ChangeEmailRequest, user=Depends(current_user)):     if not await auth.verify_password(user.id, req.current_password):         raise HTTPException(status_code=401, detail="re-auth required")     await repo.update_user(user.id, email=req.new_email)
+    pattern-either:
+      - pattern: |-
+          @app.post("/users/me/change-email")
+          async def change_email(req: ChangeEmailRequest, user=Depends(current_user)):
+              await repo.update_user(user.id, email=req.new_email)
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-010\\b'
+    message: |-
+      HexVibe Detection [BIZ-010]: OWASP API Security Top 10 (2023) API2 Broken Authentication; OWASP ASVS v4.0.3 V2
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        def _is_blocked_host(host: str) -> bool:     if host in {"localhost"}:         return True     try:         ip = ipaddress.ip_address(host)         return ip.is_private or ip.is_loopback or ip.is_link_local     except ValueError:         return False @app.post("/preview") async def preview(dto: PreviewRequest):     parsed = urlparse(dto.url)     if parsed.scheme not in {"https"} or not parsed.hostname or _is_blocked_host(parsed.hostname):         raise HTTPException(status_code=400, detail="blocked target")     async with httpx.AsyncClient(timeout=5.0, follow_redirects=False) as client:         r = await client.get(dto.url)     return {"status": r.status_code}
+    pattern-either:
+      - pattern: |-
+          @app.post("/preview")
+          async def preview(dto: dict):
+              async with httpx.AsyncClient() as client:
+                  r = await client.get(dto["url"])
+              return {"status": r.status_code}
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-011\\b'
+    message: |-
+      HexVibe Detection [BIZ-011]: OWASP API Security Top 10 (2023) API7: Server Side Request Forgery; OWASP ASVS v4.0.3 V5 Validation, Sanitization and Encoding
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        class RiskResponse(BaseModel):     user_id: int     risk_level: Literal["low", "medium", "high"]     allow_transfer: bool @app.get("/risk/{user_id}") async def risk(user_id: int):     async with httpx.AsyncClient(timeout=5.0) as client:         r = await client.get(f"http://risk.internal/score/{user_id}")     r.raise_for_status()     data = RiskResponse.model_validate(r.json())     if data.user_id != user_id:         raise HTTPException(status_code=502, detail="upstream mismatch")     return {"allow_transfer": data.allow_transfer}
+    pattern-either:
+      - pattern: |-
+          @app.get("/risk/{user_id}")
+          async def risk(user_id: int):
+              async with httpx.AsyncClient(timeout=5.0) as client:
+                  r = await client.get(f"http://risk.internal/score/{user_id}")
+              return {"allow_transfer": r.json()["allow_transfer"]}
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-012\\b'
+    message: |-
+      HexVibe Detection [BIZ-012]: OWASP API Security Top 10 (2023) API10: Unsafe Consumption of APIs; OWASP ASVS v4.0.3 V14 Config / V5 Input Validation
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        def create_app(env: str) -> FastAPI:     app = FastAPI()     if env != "prod":         @app.get("/debug/sql")         async def debug_sql():             return {"ok": True}     return app @app.get("/legacy/report", include_in_schema=False) async def legacy_report():     raise HTTPException(status_code=410, detail="endpoint removed")
+    pattern-either:
+      - pattern: |-
+          @app.get("/debug/sql")
+          async def debug_sql():
+              return {"dsn": os.getenv("DATABASE_URL")}
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-013\\b'
+    message: |-
+      HexVibe Detection [BIZ-013]: OWASP API Security Top 10 (2023) API9: Improper Inventory Management; OWASP Top 10 (2021) A05 Security Misconfiguration
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.post("/wallet/transfer") async def transfer(req: TransferRequest, db=Depends(get_db)):     async with db.transaction():         src = await repo.get_wallet_for_update(req.src_id, db)         dst = await repo.get_wallet_for_update(req.dst_id, db)         if src.balance < req.amount:             raise HTTPException(status_code=409, detail="insufficient funds")         await repo.update_balance(req.src_id, -req.amount, db)         await repo.update_balance(req.dst_id, req.amount, db)
+    pattern-either:
+      - pattern: |-
+          @app.post("/wallet/transfer")
+          async def transfer(req: TransferRequest):
+              src = await repo.get_wallet(req.src_id)
+              dst = await repo.get_wallet(req.dst_id)
+              src.balance -= req.amount
+              dst.balance += req.amount
+              await repo.save_wallet(src)
+              await repo.save_wallet(dst)
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-014\\b'
+    message: |-
+      HexVibe Detection [BIZ-014]: OWASP API Security Top 10 (2023) API6: Unrestricted Access to Sensitive Business Flows; OWASP Top 10 (2021) A04 Insecure Design
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.get("/search") async def search(request: Request):     roles = request.query_params.getlist("role")     if len(roles) != 1:         raise HTTPException(status_code=400, detail="duplicate role parameter")     role = roles[0]     if role not in {"user", "manager"}:         raise HTTPException(status_code=400, detail="invalid role")     return await repo.search(role=role)
+    pattern-either:
+      - pattern: |-
+          @app.get("/search")
+          async def search(role: str = "user"):
+              return await repo.search(role=role)
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-015\\b'
+    message: |-
+      HexVibe Detection [BIZ-015]: OWASP API Security Top 10 (2023) API8: Security Misconfiguration; OWASP ASVS v4.0.3 V5 Validation, Sanitization and Encoding
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        MAX_EXPORT_ROWS = 10000 @app.get("/exports/orders.csv") async def export_orders(limit: int = 1000):     if limit <= 0 or limit > MAX_EXPORT_ROWS:         raise HTTPException(status_code=400, detail="limit out of range")     rows = await repo.list_orders(limit=limit)     return to_csv(rows)
+    pattern-either:
+      - pattern: |-
+          @app.get("/exports/orders.csv")
+          async def export_orders(limit: int = 1000000):
+              rows = await repo.list_orders(limit=limit)
+              return to_csv(rows)
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-016\\b'
+    message: |-
+      HexVibe Detection [BIZ-016]: OWASP API Security Top 10 (2023) API4: Unrestricted Resource Consumption; OWASP ASVS v4.0.3 V1 Architecture, Design and Threat Modeling
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        DANGEROUS_PREFIXES = ("=", "+", "-", "@") def sanitize_cell(value: str) -> str:     if value.startswith(DANGEROUS_PREFIXES):         return "'" + value     return value def row_to_csv(user: dict[str, str]) -> list[str]:     return [         sanitize_cell(user["name"]),         sanitize_cell(user["email"]),         sanitize_cell(user["comment"]),     ]
+    pattern-either:
+      - pattern: |-
+          def row_to_csv(user: dict[str, str]) -> list[str]:
+              return [user["name"], user["email"], user["comment"]]
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-017\\b'
+    message: |-
+      HexVibe Detection [BIZ-017]: OWASP API Security Top 10 (2023) API8: Security Misconfiguration; OWASP ASVS v4.0.3 V5 Validation, Sanitization and Encoding
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.post("/checkout") async def checkout(req: CheckoutRequest, user=Depends(current_user)):     items = await catalog.get_items(req.item_ids)     subtotal = sum(item.price for item in items)     discount = await promotions.calculate_discount(user.id, req.promo_code, items)     total = max(subtotal - discount, 0)     if req.client_total is not None and abs(req.client_total - total) > Decimal("0.01"):         raise HTTPException(status_code=400, detail="price tampering detected")     await billing.charge(user.id, total)
+    pattern-either:
+      - pattern: |-
+          @app.post("/checkout")
+          async def checkout(payload: dict):
+              order_total = payload["client_total"]
+              discount = payload.get("discount", 0)
+              await billing.charge(payload["user_id"], order_total - discount)
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-018\\b'
+    message: |-
+      HexVibe Detection [BIZ-018]: OWASP API Security Top 10 (2023) API3: Broken Object Property Level Authorization / API8: Security Misconfiguration; OWASP ASVS v4.0.3 V4 Access Control and V5 Validation
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @app.post("/webhook/payment") async def payment_webhook(request: Request):     body = await request.body()     sig = request.headers.get("x-signature", "")     if not verify_hmac(body, sig, webhook_secret):         raise HTTPException(status_code=401, detail="invalid signature")     payload = json.loads(body)     ...     await payments.mark_paid(payload["order_id"])
+    pattern-either:
+      - pattern: |-
+          @app.post("/webhook/payment")
+          async def payment_webhook(request: Request):
+              payload = await request.json()
+              ...
+              await payments.mark_paid(payload["order_id"])
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-019\\b'
+    message: |-
+      HexVibe Detection [BIZ-019]: CWE-345
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Явно задавать безопасный serializer (json/msgpack), запретить pickle в job payload и валидировать схему аргументов задач.
+    pattern-either:
+      - pattern: |-
+          Queue("default", connection=redis_conn)
+          Worker([q], connection=redis_conn)
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-020\\b'
+    message: |-
+      HexVibe Detection [BIZ-020]: CWE Final Certification
+    languages:
+      - python
+    severity: WARNING
+  - id: hexvibe.app-logic.biz-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Всегда задавать timeout (и retry budget), чтобы исключить зависание и неконтролируемое потребление ресурсов.
+    pattern-either:
+      - pattern: |-
+          httpx.get(url)
+          httpx.post(api, json=payload)
+      - pattern-regex: 'Vulnerable:\\s*BIZ\\-021\\b'
+    message: |-
+      HexVibe Detection [BIZ-021]: CWE Final Certification
+    languages:
+      - python
+    severity: WARNING

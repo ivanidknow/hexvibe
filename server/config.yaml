@@ -1,0 +1,407 @@
+# trufflehog-custom-detectors.yaml
+# Custom detectors for TruffleHog v3.x
+# Соответствует gitleaks.rules.toml (MOEX Gitleaks high-confidence config)
+# RU-specific tokens + инфраструктура (Vault, Atlassian, Grafana, Nexus/NPM, Elastic, 1C, Kafka)
+#
+# Синхронизация с gitleaks: при добавлении правил в gitleaks.rules.toml добавлять
+# соответствующие детекторы сюда (те же regex/keywords, формат YAML).
+#
+# Usage: trufflehog git file:///path/to/repo --config=./trufflehog-custom-detectors.yaml --json
+
+detectors:
+  # ============================================================================
+  # RU-SPECIFIC / LOCAL TOKENS
+  # ============================================================================
+  
+  - name: Telegram Bot Token
+    keywords:
+      - telegram
+      - bot
+    regex:
+      pattern: '\d{8,10}:A[0-9A-Za-z_\-]{33}'
+
+  - name: VK Access Token
+    keywords:
+      - vk1.a
+    regex:
+      pattern: 'vk1\.a\.[0-9A-Za-z_\-]{20,}'
+
+  - name: Yandex OAuth Token
+    keywords:
+      - y0_
+    regex:
+      pattern: 'y0_[0-9A-Za-z_\-]{20,}'
+
+  - name: Yandex Cloud Service Token
+    keywords:
+      - yandex-cloud-token
+      - yc-iam-token
+      - yandex-service-token
+    regex:
+      pattern: '(?i)(yandex[_-]?cloud[_-]?token|yc[_-]?iam[_-]?token|yandex[_-]?service[_-]?token)\s*[:=]\s*[''"]?[A-Za-z0-9_\-]{40,}[''"]?'
+
+  - name: Yandex 360 API Token
+    keywords:
+      - yandex-360-token
+      - y360-api-token
+    regex:
+      pattern: '(?i)(yandex[_-]?360[_-]?token|y360[_-]?api[_-]?token)\s*[:=]\s*[''"]?[A-Za-z0-9_\-]{32,}[''"]?'
+
+  - name: VK Cloud API Token
+    keywords:
+      - vk-cloud-token
+      - vcloud-api-token
+    regex:
+      pattern: '(?i)(vk[_-]?cloud[_-]?token|vcloud[_-]?api[_-]?token)\s*[:=]\s*[''"]?[A-Za-z0-9_\-]{40,}[''"]?'
+
+  - name: VK OAuth Token
+    keywords:
+      - vk-oauth-token
+      - vk-access-token
+    regex:
+      pattern: '(?i)(vk[_-]?oauth[_-]?token|vk[_-]?access[_-]?token)\s*[:=]\s*[''"]?[A-Za-z0-9_\-]{20,}[''"]?'
+
+  - name: SberCloud API Token
+    keywords:
+      - sbercloud-token
+      - sber-cloud-api-token
+    regex:
+      pattern: '(?i)(sbercloud[_-]?token|sber[_-]?cloud[_-]?api[_-]?token)\s*[:=]\s*[''"]?[A-Za-z0-9_\-]{40,}[''"]?'
+
+  - name: 1C HTTP API Token
+    keywords:
+      - 1c-api-token
+      - 1c-http-auth
+      - 1c-basic-auth
+    regex:
+      pattern: '(?i)(1c[_-]?api[_-]?token|1c[_-]?http[_-]?auth|1c[_-]?basic[_-]?auth)\s*[:=]\s*[''"]?[A-Za-z0-9_\-+/=]{20,}[''"]?'
+
+  - name: Bitrix24 REST Token
+    keywords:
+      - bitrix24-token
+      - bitrix-rest-token
+      - bx24-token
+    regex:
+      pattern: '(?i)(bitrix24[_-]?token|bitrix[_-]?rest[_-]?token|bx24[_-]?token)\s*[:=]\s*[''"]?[A-Za-z0-9]{32,}[''"]?'
+
+  # ============================================================================
+  # CREDENTIALS IN URL (BASIC AUTH)
+  # ============================================================================
+  
+  - name: Basic Auth URL
+    keywords:
+      - http://
+      - https://
+    regex:
+      pattern: 'https?:\/\/[^:\s\/]+:[^@\s\/]+@[^\/\s''"]+'
+
+  # ============================================================================
+  # DATABASE CONNECTION STRINGS (RU-STACK)
+  # ============================================================================
+  
+  - name: Database Connection String
+    keywords:
+      - postgres://
+      - postgresql://
+      - mysql://
+      - mariadb://
+      - mongodb://
+      - clickhouse://
+      - redis://
+      - rediss://
+      - jdbc:postgresql://
+      - jdbc:mysql://
+    regex:
+      pattern: '(?i)(jdbc:)?(postgres|postgresql|mysql|mariadb|sqlserver|oracle|mongodb|mssql|clickhouse|redis|rediss)(\+\w+)?(:\/\/)[^:\s]+:[^@\s]+@[^:\s\/]+(:[0-9]{1,5})?\/?[^\s''"]*'
+
+  # ============================================================================
+  # OAUTH / CLIENT SECRETS
+  # ============================================================================
+  
+  - name: OAuth Client Secret
+    keywords:
+      - client_secret
+    regex:
+      pattern: '(?i)(client_secret)\s*[:=]\s*[''"]?[0-9A-Za-z\-._~]{16,}[''"]?'
+
+  - name: OAuth Client ID
+    keywords:
+      - client_id
+    regex:
+      pattern: '(?i)(client_id)\s*[:=]\s*[''"]?[0-9A-Za-z\-._~]{10,}[''"]?'
+
+  - name: OIDC Keycloak Client Secret
+    keywords:
+      - client_secret
+      - client-secret
+      - KEYCLOAK_CLIENT_SECRET
+    regex:
+      pattern: '(?i)(oidc|oauth2|keycloak).*client[_-]?secret.*[:=]\s*[''"]?[0-9A-Za-z\-._~]{16,}[''"]?'
+
+  - name: ITS-002 Keycloak Client Secret Policy Violation
+    keywords:
+      - KEYCLOAK_CLIENT_SECRET
+      - keycloak.client-secret
+      - keycloak_client_secret
+    regex:
+      pattern: '(?i)(keycloak[_\.-]?client[_-]?secret|KEYCLOAK_CLIENT_SECRET)\s*[:=]\s*[''"]?[0-9A-Za-z\-._~]{12,}[''"]?'
+
+  - name: Spring OAuth2 Client Secret
+    keywords:
+      - spring.security.oauth2.client.registration
+      - client-secret
+    regex:
+      pattern: '(?i)spring\.security\.oauth2\.client\.registration\.[^.\s]+\.client-secret\s*=\s*[''"]?[0-9A-Za-z\-._~]{16,}[''"]?'
+
+  # ============================================================================
+  # GITLAB / GITHUB TOKENS (Custom - keep for consistency)
+  # ============================================================================
+  
+  - name: GitLab Personal Access Token
+    keywords:
+      - glpat-
+    regex:
+      pattern: 'glpat-[0-9A-Za-z_\-]{20,}'
+
+  - name: GitHub Personal Access Token
+    keywords:
+      - ghp_
+    regex:
+      pattern: 'ghp_[0-9A-Za-z]{20,}'
+
+  # ============================================================================
+  # SMTP / MAIL
+  # ============================================================================
+  
+  - name: SMTP URL Credentials
+    keywords:
+      - smtp://
+      - smtps://
+    regex:
+      pattern: '(?i)smtps?:\/\/[^:\s\/]+:[^@\s\/]+@[^\/\s''"]+'
+
+  # ============================================================================
+  # VPN / PROXY / INFRASTRUCTURE SECRETS
+  # ============================================================================
+  
+  - name: VPN Credentials
+    keywords:
+      - vpn-user
+      - vpn-login
+      - vpn-password
+      - vpn-cert
+      - openvpn-key
+    regex:
+      pattern: '(?i)(vpn[_-]?user|vpn[_-]?login|vpn[_-]?password|vpn[_-]?cert|openvpn[_-]?key)\s*[:=]\s*[''"]?[A-Za-z0-9_\-+/=]{16,}[''"]?'
+
+  - name: Proxy Credentials
+    keywords:
+      - proxy-user
+      - proxy-login
+      - proxy-password
+      - proxy-auth
+    regex:
+      pattern: '(?i)(proxy[_-]?user|proxy[_-]?login|proxy[_-]?password|proxy[_-]?auth)\s*[:=]\s*[''"]?[A-Za-z0-9_\-]{8,}[''"]?'
+
+  - name: GitLab Runner Token
+    keywords:
+      - gitlab-runner-token
+      - ci-cd-token
+      - runner-registration-token
+    regex:
+      pattern: '(?i)(gitlab[_-]?runner[_-]?token|ci[_-]?cd[_-]?token|runner[_-]?registration[_-]?token)\s*[:=]\s*[''"]?[A-Za-z0-9_\-]{20,}[''"]?'
+
+  - name: Self-Hosted CI/CD Token
+    keywords:
+      - jenkins-token
+      - teamcity-token
+      - bamboo-token
+      - self-hosted-ci-token
+    regex:
+      pattern: '(?i)(jenkins[_-]?token|teamcity[_-]?token|bamboo[_-]?token|self[_-]?hosted[_-]?ci[_-]?token)\s*[:=]\s*[''"]?[A-Za-z0-9_\-]{20,}[''"]?'
+
+  # ============================================================================
+  # INFRASTRUCTURE (Vault, Atlassian, Grafana, Nexus/NPM, Elastic, 1C, Kafka)
+  # Соответствует новым правилам в gitleaks.rules.toml (techstack.md)
+  # ============================================================================
+  - name: HashiCorp Vault Token
+    keywords:
+      - vault
+      - hvs.
+      - hvc.
+    regex:
+      pattern: '(hvs\.CAES[A-Za-z0-9_\-]+|hvc\.CAES[A-Za-z0-9_\-]+|\bs\.[A-Za-z0-9_\-]{20,})'
+
+  - name: ITS-002 Vault Token Policy Violation
+    keywords:
+      - vault_token
+      - VAULT_TOKEN
+      - vault-token
+    regex:
+      pattern: '(?i)(vault[_-]?token|VAULT_TOKEN)\s*[:=]\s*[''"]?(hvs\.CAES[A-Za-z0-9_\-]+|hvc\.CAES[A-Za-z0-9_\-]+|s\.[A-Za-z0-9_\-]{8,})[''"]?'
+
+  - name: Atlassian API Token
+    keywords:
+      - ATATT
+    regex:
+      pattern: 'ATATT[A-Za-z0-9_\-]{80,}'
+
+  - name: Grafana API Token
+    keywords:
+      - glsa_
+    regex:
+      pattern: 'glsa_[A-Za-z0-9_\-]{40,}'
+
+  - name: Maven settings.xml Password
+    keywords:
+      - "<password>"
+    regex:
+      pattern: '<password>\s*[^<\s]{8,}\s*</password>'
+
+  - name: NPM Auth Token
+    keywords:
+      - _authToken
+      - _auth
+      - registry.npmjs.org_auth
+    regex:
+      pattern: '(?i)(_authToken|_auth|registry\.npmjs\.org[_-]?auth)\s*=\s*[A-Za-z0-9_\-=]{20,}'
+
+  - name: Elasticsearch OpenSearch Auth
+    keywords:
+      - xpack.security
+      - cloud.auth
+      - api_key
+      - elasticsearch.password
+    regex:
+      pattern: '(?i)(xpack\.security\.(user|password)|cloud\.auth|api_key|elasticsearch\.password)\s*[:=]\s*[''"]?[A-Za-z0-9_\-=]{16,}[''"]?'
+
+  - name: 1C Base Connection String
+    keywords:
+      - Server=
+      - Ref=
+      - Password=
+    regex:
+      pattern: '(?i)(Server|Srv)\s*=\s*[^;]+;(Ref|InfoBase)\s*=\s*[^;]+;.*(Password|Pwd)\s*=\s*[^;\s''"]{6,}'
+
+  - name: Kafka SASL Credentials
+    keywords:
+      - sasl.jaas
+      - sasl.username
+      - sasl.password
+    regex:
+      pattern: '(?i)(sasl\.(jaas\.config|username|password)|org\.apache\.kafka\.common\.security\.plain\.(username|password))\s*[:=]\s*[''"]?[^''"\s]{8,}[''"]?'
+
+  - name: Generic Header API Key
+    keywords:
+      - x-api-key
+      - x-auth-token
+      - x-api-token
+    regex:
+      pattern: '(?i)(x-api-key|x-auth-token|x-api-token)\s*[:=]\s*[''"]?[0-9A-Za-z\-._~]{24,}[''"]?'
+
+  # ============================================================================
+  # GENERIC TOKENS / API KEYS
+  # ============================================================================
+  
+  - name: Generic Bearer Token
+    keywords:
+      - authorization
+      - bearer
+    regex:
+      pattern: '(?i)authorization:\s*bearer\s+[0-9A-Za-z\-\._~\+\/]{20,}=*'
+
+  - name: Hardcoded Password
+    keywords:
+      - password
+      - passwd
+      - pwd
+      - secret
+      - key
+      - token
+      - salt
+      - api_key
+      - apikey
+    regex:
+      pattern: '(?i)(password|passwd|pwd|secret|key|token|salt|api_key|apikey)\s*[:=]\s*[''"][^''"]{8,}[''"]'
+
+  - name: Generic API Key
+    keywords:
+      - api_key
+      - api-key
+      - apikey
+    regex:
+      pattern: '(?i)(api[_-]?key|apikey)\s*[:=]\s*[''"]?[0-9A-Za-z_\-]{32,}[''"]?'
+
+  - name: Generic Secret Token
+    keywords:
+      - secret
+      - token
+      - password
+    regex:
+      pattern: '(?i)(secret|token|password|passwd)\s*[:=]\s*[''"]?[0-9A-Za-z_\-]{40,}[''"]?'
+
+  # ============================================================================
+  # PII (PERSONAL IDENTIFIABLE INFORMATION) - GDPR/COMPLIANCE
+  # ============================================================================
+  
+  - name: PII Email
+    keywords:
+      - email
+      - e-mail
+      - mail
+    regex:
+      pattern: '(?i)(email|e-mail|mail)\s*[:=]\s*[''"]?[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}[''"]?'
+
+  - name: PII Phone RU
+    keywords:
+      - phone
+      - tel
+      - mobile
+      - телефон
+    regex:
+      pattern: '(?i)(phone|tel|mobile|телефон)\s*[:=]\s*[''"]?(\+7|8)?[\s\-]?\(?[0-9]{3}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}[''"]?'
+
+  - name: PII Passport RU
+    keywords:
+      - passport
+      - паспорт
+    regex:
+      pattern: '(?i)(passport|паспорт)\s*[:=]\s*[''"]?[0-9]{4}\s*[0-9]{6}[''"]?'
+
+  - name: PII SNILS
+    keywords:
+      - snils
+      - снилс
+    regex:
+      pattern: '(?i)(snils|снилс)\s*[:=]\s*[''"]?[0-9]{3}[\s\-]?[0-9]{3}[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[''"]?'
+
+  - name: PII Credit Card
+    keywords:
+      - card
+      - credit
+      - debit
+      - pan
+      - card_number
+      - cc_number
+    regex:
+      pattern: '(?i)(card|credit|debit|pan|card_number|cardNumber|cc_number|ccNumber)\s*[:=]\s*[''"]?[0-9]{4}[\s\-]?[0-9]{4}[\s\-]?[0-9]{4}[\s\-]?[0-9]{4}[''"]?'
+
+  - name: PII IBAN
+    keywords:
+      - iban
+    regex:
+      pattern: '(?i)(iban)\s*[:=]\s*[''"]?[A-Z]{2}[0-9]{2}[A-Z0-9]{4,30}[''"]?'
+
+  - name: PII BIC SWIFT
+    keywords:
+      - bic
+      - swift
+    regex:
+      pattern: '(?i)(bic|swift)\s*[:=]\s*[''"]?[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?[''"]?'
+
+  - name: PII INN RU
+    keywords:
+      - inn
+      - инн
+    regex:
+      pattern: '(?i)(inn|инн)\s*[:=]\s*[''"]?[0-9]{10,12}[''"]?'

@@ -1,0 +1,397 @@
+rules:
+  - id: hexvibe.java-spring.java-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String expr = request.getParameter("expr"); if (!expr.matches("^[0-9+\\-*/(). ]{1,64}$")) throw new IllegalArgumentException(); ... Object result = safeMathEval(expr);
+    pattern-either:
+      - pattern: |-
+          String expr = request.getParameter("expr");
+          ...
+          Object result = engine.eval(expr);
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-001\\b'
+    message: |-
+      HexVibe Detection [JAVA-001]: CWE-94
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String host = req.getParameter("host"); if (!host.matches("^[a-zA-Z0-9.-]{1,255}$")) throw new IllegalArgumentException(); ... new ProcessBuilder("ping","-c","1",host).start();
+    pattern-either:
+      - pattern: |-
+          String host = req.getParameter("host");
+          ...
+          Runtime.getRuntime().exec("ping -c 1 " + host);
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-002\\b'
+    message: |-
+      HexVibe Detection [JAVA-002]: CWE-78
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String action = req.getParameter("action"); Map<String,List<String>> allowed = Map.of("uptime", List.of("uptime")); ... new ProcessBuilder(allowed.get(action)).start();
+    pattern-either:
+      - pattern: |-
+          String cmd = req.getParameter("cmd");
+          ...
+          new ProcessBuilder("sh","-c", cmd).start();
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-003\\b'
+    message: |-
+      HexVibe Detection [JAVA-003]: CWE-77
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String key = req.getParameter("handler"); Map<String,Class<?>> allow = Map.of("health", HealthHandler.class); ... Class<?> c = allow.get(key);
+    pattern-either:
+      - pattern: |-
+          String className = req.getParameter("class");
+          ...
+          Class<?> c = Class.forName(className);
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-004\\b'
+    message: |-
+      HexVibe Detection [JAVA-004]: CWE-470
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String method = req.getParameter("method"); Set<String> allow = Set.of("health","status"); if (!allow.contains(method)) throw new SecurityException(); ... target.getClass().getMethod(method).invoke(target);
+    pattern-either:
+      - pattern: |-
+          String method = req.getParameter("method");
+          ...
+          target.getClass().getMethod(method).invoke(target);
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-005\\b'
+    message: |-
+      HexVibe Detection [JAVA-005]: CWE-74
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String order = req.getParameter("order"); if (!Set.of("name","created_at").contains(order)) order = "name"; ... String q = "SELECT * FROM users ORDER BY " + order;
+    pattern-either:
+      - pattern: |-
+          String order = req.getParameter("order");
+          ...
+          String q = "SELECT * FROM users ORDER BY " + order;
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-006\\b'
+    message: |-
+      HexVibe Detection [JAVA-006]: CWE-74
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String key = req.getParameter("key"); Map<String,String> allow = Map.of("env","prod"); ... return allow.getOrDefault(key, "n/a");
+    pattern-either:
+      - pattern: |-
+          String exp = req.getParameter("exp");
+          ...
+          parser.parseExpression(exp).getValue(ctx);
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-007\\b'
+    message: |-
+      HexVibe Detection [JAVA-007]: CWE-94
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String cmd = req.getParameter("cmd"); if (!Set.of("normalize").contains(cmd)) throw new SecurityException(); ... runFixedJsFunction(cmd);
+    pattern-either:
+      - pattern: |-
+          String js = req.getParameter("script");
+          ...
+          engine.eval(js);
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-008\\b'
+    message: |-
+      HexVibe Detection [JAVA-008]: CWE-95
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String key = request.getParameter("key"); Map<String,Object> allowed = Map.of("health", true); ... return allowed.getOrDefault(key, false);
+    pattern-either:
+      - pattern: |-
+          String expr = request.getParameter("expr");
+          ...
+          spelParser.parseExpression(expr).getValue(context);
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-009\\b'
+    message: |-
+      HexVibe Detection [JAVA-009]: CWE-917
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ObjectMapper mapper = new ObjectMapper(); ... mapper.disableDefaultTyping(); UserDTO obj = mapper.readValue(body, UserDTO.class);
+    pattern-either:
+      - pattern: |-
+          ObjectMapper mapper = new ObjectMapper();
+          ...
+          mapper.enableDefaultTyping();
+          Object obj = mapper.readValue(body, Object.class);
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-010\\b'
+    message: |-
+      HexVibe Detection [JAVA-010]: CWE-502
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String msg = request.getParameter("msg"); String safe = msg.replace("${", "\\${"); ... logger.error("msg={}", safe);
+    pattern-either:
+      - pattern: |-
+          String msg = request.getParameter("msg");
+          ...
+          logger.error(msg);
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-011\\b'
+    message: |-
+      HexVibe Detection [JAVA-011]: CWE-502
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        DocumentBuilderFactory f = DocumentBuilderFactory.newInstance(); f.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true); f.setFeature("http://xml.org/sax/features/external-general-entities", false); f.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+    pattern-either:
+      - pattern: |-
+          DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
+          ...
+          DocumentBuilder b = f.newDocumentBuilder();
+          Document d = b.parse(input);
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-012\\b'
+    message: |-
+      HexVibe Detection [JAVA-012]: CWE-611
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        http.authorizeHttpRequests(auth -> auth     .requestMatchers("/admin/**").hasRole("ADMIN") );
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(auth -> auth
+              .requestMatchers("/admin/**").permitAll()
+          );
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-013\\b'
+    message: |-
+      HexVibe Detection [JAVA-013]: CWE-306
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        http.csrf(csrf -> csrf     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) );
+    pattern-either:
+      - pattern: |-
+          http.csrf(csrf -> csrf.disable());
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-014\\b'
+    message: |-
+      HexVibe Detection [JAVA-014]: CWE-352
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String next = request.getParameter("next"); if (!next.startsWith("/")) next = "/"; ... return "redirect:" + next;
+    pattern-either:
+      - pattern: |-
+          String next = request.getParameter("next");
+          ...
+          return "redirect:" + next;
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-015\\b'
+    message: |-
+      HexVibe Detection [JAVA-015]: CWE-601
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        JwsHeader<?> h = Jwts.parserBuilder().build().parseClaimsJws(token).getHeader(); if (!"HS256".equals(h.getAlgorithm())) throw new SecurityException(); Claims c = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+    pattern-either:
+      - pattern: |-
+          Claims c = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-016\\b'
+    message: |-
+      HexVibe Detection [JAVA-016]: CWE-347
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        SecureRandom r = new SecureRandom(); ... byte[] token = new byte[32]; r.nextBytes(token);
+    pattern-either:
+      - pattern: |-
+          Random r = new Random();
+          ...
+          String token = Long.toHexString(r.nextLong());
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-017\\b'
+    message: |-
+      HexVibe Detection [JAVA-017]: CWE-338
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String jwtSecret = System.getenv("JWT_SECRET"); if (jwtSecret == null) throw new IllegalStateException();
+    pattern-either:
+      - pattern: |-
+          String jwtSecret = "prod-secret-123";
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-018\\b'
+    message: |-
+      HexVibe Detection [JAVA-018]: CWE-798
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        if (file.getSize() > 5 * 1024 * 1024) throw new IllegalArgumentException(); ... byte[] data = file.getBytes();
+    pattern-either:
+      - pattern: |-
+          MultipartFile file = req.getFile("file");
+          ...
+          byte[] data = file.getBytes();
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-019\\b'
+    message: |-
+      HexVibe Detection [JAVA-019]: CWE-400
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String p = request.getParameter("path"); Path target = Paths.get(root, p).normalize(); if (!target.startsWith(Paths.get(root))) throw new SecurityException();
+    pattern-either:
+      - pattern: |-
+          String p = request.getParameter("path");
+          ...
+          Path target = Paths.get(root, p);
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-020\\b'
+    message: |-
+      HexVibe Detection [JAVA-020]: CWE-22
+    languages:
+      - java
+    severity: WARNING

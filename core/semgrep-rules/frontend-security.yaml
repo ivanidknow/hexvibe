@@ -1,0 +1,200 @@
+rules:
+  - id: hexvibe.frontend-security.fts-001
+    pattern-either:
+      - pattern: |-
+          dangerouslySetInnerHTML={{ __html: userHtml }}
+          <div v-html="content"></div>
+          el.innerHTML = payload
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-001\\b'
+    message: 'HexVibe Detection [FTS-001]: OWASP XSS Prevention Cheat Sheet'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-002
+    pattern-either:
+      - pattern: |-
+          localStorage.setItem("jwt", token)
+          sessionStorage.setItem("snils", value)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-002\\b'
+    message: 'HexVibe Detection [FTS-002]: OWASP ASVS Session Management'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-003
+    pattern-either:
+      - pattern: |-
+          console.log("token", token)
+          console.error("user profile", profile)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-003\\b'
+    message: 'HexVibe Detection [FTS-003]: OWASP Logging Cheat Sheet'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-004
+    pattern-either:
+      - pattern: |-
+          window.addEventListener("message", (e) => handle(e.data))
+          target.postMessage(data, "*")
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-004\\b'
+    message: 'HexVibe Detection [FTS-004]: OWASP HTML5 Security Cheat Sheet'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-005
+    pattern-either:
+      - pattern: |-
+          if (user.role === "admin") price = 0
+          if (clientAmount < limit) approve()
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-005\\b'
+    message: 'HexVibe Detection [FTS-005]: OWASP Top 10 A04 Insecure Design'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-006
+    pattern-either:
+      - pattern: |-
+          <meta http-equiv="Content-Security-Policy" content="">
+          script-src 'unsafe-inline' 'unsafe-eval'
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-006\\b'
+    message: 'HexVibe Detection [FTS-006]: CSP Level 3 guidance'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-007
+    pattern-either:
+      - pattern: |-
+          # no frame-ancestors / X-Frame-Options policy
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-007\\b'
+    message: 'HexVibe Detection [FTS-007]: OWASP Clickjacking Defense'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-008
+    pattern-either:
+      - pattern: |-
+          GENERATE_SOURCEMAP=true
+          app.js.map published publicly
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-008\\b'
+    message: 'HexVibe Detection [FTS-008]: Frontend supply-chain hardening'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-009
+    pattern-either:
+      - pattern: |-
+          <script src="https://cdn.example.com/lib.js"></script>
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-009\\b'
+    message: 'HexVibe Detection [FTS-009]: Subresource Integrity (SRI)'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-010
+    pattern-either:
+      - pattern: |-
+          self.addEventListener("fetch", (event) => event.respondWith(caches.match(req)))
+          # no cache key validation / stale cache fallback
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-010\\b'
+    message: 'HexVibe Detection [FTS-010]: PWA security guidance'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-011
+    pattern-either:
+      - pattern: |-
+          eval(userInput)
+          new Function(code)
+          setTimeout("run()", 100)
+          setInterval("tick()", 1000)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-011\\b'
+    message: 'HexVibe Detection [FTS-011]: OWASP JavaScript Security Guidelines'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-012
+    pattern-either:
+      - pattern: |-
+          deepMerge(target, payload)
+          obj[key] = value (без фильтра __proto__/constructor/prototype)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-012\\b'
+    message: 'HexVibe Detection [FTS-012]: Prototype Pollution Prevention'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-013
+    pattern-either:
+      - pattern: |-
+          leakedVar = 1
+          Array.prototype.custom = fn
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-013\\b'
+    message: 'HexVibe Detection [FTS-013]: JavaScript Secure Coding'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-014
+    pattern-either:
+      - pattern: |-
+          const token = Math.random().toString(36)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-014\\b'
+    message: 'HexVibe Detection [FTS-014]: Web Crypto API Guidance'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-015
+    pattern-either:
+      - pattern: |-
+          const re = /(a+)+$/
+          re.test(input)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-015\\b'
+    message: 'HexVibe Detection [FTS-015]: OWASP ReDoS'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-016
+    pattern-either:
+      - pattern: |-
+          for (const id of ids) { await fetchUser(id) }
+          items.map(async (i) => await apiCall(i))
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-016\\b'
+    message: 'HexVibe Detection [FTS-016]: JS Async Performance/Safety'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-017
+    pattern-either:
+      - pattern: |-
+          window.addEventListener("message", (e) => JSON.parse(e.data))
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-017\\b'
+    message: 'HexVibe Detection [FTS-017]: OWASP HTML5 Messaging Security'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-018
+    pattern-either:
+      - pattern: |-
+          button.style.display = "none"
+          if (!isAdmin) panel.classList.add("hidden")
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-018\\b'
+    message: 'HexVibe Detection [FTS-018]: OWASP Authorization Best Practices'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-019
+    pattern-either:
+      - pattern: |-
+          if (role == "admin") allow()
+          if (isOwner != false) execute()
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-019\\b'
+    message: 'HexVibe Detection [FTS-019]: JavaScript Equality Safety'
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.frontend-security.fts-020
+    pattern-either:
+      - pattern: |-
+          doCritical().then(saveAudit)
+          async function run(){ await step(); } (без try/catch)
+      - pattern-regex: 'Vulnerable:\\s*FTS\\-020\\b'
+    message: 'HexVibe Detection [FTS-020]: Async Error Handling Best Practices'
+    languages:
+      - generic
+    severity: WARNING

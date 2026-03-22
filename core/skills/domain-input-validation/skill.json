@@ -1,0 +1,24 @@
+{
+  "skill_id": "domain-input-validation",
+  "name": "Domain Input Validation",
+  "activation_triggers": [
+    "path-traversal-guard",
+    "ssrf-host-allowlist",
+    "command-injection-node",
+    "sql-param-binding"
+  ],
+  "relevant_extensions": [
+    ".py",
+    ".js",
+    ".ts",
+    ".json"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/domain-input-validation/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/gap_fill_vulnerable.py",
+  "security_priority": 8
+}

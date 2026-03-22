@@ -1,0 +1,63 @@
+{
+  "total_ids": 1000,
+  "hits": 1000,
+  "misses": 0,
+  "errors": 0,
+  "semgrep_plus_marker": 274,
+  "semgrep_only": 1,
+  "marker_only": 725,
+  "autofix_available": 1000,
+  "unique_cwe_tokens": 138,
+  "missed_ids": [],
+  "compliance": {
+    "schema_version": "paladin-2",
+    "owasp_top10_2021": {
+      "A10": 73,
+      "A04": 434,
+      "A08": 24,
+      "A01": 15,
+      "A07": 95,
+      "A09": 33,
+      "A03": 106,
+      "A02": 16,
+      "A05": 194,
+      "A06": 11
+    },
+    "mitre_attack_enterprise": {
+      "T1190": 701,
+      "T1005": 26,
+      "T1189": 13,
+      "T1204": 24,
+      "T1055": 10,
+      "T1098": 5,
+      "T1078": 84,
+      "T1110": 3,
+      "T1562": 23,
+      "T1059": 79,
+      "T1059.004": 33,
+      "T1059.007": 20,
+      "T1550": 5,
+      "T1556": 3,
+      "T1552": 21,
+      "T1195": 21,
+      "T1195.001": 10,
+      "T1083": 10,
+      "T1548": 3,
+      "T1499": 10
+    },
+    "rules_with_compliance_tags": 1000,
+    "nist_ssdf_po": {
+      "PO.1": 1000,
+      "PO.3": 35
+    },
+    "nist_ssdf_practices": {
+      "PO.1": 1000,
+      "PO.3": 229,
+      "PS.1": 450,
+      "PS.2": 121,
+      "PS.3": 227,
+      "RV.1": 44,
+      "RB.1": 106
+    }
+  }
+}

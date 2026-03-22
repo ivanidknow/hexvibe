@@ -1,0 +1,22 @@
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.crt
+secrets/
+
+__pycache__/
+.pytest_cache/
+*.log
+semgrep*.json
+semgrep-*.json
+# Ephemeral JSON dumps sometimes written to repo root by local scans / tooling
+/semgrep-output.json
+/semgrep-results.json
+/*-scan.json
+/*-report.json
+/detection-summary.json
+
+.cursor/
+mcps/

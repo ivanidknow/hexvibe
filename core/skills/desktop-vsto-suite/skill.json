@@ -1,0 +1,26 @@
+{
+  "skill_id": "hexvibe-desktop-vsto",
+  "name": "Desktop & Office Integration Suite",
+  "activation_triggers": [
+    "ins-vsto-addin",
+    "ins-electron-ipc",
+    "ins-nsis-installer",
+    "ins-vsto-key",
+    "ins-office-desktop"
+  ],
+  "relevant_extensions": [
+    ".cs",
+    ".ts",
+    ".js",
+    ".nsi",
+    ".config"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/desktop-vsto-suite/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/insight_vulnerable.ts",
+  "security_priority": 7
+}

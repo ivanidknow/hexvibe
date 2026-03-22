@@ -1,0 +1,1636 @@
+rules:
+  - id: hexvibe.infra-k8s-helm.inf-4.1
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        FROM python:3.11 WORKDIR /app RUN groupadd -r app && useradd -r -g app app COPY . /app RUN chown -R app:app /app USER app CMD ["python","main.py"]
+    pattern-either:
+      - pattern: |-
+          FROM python:3.11
+      - pattern-regex: 'Vulnerable:\\s*INF\\-4\\.1\\b'
+    message: |-
+      HexVibe Detection [INF-4.1]: CIS_Docker_Benchmark_v1.8.0.pdf, п. 4.1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-5.10
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий исчерпывает CPU/RAM контейнера множеством запросов; при отсутствии limits — отказ в обслуживании (обычно не прямой RCE).
+      fix_template: |-
+        services:   api:     image: example/api:1.0.0     mem_limit: "512m"     cpu_shares: 512
+    pattern-either:
+      - pattern: |-
+          services:
+      - pattern-regex: 'Vulnerable:\\s*INF\\-5\\.10\\b'
+    message: |-
+      HexVibe Detection [INF-5.10]: CIS_Docker_Benchmark_v1.8.0.pdf, п. 5.10
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-5.2.1
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiVersion: v1 kind: Pod metadata:   name: restricted-pod spec:   containers:   - name: app     image: nginx:1.27     securityContext:       privileged: false
+    pattern-either:
+      - pattern: |-
+          apiVersion: v1
+      - pattern-regex: 'Vulnerable:\\s*INF\\-5\\.2\\.1\\b'
+    message: |-
+      HexVibe Detection [INF-5.2.1]: CIS_Kubernetes_Benchmark_V1.12.0_PDF.pdf, п. 5.2.1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-5.2.4
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiVersion: apps/v1 kind: Deployment metadata:   name: ape-off spec:   template:     spec:       containers:       - name: app         image: example/app:1.0.0         securityContext:           allowPrivilegeEscalation: false
+    pattern-either:
+      - pattern: |-
+          apiVersion: apps/v1
+      - pattern-regex: 'Vulnerable:\\s*INF\\-5\\.2\\.4\\b'
+    message: |-
+      HexVibe Detection [INF-5.2.4]: CIS_Kubernetes_Benchmark_V1.12.0_PDF.pdf, п. 5.2.4
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-5.2.5
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiVersion: v1 kind: Pod metadata:   name: non-root-gid spec:   containers:   - name: app     image: example/app:1.0.0     securityContext:       runAsNonRoot: true       runAsGroup: 10001
+    pattern-either:
+      - pattern: |-
+          apiVersion: v1
+      - pattern-regex: 'Vulnerable:\\s*INF\\-5\\.2\\.5\\b'
+    message: |-
+      HexVibe Detection [INF-5.2.5]: CIS_Kubernetes_Benchmark_V1.12.0_PDF.pdf, п. 5.2.5
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-5.3.1
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata:   name: app-default-deny   namespace: default spec:   podSelector:     matchLabels:       app: app   policyTypes:   - Ingress   - Egress   ingress: []   egress: []
+    pattern-either:
+      - pattern: |-
+          apiVersion: apps/v1
+      - pattern-regex: 'Vulnerable:\\s*INF\\-5\\.3\\.1\\b'
+    message: |-
+      HexVibe Detection [INF-5.3.1]: CIS_Kubernetes_Benchmark_V1.12.0_PDF.pdf, п. 5.3.1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-2.5.1
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        server {   listen 80;   server_tokens off; # CIS: скрыть версию NGINX }
+    pattern-either:
+      - pattern: |-
+          server {
+            listen 80;
+            server_tokens on;
+          }
+      - pattern-regex: 'Vulnerable:\\s*INF\\-2\\.5\\.1\\b'
+    message: |-
+      HexVibe Detection [INF-2.5.1]: CIS_NGINX_Benchmark_v3.0.0.pdf, п. 2.5.1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-5.3.2
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        server {   listen 443 ssl;   add_header Content-Security-Policy "default-src 'self'; frame-ancestors 'self'; object-src 'none'" always; # CIS: CSP обязателен   location / { proxy_pass http://app; } }
+    pattern-either:
+      - pattern: |-
+          location / { proxy_pass http://app; }
+      - pattern-regex: 'Vulnerable:\\s*INF\\-5\\.3\\.2\\b'
+    message: |-
+      HexVibe Detection [INF-5.3.2]: CIS_NGINX_Benchmark_v3.0.0.pdf, п. 5.3.2
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-5.3.1-ngx
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        server {   listen 443 ssl;   add_header X-Frame-Options "DENY" always; # CIS: разрешено DENY или SAMEORIGIN   location / { proxy_pass http://app; } }
+    pattern-either:
+      - pattern: |-
+          location / { proxy_pass http://app; }
+      - pattern-regex: 'Vulnerable:\\s*INF\\-5\\.3\\.1\\-NGX\\b'
+    message: |-
+      HexVibe Detection [INF-5.3.1-NGX]: CIS_NGINX_Benchmark_v3.0.0.pdf, п. 5.3.1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-1.2.1
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiVersion: v1 kind: Pod metadata:   name: kube-apiserver spec:   containers:   - name: kube-apiserver     command:     - kube-apiserver     - --anonymous-auth=false # CIS: запрет неаутентифицированного доступа
+    pattern-either:
+      - pattern: |-
+          apiVersion: v1
+      - pattern-regex: 'Vulnerable:\\s*INF\\-1\\.2\\.1\\b'
+    message: |-
+      HexVibe Detection [INF-1.2.1]: CIS_Kubernetes_Benchmark_V1.12.0_PDF.pdf, п. 1.2.1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-1.2.6
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiVersion: v1 kind: Pod metadata:   name: kube-apiserver spec:   containers:   - name: kube-apiserver     command:     - kube-apiserver     - --admission-control-config-file=/etc/kubernetes/admission-control.yaml # CIS: явно задать политику admission
+    pattern-either:
+      - pattern: |-
+          apiVersion: v1
+      - pattern-regex: 'Vulnerable:\\s*INF\\-1\\.2\\.6\\b'
+    message: |-
+      HexVibe Detection [INF-1.2.6]: CIS_Kubernetes_Benchmark_V1.12.0_PDF.pdf, п. 1.2.6
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-5.1.1
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiVersion: rbac.authorization.k8s.io/v1 kind: Role metadata:   name: app-read-only   namespace: app rules: - apiGroups: [""]   resources: ["pods","services"]   verbs: ["get","list","watch"] # CIS: минимум привилегий --- apiVersion: rbac.authorization.k8s.io/v1 kind: RoleBinding metadata:   name: app-read-only-binding   namespace: app subjects: - kind: ServiceAccount   name: app-sa   namespace: app roleRef:   kind: Role   name: app-read-only   apiGroup: rbac.authorization.k8s.io
+    pattern-either:
+      - pattern: |-
+          apiVersion: rbac.authorization.k8s.io/v1
+      - pattern-regex: 'Vulnerable:\\s*INF\\-5\\.1\\.1\\b'
+    message: |-
+      HexVibe Detection [INF-5.1.1]: CIS_Kubernetes_Benchmark_V1.12.0_PDF.pdf, п. 5.1.1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-5.6.2
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiVersion: v1 kind: Pod metadata:   name: with-seccomp spec:   containers:   - name: app     image: nginx:1.27     securityContext:       seccompProfile:         type: RuntimeDefault # CIS: docker/default или runtime/default
+    pattern-either:
+      - pattern: |-
+          apiVersion: v1
+      - pattern-regex: 'Vulnerable:\\s*INF\\-5\\.6\\.2\\b'
+    message: |-
+      HexVibe Detection [INF-5.6.2]: CIS_Kubernetes_Benchmark_V1.12.0_PDF.pdf, п. 5.6.2
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-1.2.33
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiVersion: v1 kind: Pod metadata:   name: kube-apiserver spec:   containers:   - name: kube-apiserver     command:     - kube-apiserver     - --encryption-provider-config=/etc/kubernetes/encryption-provider.yaml # CIS: encryption at rest for secrets
+    pattern-either:
+      - pattern: |-
+          apiVersion: v1
+      - pattern-regex: 'Vulnerable:\\s*INF\\-1\\.2\\.33\\b'
+    message: |-
+      HexVibe Detection [INF-1.2.33]: CIS_Kubernetes_Benchmark_V1.12.0_PDF.pdf, п. 1.2.33
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-4.4
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        FROM python:3.11 ENV DB_PASSWORD_FILE=/run/secrets/db_password LABEL security.secrets=\"external-secret-store\" # no plaintext secrets
+    pattern-either:
+      - pattern: |-
+          FROM python:3.11
+      - pattern-regex: 'Vulnerable:\\s*INF\\-4\\.4\\b'
+    message: |-
+      HexVibe Detection [INF-4.4]: CIS_Docker_Benchmark_v1.8.0.pdf, п. 4.4
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-5.25
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiVersion: v1 kind: Pod metadata:   name: no-docker-sock spec:   containers:   - name: app     image: alpine:3.20     volumeMounts:     - name: app-tmp       mountPath: /tmp   volumes:   - name: app-tmp     emptyDir: {}
+    pattern-either:
+      - pattern: |-
+          apiVersion: v1
+      - pattern-regex: 'Vulnerable:\\s*INF\\-5\\.25\\b'
+    message: |-
+      HexVibe Detection [INF-5.25]: CIS_Docker_Benchmark_v1.8.0.pdf, п. 5.25
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-5.1.2-tls
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        server {   listen 443 ssl;   ssl_protocols TLSv1.2 TLSv1.3; # CIS: disable legacy TLS }
+    pattern-either:
+      - pattern: |-
+          server {
+            listen 443 ssl;
+            ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+          }
+      - pattern-regex: 'Vulnerable:\\s*INF\\-5\\.1\\.2\\-TLS\\b'
+    message: |-
+      HexVibe Detection [INF-5.1.2-TLS]: CIS_NGINX_Benchmark_v3.0.0.pdf, п. 5.1.2
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-5.5.1
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        location /api/ {   limit_except GET POST HEAD {     deny all; # CIS: allow only approved methods   }   proxy_pass http://backend; }
+    pattern-either:
+      - pattern: |-
+          proxy_pass http://backend;
+      - pattern-regex: 'Vulnerable:\\s*INF\\-5\\.5\\.1\\b'
+    message: |-
+      HexVibe Detection [INF-5.5.1]: CIS_NGINX_Benchmark_v3.0.0.pdf, п. 5.5.1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        services:   db:     image: postgres:16     environment:       POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password       API_TOKEN_FILE: /run/secrets/api_token secrets:   postgres_password:     file: ./secrets/postgres_password   api_token:     file: ./secrets/api_token
+    pattern-either:
+      - pattern: |-
+          services:
+      - pattern-regex: 'Vulnerable:\\s*INF\\-010\\b'
+    message: |-
+      HexVibe Detection [INF-010]: OWASP API Security Top 10 (API8: Security Misconfiguration); FastAPI Production Readiness (secret management)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        tls.crt tls.key # secrets are provisioned at deploy time via external secret manager apiVersion: external-secrets.io/v1beta1 kind: ExternalSecret metadata:   name: app-tls spec:   secretStoreRef:     name: vault-store     kind: ClusterSecretStore   target:     name: app-tls   data:   - secretKey: tls.key     remoteRef:       key: kv/prod/app/tls_key
+    pattern-either:
+      - pattern: |-
+          -----BEGIN RSA PRIVATE KEY-----
+          MIIEowIBAAKCAQEA...
+          -----END RSA PRIVATE KEY-----
+      - pattern-regex: 'Vulnerable:\\s*INF\\-011\\b'
+    message: |-
+      HexVibe Detection [INF-011]: OWASP API Security Top 10 (API8: Security Misconfiguration); FastAPI Production Readiness (key material handling)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        # .gitignore .env .env.* secrets/ *.pem *.key *credentials*.json !.env.example
+    pattern-either:
+      - pattern: |-
+          # .gitignore
+          __pycache__/
+          *.pyc
+          # secrets are not ignored
+      - pattern-regex: 'Vulnerable:\\s*INF\\-012\\b'
+    message: |-
+      HexVibe Detection [INF-012]: OWASP API Security Top 10 (API8: Security Misconfiguration); FastAPI Production Readiness (repository hygiene)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiVersion: apps/v1 kind: Deployment spec:   template:     spec:       containers:       - name: api         ...         image: org/api@sha256:3b5f...
+    pattern-either:
+      - pattern: |-
+          apiVersion: apps/v1
+      - pattern-regex: 'Vulnerable:\\s*INF\\-013\\b'
+    message: |-
+      HexVibe Detection [INF-013]: CWE-494
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        apiVersion: v1 kind: Pod metadata:   name: app-pod spec:   automountServiceAccountToken: false   ...   containers:   - name: app     image: org/app:1.0.0
+    pattern-either:
+      - pattern: |-
+          apiVersion: v1
+      - pattern-regex: 'Vulnerable:\\s*INF\\-014\\b'
+    message: |-
+      HexVibe Detection [INF-014]: CWE-269
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        securityContext:   allowPrivilegeEscalation: false   capabilities:     drop: ["ALL"]
+    pattern-either:
+      - pattern: |-
+          securityContext:
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-010\\b'
+    message: |-
+      HexVibe Detection [K8S-010]: CIS Kubernetes
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        spec:   hostNetwork: false
+    pattern-either:
+      - pattern: |-
+          spec:
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-011\\b'
+    message: |-
+      HexVibe Detection [K8S-011]: CIS Kubernetes
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        spec:   hostPID: false
+    pattern-either:
+      - pattern: |-
+          spec:
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-012\\b'
+    message: |-
+      HexVibe Detection [K8S-012]: CIS Kubernetes
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        spec:   hostIPC: false
+    pattern-either:
+      - pattern: |-
+          spec:
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-013\\b'
+    message: |-
+      HexVibe Detection [K8S-013]: CIS Kubernetes
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        securityContext:   readOnlyRootFilesystem: true
+    pattern-either:
+      - pattern: |-
+          securityContext:
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-014\\b'
+    message: |-
+      HexVibe Detection [K8S-014]: CIS Kubernetes
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        securityContext:   runAsNonRoot: true
+    pattern-either:
+      - pattern: |-
+          securityContext:
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-015\\b'
+    message: |-
+      HexVibe Detection [K8S-015]: CIS Kubernetes
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        metadata:   annotations:     container.apparmor.security.beta.kubernetes.io/app: runtime/default
+    pattern-either:
+      - pattern: |-
+          metadata:
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-016\\b'
+    message: |-
+      HexVibe Detection [K8S-016]: Kubernetes Hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        seccompProfile:   type: RuntimeDefault
+    pattern-either:
+      - pattern: |-
+          seccompProfile:
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-017\\b'
+    message: |-
+      HexVibe Detection [K8S-017]: CIS Kubernetes
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        containers: - name: api   livenessProbe:     httpGet:       path: /healthz
+    pattern-either:
+      - pattern: |-
+          containers:
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-018\\b'
+    message: |-
+      HexVibe Detection [K8S-018]: Kubernetes Reliability
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        containers: - name: api   readinessProbe:     httpGet:       path: /ready
+    pattern-either:
+      - pattern: |-
+          containers:
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-019\\b'
+    message: |-
+      HexVibe Detection [K8S-019]: Kubernetes Reliability
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        resources:   limits:     cpu: "500m"     memory: "512Mi"
+    pattern-either:
+      - pattern: |-
+          resources: {}
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-020\\b'
+    message: |-
+      HexVibe Detection [K8S-020]: CIS Kubernetes
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        kind: NetworkPolicy metadata:   namespace: prod spec:   policyTypes: ["Ingress","Egress"]
+    pattern-either:
+      - pattern: |-
+          kind: Deployment
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-021\\b'
+    message: |-
+      HexVibe Detection [K8S-021]: Kubernetes NetworkPolicy
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        kind: Service spec:   type: ClusterIP
+    pattern-either:
+      - pattern: |-
+          kind: Service
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-022\\b'
+    message: |-
+      HexVibe Detection [K8S-022]: Kubernetes Exposure
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        verbs: ["get","list"] resources: ["pods"]
+    pattern-either:
+      - pattern: |-
+          verbs: ["*"]
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-023\\b'
+    message: |-
+      HexVibe Detection [K8S-023]: CIS Kubernetes RBAC
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        automountServiceAccountToken: false
+    pattern-either:
+      - pattern: |-
+          automountServiceAccountToken: true
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-024\\b'
+    message: |-
+      HexVibe Detection [K8S-024]: CIS Kubernetes
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        image: org/api@sha256:abcd...
+    pattern-either:
+      - pattern: |-
+          image: org/api:latest
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-025\\b'
+    message: |-
+      HexVibe Detection [K8S-025]: Supply Chain
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        RUN adduser -D appuser USER appuser
+    pattern-either:
+      - pattern: |-
+          USER root
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-010\\b'
+    message: |-
+      HexVibe Detection [DOCK-010]: CIS Docker
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        FROM alpine:3.20 USER 10001 CMD ["app"]
+    pattern-either:
+      - pattern: |-
+          FROM alpine:3.20
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-011\\b'
+    message: |-
+      HexVibe Detection [DOCK-011]: CIS Docker
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        docker run --read-only --tmpfs /tmp app@sha256:...
+    pattern-either:
+      - pattern: |-
+          docker run app:latest
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-012\\b'
+    message: |-
+      HexVibe Detection [DOCK-012]: Docker Runtime Hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        FROM node:20.11.1@sha256:...
+    pattern-either:
+      - pattern: |-
+          FROM node:latest
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-013\\b'
+    message: |-
+      HexVibe Detection [DOCK-013]: Supply Chain
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        COPY app.tar.gz /opt/
+    pattern-either:
+      - pattern: |-
+          ADD https://example.com/app.tar.gz /opt/
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-014\\b'
+    message: |-
+      HexVibe Detection [DOCK-014]: Docker Best Practices
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+    pattern-either:
+      - pattern: |-
+          RUN apt-get update && apt-get install -y curl
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-015\\b'
+    message: |-
+      HexVibe Detection [DOCK-015]: Container Minimization
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ARG API_TOKEN # inject via runtime secrets
+    pattern-either:
+      - pattern: |-
+          ARG API_TOKEN=prod-secret
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-016\\b'
+    message: |-
+      HexVibe Detection [DOCK-016]: Secret Management
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Container Reliability
+    pattern-either:
+      - pattern: |-
+          FROM python:3.11
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-017\\b'
+    message: |-
+      HexVibe Detection [DOCK-017]: exit 1
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        docker run --cap-drop ALL --security-opt no-new-privileges app:1.0
+    pattern-either:
+      - pattern: |-
+          docker run --privileged app:1.0
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-018\\b'
+    message: |-
+      HexVibe Detection [DOCK-018]: Docker Runtime Hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        # do not mount docker.sock
+    pattern-either:
+      - pattern: |-
+          -v /var/run/docker.sock:/var/run/docker.sock
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-019\\b'
+    message: |-
+      HexVibe Detection [DOCK-019]: Container Escape Prevention
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        docker run --security-opt seccomp=default.json app:1.0
+    pattern-either:
+      - pattern: |-
+          docker run app:1.0
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-020\\b'
+    message: |-
+      HexVibe Detection [DOCK-020]: Docker Runtime Hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    pattern-either:
+      - pattern: |-
+          server {
+            listen 443 ssl;
+          }
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-001\\b'
+    message: |-
+      HexVibe Detection [NGX-001]: CIS NGINX
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        add_header Content-Security-Policy "default-src 'self'" always;
+    pattern-either:
+      - pattern: |-
+          # no CSP header
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-002\\b'
+    message: |-
+      HexVibe Detection [NGX-002]: CIS NGINX
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        add_header X-Content-Type-Options "nosniff" always;
+    pattern-either:
+      - pattern: |-
+          # no X-Content-Type-Options
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-003\\b'
+    message: |-
+      HexVibe Detection [NGX-003]: CIS NGINX
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        add_header X-Frame-Options "DENY" always;
+    pattern-either:
+      - pattern: |-
+          # no X-Frame-Options
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-004\\b'
+    message: |-
+      HexVibe Detection [NGX-004]: CIS NGINX
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ssl_protocols TLSv1.2 TLSv1.3;
+    pattern-either:
+      - pattern: |-
+          ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-005\\b'
+    message: |-
+      HexVibe Detection [NGX-005]: TLS hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ssl_protocols TLSv1.3;
+    pattern-either:
+      - pattern: |-
+          ssl_protocols TLSv1.2;
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-006\\b'
+    message: |-
+      HexVibe Detection [NGX-006]: Fortress Policy
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        limit_req_zone $binary_remote_addr zone=api_limit:10m rate=10r/s;
+    pattern-either:
+      - pattern: |-
+          location /api { proxy_pass http://api; }
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-007\\b'
+    message: |-
+      HexVibe Detection [NGX-007]: DDoS resilience
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        client_max_body_size 10m;
+    pattern-either:
+      - pattern: |-
+          # no client_max_body_size
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-008\\b'
+    message: |-
+      HexVibe Detection [NGX-008]: NGINX hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        proxy_connect_timeout 5s; proxy_read_timeout 30s;
+    pattern-either:
+      - pattern: |-
+          proxy_pass http://backend;
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-009\\b'
+    message: |-
+      HexVibe Detection [NGX-009]: Gateway resilience
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        server_tokens off;
+    pattern-either:
+      - pattern: |-
+          server_tokens on;
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-010\\b'
+    message: |-
+      HexVibe Detection [NGX-010]: CIS NGINX
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        http_access deny all http_access allow localnet
+    pattern-either:
+      - pattern: |-
+          http_access allow all
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-001\\b'
+    message: |-
+      HexVibe Detection [SQD-001]: Squid hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        cache_peer upstream.example parent 3129 0 no-query tls
+    pattern-either:
+      - pattern: |-
+          cache_peer upstream.example parent 3128 0 no-query
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-002\\b'
+    message: |-
+      HexVibe Detection [SQD-002]: Proxy transport security
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        sslproxy_cert_error deny all
+    pattern-either:
+      - pattern: |-
+          ssl_bump stare all
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-003\\b'
+    message: |-
+      HexVibe Detection [SQD-003]: Squid TLS interception
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        acl SSL_ports port 443
+    pattern-either:
+      - pattern: |-
+          acl SSL_ports port 1-65535
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-004\\b'
+    message: |-
+      HexVibe Detection [SQD-004]: Squid ACL hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        maxconn 100
+    pattern-either:
+      - pattern: |-
+          # no delay_pools / conn limits
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-005\\b'
+    message: |-
+      HexVibe Detection [SQD-005]: Proxy abuse prevention
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        access_log stdio:/var/log/squid/access.log
+    pattern-either:
+      - pattern: |-
+          access_log none
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-006\\b'
+    message: |-
+      HexVibe Detection [SQD-006]: Audit logging
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Cache control security
+    pattern-either:
+      - pattern: |-
+          refresh_pattern . 0 100% 4320 override-expire
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-007\\b'
+    message: |-
+      HexVibe Detection [SQD-007]: js)$ 0 20% 1440
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        dns_nameservers 10.0.0.53
+    pattern-either:
+      - pattern: |-
+          dns_nameservers 8.8.8.8
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-008\\b'
+    message: |-
+      HexVibe Detection [SQD-008]: Regulatory resolver policy
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
+    pattern-either:
+      - pattern: |-
+          http_access allow corp_users
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-009\\b'
+    message: |-
+      HexVibe Detection [SQD-009]: Proxy authentication
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        acl allowed_domains dstdomain .corp.local http_access allow allowed_domains
+    pattern-either:
+      - pattern: |-
+          http_access allow all
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-010\\b'
+    message: |-
+      HexVibe Detection [SQD-010]: Egress control
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        forwarded_for transparent
+    pattern-either:
+      - pattern: |-
+          forwarded_for off
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-011\\b'
+    message: |-
+      HexVibe Detection [SQD-011]: Proxy traceability
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        cache_effective_user squid cache_effective_group squid
+    pattern-either:
+      - pattern: |-
+          cache_dir ufs /var/spool/squid 100 16 256
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-012\\b'
+    message: |-
+      HexVibe Detection [SQD-012]: Proxy filesystem hardening
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        acl cloud_meta dst 169.254.169.254/32 http_access deny cloud_meta
+    pattern-either:
+      - pattern: |-
+          http_access allow all
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-013\\b'
+    message: |-
+      HexVibe Detection [SQD-013]: SSRF/metadata protection
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Завершать ACL цепочку http_access deny all и ограничивать localnet только доверенными CIDR-сетями.
+    pattern-either:
+      - pattern: |-
+          Отсутствует http_access deny all в конце
+          acl localnet src 0.0.0.0/0
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-014\\b'
+    message: |-
+      HexVibe Detection [SQD-014]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Добавить limit_req_zone с разумным rate/burst и применять limit_req на чувствительных location.
+    pattern-either:
+      - pattern: |-
+          Нет limit_req_zone $binary_remote_addr ... в http block
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-011\\b'
+    message: |-
+      HexVibe Detection [NGX-011]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Отключить server_tokens, скрывать версию веб-сервера и минимизировать fingerprinting surface.
+    pattern-either:
+      - pattern: |-
+          Отсутствует server_tokens off;
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-012\\b'
+    message: |-
+      HexVibe Detection [NGX-012]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Пиновать base image на конкретную версию и digest (FROM python:3.12.3@sha256:...) для воспроизводимости и supply-chain контроля.
+    pattern-either:
+      - pattern: |-
+          FROM python:latest
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-021\\b'
+    message: |-
+      HexVibe Detection [DOCK-021]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Фиксировать версии пакетов (curl=... openssl=...), использовать --no-install-recommends и очищать apt cache.
+    pattern-either:
+      - pattern: |-
+          RUN apt-get update && apt-get install -y curl openssl
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-022\\b'
+    message: |-
+      HexVibe Detection [DOCK-022]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Блокировать proxy к internal ranges (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.169.254) и использовать strict upstream allowlist.
+    pattern-either:
+      - pattern: |-
+          location /proxy/ { proxy_pass $arg_url; } без denylist внутренних CIDR/metadata
+      - pattern-regex: 'Vulnerable:\\s*INF\\-015\\b'
+    message: |-
+      HexVibe Detection [INF-015]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Дефолтно выставлять безопасные значения (privileged: false, allowPrivilegeEscalation: false, runAsNonRoot: true).
+    pattern-either:
+      - pattern: |-
+          values.yaml: securityContext.privileged: true
+      - pattern-regex: 'Vulnerable:\\s*INF\\-016\\b'
+    message: |-
+      HexVibe Detection [INF-016]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        По умолчанию отключать host namespaces и разрешать их только explicit opt-in с security review.
+    pattern-either:
+      - pattern: |-
+          hostNetwork: true/hostPID: true в values по умолчанию
+      - pattern-regex: 'Vulnerable:\\s*INF\\-017\\b'
+    message: |-
+      HexVibe Detection [INF-017]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.inf-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        В chart defaults задавать drop: ["ALL"] и точечно добавлять только необходимые capabilities.
+    pattern-either:
+      - pattern: |-
+          Отсутствует capabilities.drop: ["ALL"] в chart defaults
+      - pattern-regex: 'Vulnerable:\\s*INF\\-018\\b'
+    message: |-
+      HexVibe Detection [INF-018]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.ngx-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Запретить dynamic upstream от пользовательских заголовков, фиксировать upstreams и блокировать internal dns zones/cluster domains.
+    pattern-either:
+      - pattern: |-
+          resolver ...; proxy_pass http://$http_host$request_uri;
+      - pattern-regex: 'Vulnerable:\\s*NGX\\-013\\b'
+    message: |-
+      HexVibe Detection [NGX-013]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.sqd-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Добавить explicit deny ACL для *.svc, control-plane IPs и metadata endpoints перед allow rules.
+    pattern-either:
+      - pattern: |-
+          http_access allow localnet без deny для kubernetes.default.svc/cluster CIDR
+      - pattern-regex: 'Vulnerable:\\s*SQD\\-015\\b'
+    message: |-
+      HexVibe Detection [SQD-015]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Устанавливать default false и включать токен только для конкретных сервисов, где это необходимо.
+    pattern-either:
+      - pattern: |-
+          automountServiceAccountToken: true в chart defaults
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-026\\b'
+    message: |-
+      HexVibe Detection [K8S-026]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Подпись артефакта в registry; SBOM + verify в pipeline.
+    pattern-either:
+      - pattern: |-
+          docker load -i release.tar
+          # cosign verify skipped
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-023\\b'
+    message: |-
+      HexVibe Detection [DOCK-023]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        FROM repo/img@sha256:... + verify attestation.
+    pattern-either:
+      - pattern: |-
+          docker build -t app:latest . без cosign verify base
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-024\\b'
+    message: |-
+      HexVibe Detection [DOCK-024]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.dock-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Подписанные образы и политика deploy only if verified.
+    pattern-either:
+      - pattern: |-
+          docker compose pull без Notary/cosign
+      - pattern-regex: 'Vulnerable:\\s*DOCK\\-025\\b'
+    message: |-
+      HexVibe Detection [DOCK-025]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Helm provenance + GPG/cosign для chart packages.
+    pattern-either:
+      - pattern: |-
+          helm install rel ./chart.tgz без .prov
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-027\\b'
+    message: |-
+      HexVibe Detection [K8S-027]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.infra-k8s-helm.k8s-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        OCI artifact signing + Kyborio/OPA policy.
+    pattern-either:
+      - pattern: |-
+          image: myreg/app:1.0.0 без digest
+      - pattern-regex: 'Vulnerable:\\s*K8S\\-028\\b'
+    message: |-
+      HexVibe Detection [K8S-028]: CWE-347
+    languages:
+      - generic
+    severity: WARNING

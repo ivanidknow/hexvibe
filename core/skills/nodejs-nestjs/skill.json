@@ -1,0 +1,24 @@
+{
+  "skill_id": "nodejs-nestjs",
+  "name": "Node.js / NestJS Security",
+  "activation_triggers": [
+    "nst-nest-guard",
+    "nst-prisma-raw",
+    "nst-cors-policy",
+    "nst-xml-parser",
+    "nst-ssrf-fetch"
+  ],
+  "relevant_extensions": [
+    ".ts",
+    ".js",
+    ".json"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/nodejs-nestjs/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/nestjs_vulnerable.ts",
+  "security_priority": 5
+}

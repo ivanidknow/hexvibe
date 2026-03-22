@@ -1,0 +1,326 @@
+# Intentionally vulnerable infra corpus for scanner calibration.
+
+# Vulnerable: INF-5.10 (No CPU/memory limits)
+services:
+  api:
+    image: example/api:1.0.0
+
+# Vulnerable: INF-010 (Hardcoded Credentials)
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: "supersecret"
+      API_TOKEN: "prod-token-123"
+
+---
+# Vulnerable: INF-5.2.1 (Privileged container)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: privileged-pod
+spec:
+  containers:
+    - name: app
+      image: nginx:1.27
+      securityContext:
+        privileged: true
+
+---
+# Vulnerable: INF-5.2.4 (allowPrivilegeEscalation enabled)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ape-on
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          image: example/app:1.0.0
+          securityContext:
+            allowPrivilegeEscalation: true
+
+---
+# Vulnerable: INF-5.2.5 (Container runs with root GID)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: root-gid
+spec:
+  containers:
+    - name: app
+      image: example/app:1.0.0
+      securityContext:
+        runAsGroup: 0
+
+---
+# Vulnerable: INF-5.3.1 (No NetworkPolicy defined)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: app
+          image: example/app:1.0.0
+
+---
+# Vulnerable: INF-1.2.1 (Anonymous auth enabled)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-apiserver-anon
+spec:
+  containers:
+    - name: kube-apiserver
+      command:
+        - kube-apiserver
+        - --anonymous-auth=true
+
+---
+# Vulnerable: INF-1.2.6 (No admission control config)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-apiserver-no-admission-config
+spec:
+  containers:
+    - name: kube-apiserver
+      command:
+        - kube-apiserver
+
+---
+# Vulnerable: INF-5.1.1 (Excessive cluster-admin usage)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: app-cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: app-sa
+    namespace: app
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# Vulnerable: INF-5.6.2 (No seccomp profile)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: no-seccomp
+spec:
+  containers:
+    - name: app
+      image: nginx:1.27
+
+---
+# Vulnerable: INF-1.2.33 (Secrets encryption at rest disabled)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-apiserver-no-etcd-encryption
+spec:
+  containers:
+    - name: kube-apiserver
+      command:
+        - kube-apiserver
+
+---
+# Vulnerable: INF-5.25 (Docker socket mount)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: docker-sock-pod
+spec:
+  containers:
+    - name: app
+      image: alpine:3.20
+      volumeMounts:
+        - name: dockersock
+          mountPath: /var/run/docker.sock
+  volumes:
+    - name: dockersock
+      hostPath:
+        path: /var/run/docker.sock
+
+---
+# Vulnerable: INF-011 (Committed Private Keys)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bad-tls-key
+type: Opaque
+stringData:
+  tls.key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEowIBAAKCAQEAexampleinsecurekeymaterial
+    -----END RSA PRIVATE KEY-----
+
+---
+# Vulnerable: INF-012 (Insecure .gitignore sample, secrets not ignored)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: insecure-gitignore-example
+data:
+  .gitignore: |
+    __pycache__/
+    *.pyc
+    # secrets are not ignored
+
+---
+# Vulnerable: INF-013 (Mutable image tag without digest)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: latest-tag-deployment
+spec:
+  template:
+    spec:
+      containers:
+        - name: api
+          image: org/api:latest
+
+---
+# Vulnerable: INF-014 (ServiceAccount token auto-mounted)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: token-mounted-pod
+spec:
+  serviceAccountName: default
+  containers:
+    - name: app
+      image: org/app:1.0.0
+
+---
+# Vulnerable: K8S-010 (No capabilities drop)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-no-cap-drop
+spec:
+  containers:
+    - name: app
+      image: org/api:latest
+      securityContext:
+        capabilities:
+          add: ["NET_ADMIN"]
+
+---
+# Vulnerable: K8S-011 (hostNetwork true)
+# Vulnerable: K8S-012 (hostPID true)
+# Vulnerable: K8S-013 (hostIPC true)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-host-ns
+spec:
+  hostNetwork: true
+  hostPID: true
+  hostIPC: true
+  containers:
+    - name: app
+      image: org/app:1.0.0
+
+---
+# Vulnerable: K8S-014 (readOnlyRootFilesystem false)
+# Vulnerable: K8S-015 (runAsNonRoot false)
+# Vulnerable: K8S-017 (Seccomp Unconfined)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-weak-security-context
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          image: org/app:latest
+          securityContext:
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+            seccompProfile:
+              type: Unconfined
+
+---
+# Vulnerable: K8S-016 (AppArmor profile missing)
+# Vulnerable: K8S-018 (No liveness probe)
+# Vulnerable: K8S-019 (No readiness probe)
+# Vulnerable: K8S-020 (No resource limits)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-probes-missing
+  annotations: {}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-probes-missing
+    spec:
+      containers:
+        - name: app
+          image: org/api:latest
+          resources: {}
+
+---
+# Vulnerable: K8S-021 (Missing NetworkPolicy)
+# Vulnerable: K8S-022 (NodePort exposure)
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeport-exposed
+  namespace: prod
+spec:
+  type: NodePort
+  selector:
+    app: k8s-probes-missing
+  ports:
+    - port: 80
+      targetPort: 8080
+
+---
+# Vulnerable: K8S-023 (RBAC wildcard)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: wildcard-role
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
+
+---
+# Vulnerable: K8S-024 (Token automount enabled)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-token-auto
+spec:
+  automountServiceAccountToken: true
+  containers:
+    - name: app
+      image: org/app:latest
+
+---
+# Vulnerable: K8S-025 (latest image tag)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-latest-image
+spec:
+  template:
+    spec:
+      containers:
+        - name: api
+          image: org/api:latest
+

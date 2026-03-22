@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hexvibe-testbed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hexvibe-testbed
+  template:
+    metadata:
+      labels:
+        app: hexvibe-testbed
+    spec:
+      containers:
+        - name: app
+          image: hexvibe-testbed:latest
+          command: ["python", "main.py"]
+          securityContext:
+            privileged: true
+            runAsUser: 0
+            readOnlyRootFilesystem: false
+          volumeMounts:
+            - name: dockersock
+              mountPath: /var/run/docker.sock
+      volumes:
+        - name: dockersock
+          hostPath:
+            path: /var/run/docker.sock
+

@@ -1,0 +1,484 @@
+rules:
+  - id: hexvibe.nodejs-nestjs.nst-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const dto = req.body
+          ...
+          Object.assign(target, dto)
+      - pattern-regex: 'Vulnerable:\\s*NST\\-001\\b'
+    message: |-
+      HexVibe Detection [NST-001]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          app.enableCors({ origin: "*", credentials: true })
+      - pattern-regex: 'Vulnerable:\\s*NST\\-002\\b'
+    message: |-
+      HexVibe Detection [NST-002]: CWE-942
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const app = await NestFactory.create(AppModule)
+      - pattern-regex: 'Vulnerable:\\s*NST\\-003\\b'
+    message: |-
+      HexVibe Detection [NST-003]: CWE-20
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const q = "SELECT * FROM users WHERE email = '" + email + "'"
+          ...
+          await dataSource.query(q)
+      - pattern-regex: 'Vulnerable:\\s*NST\\-004\\b'
+    message: |-
+      HexVibe Detection [NST-004]: CWE-89
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          await prisma.$queryRawUnsafe("SELECT * FROM users WHERE id = " + id)
+      - pattern-regex: 'Vulnerable:\\s*NST\\-005\\b'
+    message: |-
+      HexVibe Detection [NST-005]: CWE-89
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        CWE-601
+    pattern-either:
+      - pattern: |-
+          return res.redirect(req.query.next as string)
+      - pattern-regex: 'Vulnerable:\\s*NST\\-006\\b'
+    message: |-
+      HexVibe Detection [NST-006]: "/")
+      if (!next.startsWith("/")) return res.redirect("/")
+      return res.redirect(next)
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const jwtSecret = "nest-prod-secret"
+      - pattern-regex: 'Vulnerable:\\s*NST\\-007\\b'
+    message: |-
+      HexVibe Detection [NST-007]: CWE-798
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NST\\-008\\b'
+    message: |-
+      HexVibe Detection [NST-008]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          app.use(express.json())
+      - pattern-regex: 'Vulnerable:\\s*NST\\-009\\b'
+    message: |-
+      HexVibe Detection [NST-009]: CWE-400
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          catch (e) {
+            throw new HttpException(e.message, 500)
+          }
+      - pattern-regex: 'Vulnerable:\\s*NST\\-010\\b'
+    message: |-
+      HexVibe Detection [NST-010]: CWE-209
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          class UserDto {
+            password: string
+          }
+      - pattern-regex: 'Vulnerable:\\s*NST\\-011\\b'
+    message: |-
+      HexVibe Detection [NST-011]: CWE-200
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          app.useGlobalPipes(new ValidationPipe({ transform: true, transformOptions: { enableImplicitConversion: true } }))
+      - pattern-regex: 'Vulnerable:\\s*NST\\-012\\b'
+    message: |-
+      HexVibe Detection [NST-012]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          return res.render("page", { userContent })
+          ...
+          {{{ userContent }}}
+      - pattern-regex: 'Vulnerable:\\s*NST\\-013\\b'
+    message: |-
+      HexVibe Detection [NST-013]: CWE-79
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          return this.httpService.get(url)
+      - pattern-regex: 'Vulnerable:\\s*NST\\-014\\b'
+    message: |-
+      HexVibe Detection [NST-014]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          @Module({
+            imports: [],
+          })
+      - pattern-regex: 'Vulnerable:\\s*NST\\-015\\b'
+    message: |-
+      HexVibe Detection [NST-015]: CWE-400
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const roles = this.reflector.get("roles", context.getClass())
+      - pattern-regex: 'Vulnerable:\\s*NST\\-016\\b'
+    message: |-
+      HexVibe Detection [NST-016]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          @UseInterceptors(FileInterceptor("file"))
+          if (!file.originalname.endsWith(".png")) throw new BadRequestException()
+      - pattern-regex: 'Vulnerable:\\s*NST\\-017\\b'
+    message: |-
+      HexVibe Detection [NST-017]: CWE-20
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          const hash = await bcrypt.hash(pass, 1)
+      - pattern-regex: 'Vulnerable:\\s*NST\\-018\\b'
+    message: |-
+      HexVibe Detection [NST-018]: CWE-327
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          await parseStringPromise(xmlData)
+      - pattern-regex: 'Vulnerable:\\s*NST\\-019\\b'
+    message: |-
+      HexVibe Detection [NST-019]: CWE-611
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          this.logger.log(userInput)
+      - pattern-regex: 'Vulnerable:\\s*NST\\-020\\b'
+    message: |-
+      HexVibe Detection [NST-020]: CWE-117
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          rows.push([user.email, req.query.note]) и raw res.send(rows.join("\\n"))
+      - pattern-regex: 'Vulnerable:\\s*NST\\-021\\b'
+    message: |-
+      HexVibe Detection [NST-021]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          response.status(500).json({ detail: exception.stack })
+      - pattern-regex: 'Vulnerable:\\s*NST\\-022\\b'
+    message: |-
+      HexVibe Detection [NST-022]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          csv += dto.name + "," + dto.comment + "\\n"
+      - pattern-regex: 'Vulnerable:\\s*NST\\-023\\b'
+    message: |-
+      HexVibe Detection [NST-023]: CWE Final Certification
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          localStorage.setItem("access_token", token)
+      - pattern-regex: 'Vulnerable:\\s*NST\\-024\\b'
+    message: |-
+      HexVibe Detection [NST-024]: CWE-312
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          localStorage.setItem("profile", JSON.stringify({ ssn: user.ssn }))
+      - pattern-regex: 'Vulnerable:\\s*NST\\-025\\b'
+    message: |-
+      HexVibe Detection [NST-025]: CWE-312
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering.
+    pattern-either:
+      - pattern: |-
+          sessionStorage.setItem("refresh", refreshToken)
+      - pattern-regex: 'Vulnerable:\\s*NST\\-026\\b'
+    message: |-
+      HexVibe Detection [NST-026]: CWE-532
+    languages:
+      - generic
+    severity: WARNING
