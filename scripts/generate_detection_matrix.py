@@ -8,7 +8,7 @@ Windows: UTF-8 for Semgrep/subprocess I/O (avoid cp1251 UnicodeDecodeError on YA
 
 HexVibe v1.0 release targets (see ``detection-summary.json``):
 ≥1000 distinct rule IDs, 100% ``autofix_available``, plus ``compliance`` (OWASP Top 10 + MITRE ATT&CK)
-including Insight (Electron + document AI pipeline).
+including Desktop/Electron and document AI pipeline coverage.
 """
 
 from __future__ import annotations

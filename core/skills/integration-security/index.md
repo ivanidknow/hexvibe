@@ -33,7 +33,7 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 | `ITS-017` | Парсинг XML от партнёра без `defusedxml`/безопасных настроек | Безопасный XML-парсер; для SAML/OIDC metadata — `authlib` loaders с проверкой подписи. |
 | `ITS-018` | FastAPI: `Security(oauth2_scheme)` без `scopes` на интеграционном эндпоинте (CWE-285) | Явно задавать `scopes=[...]` в `Security(...)` / `OAuth2AuthorizationCodeBearer(..., scopes=...)`; проверять scope в dependency до бизнес-логики; для machine-to-machine — `authlib.integrations` + зарегистрированные scopes. |
 | `ITS-019` | Токен/API-ключ в query/`params` вместо заголовков (CWE-598) | Перенести секреты в headers; для OAuth2 — `authlib` OAuth2 client с token в Authorization; отключить логирование полных URL. |
-| `ITS-020` | Nginx/Squid: webhook location без лимита размера тела (CWE-770) | Задать лимит тела для webhook path; комбинировать с таймаутами; для подписанных тел — всё равно ограничивать размер до парсинга. |
+| `ITS-020` | Nginx / HTTP egress proxy: webhook location без лимита размера тела (CWE-770) | Задать лимит тела для webhook path; комбинировать с таймаутами; для подписанных тел — всё равно ограничивать размер до парсинга. |
 | `ITS-021` | JWT/OAuth: время жизни access token > 24h или декод без проверки `iss` (CWE-613) | Короткий access TTL, обязательный `iss`/`aud`; `authlib.jose.JWTClaims` с `claims_options` для issuer. |
 | `ITS-022` | SSRF: исходящий запрос к metadata IP `169.254.169.254` (CWE-918) | Единый egress wrapper с denylist IP (169.254.0.0/16, …); `authlib` только для зарегистрированных partner URL. |
 | `ITS-023` | SSRF Python: `httpx` к AWS metadata (CWE-918) | Общий egress-клиент с denylist metadata CIDR; `authlib` redirect только на зарегистрированные URI. |

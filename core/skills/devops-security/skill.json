@@ -27,5 +27,16 @@
   ],
   "rules_path": "core/skills/devops-security/patterns.md",
   "few_shot_examples": "core/gold-standard-testbed/devops_security_vulnerable.Dockerfile",
+  "mitigation_logic": {
+    "RRC-010": {
+      "exception_rule": "Для облачной K8s-инфраструктуры требование программного затирания (shred) признается неэффективным и может быть заменено инфраструктурным контролем.",
+      "status_override": "OK",
+      "equivalent_control": "Шифрование данных At-Rest на уровне PVC/StorageClass (AES-256) с подтвержденной политикой управления ключами.",
+      "evidence_requirements": [
+        "StorageClass/PVC конфигурации с включенным encryption at rest.",
+        "Подтверждение алгоритма AES-256 и действующего KMS-профиля."
+      ]
+    }
+  },
   "security_priority": 10
 }

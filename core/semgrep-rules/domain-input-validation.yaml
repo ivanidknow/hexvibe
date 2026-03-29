@@ -658,7 +658,7 @@ rules:
           )
       - pattern-regex: 'Vulnerable:\\s*DSK\\-100\\b'
     message: |-
-      HexVibe Detection [DSK-100]: Insight SAR
+      HexVibe Detection [DSK-100]: Desktop security baseline
     languages:
       - generic
     severity: WARNING

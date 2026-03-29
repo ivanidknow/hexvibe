@@ -31,7 +31,7 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 | `PY-026` | Secrets in logs | Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists. |
 | `NJS-010` | Stacktrace leakage in API | Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering. |
 | `NJS-035` | Sensitive data retained in memory | Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering. |
-| `RRC-001` | PII leakage in logs (152-FZ) | Маскирование ПДн и policy-based log redaction. |
+| `RRC-001` | PII leakage in logs (Enterprise Compliance) | Маскирование ПДн и policy-based log redaction. |
 | `LOG-012` | PII/secret leakage in observability | Sanitization pipeline до отправки в telemetry backend. |
 | `DJA-008` | Hardcoded Secret Key | Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists. |
 | `DJA-010` | Verbose error leakage to client | Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists. |
@@ -64,7 +64,7 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 | `CWE-359-AXIOS-PARAMS-LEAK` | Sensitive data exposure via Axios `params` query string (`token/password/secret`) | Не передавать секреты в query string; использовать Authorization header/body и redaction policy для логов/телеметрии. |
 | `CWE-524-AXIOS-CACHE-AUTH` | Missing `Cache-Control: no-store` on Axios GET to `/api/user/*` or `/api/auth/*` | Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering. |
 | `CWE-200-NEXTJS-CLIENT-ENV` | Secret env leak: server-side env vars used in `use client` components | Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering. |
-| `CWE-200-OPENROUTER-APIKEY-LEAK` | Hardcoded OpenRouter/OpenAI API keys in code/logs | Хранить ключи только во внешнем secret manager/env, маскировать в логах и исключать из репозитория/trace output. |
+| `CWE-200-OPENROUTER-APIKEY-LEAK` | Hardcoded LLM provider API keys in code/logs | Хранить ключи только во внешнем secret manager/env, маскировать в логах и исключать из репозитория/trace output. |
 | `CWE-922-FASTAPI-HEADER-LOG` | Sensitive headers (`Authorization`, `Set-Cookie`) logged by request middleware | Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists. |
 | `CWE-798-CSH-CONFIG-SECRETS` | Hardcoded API keys/passwords in `.config`, `Settings.settings`, `.resx` for C# desktop ... | Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input. |
 | `CWE-384-CSH-STATIC-TOKEN-CONTEXT` | Session fixation risk via `public static` token/user context fields in VSTO classes | Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input. |

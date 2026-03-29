@@ -75,8 +75,8 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 | `NGX-008` | Client body size unlimited | `client_max_body_size 10m;` |
 | `NGX-009` | Proxy timeouts missing | `proxy_connect_timeout 5s; proxy_read_timeout 30s;` |
 | `NGX-010` | server_tokens enabled | `server_tokens off;` |
-| `SQD-001` | Squid allows all clients | `http_access deny all` `http_access allow localnet` |
-| `SQD-002` | Squid cache_peer uses plaintext HTTP | `cache_peer upstream.example parent 3129 0 no-query tls` |
+| `SQD-001` | HTTP egress proxy allows all clients | `http_access deny all` `http_access allow localnet` |
+| `SQD-002` | Egress proxy cache_peer uses plaintext HTTP | `cache_peer upstream.example parent 3129 0 no-query tls` |
 | `SQD-003` | ssl_bump without certificate validation policy | `sslproxy_cert_error deny all` |
 | `SQD-004` | Weak ACL for CONNECT methods | `acl SSL_ports port 443` |
 | `SQD-005` | No request rate/connection controls | `maxconn 100` |
@@ -88,7 +88,7 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 | `SQD-011` | Unsafe forwarded_for policy | `forwarded_for transparent` |
 | `SQD-012` | Insecure cache_dir permissions | `cache_effective_user squid` `cache_effective_group squid` |
 | `SQD-013` | No denylist for metadata endpoints | `acl cloud_meta dst 169.254.169.254/32` `http_access deny cloud_meta` |
-| `SQD-014` | Squid final deny rule missing / overly broad localnet ACL | Завершать ACL цепочку `http_access deny all` и ограничивать `localnet` только доверенными CIDR-сетями. |
+| `SQD-014` | HTTP egress proxy final deny rule missing / overly broad localnet ACL | Завершать ACL цепочку `http_access deny all` и ограничивать `localnet` только доверенными CIDR-сетями. |
 | `NGX-011` | Nginx request limiting zone missing (`limit_req_zone`) | Добавить `limit_req_zone` с разумным rate/burst и применять `limit_req` на чувствительных location. |
 | `NGX-012` | Nginx version disclosure via missing `server_tokens off` | Отключить `server_tokens`, скрывать версию веб-сервера и минимизировать fingerprinting surface. |
 | `DOCK-021` | Docker base image uses mutable `latest` tag (`FROM ...:latest`) | Пиновать base image на конкретную версию и digest (`FROM python:3.12.3@sha256:...`) для воспроизводимости и supply-chain контроля. |
@@ -98,7 +98,7 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 | `INF-017` | Helm chart default enables host namespace sharing (CWE-1188) | По умолчанию отключать host namespaces и разрешать их только explicit opt-in с security review. |
 | `INF-018` | Helm default grants broad capabilities without drop-all baseline (CWE-1188) | В chart defaults задавать `drop: ["ALL"]` и точечно добавлять только необходимые capabilities. |
 | `NGX-013` | Nginx forward proxy behavior enables unintended internal routing (CWE-441) | Запретить dynamic upstream от пользовательских заголовков, фиксировать upstreams и блокировать internal dns zones/cluster domains. |
-| `SQD-015` | Squid ACL permits proxying to Kubernetes control-plane/internal services (CWE-441) | Добавить explicit deny ACL для `*.svc`, control-plane IPs и metadata endpoints перед allow rules. |
+| `SQD-015` | HTTP egress proxy ACL permits proxying to Kubernetes control-plane/internal services (CWE-441) | Добавить explicit deny ACL для `*.svc`, control-plane IPs и metadata endpoints перед allow rules. |
 | `K8S-026` | Helm values default `automountServiceAccountToken: true` for all workloads (CWE-1188) | Устанавливать default `false` и включать токен только для конкретных сервисов, где это необходимо. |
 | `DOCK-023` | Docker: `docker load` образа без проверки подписи Cosign (CWE-347) | Подпись артефакта в registry; SBOM + verify в pipeline. |
 | `DOCK-024` | Dockerfile: `FROM` без проверки digest при pull в CI (CWE-347) | `FROM repo/img@sha256:...` + verify attestation. |

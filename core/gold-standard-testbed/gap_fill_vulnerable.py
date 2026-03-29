@@ -2242,7 +2242,7 @@ insecure_value = True
 # Expected Fix: safe_pattern(SQD-013) with typed validation, allowlists, and secure API usage
 insecure_value = True
 
-# --- v13.1 Silk Mobile / Silk Backend / Insight assessment snippets ---
+# --- v13.1 Mobile / backend / desktop assessment snippets ---
 
 # Stack: Flutter
 # Vulnerable: MOB-001 (SSL Bypass in Flutter HttpOverrides)
@@ -4105,8 +4105,8 @@ File.AppendAllText("audit.log", document.FullName);
 # Vulnerable: INS-022
 # Expected Fix: safe_pattern(INS-022) with typed validation, allowlists, and secure API usage
 csharp_ipc_without_security_descriptor = """
-var pipe = new NamedPipeServerStream("dion_pipe");
-var mutex = new Mutex(false, "Global\\InsightMutex");
+var pipe = new NamedPipeServerStream("app_ipc_pipe");
+var mutex = new Mutex(false, "Global\\DesktopAppMutex");
 """
 
 # Stack: C#/.NET 4.8 Desktop

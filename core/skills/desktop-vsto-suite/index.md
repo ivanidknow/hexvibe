@@ -91,26 +91,26 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 | `INS-069` | Неверный размер буфера `stackalloc` для interop (CWE-131) | Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input. |
 | `INS-070` | VSTO: логирование полного набора переменных окружения (CWE-497) | Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input. |
 | `INS-071` | VSTO: вывод `Environment.GetCommandLineArgs()` в telemetry (CWE-497) | Use using/try-finally and safe .NET APIs; enforce strict allowlists for untrusted input. |
-| `INS-072` | Insight: xlsx (SheetJS 0.18.5) cell from user written without formula neutralization | Prefix formula-meta chars in .xlsx exports; central `sanitizeForExcelCell()` for all user/DB fields. |
-| `INS-073` | Insight: `XLSX.utils.json_to_sheet` from untrusted rows без санитизации | Map all values through sanitize before `json_to_sheet` / `aoa_to_sheet`. |
-| `INS-074` | Insight: `xlsx.writeFile` экспорт без нейтрализации формул в колонках | Never write raw user strings to xlsx cells; apply CSV/Excel injection defenses. |
-| `INS-075` | Insight: `xlsx` read → re-export цепочка без ре-sanitization | On re-export pipeline, treat every cell as untrusted input. |
-| `INS-076` | Insight: mammoth `convertToHtml` без ограничения размера входного DOCX | Enforce max doc size before mammoth; reject oversized ZIP/docx. |
-| `INS-077` | Insight: mammoth извлечение без hardening XML внутри DOCX (внешние сущности) | Pre-validate docx zip and XML parts; disable entity expansion in XML pipeline. |
-| `INS-078` | Insight: `docx` npm / PizZip открытие без проверки compression ratio (zip bomb) | Enforce max uncompressed size and compression ratio for OOXML containers. |
-| `INS-079` | Insight: `JSZip` загрузка `.docx/.pptx` без лимита распакованного объёма | Track cumulative uncompressed bytes; abort on threshold (zip bomb). |
-| `INS-080` | Insight: `pdfjs-dist` `getDocument` без лимита на размер/страницы | Cap PDF bytes and pages; stream with limits. |
-| `INS-081` | Insight: `pdfjs-dist` workerSrc с недоверенного origin | Host pdf.worker.js from same origin; integrity attribute. |
-| `INS-082` | Insight: `word-extractor` без таймаута и лимита памяти | Timeout + size limit around word-extractor; reject huge binaries. |
-| `INS-083` | Insight: `docx` XML part `word/document.xml` парсится с `xml2js` `mergeAttrs` без отклю... | Parse OOXML with XXE-safe XML settings; no external entities. |
-| `INS-084` | Insight: ExcelJS `worksheet.addRow` с пользовательскими строками в отчёт | Sanitize ExcelJS rows before commit; same rules as SheetJS. |
-| `INS-085` | Insight: `mammoth` `convertToHtml` + встроенные `styleMap` из пользователя | Do not pass user-controlled styleMap to mammoth; allowlist only. |
-| `INS-086` | Insight: распаковка `.pptx` для превью без ratio check | Same zip-bomb defenses as docx for pptx OOXML. |
-| `INS-087` | Insight: `fflate` unzip `xlsx` array без лимита | Limit entries and total bytes when using fflate/unzip on xlsx. |
-| `INS-088` | Insight: `pdfjs` `getMetadata` доверие к `/Title` для XSS в UI | Treat PDF metadata as untrusted; never HTML-embed without encode. |
-| `INS-089` | Insight: mammoth `embedImage` с пользовательским base64 | Strict allowlist for embedded image resolution in mammoth. |
-| `INS-090` | Insight: CSV → xlsx pipeline без нейтрализации (формула в CSV) | Apply CSV injection rules before promoting to xlsx. |
-| `INS-091` | Insight: `word-extractor` + последующая запись в HTML без escape | Never assign extracted text to innerHTML without sanitization. |
+| `INS-072` | Desktop app: xlsx (SheetJS 0.18.5) cell from user written without formula neutralization | Prefix formula-meta chars in .xlsx exports; central `sanitizeForExcelCell()` for all user/DB fields. |
+| `INS-073` | Desktop app: `XLSX.utils.json_to_sheet` from untrusted rows без санитизации | Map all values through sanitize before `json_to_sheet` / `aoa_to_sheet`. |
+| `INS-074` | Desktop app: `xlsx.writeFile` экспорт без нейтрализации формул в колонках | Never write raw user strings to xlsx cells; apply CSV/Excel injection defenses. |
+| `INS-075` | Desktop app: `xlsx` read → re-export цепочка без ре-sanitization | On re-export pipeline, treat every cell as untrusted input. |
+| `INS-076` | Desktop app: mammoth `convertToHtml` без ограничения размера входного DOCX | Enforce max doc size before mammoth; reject oversized ZIP/docx. |
+| `INS-077` | Desktop app: mammoth извлечение без hardening XML внутри DOCX (внешние сущности) | Pre-validate docx zip and XML parts; disable entity expansion in XML pipeline. |
+| `INS-078` | Desktop app: `docx` npm / PizZip открытие без проверки compression ratio (zip bomb) | Enforce max uncompressed size and compression ratio for OOXML containers. |
+| `INS-079` | Desktop app: `JSZip` загрузка `.docx/.pptx` без лимита распакованного объёма | Track cumulative uncompressed bytes; abort on threshold (zip bomb). |
+| `INS-080` | Desktop app: `pdfjs-dist` `getDocument` без лимита на размер/страницы | Cap PDF bytes and pages; stream with limits. |
+| `INS-081` | Desktop app: `pdfjs-dist` workerSrc с недоверенного origin | Host pdf.worker.js from same origin; integrity attribute. |
+| `INS-082` | Desktop app: `word-extractor` без таймаута и лимита памяти | Timeout + size limit around word-extractor; reject huge binaries. |
+| `INS-083` | Desktop app: `docx` XML part `word/document.xml` парсится с `xml2js` `mergeAttrs` без отклю... | Parse OOXML with XXE-safe XML settings; no external entities. |
+| `INS-084` | Desktop app: ExcelJS `worksheet.addRow` с пользовательскими строками в отчёт | Sanitize ExcelJS rows before commit; same rules as SheetJS. |
+| `INS-085` | Desktop app: `mammoth` `convertToHtml` + встроенные `styleMap` из пользователя | Do not pass user-controlled styleMap to mammoth; allowlist only. |
+| `INS-086` | Desktop app: распаковка `.pptx` для превью без ratio check | Same zip-bomb defenses as docx for pptx OOXML. |
+| `INS-087` | Desktop app: `fflate` unzip `xlsx` array без лимита | Limit entries and total bytes when using fflate/unzip on xlsx. |
+| `INS-088` | Desktop app: `pdfjs` `getMetadata` доверие к `/Title` для XSS в UI | Treat PDF metadata as untrusted; never HTML-embed without encode. |
+| `INS-089` | Desktop app: mammoth `embedImage` с пользовательским base64 | Strict allowlist for embedded image resolution in mammoth. |
+| `INS-090` | Desktop app: CSV → xlsx pipeline без нейтрализации (формула в CSV) | Apply CSV injection rules before promoting to xlsx. |
+| `INS-091` | Desktop app: `word-extractor` + последующая запись в HTML без escape | Never assign extracted text to innerHTML without sanitization. |
 | `INS-092` | OpenAI SDK: `chat.completions.create` без схемы ответа для JSON-логики | Use `json_schema` response_format or validate with Zod before branching logic. |
 | `INS-093` | OpenAI: доверие к `role`/`tool_calls` без проверки | Never branch security on model-supplied role strings; server-side allowlist. |
 | `INS-094` | OpenAI: `completion.choices[0].message.content` как команда без allowlist | Validate structured output; reject unknown fields; no shell exec from model text. |
@@ -130,48 +130,48 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 | `INS-108` | Electron: `session.setPermissionRequestHandler` всегда `cb(true)` | Default deny; explicit allowlist for media/geolocation. |
 | `INS-109` | Electron: `protocol.registerFileProtocol` без path traversal check | Validate file paths in custom protocols; prevent traversal. |
 | `INS-110` | Electron: `desktopCapturer` + AI без user consent | Gate screen capture behind explicit user consent. |
-| `INS-111` | Insight: `xlsx` `sheet_to_csv` затем email без escape | Sanitize CSV exports from xlsx before messaging. |
-| `INS-112` | Insight: `mammoth` `convertToHtml` + `innerHTML` в Electron | Sanitize mammoth HTML before DOM insertion. |
-| `INS-113` | Insight: `pdfjs` page text → SQL без параметризации | Parameterize DB; treat PDF text as untrusted. |
-| `INS-114` | Insight: `docx` template engine `{{user}}` без escape | Escape template fields for docx generation. |
-| `INS-115` | Insight: OpenAI `responses.parse` / structured output без `strict: true` | Use strict JSON schema where API allows. |
+| `INS-111` | Desktop app: `xlsx` `sheet_to_csv` затем email без escape | Sanitize CSV exports from xlsx before messaging. |
+| `INS-112` | Desktop app: `mammoth` `convertToHtml` + `innerHTML` в Electron | Sanitize mammoth HTML before DOM insertion. |
+| `INS-113` | Desktop app: `pdfjs` page text → SQL без параметризации | Parameterize DB; treat PDF text as untrusted. |
+| `INS-114` | Desktop app: `docx` template engine `{{user}}` без escape | Escape template fields for docx generation. |
+| `INS-115` | Desktop app: OpenAI `responses.parse` / structured output без `strict: true` | Use strict JSON schema where API allows. |
 | `INS-116` | OpenAI: логирование полного `messages` в `pino`/`winston` | Redact OpenAI message bodies in logs. |
 | `INS-117` | Electron: `contextBridge.exposeInMainWorld` с функцией без аргументов проверки | Validate IPC args in preload bridge and main. |
 | `INS-118` | Electron: `ipcMain.on` (legacy) вместо `handle` без проверки sender | Prefer `handle` with sender validation over legacy `on`. |
-| `INS-119` | Insight: `pdfjs` `getDocument` data URL с user data | Block unbounded base64 PDF from user input. |
-| `INS-120` | Insight: `word-extractor` на UNC path без доверия | Restrict UNC/network paths for extraction. |
-| `INS-121` | Insight: xlsx `cellStyles` из пользователя | Do not apply user-controlled styles that embed formulas. |
-| `INS-122` | Insight: mammoth `convertToMarkdown` → markdown XSS | Sanitize markdown output from mammoth. |
-| `INS-123` | Insight: `docx` hyperlink из пользователя | Validate hyperlinks in generated docx. |
+| `INS-119` | Desktop app: `pdfjs` `getDocument` data URL с user data | Block unbounded base64 PDF from user input. |
+| `INS-120` | Desktop app: `word-extractor` на UNC path без доверия | Restrict UNC/network paths for extraction. |
+| `INS-121` | Desktop app: xlsx `cellStyles` из пользователя | Do not apply user-controlled styles that embed formulas. |
+| `INS-122` | Desktop app: mammoth `convertToMarkdown` → markdown XSS | Sanitize markdown output from mammoth. |
+| `INS-123` | Desktop app: `docx` hyperlink из пользователя | Validate hyperlinks in generated docx. |
 | `INS-124` | OpenAI: `parallel_tool_calls` без лимита веток | Limit parallel tool execution from model. |
 | `INS-125` | OpenAI: кэш ответа LLM на диск без шифрования | Encrypt cached LLM responses; no plaintext PII. |
 | `INS-126` | Electron: `nativeImage` из пользовательского пути без проверки | Validate paths for nativeImage loads. |
 | `INS-127` | Electron: `Menu` item `click` с `remote` shell | Validate URLs in menu handlers. |
-| `INS-128` | Insight: `xlsx` shared strings table pollution | Sanitize shared strings when merging workbooks. |
-| `INS-129` | Insight: `pptxgenjs` text from user без sanitize | Sanitize user text in pptxgenjs slides. |
-| `INS-130` | Insight: `pdf-lib` embed font from user path | Restrict embedded fonts to trusted sources. |
+| `INS-128` | Desktop app: `xlsx` shared strings table pollution | Sanitize shared strings when merging workbooks. |
+| `INS-129` | Desktop app: `pptxgenjs` text from user без sanitize | Sanitize user text in pptxgenjs slides. |
+| `INS-130` | Desktop app: `pdf-lib` embed font from user path | Restrict embedded fonts to trusted sources. |
 | `INS-131` | OpenAI: `temperature`/`top_p` max для production | Bound sampling params for production AI paths. |
 | `INS-132` | OpenAI: отсутствие `seed` для воспроизводимости аудита | Use seed for reproducibility when policy requires. |
 | `INS-133` | Electron: `powerMonitor` + IPC без auth | Gate system events on IPC. |
 | `INS-134` | Electron: `clipboard` write из renderer без проверки | Mediate clipboard IPC in main. |
-| `INS-135` | Insight: `mammoth` + `cheerio` load без sanitize | Sanitize cheerio HTML from mammoth. |
-| `INS-136` | Insight: `xlsx` password-protected workbook без rate limit | Rate-limit xlsx password attempts. |
-| `INS-137` | Insight: `pdfjs` `getOperatorList` утечка в лог | Do not log PDF operator lists in production. |
+| `INS-135` | Desktop app: `mammoth` + `cheerio` load без sanitize | Sanitize cheerio HTML from mammoth. |
+| `INS-136` | Desktop app: `xlsx` password-protected workbook без rate limit | Rate-limit xlsx password attempts. |
+| `INS-137` | Desktop app: `pdfjs` `getOperatorList` утечка в лог | Do not log PDF operator lists in production. |
 | `INS-138` | OpenAI: `metadata` поля с PII в `store` | Minimize OpenAI request metadata. |
 | `INS-139` | Electron: `globalShortcut` регистрация без проверки фокуса | Validate focus before global shortcuts. |
 | `INS-140` | Electron: `dialog.showSaveDialog` path в `openExternal` | Validate save dialog paths before opening. |
-| `INS-141` | Insight: `xlsx` CSV delimiter injection | Handle CSV delimiter injection in xlsx roundtrip. |
-| `INS-142` | Insight: `docx` `header`/`footer` user HTML | Safe XML/HTML for headers/footers. |
-| `INS-143` | Insight: `pdfjs` `getAnnotations` исполнение | Treat PDF annotations as untrusted. |
+| `INS-141` | Desktop app: `xlsx` CSV delimiter injection | Handle CSV delimiter injection in xlsx roundtrip. |
+| `INS-142` | Desktop app: `docx` `header`/`footer` user HTML | Safe XML/HTML for headers/footers. |
+| `INS-143` | Desktop app: `pdfjs` `getAnnotations` исполнение | Treat PDF annotations as untrusted. |
 | `INS-144` | OpenAI: `response_format` JSON + `tools` одновременно без тестов | Test tools + JSON schema together. |
 | `INS-145` | Electron: `BrowserView` без `webPreferences` копии | Set full webPreferences on BrowserView. |
 | `INS-146` | Electron: `utilityProcess` fork без argv allowlist | Validate utility process arguments. |
-| `INS-147` | Insight: `mammoth` `ignoreEmptyParagraphs: false` + huge doc | Combine mammoth options with size caps. |
-| `INS-148` | Insight: `xlsx` `sheet_to_json` `defval` user injection | Do not use user input as defval in sheet_to_json. |
+| `INS-147` | Desktop app: `mammoth` `ignoreEmptyParagraphs: false` + huge doc | Combine mammoth options with size caps. |
+| `INS-148` | Desktop app: `xlsx` `sheet_to_json` `defval` user injection | Do not use user input as defval in sheet_to_json. |
 | `INS-149` | OpenAI: `max_tokens` не ограничен для UI path | Bound max_tokens for interactive flows. |
 | `INS-150` | Electron: `safeStorage` key fallback | No plaintext fallback when safeStorage unavailable. |
-| `INS-151` | Insight: Infinity release checklist — отсутствие `npm audit` в CI для Insight deps | Run npm audit in CI for Insight stack. |
-| `INS-152` | Insight: `electron` `remote` module (deprecated) | Ban `@electron/remote`; use contextBridge. |
+| `INS-151` | Desktop app: Infinity release checklist — отсутствие `npm audit` в CI для desktop dependencies | Run npm audit in CI for Desktop/Electron stack. |
+| `INS-152` | Desktop app: `electron` `remote` module (deprecated) | Ban `@electron/remote`; use contextBridge. |
 
 ## Verification
 

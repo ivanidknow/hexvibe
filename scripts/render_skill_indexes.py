@@ -201,7 +201,7 @@ META: dict[str, dict] = {
             "[`gold-standard-testbed/aac_vulnerable.ts`](../gold-standard-testbed/aac_vulnerable.ts)",
         ],
         "extra": (
-            "**Product alignment:** critical for **Dion Agent** — browser-bound automation, queues, and cloud-adjacent "
+            "**Product alignment:** critical for **browser automation and backend agents** — browser-bound automation, queues, and cloud-adjacent "
             "controls must stay aligned with these metrics."
         ),
     },
@@ -232,7 +232,7 @@ META: dict[str, dict] = {
         "title": "Desktop Electron Pro",
         "stack": (
             "Security controls for **Electron desktop** runtime channels and dependency posture, based on "
-            "real assessment findings from Insight. Metrics are prefixed **`DSK`**."
+            "field assessment patterns. Metrics are prefixed **`DSK`**."
         ),
         "threats": [
             "Renderer-to-main unsafe code execution paths (`DSK-100`).",
@@ -284,7 +284,7 @@ META: dict[str, dict] = {
     "mobile-flutter": {
         "title": "Mobile Flutter",
         "stack": (
-            "Mobile app hardening for **Flutter** and Android host integration from Silk Mobile assessment patterns. "
+            "Mobile app hardening for **Flutter** and Android host integration from mobile security assessment patterns. "
             "Metrics are prefixed **`MOB`**."
         ),
         "threats": [
@@ -460,7 +460,7 @@ META: dict[str, dict] = {
     "python-backend-pro": {
         "title": "Python Backend Pro",
         "stack": (
-            "Backend API controls extracted from Silk Backend security assessments for auth hardening, object-level "
+            "Backend API controls extracted from enterprise backend security assessments for auth hardening, object-level "
             "authorization, and filesystem safety. Metrics are prefixed **`PY-1xx`**."
         ),
         "threats": [
@@ -503,10 +503,10 @@ META: dict[str, dict] = {
         ),
     },
     "ru-regulatory": {
-        "title": "RU Regulatory (152-FZ / КИИ)",
+        "title": "Enterprise Compliance (Regional Controls)",
         "stack": (
-            "Russian regulatory controls for PII logging (152-FZ), data residency/anonymization before foreign AI APIs, "
-            "GOST / certified crypto usage inside KII, and import substitution portability. Metrics are prefixed **`RRC`**."
+            "Enterprise and regional compliance controls for PII logging, data residency and anonymization before foreign AI APIs, "
+            "certified cryptography in critical infrastructure contexts, and import substitution portability. Metrics are prefixed **`RRC`**."
         ),
         "threats": [
             "Logging PII to stdout or external log systems (`RRC-001`).",

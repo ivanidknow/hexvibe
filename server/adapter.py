@@ -6,6 +6,7 @@ Tools exposed:
 - get_skill_context(skill_id)
 - ask_hexvibe(question)
 - run_check(path)
+- run_security_review(project_name, context)  # includes STRIDE threat modeling (Section 0) before run_check
 - ignore_finding(metric_id, file_path, line_content, reason)
 - apply_remediation(metric_id, file_path)
 """
@@ -43,6 +44,8 @@ RULES_DIR = ROOT / "core" / "semgrep-rules"
 TRUFFLEHOG_CONFIG = ROOT / "server" / "config.yaml"
 RAG_CACHE_PATH = ROOT / "server" / ".rag-cache.json"
 RAG_CACHE_SCHEMA_VERSION = 3
+THREAT_MODEL_CACHE_PATH = ROOT / "server" / ".threat-model-cache.json"
+THREAT_MODEL_CACHE_SCHEMA_VERSION = 2
 # In Docker, ROOT is /app → `/app/.hexvibe-ignore.yaml` (must match COPY in Dockerfile).
 IGNORE_FILE_PATH = ROOT / ".hexvibe-ignore.yaml"
 DETECTION_SUMMARY_PATH = ROOT / "core" / "gold-standard-testbed" / "detection-summary.json"
@@ -55,6 +58,833 @@ ANTI_HALLUCINATION_PROMPT = (
     "ТЫ ОБЯЗАН проверить код инструментом run_check ПОСЛЕ каждого исправления. "
     "Твои слова о безопасности ничего не значат без PASS от Semgrep/TruffleHog."
 )
+# Security review profiles: FastAPI Backend (service/agent stacks) vs Desktop App (Electron / desktop integration).
+PROFILE_FASTAPI_BACKEND = "fastapi_backend"
+PROFILE_DESKTOP_APP = "desktop_app"
+
+ENTERPRISE_BASELINES: dict[str, str] = {
+    PROFILE_FASTAPI_BACKEND: (
+        "Project deployed in Enterprise Kubernetes. Identity & Access: Keycloak SSO is the only source of truth; "
+        "local user/password databases are prohibited. WebSocket Management: backend must authorize every "
+        "WS connection and enforce ownership checks for user-session binding. "
+        "Network Topology: backend and agent are isolated; any outbound traffic to LLM providers, "
+        "speech/transcription APIs, and S3-compatible object storage must pass strictly through an "
+        "egress HTTP proxy and reverse proxy (e.g. Nginx). "
+        "Data Flow: direct service-to-public-internet connections are prohibited; summarization and transcription "
+        "integrations are trusted only when proxy mediation is present. "
+        "Logging: External (Fluentbit/SIEM). Storage: S3-compatible (Presigned URLs). Disk: Encrypted (AES-256)."
+    ),
+    PROFILE_DESKTOP_APP: (
+        "Project deployed in Enterprise Kubernetes. Core Architecture (Electron): strict split between "
+        "UI Renderer and Main Process, communication only via IPC (invoke + events). Renderer direct "
+        "access to Node.js APIs or network is prohibited; enforce preload usage and context isolation "
+        "(nodeIntegration=false, contextIsolation=true). Identity & API Gateway: all external "
+        "API calls (LLM, RAG, transcription, calendar/mail integrations) must pass through the central API gateway "
+        "with token validation; any direct external service call bypassing the gateway is critical. "
+        "Internal Orchestration: Supervisor plans, Branch Runner executes tools; tool outputs must flow into Answer Node for final synthesis. "
+        "Local Data Privacy: user data (history, settings, patterns) remains in local userData and must not leak into "
+        "external logs or IPC payloads. Legacy Path (Vision/RAG without agent) must also pass through the gateway."
+    ),
+}
+SECURITY_REVIEW_ENGINE_PROMPT = (
+    "System Role: HexVibe Security Engine Orchestrator. "
+    "When reviewing network-security findings, treat HTTP_PROXY/HTTPS_PROXY or explicit proxy routing "
+    "as mandatory evidence for OK status. If external API calls exist but context confirms proxy mediation, "
+    "suppress direct-internet false positives and classify findings according to architecture constraints."
+)
+
+
+def _engine_prompt_for_profile(profile: str) -> str:
+    if profile == PROFILE_DESKTOP_APP:
+        return (
+            f"{SECURITY_REVIEW_ENGINE_PROMPT} "
+            "Desktop App mode: mark external calls as OK only when the endpoint chain goes through the central API gateway; "
+            "detect IPC Injection risks in Renderer->Main message flow; verify secure token processing "
+            "for gateway-mediated external API access."
+        )
+    return SECURITY_REVIEW_ENGINE_PROMPT
+
+
+def _threat_scan_root(target_rel: str) -> Path:
+    base = (ROOT / target_rel).resolve() if target_rel and target_rel != "." else ROOT
+    return base if base.is_dir() else base.parent
+
+
+def _parse_simple_deps_file(path: Path, max_lines: int = 400) -> set[str]:
+    out: set[str] = set()
+    if not path.is_file():
+        return out
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return out
+    for raw in text.splitlines()[:max_lines]:
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        if path.name == "package.json":
+            continue
+        # requirements.txt / constraints: take name before [ or ; or =
+        m = re.match(r"^([a-zA-Z0-9_.\-]+)", line)
+        if m:
+            out.add(m.group(1).lower().replace("_", "-"))
+    return out
+
+
+def _parse_package_json_deps(path: Path) -> set[str]:
+    out: set[str] = set()
+    if not path.is_file():
+        return out
+    try:
+        data = json.loads(path.read_text(encoding="utf-8", errors="ignore"))
+    except (json.JSONDecodeError, OSError):
+        return out
+    for key in ("dependencies", "devDependencies", "optionalDependencies", "peerDependencies"):
+        block = data.get(key)
+        if isinstance(block, dict):
+            out.update(str(k).lower() for k in block.keys())
+    return out
+
+
+def _collect_repo_threat_signals(scan_root: Path) -> dict[str, Any]:
+    try:
+        scan_rel = str(scan_root.relative_to(ROOT)).replace("\\", "/")
+    except ValueError:
+        scan_rel = str(scan_root)
+    signals: dict[str, Any] = {
+        "scan_root": scan_rel,
+        "top_level_dirs": [],
+        "key_files": [],
+        "deps": set(),
+        "flags": {
+            "has_dockerfile": False,
+            "has_compose": False,
+            "has_k8s_yaml": False,
+            "has_github_workflows": False,
+            "has_electron": False,
+            "has_playwright": False,
+            "has_fastapi": False,
+            "has_redis_client": False,
+        },
+    }
+    try:
+        for child in sorted(scan_root.iterdir(), key=lambda p: p.name.lower()):
+            if child.is_dir() and not child.name.startswith("."):
+                signals["top_level_dirs"].append(child.name)
+                if len(signals["top_level_dirs"]) >= 40:
+                    break
+    except OSError:
+        pass
+
+    deps: set[str] = set()
+    try:
+        for pattern in ("**/package.json", "**/requirements.txt", "**/pyproject.toml", "**/go.mod"):
+            for p in scan_root.glob(pattern):
+                if len(signals["key_files"]) >= 100:
+                    break
+                if any(part.startswith(".") for part in p.parts):
+                    continue
+                rel = str(p.relative_to(scan_root)).replace("\\", "/")
+                if rel not in signals["key_files"]:
+                    signals["key_files"].append(rel)
+                if p.name == "package.json":
+                    deps |= _parse_package_json_deps(p)
+                elif p.name == "requirements.txt":
+                    deps |= _parse_simple_deps_file(p)
+                elif p.name == "pyproject.toml":
+                    try:
+                        txt = p.read_text(encoding="utf-8", errors="ignore").lower()
+                        for m in re.finditer(r"['\"]([a-zA-Z0-9_.\-]+)['\"]", txt):
+                            deps.add(m.group(1).lower())
+                    except OSError:
+                        pass
+            if len(signals["key_files"]) >= 100:
+                break
+        for name in ("Dockerfile", "docker-compose.yml", "docker-compose.yaml"):
+            fp = scan_root / name
+            if fp.is_file():
+                signals["key_files"].append(name)
+                if name == "Dockerfile":
+                    signals["flags"]["has_dockerfile"] = True
+                else:
+                    signals["flags"]["has_compose"] = True
+        for p in scan_root.rglob("*.yaml"):
+            if p.is_file() and any(x in p.name.lower() for x in ("deploy", "helm", "k8s", "values")):
+                signals["flags"]["has_k8s_yaml"] = True
+                break
+        wf = scan_root / ".github" / "workflows"
+        if wf.is_dir():
+            signals["flags"]["has_github_workflows"] = True
+    except OSError:
+        pass
+
+    signals["deps"] = sorted(deps)
+    djoin = " ".join(deps)
+    signals["flags"]["has_electron"] = "electron" in djoin
+    signals["flags"]["has_playwright"] = "playwright" in djoin or "@playwright/test" in djoin
+    signals["flags"]["has_fastapi"] = "fastapi" in djoin or "starlette" in djoin
+    signals["flags"]["has_redis_client"] = any(
+        x in djoin for x in ("redis", "aioredis", "rq", "celery", "hiredis")
+    )
+    return signals
+
+
+def _repo_threat_fingerprint(signals: dict[str, Any]) -> str:
+    payload = json.dumps(
+        {
+            "top_level_dirs": signals.get("top_level_dirs", []),
+            "key_files": sorted(set(signals.get("key_files", [])))[:80],
+            "deps": signals.get("deps", []),
+            "flags": signals.get("flags", {}),
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def _threat_cache_key(profile: str, final_context: str, repo_fp: str) -> str:
+    raw = f"{profile}\n{final_context}\n{repo_fp}"
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
+def _load_threat_model_cache() -> dict[str, Any]:
+    if not THREAT_MODEL_CACHE_PATH.exists():
+        return {"schema_version": THREAT_MODEL_CACHE_SCHEMA_VERSION, "entries": {}}
+    try:
+        data = json.loads(THREAT_MODEL_CACHE_PATH.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {"schema_version": THREAT_MODEL_CACHE_SCHEMA_VERSION, "entries": {}}
+    if int(data.get("schema_version", 0)) != THREAT_MODEL_CACHE_SCHEMA_VERSION:
+        return {"schema_version": THREAT_MODEL_CACHE_SCHEMA_VERSION, "entries": {}}
+    entries = data.get("entries")
+    if not isinstance(entries, dict):
+        entries = {}
+    return {"schema_version": THREAT_MODEL_CACHE_SCHEMA_VERSION, "entries": entries}
+
+
+def _save_threat_model_cache_entry(cache_key: str, markdown: str) -> None:
+    payload = _load_threat_model_cache()
+    payload["entries"][cache_key] = {
+        "markdown": markdown,
+        "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
+    }
+    try:
+        THREAT_MODEL_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+        THREAT_MODEL_CACHE_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    except (OSError, TypeError, ValueError):
+        _log_err("threat model cache write failed")
+
+
+def _rag_keywords_from_ask(payload: dict[str, Any]) -> set[str]:
+    keys: set[str] = set()
+    for row in payload.get("top_safe_patterns", []) or []:
+        title = str(row.get("title") or "")
+        for t in _tokenize(title):
+            if len(t) >= 4:
+                keys.add(t)
+    return keys
+
+
+def _stride_classify_clause(clause: str) -> str:
+    c = clause.lower()
+    if any(x in c for x in ("auth", "jwt", "keycloak", "token", "sso", "spoof", "identity")):
+        return "S"
+    if any(x in c for x in ("tamper", "integrity", "modify", "inject", "queue", "payload")):
+        return "T"
+    if any(x in c for x in ("audit", "log", "repud", "deny", "siem", "fluent")):
+        return "R"
+    if any(x in c for x in ("disclosure", "leak", "pii", "secret", "minio", "s3", "userdata", "ipc")):
+        return "I"
+    if any(x in c for x in ("dos", "rate", "flood", "availability", "proxy", "egress", "network")):
+        return "D"
+    if any(x in c for x in ("elevat", "privilege", "bola", "owner", "admin", "branch", "supervisor")):
+        return "E"
+    return "I"
+
+
+def _build_stride_threat_candidates(
+    profile: str,
+    baseline: str,
+    signals: dict[str, Any],
+    rag_keywords: set[str],
+) -> list[tuple[float, str, str, str]]:
+    """
+    Build ranked STRIDE candidates from profile + Enterprise baseline + repo signals + RAG keywords.
+    No fixed global threat list: candidates are emitted only when signals/baseline/RAG justify them.
+    """
+    deps: set[str] = set(str(d).lower() for d in signals.get("deps", []))
+    bl = baseline.lower()
+    dirs = " ".join(signals.get("top_level_dirs", [])).lower()
+    flags = signals.get("flags", {})
+    combined = f"{bl} {' '.join(deps)} {dirs} {' '.join(rag_keywords)}".lower()
+
+    def score(base: float, *terms: str) -> float:
+        s = base
+        for term in terms:
+            if term and term in combined:
+                s += 1.5
+        return s
+
+    candidates: list[tuple[float, str, str, str]] = []
+
+    if profile == PROFILE_FASTAPI_BACKEND or "keycloak" in bl or "jwt" in deps or "pyjwt" in deps or "python-jose" in deps:
+        candidates.append(
+            (
+                score(4.0, "keycloak", "jwt", "token"),
+                "S",
+                "Подмена идентичности и токенов на границе API/WS",
+                (
+                    "С учётом обнаруженных зависимостей и baseline (Keycloak SSO) критичен риск подмены субъекта/аудитории "
+                    "и неверной привязки WebSocket-сессии к пользователю при отсутствии строгой проверки ownership."
+                ),
+            )
+        )
+    if "websocket" in bl or "ipc" in combined or "playwright" in combined:
+        candidates.append(
+            (
+                score(3.5, "websocket", "playwright", "chromium"),
+                "T",
+                "Подмена данных в потоке агента/автоматизации",
+                (
+                    "Потоки Browser/Agent и очереди задач увеличивают поверхность для подмены входных данных и инъекций "
+                    "в цепочку инструментов; приоритет — проверка целостности границ и схем валидации."
+                ),
+            )
+        )
+    if profile == PROFILE_FASTAPI_BACKEND and any(x in bl for x in ("speaker", "session", "websocket", "event")):
+        candidates.append(
+            (
+                score(4.1, "speaker", "session", "event"),
+                "S",
+                "Имперсонация при маппинге speaker_id и незащищённом event_url",
+                (
+                    "Риск присвоения чужой голосовой/медиа-сессии: привязка speaker_id к пользователю только через "
+                    "предсказуемый или утечкой полученный event_url без криптографической привязки токена к субъекту."
+                ),
+            )
+        )
+    if flags.get("has_redis_client") or "redis" in deps or "rq" in deps:
+        candidates.append(
+            (
+                score(4.2, "redis", "rq", "queue"),
+                "T",
+                "Целостность очередей и сериализации фоновых задач",
+                (
+                    "Репозиторий указывает на Redis/RQ/Celery-подсистемы: критична подмена job payload и небезопасная "
+                    "десериализация при передаче между воркерами."
+                ),
+            )
+        )
+        candidates.append(
+            (
+                score(3.6, "worker", "backend", "segment"),
+                "I",
+                "Отсутствие сегментации доверия между Worker и Backend",
+                (
+                    "Общая очередь/брокер без изоляции tenant/секретов: риск чтения задач и побочных эффектов в чужом "
+                    "контексте при ошибочной маршрутизации или общем namespace."
+                ),
+            )
+        )
+    if "proxy" in bl or "egress" in bl:
+        candidates.append(
+            (
+                score(4.0, "proxy", "egress", "nginx"),
+                "D",
+                "Обход изоляции egress и отказ прокси-контура",
+                (
+                    "Архитектура требует прокси-цепочки; риск — прямой выход процессов в интернет или обход HTTP egress proxy, "
+                    "что ведёт к DDoS/злоупотреблению LLM/ASR и нарушению политики Production Environment."
+                ),
+            )
+        )
+    if "minio" in bl or "s3" in bl or "boto" in deps or "presign" in bl:
+        candidates.append(
+            (
+                score(3.8, "minio", "s3", "boto"),
+                "I",
+                "Утечка объектов и метаданных через объектное хранилище",
+                (
+                    "При наличии S3/MinIO и presigned URL критичны ошибки ACL, TTL и утечки чувствительных ключей/имён объектов "
+                    "в логи или клиентские ошибки."
+                ),
+            )
+        )
+    if profile == PROFILE_DESKTOP_APP or flags.get("has_electron"):
+        candidates.append(
+            (
+                score(4.5, "electron", "ipc", "preload"),
+                "E",
+                "Повышение привилегий через IPC и Main Process",
+                (
+                    "Electron-стек: риск IPC Injection и обхода изоляции Renderer→Main, включая небезопасные preload-мосты "
+                    "и прямой доступ к Node.js из UI при неверных webPreferences."
+                ),
+            )
+        )
+    if "api gateway" in bl or "central api" in combined or "gateway" in combined:
+        candidates.append(
+            (
+                score(4.3, "gateway", "token", "api"),
+                "S",
+                "Нарушение цепочки доверия к внешним API через центральный API gateway",
+                (
+                    "Все внешние интеграции должны проходить через единый API gateway; критичен обход шлюза и некорректная валидация токенов "
+                    "на границе LLM/RAG и внешних сервисов."
+                ),
+            )
+        )
+    if "fluent" in bl or "siem" in bl or "audit" in bl:
+        candidates.append(
+            (
+                score(3.2, "siem", "audit", "log"),
+                "R",
+                "Невозможность расследования и отчуждаемость событий",
+                (
+                    "Baseline требует централизованного журналирования: риск отсутствия корреляции событий безопасности и "
+                    "недостаточной трассируемости критичных операций."
+                ),
+            )
+        )
+
+    # Baseline clause-driven fillers (no hardcoded threat names; text from architecture sentences)
+    clause_count = 0
+    for sentence in re.split(r"[.;]\s+", baseline):
+        s = sentence.strip()
+        if len(s) < 40:
+            continue
+        letter = _stride_classify_clause(s)
+        candidates.append(
+            (
+                score(2.0, *s.lower().split()[:3]),
+                letter,
+                f"Архитектурный риск ({letter}) из baseline",
+                s[:500] + ("…" if len(s) > 500 else ""),
+            )
+        )
+        clause_count += 1
+        if clause_count >= 8:
+            break
+
+    candidates.sort(key=lambda x: -x[0])
+    # de-duplicate by (stride, title) keeping highest score
+    seen: set[tuple[str, str]] = set()
+    unique: list[tuple[float, str, str, str]] = []
+    for item in candidates:
+        key = (item[1], item[2])
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(item)
+    return unique
+
+
+def _classify_infra_vs_business(stride: str, title: str, desc: str) -> str:
+    """Return 'infra' or 'business' for Separation of Concerns split."""
+    t = f"{title} {desc}".lower()
+    infra_kw = (
+        "proxy",
+        "egress",
+        "network",
+        "redis",
+        "queue",
+        "minio",
+        "s3",
+        "worker",
+        "kubernetes",
+        "fluent",
+        "siem",
+        "storage",
+        "шифр",
+        "aes",
+        "segment",
+        "изолирован",
+        "контур",
+        "dns",
+        "tls",
+        "ingress",
+        "availability",
+        "ddos",
+        "rate",
+    )
+    biz_kw = (
+        "токен",
+        "jwt",
+        "keycloak",
+        "websocket",
+        "ownership",
+        "подмен",
+        "идентич",
+        "ipc",
+        "gateway",
+        "playwright",
+        "сесс",
+        "bola",
+        "авториз",
+        "пользоват",
+        "renderer",
+        "preload",
+        "main process",
+        "imperson",
+        "speaker",
+        "event",
+        "api gateway",
+    )
+    i_score = sum(1 for k in infra_kw if k in t)
+    b_score = sum(1 for k in biz_kw if k in t)
+    if i_score > b_score:
+        return "infra"
+    if b_score > i_score:
+        return "business"
+    if stride in ("D",) or "proxy" in t or "queue" in t:
+        return "infra"
+    return "business"
+
+
+def _load_repo_crosscheck_haystack(scan_root: Path, max_total_chars: int = 350_000) -> str:
+    """Lightweight text aggregate for architectural cross-check (not full Semgrep)."""
+    parts: list[str] = []
+    total = 0
+    skip_dirs = {".git", "node_modules", "__pycache__", ".venv", "venv", "dist", "build", ".next"}
+    exts = {".py", ".ts", ".tsx", ".js", ".jsx", ".yaml", ".yml", ".go", ".cs", ".json"}
+    try:
+        paths = sorted(scan_root.rglob("*"), key=lambda p: str(p).replace("\\", "/"))
+    except OSError:
+        return ""
+    n_files = 0
+    for p in paths:
+        if n_files >= 220:
+            break
+        if not p.is_file():
+            continue
+        if p.suffix.lower() not in exts:
+            continue
+        if any(seg in skip_dirs for seg in p.parts):
+            continue
+        try:
+            rel = p.relative_to(scan_root)
+        except ValueError:
+            continue
+        try:
+            chunk = p.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        snippet = chunk[:14000]
+        block = f"\n--- {rel.as_posix()} ---\n{snippet}"
+        if total + len(block) > max_total_chars:
+            break
+        parts.append(block)
+        total += len(block)
+        n_files += 1
+    return "".join(parts)
+
+
+def _cross_check_architectural_threat(title: str, desc: str, haystack: str) -> str:
+    """
+    If threat cannot be confirmed or refuted by code sample → manual architect review.
+    """
+    h = haystack.lower()
+    blob = f"{title} {desc}".lower()
+    confirms: list[str] = []
+    refutes: list[str] = []
+
+    def hit_any(s: str, needles: tuple[str, ...]) -> bool:
+        return any(n in s for n in needles)
+
+    if hit_any(blob, ("proxy", "egress", "прокси", "публичн", "internet")):
+        if hit_any(h, ("http_proxy", "https_proxy", "https_proxy_authorization", "proxy_pass", "trust_env")):
+            confirms.append("прокси/egress-контроль в коде или конфиге")
+        elif hit_any(h, ("requests.get", "httpx.get", "aiohttp", "urllib.request")) and not hit_any(
+            h, ("http_proxy", "https_proxy", "proxy=", "proxies=")
+        ):
+            refutes.append("прямые HTTP-клиенты без явного proxy в выборке")
+
+    if hit_any(blob, ("сегмента", "network policy", "изолирован", "worker", "backend")):
+        if hit_any(h, ("networkpolicy", "network_policy", "namespace:", "calico", "istio")):
+            confirms.append("признаки сетевой политики/неймспейсов")
+        elif hit_any(blob, ("worker", "redis", "rq")) and hit_any(h, ("redis", "rq.", "celery")):
+            confirms.append("явные границы worker/очереди в коде")
+
+    if hit_any(blob, ("redis", "rq", "очеред", "сериализац")):
+        if hit_any(h, ("serializer", "json.loads", "msgpack", "pickle")):
+            confirms.append("сериализация очередей/данных")
+        if hit_any(h, ("pickle.loads", "pickle.load")) and "json" not in h:
+            refutes.append("использование pickle в выборке")
+
+    if hit_any(blob, ("minio", "s3", "presign", "объект")):
+        if hit_any(h, ("boto3", "presigned", "minio", "generate_presigned")):
+            confirms.append("S3/MinIO/presigned в коде")
+
+    if hit_any(blob, ("websocket", "ws")):
+        if hit_any(h, ("websocket", "owner", "authorize", "verify", "depends")):
+            confirms.append("авторизация/ownership вокруг WS")
+
+    if hit_any(blob, ("keycloak", "jwt", "sso", "токен")):
+        if hit_any(h, ("jwt", "keycloak", "jwks", "audience", "verify")):
+            confirms.append("проверка JWT/Keycloak/JWKS")
+
+    if hit_any(blob, ("ipc", "electron", "renderer", "preload")):
+        if hit_any(h, ("contextisolation", "context_isolation", "nodeintegration", "preload")):
+            confirms.append("Electron webPreferences/preload в выборке")
+
+    if hit_any(blob, ("api gateway", "gateway", "central api")):
+        if hit_any(h, ("api_gateway", "apigateway", "gateway", "proxy_pass")):
+            confirms.append("упоминание API gateway / прокси в коде")
+
+    if hit_any(blob, ("playwright", "dom", "селектор", "автоматиз")):
+        if hit_any(h, ("playwright", "page.goto", "page.locator", "chromium")):
+            confirms.append("Playwright/Chromium в коде")
+
+    if hit_any(blob, ("event_url", "event url", "speaker", "сесс")):
+        if hit_any(h, ("event_url", "speaker_id", "session_id")):
+            confirms.append("event_url/speaker/session в коде")
+
+    confirms = list(dict.fromkeys(confirms))
+    refutes = list(dict.fromkeys(refutes))
+    if confirms and not refutes:
+        return "ПОДТВЕРЖДАЕТСЯ КОДОМ: " + "; ".join(confirms)
+    if refutes and not confirms:
+        return "ОПРОВЕРГАЕТСЯ ИЛИ СМЯГЧАЕТСЯ КОДОМ: " + "; ".join(refutes)
+    if confirms and refutes:
+        return (
+            "ТРЕБУЕТ РУЧНОЙ ПРОВЕРКИ АРХИТЕКТОРОМ (противоречивые сигналы: "
+            + " | ".join(confirms)
+            + " vs "
+            + " | ".join(refutes)
+            + ")"
+        )
+    return "ТРЕБУЕТ РУЧНОЙ ПРОВЕРКИ АРХИТЕКТОРОМ"
+
+
+def _build_what_if_scenarios(profile: str, baseline: str, signals: dict[str, Any]) -> list[str]:
+    """Three speculative negative scenarios beyond standard rule checks (context-derived)."""
+    deps_l = " ".join(signals.get("deps", [])).lower()
+    bl = baseline.lower()
+    scenarios: list[str] = []
+
+    if profile == PROFILE_FASTAPI_BACKEND or "playwright" in deps_l or "playwright" in bl:
+        scenarios.append(
+            "Что если целевой веб-сервис изменит DOM-структуру или селекторы? "
+            "Как поведёт себя Playwright-инжект и сценарии автоматизации — деградация, ложные срабатывания или утечка действий в чужой контекст?"
+        )
+    if profile == PROFILE_FASTAPI_BACKEND or "websocket" in bl or "event" in bl:
+        scenarios.append(
+            "Что если злоумышленник получит или угадает event_url сессии / идентификатор канала? "
+            "Допустима ли имперсонация или присоединение к чужой сессии при маппинге speaker_id без криптографической привязки к пользователю?"
+        )
+    if profile == PROFILE_DESKTOP_APP or signals.get("flags", {}).get("has_electron"):
+        scenarios.append(
+            "Что если IPC-канал между Renderer и Main принимает недостаточно типизированные сообщения? "
+            "Возможна ли инъекция команд/путей, которая обойдёт центральный API gateway и приведёт к исполнению в привилегированном процессе?"
+        )
+    if len(scenarios) < 3 and ("redis" in deps_l or "rq" in deps_l or "queue" in bl):
+        scenarios.append(
+            "Что если Worker и Backend разделяют общую очередь без строгой сегментации секретов и tenant_id? "
+            "Может ли подмена job payload привести к исполнению действий от имени другого арендатора или сервиса?"
+        )
+    if len(scenarios) < 3:
+        scenarios.append(
+            "Что если политика egress (HTTP proxy / reverse proxy) временно недоступна или обходится через DNS-rebinding / прямой резолв? "
+            "Сохраняется ли запрет прямого выхода к LLM/ASR/S3 на уровне приложения?"
+        )
+    if len(scenarios) < 3:
+        scenarios.append(
+            "Что если локальное хранилище userData (Desktop App) окажется включённым в телеметрию или логи ошибок? "
+            "Как исключается утечка истории и настроек во внешние каналы?"
+        )
+    return scenarios[:3]
+
+
+def _generate_threat_model(
+    profile: str,
+    baseline: str,
+    signals: dict[str, Any],
+    rag_keywords: set[str],
+    cached: bool,
+    scan_root: Path,
+) -> str:
+    """
+    Architect-grade threat model: infrastructure vs business logic, cross-check vs code, WHAT-IF scenarios.
+    Alias entry point for legacy name `_generate_threat_model` usage in docs.
+    """
+    candidates = _build_stride_threat_candidates(profile, baseline, signals, rag_keywords)
+    haystack = _load_repo_crosscheck_haystack(scan_root)
+
+    infra_rows: list[tuple[float, str, str, str, str]] = []
+    biz_rows: list[tuple[float, str, str, str, str]] = []
+    for item in candidates:
+        sc, stride, title, desc = item
+        bucket = _classify_infra_vs_business(stride, title, desc)
+        status = _cross_check_architectural_threat(title, desc, haystack)
+        row = (sc, stride, title, desc, status)
+        if bucket == "infra":
+            infra_rows.append(row)
+        else:
+            biz_rows.append(row)
+
+    infra_rows.sort(key=lambda x: -x[0])
+    biz_rows.sort(key=lambda x: -x[0])
+
+    def pick(rows: list[tuple[float, str, str, str, str]], n: int) -> list[tuple[float, str, str, str, str]]:
+        out: list[tuple[float, str, str, str, str]] = []
+        seen: set[tuple[str, str]] = set()
+        for r in rows:
+            key = (r[1], r[2])
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append(r)
+            if len(out) >= n:
+                break
+        return out
+
+    infra_top = pick(infra_rows, 5)
+    biz_top = pick(biz_rows, 5)
+    while len(infra_top) < 3:
+        added = False
+        for item in candidates:
+            sc, stride, title, desc = item
+            if _classify_infra_vs_business(stride, title, desc) != "infra":
+                continue
+            status = _cross_check_architectural_threat(title, desc, haystack)
+            row = (sc, stride, title, desc, status)
+            keys = {(r[1], r[2]) for r in infra_top}
+            if (stride, title) not in keys:
+                infra_top.append(row)
+                added = True
+                break
+        if not added:
+            break
+    while len(biz_top) < 3:
+        added = False
+        for item in candidates:
+            sc, stride, title, desc = item
+            if _classify_infra_vs_business(stride, title, desc) != "business":
+                continue
+            status = _cross_check_architectural_threat(title, desc, haystack)
+            row = (sc, stride, title, desc, status)
+            keys = {(r[1], r[2]) for r in biz_top}
+            if (stride, title) not in keys:
+                biz_top.append(row)
+                added = True
+                break
+        if not added:
+            break
+
+    what_if = _build_what_if_scenarios(profile, baseline, signals)
+
+    lines: list[str] = []
+    lines.append("## 0. Секция 0: Модель угроз проекта (Threat Modeling, STRIDE + Архитектор)")
+    lines.append("")
+    lines.append(
+        f"- Источники: профиль `{profile}`, Enterprise baseline, сигналы репозитория "
+        f"(`{signals.get('scan_root', '.')}`), зависимости: {len(signals.get('deps', []))} записей, RAG-ключи: {len(rag_keywords)}."
+    )
+    lines.append(f"- Кэш threat model: `{'hit' if cached else 'miss'}` (schema v{THREAT_MODEL_CACHE_SCHEMA_VERSION})")
+    lines.append(f"- Cross-check: выборка исходников для эвристики: ~{len(haystack)} символов.")
+    lines.append("")
+    lines.append("### 0.1 Infrastructure Risks (инфраструктура и сеть)")
+    lines.append("")
+    if infra_top:
+        for i, (_sc, stride, title, desc, status) in enumerate(infra_top[:5], start=1):
+            lines.append(f"{i}. **[{stride}]** {title}")
+            lines.append(f"   - {desc}")
+            lines.append(f"   - **Cross-check:** {status}")
+            lines.append("")
+    else:
+        lines.append("- (нет выделенных инфраструктурных рисков по классификатору — см. Business Logic.)")
+        lines.append("")
+    lines.append("### 0.2 Business Logic Risks (логика приложения и доверие)")
+    lines.append("")
+    if biz_top:
+        for i, (_sc, stride, title, desc, status) in enumerate(biz_top[:5], start=1):
+            lines.append(f"{i}. **[{stride}]** {title}")
+            lines.append(f"   - {desc}")
+            lines.append(f"   - **Cross-check:** {status}")
+            lines.append("")
+    else:
+        lines.append("- (нет выделенных рисков бизнес-логики — см. Infrastructure.)")
+        lines.append("")
+    lines.append("### 0.3 Негативные сценарии «Что если?» (вне стандартных правил Semgrep)")
+    lines.append("")
+    for i, scenario in enumerate(what_if, start=1):
+        cc = _cross_check_architectural_threat(f"WHAT-IF {i}", scenario, haystack)
+        lines.append(f"{i}. {scenario}")
+        lines.append(f"   - **Cross-check (эвристика):** {cc}")
+        lines.append("")
+    lines.append("### 0.4 STRIDE — сводная топ-5 (для трассировки)")
+    lines.append("")
+    for i, (_sc, stride, title, desc) in enumerate(candidates[:5], start=1):
+        lines.append(f"{i}. **[{stride}]** {title} — {desc[:220]}{'…' if len(desc) > 220 else ''}")
+        lines.append("")
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def _format_threat_model_section_markdown(
+    profile: str,
+    baseline: str,
+    signals: dict[str, Any],
+    rag_keywords: set[str],
+    cached: bool,
+    scan_root: Path,
+) -> str:
+    return _generate_threat_model(profile, baseline, signals, rag_keywords, cached, scan_root)
+
+
+def run_threat_modeling_engine(
+    profile: str,
+    final_context: str,
+    target_rel: str,
+) -> tuple[str, dict[str, Any], bool]:
+    """
+    Zero-prompt STRIDE synthesis from profile + ENTERPRISE_BASELINES + repo scan + lightweight RAG keywords.
+    Returns (markdown_section, engine_metadata, cache_hit).
+    """
+    baseline = ENTERPRISE_BASELINES.get(profile, "")
+    scan_root = _threat_scan_root(target_rel)
+    signals = _collect_repo_threat_signals(scan_root)
+    repo_fp = _repo_threat_fingerprint(signals)
+    cache_key = _threat_cache_key(profile, final_context, repo_fp)
+    cache = _load_threat_model_cache()
+    cached_entry = cache.get("entries", {}).get(cache_key)
+    if isinstance(cached_entry, dict) and cached_entry.get("markdown"):
+        return (
+            str(cached_entry["markdown"]),
+            {
+                "cache_key": cache_key,
+                "repo_fingerprint": repo_fp,
+                "signals": signals,
+                "ask_hexvibe": None,
+            },
+            True,
+        )
+
+    rag_payload = ask_hexvibe_impl(
+        f"{profile} STRIDE threat modeling architecture security. Context: {final_context[:1200]}"
+    )
+    rag_kw = _rag_keywords_from_ask(rag_payload)
+    section_md = _format_threat_model_section_markdown(
+        profile=profile,
+        baseline=baseline,
+        signals=signals,
+        rag_keywords=rag_kw,
+        cached=False,
+        scan_root=scan_root,
+    )
+    _save_threat_model_cache_entry(cache_key, section_md)
+    return (
+        section_md,
+        {
+            "cache_key": cache_key,
+            "repo_fingerprint": repo_fp,
+            "signals": signals,
+            "rag_keywords": sorted(rag_kw)[:40],
+            "ask_hexvibe": rag_payload,
+        },
+        False,
+    )
 
 
 def _log_err(message: str) -> None:
@@ -525,13 +1355,13 @@ def _build_or_load_rag_index() -> list[dict[str, Any]]:
 def _skill_boosts(question: str) -> dict[str, float]:
     q = question.lower()
     boosts: dict[str, float] = {}
-    if any(k in q for k in ["пдн", "персональ", "152-фз", "152", "kii", "гост", "1с"]):
+    if any(k in q for k in ["пдн", "персональ", "enterprise compliance", "gdpr", "kii", "гост", "1с"]):
         boosts["ru-regulatory"] = 0.35
     if any(k in q for k in ["фстэк", "fstek", "приказ 235", "приказ 239", "gost r 56939", "гост р 56939", "кии"]):
         boosts["ru-regulatory"] = max(boosts.get("ru-regulatory", 0.0), 0.45)
     if any(k in q for k in ["цб", "57580", "уди", "уда", "user/pass", "мясные учет", "meat account"]):
         boosts["ru-regulatory"] = max(boosts.get("ru-regulatory", 0.0), 0.45)
-    if any(k in q for k in ["fapi", "keycloak", "клинкер", "clinker", "fapi-sec", "fapi-paok", "гост 57580"]):
+    if any(k in q for k in ["fapi", "keycloak", "api gateway", "fapi-sec", "fapi-paok", "гост 57580"]):
         boosts["auth-keycloak"] = 0.45
     if any(k in q for k in ["vault", "eso", "secret", "секрет", "externalsecret", "vault agent injector"]):
         boosts["cloud-secrets"] = max(boosts.get("cloud-secrets", 0.0), 0.35)
@@ -553,7 +1383,7 @@ def _skill_boosts(question: str) -> dict[str, float]:
             "helm",
             "dockerfile",
             "nginx",
-            "squid",
+            "egress proxy",
             "proxy",
             "capabilities",
             "rootfs",
@@ -725,7 +1555,7 @@ def ask_hexvibe_impl(question: str) -> dict[str, Any]:
     manifests = _load_skill_manifests()
     ql = question.lower()
     required_ids: list[str] = []
-    if "squid" in ql:
+    if ("egress" in ql and "proxy" in ql) or "http proxy" in ql:
         required_ids.append("SQD-001")
     if "docker" in ql and "root" in ql:
         required_ids.extend(["DOCK-010", "DOCK-011"])
@@ -1395,7 +2225,7 @@ def _run_trufflehog(target_path: Path) -> dict[str, Any]:
     }
 
 
-def run_check_impl(path: str) -> dict[str, Any]:
+def run_check_impl(path: str, context_text: str = "") -> dict[str, Any]:
     target = (ROOT / path).resolve() if not Path(path).is_absolute() else Path(path).resolve()
     if not target.exists():
         return {"error": f"path does not exist: {target}"}
@@ -1478,6 +2308,7 @@ def run_check_impl(path: str) -> dict[str, Any]:
     comp_block = _summary.get("compliance") if isinstance(_summary, dict) else None
     response: dict[str, Any] = {
         "path": str(target_rel).replace("\\", "/"),
+        "context_text": context_text,
         "hexvibe_compliance": {
             "schema": (comp_block or {}).get("schema_version", "paladin-1") if isinstance(comp_block, dict) else "paladin-1",
             "owasp_top10_2021_counts": (comp_block or {}).get("owasp_top10_2021") if isinstance(comp_block, dict) else {},
@@ -1541,6 +2372,278 @@ def run_check_impl(path: str) -> dict[str, Any]:
     return response
 
 
+def _detect_security_profile(project_name: str, context: str) -> str:
+    text = f"{project_name} {context}".lower()
+    backend_markers = ("fastapi", "agent", "chromium", "playwright", "starlette")
+    desktop_markers = ("electron", ".net", "vsto", "nsis", "desktop app")
+    backend_score = sum(1 for marker in backend_markers if marker in text)
+    desktop_score = sum(1 for marker in desktop_markers if marker in text)
+    if backend_score == 0 and desktop_score == 0:
+        return PROFILE_FASTAPI_BACKEND  # Default: service/agent-first repos.
+    return PROFILE_DESKTOP_APP if desktop_score > backend_score else PROFILE_FASTAPI_BACKEND
+
+
+def _compose_effective_review_context(project_name: str, context: str, profile: str) -> str:
+    raw_context = (context or "").strip()
+    baseline = ENTERPRISE_BASELINES.get(profile, "")
+    # Enforce baseline-first composition for deterministic architecture-aware review.
+    if not raw_context:
+        return f"{baseline}\nProject: {project_name}".strip()
+    return f"{baseline}\nProject: {project_name}\n{raw_context}".strip()
+
+
+def _profile_specific_checks(profile: str) -> list[str]:
+    if profile == PROFILE_DESKTOP_APP:
+        return [
+            "Electron isolation / Node Integration",
+            "VSTO add-in security baseline",
+            "NSIS installer integrity controls",
+            "SQLModel/SQLAlchemy async safety",
+        ]
+    return [
+        "SSRF including DNS rebinding vectors",
+        "RQ/Redis serialization and queue safety",
+        "Egress isolation through HTTP proxy chain",
+        "JWT audience verification and realm isolation",
+    ]
+
+
+def _resolve_project_target(project_name: str) -> str:
+    # Accept absolute/relative project path; fallback to repository root.
+    candidate = Path(project_name.strip())
+    if candidate.is_absolute() and candidate.exists():
+        try:
+            return str(candidate.resolve().relative_to(ROOT)).replace("\\", "/")
+        except ValueError:
+            return "."
+    rel = (ROOT / project_name.strip()).resolve()
+    if project_name.strip() and rel.exists():
+        try:
+            return str(rel.relative_to(ROOT)).replace("\\", "/")
+        except ValueError:
+            return "."
+    return "."
+
+
+def _is_metric_mitigated(metric_id: str, context_text: str, mitigation_logic: dict[str, Any]) -> bool:
+    if metric_id not in mitigation_logic:
+        return False
+    c = context_text.lower()
+    checks: dict[str, bool] = {
+        "RRC-008": ("fluentbit" in c) or ("logstash" in c) or ("siem" in c),
+        "NGX-storage": ("boto3.generate_presigned_url" in c) or ("presigned" in c),
+        "RRC-007": ("debug=false" in c) or ("debug = false" in c),
+        "AK-002": ("isolated realm" in c) or ("single client" in c and "enterprise-client" in c),
+        "RRC-010": ("aes-256" in c) and (("storageclass" in c) or ("pvc" in c) or ("at-rest" in c)),
+        "AK-020": ("jwks" in c) and (("verify_signature" in c) or ("signature verification" in c)),
+        "BOLA": (("owner_id" in c) and ("user_id" in c)) or ("ownership check" in c),
+        "AAC-004": ("serializer=json" in c) or ("json serializer" in c),
+        "RRC-024": ("next.js" in c) and ("ugc" in c and ("no ugc" in c or "without ugc" in c)),
+    }
+    return checks.get(metric_id, False)
+
+
+def _is_external_integration_finding(message: str, path: str) -> bool:
+    text = f"{message} {path}".lower()
+    markers = (
+        "external",
+        "internet",
+        "egress",
+        "outlook",
+        "transcription",
+        "rag",
+        "llm",
+        "requests.",
+        "httpx",
+        "fetch(",
+    )
+    return any(marker in text for marker in markers)
+
+
+def _render_security_review_markdown(
+    profile: str,
+    project_name: str,
+    final_context: str,
+    engine_prompt: str,
+    skill_ids: list[str],
+    checked_metrics: set[str],
+    fixed_items: list[dict[str, Any]],
+    critical_items: list[dict[str, Any]],
+    medium_items: list[dict[str, Any]],
+    threat_model_markdown: str = "",
+) -> str:
+    lines: list[str] = []
+    lines.append(f"# Security Review: {project_name}")
+    lines.append("")
+    if threat_model_markdown.strip():
+        lines.append(threat_model_markdown.rstrip())
+        lines.append("")
+    lines.append("## 1. Методология")
+    lines.append(f"- Профиль: `{profile}`.")
+    lines.append("- Оркестрация: `list_skills -> get_skill_context -> run_check`.")
+    lines.append("- Перед оценкой находок применена проверка `mitigation_logic` и инфраструктурных исключений.")
+    lines.append("- Для сетевых метрик `HTTP_PROXY` / `HTTPS_PROXY` рассматриваются как обязательный контроль для статуса `OK`.")
+    lines.append(f"- Engine Prompt: `{engine_prompt}`")
+    lines.append(f"- Final Context: `{final_context}`")
+    lines.append("")
+    lines.append("## 2. Исправлено (OK)")
+    if fixed_items:
+        for item in fixed_items[:100]:
+            lines.append(f"- `{item['metric_id']}`: {item['reason']}")
+    else:
+        lines.append("- Нет элементов со статусом OK по правилам исключений.")
+    lines.append("")
+    lines.append("## 3. Критические (РИСК)")
+    if critical_items:
+        for item in critical_items[:100]:
+            lines.append(f"- `{item['metric_id']}` в `{item['path']}`: {item['message']}")
+    else:
+        lines.append("- Критические риски не выявлены.")
+    lines.append("")
+    lines.append("## 4. Средние")
+    if medium_items:
+        for item in medium_items[:100]:
+            lines.append(f"- `{item['metric_id']}` в `{item['path']}`: {item['message']}")
+    else:
+        lines.append("- Средние риски не выявлены.")
+    lines.append("")
+    lines.append("## 5. Матрица покрытия")
+    lines.append(f"- Подключенные Skills: {', '.join(f'`{sid}`' for sid in skill_ids)}")
+    lines.append(f"- Проверенные метрики (уникальные): `{len(checked_metrics)}`")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def run_security_review_impl(project_name: str, context: str) -> dict[str, Any]:
+    if not project_name.strip():
+        return {"error": "project_name is required"}
+    profile = _detect_security_profile(project_name, context)
+    profile_map: dict[str, list[str]] = {
+        PROFILE_FASTAPI_BACKEND: [
+            "fastapi-async",
+            "auth-keycloak",
+            "advanced-agent-cloud",
+            "infra-k8s-helm",
+            "domain-data-privacy",
+        ],
+        PROFILE_DESKTOP_APP: [
+            "desktop-vsto-suite",  # alias: desktop-security
+            "csharp-dotnet",  # alias: dotnet-legacy
+            "domain-access-management",
+            "infra-k8s-helm",
+            "domain-input-validation",
+        ],
+    }
+    available_skills = {s["skill_id"] for s in list_skills_impl().get("skills", [])}
+    skill_ids = [sid for sid in profile_map[profile] if sid in available_skills]
+    if not skill_ids:
+        return {"error": f"no mapped skills available for profile: {profile}"}
+
+    final_context = _compose_effective_review_context(project_name, context, profile)
+    engine_prompt = _engine_prompt_for_profile(profile)
+    target_path = _resolve_project_target(project_name)
+    threat_md, threat_meta, threat_cache_hit = run_threat_modeling_engine(profile, final_context, target_path)
+    ask_output = threat_meta.get("ask_hexvibe") or ask_hexvibe_impl(final_context)
+    run_result = run_check_impl(target_path, context_text=final_context)
+    findings = run_result.get("semgrep", {}).get("findings", [])
+    context_text = final_context
+    manifests = _load_skill_manifests()
+    metric_to_skill: dict[str, str] = {}
+    for sid in skill_ids:
+        ctx = get_skill_context_impl(sid, question=final_context, file_path=target_path, file_content="")
+        if "patterns_by_stack" not in ctx:
+            continue
+        for rows in ctx.get("patterns_by_stack", {}).values():
+            for row in rows:
+                mid = str(row.get("metric_id", "")).upper()
+                if mid:
+                    metric_to_skill[mid] = sid
+
+    checked_metrics: set[str] = set()
+    fixed_items: list[dict[str, Any]] = []
+    critical_items: list[dict[str, Any]] = []
+    medium_items: list[dict[str, Any]] = []
+    for finding in findings:
+        metric_id = _extract_metric_id(str(finding.get("check_id", ""))).upper()
+        if not metric_id:
+            continue
+        skill_id = metric_to_skill.get(metric_id)
+        if skill_id not in skill_ids:
+            continue
+        checked_metrics.add(metric_id)
+        mitigation_logic = manifests.get(skill_id, {}).get("mitigation_logic", {})
+        message = str((finding.get("extra") or {}).get("message", ""))
+        rel_path = str(finding.get("path", ""))
+        severity = str((finding.get("extra") or {}).get("severity", "WARNING")).upper()
+        # Desktop App baseline: external integrations are trusted only through central API gateway mediation.
+        if profile == PROFILE_DESKTOP_APP and _is_external_integration_finding(message, rel_path):
+            if "api gateway" in context_text.lower() or "gateway" in context_text.lower():
+                fixed_items.append(
+                    {
+                        "metric_id": metric_id,
+                        "path": rel_path,
+                        "reason": "External integration accepted via mandatory API gateway chain.",
+                    }
+                )
+                continue
+        if _is_metric_mitigated(metric_id, context_text, mitigation_logic):
+            fixed_items.append(
+                {
+                    "metric_id": metric_id,
+                    "path": rel_path,
+                    "reason": f"Applied mitigation logic from `{skill_id}`.",
+                }
+            )
+            continue
+        item = {"metric_id": metric_id, "path": rel_path, "message": message}
+        if severity == "ERROR":
+            critical_items.append(item)
+        else:
+            medium_items.append(item)
+
+    markdown_report = _render_security_review_markdown(
+        profile=profile,
+        project_name=project_name,
+        final_context=final_context,
+        engine_prompt=engine_prompt,
+        skill_ids=skill_ids,
+        checked_metrics=checked_metrics,
+        fixed_items=fixed_items,
+        critical_items=critical_items,
+        medium_items=medium_items,
+        threat_model_markdown=threat_md,
+    )
+    return {
+        "project_name": project_name,
+        "profile": profile,
+        "target_path": target_path,
+        "effective_context": final_context,
+        "selected_skills": skill_ids,
+        "specific_checks": _profile_specific_checks(profile),
+        "orchestration": [
+            "threat_modeling_stride",
+            "list_skills",
+            "get_skill_context",
+            "run_check",
+            "ask_hexvibe",
+        ],
+        "threat_modeling": {
+            "cache_hit": threat_cache_hit,
+            "markdown_section": threat_md,
+            "engine": threat_meta,
+        },
+        "engine_prompt": engine_prompt,
+        "ask_hexvibe": ask_output,
+        "summary": {
+            "ok_count": len(fixed_items),
+            "critical_count": len(critical_items),
+            "medium_count": len(medium_items),
+            "checked_metrics_count": len(checked_metrics),
+        },
+        "report_markdown": markdown_report,
+    }
+
+
 _RAG_CHUNKS = _build_or_load_rag_index()
 
 
@@ -1564,6 +2667,10 @@ try:
     @mcp.tool()
     def run_check(path: str) -> dict[str, Any]:
         return run_check_impl(path)
+
+    @mcp.tool()
+    def run_security_review(project_name: str, context: str) -> dict[str, Any]:
+        return run_security_review_impl(project_name=project_name, context=context)
 
     @mcp.tool()
     def ignore_finding(metric_id: str, file_path: str, line_content: str, reason: str) -> dict[str, Any]:

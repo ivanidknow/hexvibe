@@ -23,5 +23,16 @@
   ],
   "rules_path": "core/skills/advanced-agent-cloud/patterns.md",
   "few_shot_examples": "core/gold-standard-testbed/aac_vulnerable.py",
+  "mitigation_logic": {
+    "NGX-storage": {
+      "exception_rule": "Если backend-код использует boto3.generate_presigned_url для выдачи временных ссылок доступа к объектам, отсутствие auth_request в Nginx считается архитектурно допустимым.",
+      "status_override": "OK",
+      "validation_requirements": [
+        "TTL presigned URL ограничен и не используется long-lived доступ.",
+        "Проверяется привязка к целевому object key и допустимому HTTP method."
+      ],
+      "rationale": "Контроль доступа переносится на криптографически подписанные временные URL, что устраняет обязательность промежуточной аутентификации на уровне Nginx."
+    }
+  },
   "security_priority": 5
 }

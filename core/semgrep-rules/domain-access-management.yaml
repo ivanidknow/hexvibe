@@ -718,7 +718,7 @@ rules:
           }
       - pattern-regex: 'Vulnerable:\\s*MOB\\-010\\b'
     message: |-
-      HexVibe Detection [MOB-010]: Silk Mobile SAR
+      HexVibe Detection [MOB-010]: Mobile security baseline
     languages:
       - generic
     severity: WARNING
@@ -736,7 +736,7 @@ rules:
           ipcMain.on("export-secrets", (event, payload) => { ... })
       - pattern-regex: 'Vulnerable:\\s*DSK\\-105\\b'
     message: |-
-      HexVibe Detection [DSK-105]: Insight SAR
+      HexVibe Detection [DSK-105]: Desktop security baseline
     languages:
       - generic
     severity: WARNING

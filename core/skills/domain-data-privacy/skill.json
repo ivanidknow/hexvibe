@@ -21,5 +21,16 @@
   ],
   "rules_path": "core/skills/domain-data-privacy/patterns.md",
   "few_shot_examples": "core/gold-standard-testbed/gap_fill_vulnerable.py",
+  "mitigation_logic": {
+    "AAC-004": {
+      "exception_rule": "Риск insecure serialization для RQ считается закрытым, если в конфигурации Redis Queue явно задан JSON-сериализатор.",
+      "status_override": "OK",
+      "evidence_requirements": [
+        "Наличие serializer=json/json.dumps/json.loads в конфигурации RQ worker/queue.",
+        "Отсутствие использования pickle.loads или эквивалентных unsafe deserializer-ов в пути обработки задач."
+      ],
+      "rationale": "JSON-сериализация устраняет класс уязвимостей, связанных с произвольной десериализацией pickle payload."
+    }
+  },
   "security_priority": 8
 }

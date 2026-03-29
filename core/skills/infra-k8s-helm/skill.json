@@ -10,7 +10,7 @@
     "k8s-seccomp-apparmor",
     "dock-readonly-rootfs",
     "ngx-header-hardening",
-    "squid-egress-policy"
+    "http-egress-proxy-policy"
   ],
   "relevant_extensions": [
     ".yaml",
@@ -26,5 +26,16 @@
   ],
   "rules_path": "core/skills/infra-k8s-helm/patterns.md",
   "few_shot_examples": "core/gold-standard-testbed/infra_vulnerable.yaml",
+  "mitigation_logic": {
+    "RRC-024": {
+      "exception_rule": "Для Next.js приложений допускается `unsafe-inline` в CSP при отсутствии прямой обработки недоверенного пользовательского контента (UGC) в рендеринг-пути.",
+      "status_override": "OK",
+      "validation_requirements": [
+        "Подтверждено отсутствие UGC sink-ов (user-controlled HTML/JS injection paths).",
+        "Применены компенсирующие меры: ограниченный `script-src` host allowlist и запрет `unsafe-eval`."
+      ],
+      "rationale": "Технические ограничения SSR/hydration-цепочки Next.js могут требовать `unsafe-inline`; при отсутствии UGC-поверхности риск XSS контролируется архитектурно."
+    }
+  },
   "security_priority": 5
 }

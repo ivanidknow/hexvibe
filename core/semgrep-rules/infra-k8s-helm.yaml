@@ -1106,7 +1106,7 @@ rules:
           http_access allow all
       - pattern-regex: 'Vulnerable:\\s*SQD\\-001\\b'
     message: |-
-      HexVibe Detection [SQD-001]: Squid hardening
+      HexVibe Detection [SQD-001]: HTTP egress proxy hardening
     languages:
       - generic
     severity: WARNING
@@ -1142,7 +1142,7 @@ rules:
           ssl_bump stare all
       - pattern-regex: 'Vulnerable:\\s*SQD\\-003\\b'
     message: |-
-      HexVibe Detection [SQD-003]: Squid TLS interception
+      HexVibe Detection [SQD-003]: HTTP proxy TLS interception
     languages:
       - generic
     severity: WARNING
@@ -1160,7 +1160,7 @@ rules:
           acl SSL_ports port 1-65535
       - pattern-regex: 'Vulnerable:\\s*SQD\\-004\\b'
     message: |-
-      HexVibe Detection [SQD-004]: Squid ACL hardening
+      HexVibe Detection [SQD-004]: HTTP proxy ACL hardening
     languages:
       - generic
     severity: WARNING

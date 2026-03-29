@@ -108,7 +108,7 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 | `CWE-295-PLAYWRIGHT-HTTPS` | TLS trust bypass in browser automation via `ignoreHTTPSErrors: true` | Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists. |
 | `CWE-295-S3-MINIO-VERIFY` | Insecure TLS disable in MinIO/S3 clients (`verify=False`) | Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists. |
 | `CWE-942-S3-PUBLIC-ACL` | Public object ACL exposure in S3/MinIO operations | Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists. |
-| `CWE-400-GIGAAM-UPLOAD-LIMITS` | Missing content-length/file size limits for GigaAM audio upload endpoints | Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists. |
+| `CWE-400-GIGAAM-UPLOAD-LIMITS` | Missing content-length/file size limits for audio upload endpoints (transcription) | Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists. |
 | `CWE-400-GIGAAM-HTTPX-TIMEOUT` | Missing `httpx` timeouts for transcription API calls (resource exhaustion risk) | Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists. |
 | `CWE-94-ELECTRON-WEBPREFS` | Insecure Electron BrowserWindow webPreferences (`nodeIntegration: true` / `contextIsola... | Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering. |
 | `CWE-250-ELECTRON-REMOTE` | Unsafe usage of deprecated Electron `remote` module | Validate data with Zod and sanitize DOM/HTML sinks with DOMPurify before rendering. |

@@ -21,5 +21,16 @@
   ],
   "rules_path": "core/skills/domain-access-management/patterns.md",
   "few_shot_examples": "core/gold-standard-testbed/gap_fill_vulnerable.py",
+  "mitigation_logic": {
+    "BOLA": {
+      "exception_rule": "Если в endpoint-коде реализована явная Ownership-проверка (сравнение user_id из токена и owner_id целевого объекта), риск BOLA считается закрытым.",
+      "status_override": "OK",
+      "validation_requirements": [
+        "Идентификатор субъекта извлекается из верифицированного токена/контекста сессии.",
+        "Перед доступом к объекту выполняется прямое условие равенства user_id == owner_id (или эквивалентная deny-by-default проверка)."
+      ],
+      "rationale": "Объектный доступ ограничен владельцем ресурса, что исключает горизонтальную эскалацию привилегий по IDOR/BOLA сценарию."
+    }
+  },
   "security_priority": 9
 }

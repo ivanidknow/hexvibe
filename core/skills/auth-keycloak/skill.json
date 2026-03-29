@@ -9,7 +9,7 @@
     "ak-dpop-proof",
     "fapi-sec",
     "fapi-paok",
-    "clinker-auth",
+    "enterprise-gateway-auth",
     "gost-crypto-jwt"
   ],
   "relevant_extensions": [
@@ -25,5 +25,27 @@
   ],
   "rules_path": "core/skills/auth-keycloak/patterns.md",
   "few_shot_examples": "core/gold-standard-testbed/api_vulnerable.py",
+  "mitigation_logic": {
+    "AK-002": {
+      "exception_rule": "Если KEYCLOAK_VERIFY_AUD=false, но аудит Keycloak Realm подтверждает наличие только одного активного client_id=enterprise-client, нарушение классифицируется как изолированный контур.",
+      "status_override": "OK",
+      "priority_override": "Low",
+      "label": "Isolated Realm",
+      "evidence_requirements": [
+        "Экспорт/аудит конфигурации realm с единственным активным клиентом.",
+        "Отсутствие доверенных внешних audience для токенов данного realm."
+      ]
+    },
+    "AK-020": {
+      "exception_rule": "Предварительный decode JWT без verify_signature допускается только как технический pre-parse этап, если в той же цепочке вызовов гарантирована последующая обязательная верификация подписи через JWKS.",
+      "status_override": "OK",
+      "validation_requirements": [
+        "Результат pre-decode не используется для authorization decision до успешной подписи/claims валидации.",
+        "После pre-decode выполняется jwt.decode(..., options={\"verify_signature\": true}) или эквивалентная проверка по актуальному JWKS.",
+        "При неуспехе JWKS/подписи обработка прерывается fail-closed."
+      ],
+      "rationale": "Двухэтапная схема parse->verify безопасна при строгом запрете доверия данным токена до криптографической верификации."
+    }
+  },
   "security_priority": 10
 }

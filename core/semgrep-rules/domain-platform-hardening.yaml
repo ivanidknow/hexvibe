@@ -13,7 +13,7 @@ rules:
           badCertificateCallback => true
       - pattern-regex: 'Vulnerable:\\s*MOB\\-001\\b'
     message: |-
-      HexVibe Detection [MOB-001]: Mobile SAR
+      HexVibe Detection [MOB-001]: Mobile security baseline
     languages:
       - generic
     severity: WARNING
@@ -31,7 +31,7 @@ rules:
           print('token - $token')
       - pattern-regex: 'Vulnerable:\\s*MOB\\-010\\b'
     message: |-
-      HexVibe Detection [MOB-010]: Mobile SAR
+      HexVibe Detection [MOB-010]: Mobile security baseline
     languages:
       - generic
     severity: WARNING
@@ -49,7 +49,7 @@ rules:
           Нет FLAG_SECURE в Android activity
       - pattern-regex: 'Vulnerable:\\s*MOB\\-021\\b'
     message: |-
-      HexVibe Detection [MOB-021]: Mobile SAR
+      HexVibe Detection [MOB-021]: Mobile security baseline
     languages:
       - generic
     severity: WARNING

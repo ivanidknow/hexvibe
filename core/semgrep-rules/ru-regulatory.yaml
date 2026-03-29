@@ -14,7 +14,7 @@ rules:
           logger.info("pii", extra={"fio": fio, "snils": snils, "email": email})
       - pattern-regex: 'Vulnerable:\\s*RRC\\-001\\b'
     message: |-
-      HexVibe Detection [RRC-001]: 152-ФЗ (PII in logs)
+      HexVibe Detection [RRC-001]: Enterprise Compliance (PII in logs)
     languages:
       - generic
     severity: WARNING

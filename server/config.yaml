@@ -1,6 +1,6 @@
 # trufflehog-custom-detectors.yaml
 # Custom detectors for TruffleHog v3.x
-# Соответствует gitleaks.rules.toml (MOEX Gitleaks high-confidence config)
+# Соответствует gitleaks.rules.toml (enterprise high-confidence secret scanning baseline)
 # RU-specific tokens + инфраструктура (Vault, Atlassian, Grafana, Nexus/NPM, Elastic, 1C, Kafka)
 #
 # Синхронизация с gitleaks: при добавлении правил в gitleaks.rules.toml добавлять

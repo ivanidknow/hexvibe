@@ -4,7 +4,7 @@
 
 Covers automation agents that combine **headless browsers** (Playwright), **JavaScript/Node** surfaces (Next.js public env), **Python** workers and queues (RQ/redis), **object storage** (S3/MinIO-style), **reverse proxies** (Nginx), **egress controls**, and **real-time** browser APIs (WebRTC). Metrics are prefixed **`AAC`**.
 
-**Product alignment:** critical for **Dion Agent** — browser-bound automation, queues, and cloud-adjacent controls must stay aligned with these metrics.
+**Product alignment:** critical for **browser automation and FastAPI backend agents** — browser-bound automation, queues, and cloud-adjacent controls must stay aligned with these metrics.
 
 ## Top threats
 
@@ -27,7 +27,7 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 | `AAC-005` | Insecure MinIO Pre-signed URL | `expires=timedelta(seconds=45)` + проверка владельца объекта и `method` GET-only где возможно |
 | `AAC-006` | Keycloak SSO Bypass | `claims = jwt.decode(token, key, audience=..., issuer=..., options={"verify_exp": True})` |
 | `AAC-007` | Nginx Rate Limit Missing | `limit_req zone=api burst=20 nodelay;` в том же `location` или выше по цепочке |
-| `AAC-008` | Egress Proxy Bypass (Squid) | `HTTP_PROXY`/`HTTPS_PROXY` заданы на уровне контейнера; `Session(trust_env=True)` |
+| `AAC-008` | Egress Proxy Bypass (HTTP proxy) | `HTTP_PROXY`/`HTTPS_PROXY` заданы на уровне контейнера; `Session(trust_env=True)` |
 | `AAC-009` | Log Injection in Task Queues | `logger.info("job=%s", sanitize(redis_raw_payload))` |
 | `AAC-010` | Insecure WebRTC/VAD Permissions | state-machine: явное `consentGiven === true` до вызова `getUserMedia` |
 | `AAC-011` | MCP tool path/command handling without `abspath` and workspace boundary checks | Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists. |

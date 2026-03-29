@@ -1,8 +1,8 @@
-# RU Regulatory (152-FZ / КИИ)
+# Enterprise Compliance (Regional Controls)
 
 ## Stack overview
 
-Russian regulatory controls for PII logging (152-FZ), data residency/anonymization before foreign AI APIs, GOST / certified crypto usage inside KII, and import substitution portability. Metrics are prefixed **`RRC`**.
+Enterprise and regional compliance controls for PII logging, data residency and anonymization before foreign AI APIs, certified cryptography in critical infrastructure contexts, and import substitution portability. Metrics are prefixed **`RRC`**.
 
 ## Top threats
 
@@ -17,7 +17,7 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 
 | ID | Metric | Stack |
 |---|---|---|
-| `RRC-001` | 152-ФЗ: PII в stdout / внешние логи | Использовать редактирование/маскирование до логирования (например, `redact_email`, `redact_snils`), а также уровень логов без PII по умолчанию. |
+| `RRC-001` | Enterprise Compliance: PII в stdout / внешние логи | Использовать редактирование/маскирование до логирования (например, `redact_email`, `redact_snils`), а также уровень логов без PII по умолчанию. |
 | `RRC-002` | Data Residency: ПДн в зарубежные API без обезличивания | Обезличить/агрегировать ПДн перед отправкой, отделить идентификаторы и payload, добавить контроль/аудит передачи данных. |
 | `RRC-003` | GOST: небезопасные/несертифицированные крипто-библиотеки | Использовать сертифицированные средства криптографии / GOST-совместимые библиотеки, соответствующие требованиям контура КИИ. |
 | `RRC-004` | Import Substitution: hardcoded cloud metadata | Уйти от hardcoded metadata: использовать абстракции конфигурации/переменные окружения и единый механизм discovery для целевого облака. |

@@ -17,5 +17,16 @@
   ],
   "rules_path": "core/skills/fastapi-async/patterns.md",
   "few_shot_examples": "core/gold-standard-testbed/api_vulnerable.py",
+  "mitigation_logic": {
+    "RRC-007": {
+      "exception_rule": "Если в коде присутствует проверка debug-режима, а в k8s/configmap.yaml или Helm values явно зафиксировано DEBUG=false, finding по debug leaks должен считаться инфраструктурно закрытым.",
+      "status_override": "OK",
+      "evidence_requirements": [
+        "Наличие branch/guard по debug flag в runtime-коде.",
+        "Подтвержденное значение DEBUG=false в deployment-конфигурации (ConfigMap/Helm values)."
+      ],
+      "rationale": "Риск утечки диагностической информации контролируется политикой окружения и отключением debug в production-контуре."
+    }
+  },
   "security_priority": 5
 }

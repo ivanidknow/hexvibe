@@ -158,7 +158,7 @@ rules:
           Логирование ФИО/СНИЛС/email в stdout
       - pattern-regex: 'Vulnerable:\\s*RRC\\-001\\b'
     message: |-
-      HexVibe Detection [RRC-001]: 152-FZ
+      HexVibe Detection [RRC-001]: Enterprise Compliance
     languages:
       - generic
     severity: WARNING
@@ -275,7 +275,7 @@ rules:
           }
       - pattern-regex: 'Vulnerable:\\s*MOB\\-021\\b'
     message: |-
-      HexVibe Detection [MOB-021]: Silk Mobile SAR
+      HexVibe Detection [MOB-021]: Mobile security baseline
     languages:
       - generic
     severity: WARNING
