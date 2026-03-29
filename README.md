@@ -12,9 +12,16 @@ The current ruleset is regression-locked at **1000/1000 HIT** within the `core/g
 
 ---
 
-## Architecture Flow
-
-(Insert Mermaid Diagram here: flowchart TD A[Developer] --> B(HexVibe) --> C{Cognitive Engine} --> D[Verified Report])
+```mermaid
+flowchart TD
+    A[Разработчик / AI Agent] -->|Код / Запрос| B(HexVibe MCP Server)
+    B --> C{Cognitive Guardrail}
+    C -->|Фаза 1| D[Архитектурный Context]
+    C -->|Фаза 2| E[Threat Model STRIDE]
+    C -->|Фаза 3| F[Cross-check & Self-critique]
+    F -->|Confidence >= 0.8| G[Verified Report / Autofix]
+    F -->|Low Confidence| H[Suppressed / Background]
+```
 
 ---
 
