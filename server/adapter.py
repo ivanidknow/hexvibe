@@ -26,6 +26,14 @@ from collections import Counter
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
+try:
+    from openai import OpenAI
+except Exception:  # pragma: no cover - optional runtime dependency
+    OpenAI = None  # type: ignore[assignment]
+try:
+    import anthropic
+except Exception:  # pragma: no cover - optional runtime dependency
+    anthropic = None  # type: ignore[assignment]
 
 _SERVER_DIR = Path(__file__).resolve().parent
 if str(_SERVER_DIR) not in sys.path:
@@ -33,12 +41,24 @@ if str(_SERVER_DIR) not in sys.path:
 from cognitive_engine import PRIMARY_LOG_THRESHOLD as _PRIMARY_LOG_THRESHOLD
 from cognitive_engine import enrich_finding as _cognitive_enrich_finding
 from cognitive_engine import is_calibration_testbed_path as _is_calibration_testbed_path
+from summarizer import generate_review_summary as _generate_review_summary
 
 DOCKER_APP_ROOT = Path("/app")
 ROOT = DOCKER_APP_ROOT if os.path.exists("/app/core") else Path(__file__).resolve().parents[1]
 # Public release identifier (MCP responses, verification prompts).
 HEXVIBE_RELEASE_VERSION = "v1.0"
-HEXVIBE_UNIQUE_PATTERN_COUNT = 1000
+HEXVIBE_UNIQUE_PATTERN_COUNT = 1136
+LOCAL_LLM_PROVIDER = os.getenv("LOCAL_LLM_PROVIDER", "local").strip().lower() or "local"
+_LEGACY_PROVIDER = os.getenv("HEXVIBE_LLM_PROVIDER", "anthropic").strip().lower() or "anthropic"
+HEXVIBE_LLM_PROVIDER = "local" if LOCAL_LLM_PROVIDER == "local" else _LEGACY_PROVIDER
+LOCAL_LLM_API_BASE = os.getenv("LOCAL_LLM_API_BASE", "http://localhost:8000/v1").strip()
+LOCAL_LLM_API_KEY = os.getenv("LOCAL_LLM_API_KEY", "").strip()
+LOCAL_LLM_MODEL = os.getenv("LOCAL_LLM_MODEL", "strong").strip() or "strong"
+LOCAL_LLM_MODEL_STRONG = os.getenv("LOCAL_LLM_MODEL_STRONG", "strong").strip() or "strong"
+LOCAL_LLM_MODEL_CODER = os.getenv("LOCAL_LLM_MODEL_CODER", "coder").strip() or "coder"
+LOCAL_LLM_MODEL_FAST = os.getenv("LOCAL_LLM_MODEL_FAST", "fast").strip() or "fast"
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "").strip()
+ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-3-5-sonnet-latest").strip() or "claude-3-5-sonnet-latest"
 SKILLS_DIR = ROOT / "core" / "skills"
 RULES_DIR = ROOT / "core" / "semgrep-rules"
 TRUFFLEHOG_CONFIG = ROOT / "server" / "config.yaml"
@@ -58,32 +78,30 @@ ANTI_HALLUCINATION_PROMPT = (
     "ТЫ ОБЯЗАН проверить код инструментом run_check ПОСЛЕ каждого исправления. "
     "Твои слова о безопасности ничего не значат без PASS от Semgrep/TruffleHog."
 )
-# Security review profiles: FastAPI Backend (service/agent stacks) vs Desktop App (Electron / desktop integration).
-PROFILE_FASTAPI_BACKEND = "fastapi_backend"
-PROFILE_DESKTOP_APP = "desktop_app"
-
 ENTERPRISE_BASELINES: dict[str, str] = {
-    PROFILE_FASTAPI_BACKEND: (
-        "Project deployed in Enterprise Kubernetes. Identity & Access: Keycloak SSO is the only source of truth; "
+    "fastapi_backend": (
+        "Project deployed in enterprise Kubernetes. Identity & Access: Keycloak SSO is the only source of truth; "
         "local user/password databases are prohibited. WebSocket Management: backend must authorize every "
         "WS connection and enforce ownership checks for user-session binding. "
-        "Network Topology: backend and agent are isolated; any outbound traffic to LLM providers, "
-        "speech/transcription APIs, and S3-compatible object storage must pass strictly through an "
-        "egress HTTP proxy and reverse proxy (e.g. Nginx). "
+        "Network Topology: backend and agent are isolated; any outbound traffic to a local OpenAI-compatible LLM "
+        "provider, speech/transcription APIs, and S3-compatible object storage must pass strictly through Egress Proxy "
+        "(Squid/Nginx). "
         "Data Flow: direct service-to-public-internet connections are prohibited; summarization and transcription "
         "integrations are trusted only when proxy mediation is present. "
-        "Logging: External (Fluentbit/SIEM). Storage: S3-compatible (Presigned URLs). Disk: Encrypted (AES-256)."
+        "Logging: External (Fluentbit/SIEM). Storage: S3-compatible object storage (Presigned URLs). Disk: Encrypted "
+        "(AES-256)."
     ),
-    PROFILE_DESKTOP_APP: (
-        "Project deployed in Enterprise Kubernetes. Core Architecture (Electron): strict split between "
+    "desktop_app": (
+        "Project deployed in enterprise Kubernetes. Core Architecture (Electron): strict split between "
         "UI Renderer and Main Process, communication only via IPC (invoke + events). Renderer direct "
         "access to Node.js APIs or network is prohibited; enforce preload usage and context isolation "
         "(nodeIntegration=false, contextIsolation=true). Identity & API Gateway: all external "
-        "API calls (LLM, RAG, transcription, calendar/mail integrations) must pass through the central API gateway "
-        "with token validation; any direct external service call bypassing the gateway is critical. "
-        "Internal Orchestration: Supervisor plans, Branch Runner executes tools; tool outputs must flow into Answer Node for final synthesis. "
+        "API calls (LLM, RAG, transcription, third-party integrations) must pass through the API gateway with token "
+        "validation; any direct external service call bypassing the API gateway is critical. Internal Orchestration: "
+        "Supervisor plans, Branch Runner executes tools, and tool outputs must flow into Answer Node for final "
+        "synthesis. "
         "Local Data Privacy: user data (history, settings, patterns) remains in local userData and must not leak into "
-        "external logs or IPC payloads. Legacy Path (Vision/RAG without agent) must also pass through the gateway."
+        "external logs or IPC payloads. Legacy Path (Vision/RAG without agent) must also pass through the API gateway."
     ),
 }
 SECURITY_REVIEW_ENGINE_PROMPT = (
@@ -95,12 +113,12 @@ SECURITY_REVIEW_ENGINE_PROMPT = (
 
 
 def _engine_prompt_for_profile(profile: str) -> str:
-    if profile == PROFILE_DESKTOP_APP:
+    if profile == "desktop_app":
         return (
             f"{SECURITY_REVIEW_ENGINE_PROMPT} "
-            "Desktop App mode: mark external calls as OK only when the endpoint chain goes through the central API gateway; "
+            "Desktop mode: mark external calls as OK only when endpoint chain goes through the API gateway; "
             "detect IPC Injection risks in Renderer->Main message flow; verify secure token processing "
-            "for gateway-mediated external API access."
+            "for API-gateway-mediated external API access."
         )
     return SECURITY_REVIEW_ENGINE_PROMPT
 
@@ -249,6 +267,199 @@ def _threat_cache_key(profile: str, final_context: str, repo_fp: str) -> str:
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
+class LLMAdapter:
+    def __init__(self) -> None:
+        self.provider = HEXVIBE_LLM_PROVIDER
+        self.local_model = LOCAL_LLM_MODEL
+        self.last_selected_model = self.local_model
+        self.local_client: Any | None = None
+        self.anthropic_client: Any | None = None
+
+        if self.provider == "local":
+            if OpenAI is None:
+                raise RuntimeError("openai package is not installed")
+            if not LOCAL_LLM_API_KEY:
+                raise RuntimeError(
+                    "[error] Local LLM enabled but API Key is missing. Check your .env or docker --env-file."
+                )
+            self.local_client = OpenAI(api_key=LOCAL_LLM_API_KEY, base_url=LOCAL_LLM_API_BASE)
+            print(f"HexVibe connected to Generic OpenAI-compatible Local API (Model: {self.local_model})")
+        else:
+            if anthropic is None:
+                raise RuntimeError("anthropic package is not installed")
+            if not ANTHROPIC_API_KEY:
+                raise RuntimeError("ANTHROPIC_API_KEY is required for anthropic provider")
+            self.anthropic_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+
+    def _resolve_model_for_task(self, task_type: str | None) -> str:
+        task_key = (task_type or "default").strip().lower() or "default"
+        selected = self.local_model
+        if self.provider == "local":
+            if task_key in {"context_research", "context_scanning", "autofix_generation", "tool_calling"}:
+                selected = LOCAL_LLM_MODEL_CODER
+            elif task_key in {"threat_modeling", "stride", "self_critique", "verification"}:
+                selected = LOCAL_LLM_MODEL_STRONG
+            elif task_key in {"summarization", "logs"}:
+                selected = LOCAL_LLM_MODEL_FAST
+            if not selected:
+                selected = LOCAL_LLM_MODEL_STRONG
+            print(f"[hexvibe] Orchestrator: Routing '{task_key}' to model '{selected}'.")
+        return selected
+
+    def route_task(self, task_type: str | None) -> str:
+        selected = self._resolve_model_for_task(task_type)
+        self.last_selected_model = selected
+        return selected
+
+    def generate_completion(
+        self,
+        messages: list[dict[str, str]],
+        *,
+        task_type: str | None = None,
+        system_prompt: str = "You are HexVibe security assistant.",
+        temperature: float = 0.1,
+    ) -> str:
+        if self.provider == "local":
+            selected_model = self._resolve_model_for_task(task_type)
+            self.last_selected_model = selected_model
+            local_messages: list[dict[str, str]] = []
+            if system_prompt and not any(m.get("role") == "system" for m in messages):
+                local_messages.append({"role": "system", "content": system_prompt})
+            local_messages.extend(messages)
+            response = self.local_client.chat.completions.create(
+                model=selected_model,
+                temperature=temperature,
+                messages=local_messages,
+            )
+            return response.choices[0].message.content or ""
+
+        msg = self.anthropic_client.messages.create(
+            model=ANTHROPIC_MODEL,
+            temperature=temperature,
+            max_tokens=1024,
+            system=system_prompt,
+            messages=[{"role": "user", "content": "\n".join(m.get("content", "") for m in messages)}],
+        )
+        text_parts: list[str] = []
+        for block in getattr(msg, "content", []) or []:
+            if getattr(block, "type", "") == "text":
+                text_parts.append(getattr(block, "text", ""))
+        return "\n".join(text_parts).strip()
+
+
+def generate_completion(
+    prompt: str,
+    *,
+    task_type: str | None = None,
+    system_prompt: str = "You are HexVibe security assistant.",
+    temperature: float = 0.1,
+) -> dict[str, Any]:
+    """
+    Backward-compatible completion helper built on LLMAdapter.
+    """
+    adapter = LLMAdapter()
+    content = adapter.generate_completion(
+        [{"role": "user", "content": prompt}],
+        task_type=task_type,
+        system_prompt=system_prompt,
+        temperature=temperature,
+    )
+    model = adapter.last_selected_model if adapter.provider == "local" else ANTHROPIC_MODEL
+    return {"provider": adapter.provider, "model": model, "content": content}
+
+
+def _safe_orchestrated_completion(
+    adapter: LLMAdapter | None,
+    *,
+    task_type: str,
+    prompt: str,
+    system_prompt: str = "You are HexVibe security assistant.",
+) -> str:
+    if adapter is None:
+        return ""
+    try:
+        return adapter.generate_completion(
+            [{"role": "user", "content": prompt}],
+            task_type=task_type,
+            system_prompt=system_prompt,
+            temperature=0.1,
+        )
+    except Exception as exc:
+        _log_err(f"LLM orchestration phase '{task_type}' failed: {exc}")
+        return ""
+
+
+def _route_tool_caller_task(task_type: str = "tool_calling") -> None:
+    try:
+        adapter = LLMAdapter()
+        adapter.route_task(task_type)
+    except Exception as exc:
+        _log_err(f"Orchestrator route '{task_type}' unavailable: {exc}")
+
+
+def _extract_first_json_object(raw: str) -> dict[str, Any] | None:
+    text = (raw or "").strip()
+    if not text:
+        return None
+    fenced = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.S)
+    if fenced:
+        text = fenced.group(1).strip()
+    try:
+        data = json.loads(text)
+        return data if isinstance(data, dict) else None
+    except json.JSONDecodeError:
+        pass
+    match = re.search(r"\{.*\}", text, re.S)
+    if not match:
+        return None
+    try:
+        data = json.loads(match.group(0))
+        return data if isinstance(data, dict) else None
+    except json.JSONDecodeError:
+        return None
+
+
+def _self_critique_veto_decisions(
+    adapter: LLMAdapter | None,
+    *,
+    findings: list[dict[str, Any]],
+    profile: str,
+    threat_md: str,
+) -> tuple[dict[tuple[str, str], dict[str, Any]], str]:
+    if adapter is None or not findings:
+        return {}, ""
+    prompt = (
+        "Phase 3 strict Cognitive Guardrail veto.\n"
+        f"You validate findings against HexVibe patterns catalog ({HEXVIBE_UNIQUE_PATTERN_COUNT} patterns).\n"
+        f"Suppress finding when model confidence_score < {_PRIMARY_LOG_THRESHOLD:.1f} or false_positive=true.\n"
+        "Return ONLY JSON with schema:\n"
+        '{"decisions":[{"metric_id":"...","path":"...","confidence_score":0.0,"false_positive":false,"suppression_reason":"..."}]}\n'
+        f"Profile: {profile}\n"
+        f"Findings:\n{json.dumps(findings, ensure_ascii=False)[:12000]}\n"
+        f"Threat excerpt:\n{threat_md[:1200]}"
+    )
+    raw = _safe_orchestrated_completion(
+        adapter,
+        task_type="self_critique",
+        prompt=prompt,
+        system_prompt="You are a strict security verifier. Output valid JSON only.",
+    )
+    payload = _extract_first_json_object(raw) or {}
+    decisions_raw = payload.get("decisions")
+    if not isinstance(decisions_raw, list):
+        return {}, raw
+    by_key: dict[tuple[str, str], dict[str, Any]] = {}
+    for row in decisions_raw:
+        if not isinstance(row, dict):
+            continue
+        metric_id = str(row.get("metric_id", "")).strip().upper()
+        path = str(row.get("path", "")).strip()
+        if not metric_id or not path:
+            continue
+        by_key[(metric_id, path)] = row
+    return by_key, raw
+
+
 def _load_threat_model_cache() -> dict[str, Any]:
     if not THREAT_MODEL_CACHE_PATH.exists():
         return {"schema_version": THREAT_MODEL_CACHE_SCHEMA_VERSION, "entries": {}}
@@ -295,9 +506,9 @@ def _stride_classify_clause(clause: str) -> str:
         return "T"
     if any(x in c for x in ("audit", "log", "repud", "deny", "siem", "fluent")):
         return "R"
-    if any(x in c for x in ("disclosure", "leak", "pii", "secret", "minio", "s3", "userdata", "ipc")):
+    if any(x in c for x in ("disclosure", "leak", "pii", "secret", "object storage", "s3", "userdata", "ipc")):
         return "I"
-    if any(x in c for x in ("dos", "rate", "flood", "availability", "proxy", "egress", "network")):
+    if any(x in c for x in ("dos", "rate", "flood", "availability", "squid", "proxy", "network")):
         return "D"
     if any(x in c for x in ("elevat", "privilege", "bola", "owner", "admin", "branch", "supervisor")):
         return "E"
@@ -311,7 +522,7 @@ def _build_stride_threat_candidates(
     rag_keywords: set[str],
 ) -> list[tuple[float, str, str, str]]:
     """
-    Build ranked STRIDE candidates from profile + Enterprise baseline + repo signals + RAG keywords.
+    Build ranked STRIDE candidates from profile + enterprise baseline + repo signals + RAG keywords.
     No fixed global threat list: candidates are emitted only when signals/baseline/RAG justify them.
     """
     deps: set[str] = set(str(d).lower() for d in signals.get("deps", []))
@@ -329,7 +540,7 @@ def _build_stride_threat_candidates(
 
     candidates: list[tuple[float, str, str, str]] = []
 
-    if profile == PROFILE_FASTAPI_BACKEND or "keycloak" in bl or "jwt" in deps or "pyjwt" in deps or "python-jose" in deps:
+    if profile == "fastapi_backend" or "keycloak" in bl or "jwt" in deps or "pyjwt" in deps or "python-jose" in deps:
         candidates.append(
             (
                 score(4.0, "keycloak", "jwt", "token"),
@@ -353,7 +564,7 @@ def _build_stride_threat_candidates(
                 ),
             )
         )
-    if profile == PROFILE_FASTAPI_BACKEND and any(x in bl for x in ("speaker", "session", "websocket", "event")):
+    if profile == "fastapi_backend" and any(x in bl for x in ("speaker", "session", "websocket", "event")):
         candidates.append(
             (
                 score(4.1, "speaker", "session", "event"),
@@ -388,31 +599,31 @@ def _build_stride_threat_candidates(
                 ),
             )
         )
-    if "proxy" in bl or "egress" in bl:
+    if "squid" in bl or "proxy" in bl or "egress" in bl:
         candidates.append(
             (
-                score(4.0, "proxy", "egress", "nginx"),
+                score(4.0, "proxy", "squid", "egress"),
                 "D",
                 "Обход изоляции egress и отказ прокси-контура",
                 (
-                    "Архитектура требует прокси-цепочки; риск — прямой выход процессов в интернет или обход HTTP egress proxy, "
-                    "что ведёт к DDoS/злоупотреблению LLM/ASR и нарушению политики Production Environment."
+                    "Архитектура требует прокси-цепочки; риск — прямой выход процессов в интернет или обход Squid/Nginx, "
+                    "что ведёт к DDoS/злоупотреблению LLM/ASR и нарушению политики Internal AI Cluster."
                 ),
             )
         )
-    if "minio" in bl or "s3" in bl or "boto" in deps or "presign" in bl:
+    if "object storage" in bl or "s3" in bl or "boto" in deps or "presign" in bl:
         candidates.append(
             (
-                score(3.8, "minio", "s3", "boto"),
+                score(3.8, "object storage", "s3", "boto"),
                 "I",
                 "Утечка объектов и метаданных через объектное хранилище",
                 (
-                    "При наличии S3/MinIO и presigned URL критичны ошибки ACL, TTL и утечки чувствительных ключей/имён объектов "
+                    "При наличии S3-compatible storage и presigned URL критичны ошибки ACL, TTL и утечки чувствительных ключей/имён объектов "
                     "в логи или клиентские ошибки."
                 ),
             )
         )
-    if profile == PROFILE_DESKTOP_APP or flags.get("has_electron"):
+    if profile == "desktop_app" or flags.get("has_electron"):
         candidates.append(
             (
                 score(4.5, "electron", "ipc", "preload"),
@@ -424,15 +635,15 @@ def _build_stride_threat_candidates(
                 ),
             )
         )
-    if "api gateway" in bl or "central api" in combined or "gateway" in combined:
+    if "api gateway" in bl or "api gateway" in combined:
         candidates.append(
             (
-                score(4.3, "gateway", "token", "api"),
+                score(4.3, "api gateway", "token", "api"),
                 "S",
-                "Нарушение цепочки доверия к внешним API через центральный API gateway",
+                "Нарушение цепочки доверия к внешним API через API gateway",
                 (
-                    "Все внешние интеграции должны проходить через единый API gateway; критичен обход шлюза и некорректная валидация токенов "
-                    "на границе LLM/RAG и внешних сервисов."
+                    "Все внешние интеграции должны проходить через API gateway; критичен обход шлюза и некорректная валидация токенов "
+                    "на границе LLM/RAG/Outlook."
                 ),
             )
         )
@@ -485,12 +696,13 @@ def _classify_infra_vs_business(stride: str, title: str, desc: str) -> str:
     """Return 'infra' or 'business' for Separation of Concerns split."""
     t = f"{title} {desc}".lower()
     infra_kw = (
+        "squid",
         "proxy",
         "egress",
         "network",
         "redis",
         "queue",
-        "minio",
+        "object storage",
         "s3",
         "worker",
         "kubernetes",
@@ -518,7 +730,7 @@ def _classify_infra_vs_business(stride: str, title: str, desc: str) -> str:
         "подмен",
         "идентич",
         "ipc",
-        "gateway",
+        "api gateway",
         "playwright",
         "сесс",
         "bola",
@@ -593,8 +805,8 @@ def _cross_check_architectural_threat(title: str, desc: str, haystack: str) -> s
     def hit_any(s: str, needles: tuple[str, ...]) -> bool:
         return any(n in s for n in needles)
 
-    if hit_any(blob, ("proxy", "egress", "прокси", "публичн", "internet")):
-        if hit_any(h, ("http_proxy", "https_proxy", "https_proxy_authorization", "proxy_pass", "trust_env")):
+    if hit_any(blob, ("proxy", "egress", "squid", "прокси", "публичн", "internet")):
+        if hit_any(h, ("http_proxy", "https_proxy", "https_proxy_authorization", "proxy_pass", "squid", "trust_env")):
             confirms.append("прокси/egress-контроль в коде или конфиге")
         elif hit_any(h, ("requests.get", "httpx.get", "aiohttp", "urllib.request")) and not hit_any(
             h, ("http_proxy", "https_proxy", "proxy=", "proxies=")
@@ -613,9 +825,9 @@ def _cross_check_architectural_threat(title: str, desc: str, haystack: str) -> s
         if hit_any(h, ("pickle.loads", "pickle.load")) and "json" not in h:
             refutes.append("использование pickle в выборке")
 
-    if hit_any(blob, ("minio", "s3", "presign", "объект")):
-        if hit_any(h, ("boto3", "presigned", "minio", "generate_presigned")):
-            confirms.append("S3/MinIO/presigned в коде")
+    if hit_any(blob, ("object storage", "s3", "presign", "объект")):
+        if hit_any(h, ("boto3", "presigned", "generate_presigned", "s3")):
+            confirms.append("S3-compatible presigned storage usage in code")
 
     if hit_any(blob, ("websocket", "ws")):
         if hit_any(h, ("websocket", "owner", "authorize", "verify", "depends")):
@@ -629,9 +841,9 @@ def _cross_check_architectural_threat(title: str, desc: str, haystack: str) -> s
         if hit_any(h, ("contextisolation", "context_isolation", "nodeintegration", "preload")):
             confirms.append("Electron webPreferences/preload в выборке")
 
-    if hit_any(blob, ("api gateway", "gateway", "central api")):
-        if hit_any(h, ("api_gateway", "apigateway", "gateway", "proxy_pass")):
-            confirms.append("упоминание API gateway / прокси в коде")
+    if hit_any(blob, ("api gateway",)):
+        if "api gateway" in h or "gateway" in h:
+            confirms.append("API gateway usage in code")
 
     if hit_any(blob, ("playwright", "dom", "селектор", "автоматиз")):
         if hit_any(h, ("playwright", "page.goto", "page.locator", "chromium")):
@@ -664,20 +876,20 @@ def _build_what_if_scenarios(profile: str, baseline: str, signals: dict[str, Any
     bl = baseline.lower()
     scenarios: list[str] = []
 
-    if profile == PROFILE_FASTAPI_BACKEND or "playwright" in deps_l or "playwright" in bl:
+    if profile == "fastapi_backend" or "playwright" in deps_l or "playwright" in bl:
         scenarios.append(
-            "Что если целевой веб-сервис изменит DOM-структуру или селекторы? "
+            "Что если внешний сервис изменит DOM-структуру или селекторы? "
             "Как поведёт себя Playwright-инжект и сценарии автоматизации — деградация, ложные срабатывания или утечка действий в чужой контекст?"
         )
-    if profile == PROFILE_FASTAPI_BACKEND or "websocket" in bl or "event" in bl:
+    if profile == "fastapi_backend" or "websocket" in bl or "event" in bl:
         scenarios.append(
             "Что если злоумышленник получит или угадает event_url сессии / идентификатор канала? "
             "Допустима ли имперсонация или присоединение к чужой сессии при маппинге speaker_id без криптографической привязки к пользователю?"
         )
-    if profile == PROFILE_DESKTOP_APP or signals.get("flags", {}).get("has_electron"):
+    if profile == "desktop_app" or signals.get("flags", {}).get("has_electron"):
         scenarios.append(
             "Что если IPC-канал между Renderer и Main принимает недостаточно типизированные сообщения? "
-            "Возможна ли инъекция команд/путей, которая обойдёт центральный API gateway и приведёт к исполнению в привилегированном процессе?"
+            "Возможна ли инъекция команд/путей, которая обойдёт API gateway и приведёт к исполнению в привилегированном процессе?"
         )
     if len(scenarios) < 3 and ("redis" in deps_l or "rq" in deps_l or "queue" in bl):
         scenarios.append(
@@ -686,12 +898,12 @@ def _build_what_if_scenarios(profile: str, baseline: str, signals: dict[str, Any
         )
     if len(scenarios) < 3:
         scenarios.append(
-            "Что если политика egress (HTTP proxy / reverse proxy) временно недоступна или обходится через DNS-rebinding / прямой резолв? "
+            "Что если политика egress (Squid/Nginx) временно недоступна или обходится через DNS-rebinding / прямой резолв? "
             "Сохраняется ли запрет прямого выхода к LLM/ASR/S3 на уровне приложения?"
         )
     if len(scenarios) < 3:
         scenarios.append(
-            "Что если локальное хранилище userData (Desktop App) окажется включённым в телеметрию или логи ошибок? "
+            "Что если локальное хранилище userData (Desktop app) окажется включённым в телеметрию или логи ошибок? "
             "Как исключается утечка истории и настроек во внешние каналы?"
         )
     return scenarios[:3]
@@ -779,7 +991,7 @@ def _generate_threat_model(
     lines.append("## 0. Секция 0: Модель угроз проекта (Threat Modeling, STRIDE + Архитектор)")
     lines.append("")
     lines.append(
-        f"- Источники: профиль `{profile}`, Enterprise baseline, сигналы репозитория "
+        f"- Источники: профиль `{profile}`, enterprise baseline, сигналы репозитория "
         f"(`{signals.get('scan_root', '.')}`), зависимости: {len(signals.get('deps', []))} записей, RAG-ключи: {len(rag_keywords)}."
     )
     lines.append(f"- Кэш threat model: `{'hit' if cached else 'miss'}` (schema v{THREAT_MODEL_CACHE_SCHEMA_VERSION})")
@@ -1355,13 +1567,13 @@ def _build_or_load_rag_index() -> list[dict[str, Any]]:
 def _skill_boosts(question: str) -> dict[str, float]:
     q = question.lower()
     boosts: dict[str, float] = {}
-    if any(k in q for k in ["пдн", "персональ", "enterprise compliance", "gdpr", "kii", "гост", "1с"]):
+    if any(k in q for k in ["пдн", "персональ", "152-фз", "152", "kii", "гост", "1с"]):
         boosts["ru-regulatory"] = 0.35
     if any(k in q for k in ["фстэк", "fstek", "приказ 235", "приказ 239", "gost r 56939", "гост р 56939", "кии"]):
         boosts["ru-regulatory"] = max(boosts.get("ru-regulatory", 0.0), 0.45)
     if any(k in q for k in ["цб", "57580", "уди", "уда", "user/pass", "мясные учет", "meat account"]):
         boosts["ru-regulatory"] = max(boosts.get("ru-regulatory", 0.0), 0.45)
-    if any(k in q for k in ["fapi", "keycloak", "api gateway", "fapi-sec", "fapi-paok", "гост 57580"]):
+    if any(k in q for k in ["fapi", "keycloak", "клинкер", "clinker", "fapi-sec", "fapi-paok", "гост 57580"]):
         boosts["auth-keycloak"] = 0.45
     if any(k in q for k in ["vault", "eso", "secret", "секрет", "externalsecret", "vault agent injector"]):
         boosts["cloud-secrets"] = max(boosts.get("cloud-secrets", 0.0), 0.35)
@@ -1383,7 +1595,7 @@ def _skill_boosts(question: str) -> dict[str, float]:
             "helm",
             "dockerfile",
             "nginx",
-            "egress proxy",
+            "squid",
             "proxy",
             "capabilities",
             "rootfs",
@@ -1555,7 +1767,7 @@ def ask_hexvibe_impl(question: str) -> dict[str, Any]:
     manifests = _load_skill_manifests()
     ql = question.lower()
     required_ids: list[str] = []
-    if ("egress" in ql and "proxy" in ql) or "http proxy" in ql:
+    if "squid" in ql:
         required_ids.append("SQD-001")
     if "docker" in ql and "root" in ql:
         required_ids.extend(["DOCK-010", "DOCK-011"])
@@ -2133,6 +2345,7 @@ def get_skill_context_impl(
 
 
 def _run_syft(target_path: Path) -> dict[str, Any]:
+    _route_tool_caller_task("tool_calling")
     # Prefer local syft, then Docker fallback.
     local_cmd = ["syft", str(target_path), "-o", "json"]
     code, out, err = _run(local_cmd)
@@ -2171,6 +2384,7 @@ def _run_syft(target_path: Path) -> dict[str, Any]:
 
 
 def _run_trufflehog(target_path: Path) -> dict[str, Any]:
+    _route_tool_caller_task("tool_calling")
     # Prefer local trufflehog, then Docker fallback.
     rel = str(target_path.relative_to(ROOT)).replace("\\", "/")
     local_cmd = [
@@ -2226,6 +2440,7 @@ def _run_trufflehog(target_path: Path) -> dict[str, Any]:
 
 
 def run_check_impl(path: str, context_text: str = "") -> dict[str, Any]:
+    _route_tool_caller_task("tool_calling")
     target = (ROOT / path).resolve() if not Path(path).is_absolute() else Path(path).resolve()
     if not target.exists():
         return {"error": f"path does not exist: {target}"}
@@ -2374,13 +2589,13 @@ def run_check_impl(path: str, context_text: str = "") -> dict[str, Any]:
 
 def _detect_security_profile(project_name: str, context: str) -> str:
     text = f"{project_name} {context}".lower()
-    backend_markers = ("fastapi", "agent", "chromium", "playwright", "starlette")
-    desktop_markers = ("electron", ".net", "vsto", "nsis", "desktop app")
+    backend_markers = ("backend", "agent", "chromium", "playwright")
+    desktop_markers = ("desktop", "electron", ".net", "vsto", "nsis")
     backend_score = sum(1 for marker in backend_markers if marker in text)
     desktop_score = sum(1 for marker in desktop_markers if marker in text)
     if backend_score == 0 and desktop_score == 0:
-        return PROFILE_FASTAPI_BACKEND  # Default: service/agent-first repos.
-    return PROFILE_DESKTOP_APP if desktop_score > backend_score else PROFILE_FASTAPI_BACKEND
+        return "fastapi_backend"  # Default profile for web/agent-first repos.
+    return "desktop_app" if desktop_score > backend_score else "fastapi_backend"
 
 
 def _compose_effective_review_context(project_name: str, context: str, profile: str) -> str:
@@ -2393,7 +2608,7 @@ def _compose_effective_review_context(project_name: str, context: str, profile: 
 
 
 def _profile_specific_checks(profile: str) -> list[str]:
-    if profile == PROFILE_DESKTOP_APP:
+    if profile == "desktop_app":
         return [
             "Electron isolation / Node Integration",
             "VSTO add-in security baseline",
@@ -2403,7 +2618,7 @@ def _profile_specific_checks(profile: str) -> list[str]:
     return [
         "SSRF including DNS rebinding vectors",
         "RQ/Redis serialization and queue safety",
-        "Egress isolation through HTTP proxy chain",
+        "Egress isolation through Squid chain",
         "JWT audience verification and realm isolation",
     ]
 
@@ -2433,7 +2648,7 @@ def _is_metric_mitigated(metric_id: str, context_text: str, mitigation_logic: di
         "RRC-008": ("fluentbit" in c) or ("logstash" in c) or ("siem" in c),
         "NGX-storage": ("boto3.generate_presigned_url" in c) or ("presigned" in c),
         "RRC-007": ("debug=false" in c) or ("debug = false" in c),
-        "AK-002": ("isolated realm" in c) or ("single client" in c and "enterprise-client" in c),
+        "AK-002": ("isolated realm" in c) or ("single client" in c and "service-agent" in c),
         "RRC-010": ("aes-256" in c) and (("storageclass" in c) or ("pvc" in c) or ("at-rest" in c)),
         "AK-020": ("jwks" in c) and (("verify_signature" in c) or ("signature verification" in c)),
         "BOLA": (("owner_id" in c) and ("user_id" in c)) or ("ownership check" in c),
@@ -2449,7 +2664,10 @@ def _is_external_integration_finding(message: str, path: str) -> bool:
         "external",
         "internet",
         "egress",
+        "openai-compatible",
+        "speech api",
         "outlook",
+        "external-service",
         "transcription",
         "rag",
         "llm",
@@ -2470,10 +2688,17 @@ def _render_security_review_markdown(
     fixed_items: list[dict[str, Any]],
     critical_items: list[dict[str, Any]],
     medium_items: list[dict[str, Any]],
+    suppressed_issues: list[dict[str, Any]] | None = None,
     threat_model_markdown: str = "",
 ) -> str:
+    suppressed_rows = suppressed_issues or []
     lines: list[str] = []
     lines.append(f"# Security Review: {project_name}")
+    lines.append("")
+    lines.append("## 🔍 Summary")
+    lines.append(
+        f"✅ Cleaned by Guardrail: {len(suppressed_rows)} low-confidence findings suppressed."
+    )
     lines.append("")
     if threat_model_markdown.strip():
         lines.append(threat_model_markdown.rstrip())
@@ -2511,6 +2736,23 @@ def _render_security_review_markdown(
     lines.append(f"- Подключенные Skills: {', '.join(f'`{sid}`' for sid in skill_ids)}")
     lines.append(f"- Проверенные метрики (уникальные): `{len(checked_metrics)}`")
     lines.append("")
+    if suppressed_rows:
+        lines.append("## 🛡️ Cognitive Guardrail: Suppressed Findings")
+        lines.append("| ID | Component | Reason for Suppression | Confidence |")
+        lines.append("| :--- | :--- | :--- | :--- |")
+        for item in suppressed_rows[:100]:
+            metric_id = str(item.get("metric_id", ""))
+            component = str(item.get("path", ""))
+            reason = str(item.get("suppression_reason", "")).replace("\n", " ").strip()
+            conf = item.get("self_critique_confidence_score")
+            if conf is None:
+                conf = item.get("confidence_score")
+            try:
+                conf_txt = f"{float(conf):.3f}"
+            except (TypeError, ValueError):
+                conf_txt = "-"
+            lines.append(f"| `{metric_id}` | `{component}` | {reason} | `{conf_txt}` |")
+        lines.append("")
     return "\n".join(lines)
 
 
@@ -2519,14 +2761,14 @@ def run_security_review_impl(project_name: str, context: str) -> dict[str, Any]:
         return {"error": "project_name is required"}
     profile = _detect_security_profile(project_name, context)
     profile_map: dict[str, list[str]] = {
-        PROFILE_FASTAPI_BACKEND: [
+        "fastapi_backend": [
             "fastapi-async",
             "auth-keycloak",
             "advanced-agent-cloud",
             "infra-k8s-helm",
             "domain-data-privacy",
         ],
-        PROFILE_DESKTOP_APP: [
+        "desktop_app": [
             "desktop-vsto-suite",  # alias: desktop-security
             "csharp-dotnet",  # alias: dotnet-legacy
             "domain-access-management",
@@ -2542,7 +2784,28 @@ def run_security_review_impl(project_name: str, context: str) -> dict[str, Any]:
     final_context = _compose_effective_review_context(project_name, context, profile)
     engine_prompt = _engine_prompt_for_profile(profile)
     target_path = _resolve_project_target(project_name)
+    llm_adapter: LLMAdapter | None = None
+    try:
+        llm_adapter = LLMAdapter()
+    except Exception as exc:
+        _log_err(f"LLM adapter unavailable; continuing with deterministic pipeline: {exc}")
+
+    context_reasoning = _safe_orchestrated_completion(
+        llm_adapter,
+        task_type="context_research",
+        prompt=f"Analyze context for security-relevant architecture constraints:\n{final_context[:2000]}",
+        system_prompt="You are a security context research assistant.",
+    )
     threat_md, threat_meta, threat_cache_hit = run_threat_modeling_engine(profile, final_context, target_path)
+    threat_reasoning = _safe_orchestrated_completion(
+        llm_adapter,
+        task_type="threat_modeling",
+        prompt=(
+            f"Perform STRIDE-oriented threat modeling for profile '{profile}'. "
+            f"Context:\n{final_context[:1600]}\n\nExisting threat section:\n{threat_md[:1600]}"
+        ),
+        system_prompt="You are a senior STRIDE threat modeler.",
+    )
     ask_output = threat_meta.get("ask_hexvibe") or ask_hexvibe_impl(final_context)
     run_result = run_check_impl(target_path, context_text=final_context)
     findings = run_result.get("semgrep", {}).get("findings", [])
@@ -2575,8 +2838,8 @@ def run_security_review_impl(project_name: str, context: str) -> dict[str, Any]:
         message = str((finding.get("extra") or {}).get("message", ""))
         rel_path = str(finding.get("path", ""))
         severity = str((finding.get("extra") or {}).get("severity", "WARNING")).upper()
-        # Desktop App baseline: external integrations are trusted only through central API gateway mediation.
-        if profile == PROFILE_DESKTOP_APP and _is_external_integration_finding(message, rel_path):
+        # Desktop baseline: external integrations are trusted only through API gateway mediation.
+        if profile == "desktop_app" and _is_external_integration_finding(message, rel_path):
             if "api gateway" in context_text.lower() or "gateway" in context_text.lower():
                 fixed_items.append(
                     {
@@ -2595,11 +2858,58 @@ def run_security_review_impl(project_name: str, context: str) -> dict[str, Any]:
                 }
             )
             continue
-        item = {"metric_id": metric_id, "path": rel_path, "message": message}
+        extra = finding.get("extra") if isinstance(finding.get("extra"), dict) else {}
+        item = {
+            "metric_id": metric_id,
+            "path": rel_path,
+            "message": message,
+            "severity": severity,
+            "confidence_score": extra.get("confidence_score"),
+        }
         if severity == "ERROR":
             critical_items.append(item)
         else:
             medium_items.append(item)
+
+    primary_issues: list[dict[str, Any]] = critical_items + medium_items
+    veto_decisions, self_critique_reasoning = _self_critique_veto_decisions(
+        llm_adapter,
+        findings=primary_issues[:80],
+        profile=profile,
+        threat_md=threat_md,
+    )
+    suppressed_issues: list[dict[str, Any]] = []
+    passed_critical: list[dict[str, Any]] = []
+    passed_medium: list[dict[str, Any]] = []
+    for item in primary_issues:
+        key = (str(item.get("metric_id", "")).upper(), str(item.get("path", "")))
+        decision = veto_decisions.get(key, {})
+        model_conf = decision.get("confidence_score")
+        try:
+            model_conf_f = float(model_conf) if model_conf is not None else 1.0
+        except (TypeError, ValueError):
+            model_conf_f = 1.0
+        false_positive = bool(decision.get("false_positive", False))
+        suppress = false_positive or model_conf_f < _PRIMARY_LOG_THRESHOLD
+        if suppress:
+            fp_tag = "[FALSE POSITIVE] " if false_positive else ""
+            reason = str(decision.get("suppression_reason", "")).strip() or (
+                f"self_critique_veto: confidence_score={model_conf_f:.3f}, false_positive={false_positive}"
+            )
+            reason = f"{fp_tag}{reason}".strip()
+            suppressed = dict(item)
+            suppressed["suppression_reason"] = reason
+            suppressed["self_critique_confidence_score"] = model_conf_f
+            suppressed["false_positive"] = false_positive
+            suppressed_issues.append(suppressed)
+            continue
+        if str(item.get("severity", "")).upper() == "ERROR":
+            passed_critical.append(item)
+        else:
+            passed_medium.append(item)
+    critical_items = passed_critical
+    medium_items = passed_medium
+    primary_issues = critical_items + medium_items
 
     markdown_report = _render_security_review_markdown(
         profile=profile,
@@ -2611,7 +2921,29 @@ def run_security_review_impl(project_name: str, context: str) -> dict[str, Any]:
         fixed_items=fixed_items,
         critical_items=critical_items,
         medium_items=medium_items,
+        suppressed_issues=suppressed_issues,
         threat_model_markdown=threat_md,
+    )
+    autofix_reasoning = _safe_orchestrated_completion(
+        llm_adapter,
+        task_type="autofix_generation",
+        prompt=(
+            "Generate high-level secure autofix guidance for the first unresolved findings.\n"
+            + "\n".join(
+                f"- {item['metric_id']} in {item['path']}: {item['message']}"
+                for item in (critical_items + medium_items)[:8]
+            )
+        ),
+        system_prompt="You are a secure code autofix assistant.",
+    )
+    llm_summary = _generate_review_summary(
+        llm_adapter,
+        project_name=project_name,
+        profile=profile,
+        checked_metrics_count=len(checked_metrics),
+        critical_count=len(critical_items),
+        medium_count=len(medium_items),
+        fixed_count=len(fixed_items),
     )
     return {
         "project_name": project_name,
@@ -2638,7 +2970,18 @@ def run_security_review_impl(project_name: str, context: str) -> dict[str, Any]:
             "ok_count": len(fixed_items),
             "critical_count": len(critical_items),
             "medium_count": len(medium_items),
+            "suppressed_count": len(suppressed_issues),
+            "primary_issues_count": len(primary_issues),
             "checked_metrics_count": len(checked_metrics),
+            "llm_summary": llm_summary,
+        },
+        "primary_issues": primary_issues,
+        "suppressed_issues": suppressed_issues,
+        "llm_orchestration": {
+            "context_research": context_reasoning[:2000] if context_reasoning else "",
+            "threat_modeling": threat_reasoning[:2000] if threat_reasoning else "",
+            "self_critique": self_critique_reasoning[:3000] if self_critique_reasoning else "",
+            "autofix_generation": autofix_reasoning[:2000] if autofix_reasoning else "",
         },
         "report_markdown": markdown_report,
     }

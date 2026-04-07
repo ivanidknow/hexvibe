@@ -1,6 +1,6 @@
 # HexVibe detection matrix
 
-**Total rules:** 1000 (generated from `semgrep-rules/*.yaml`)
+**Total rules:** 1136 (generated from `semgrep-rules/*.yaml`)
 
 A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker exists in the gold testbed (structural patterns may be skipped if the first `pattern-either` branch fails to parse).
 
@@ -125,6 +125,36 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | BRW-011 | `core/gold-standard-testbed/browser_vulnerable.js` | HIT | Marker (testbed) |
 | BRW-012 | `core/gold-standard-testbed/browser_vulnerable.js` | HIT | Semgrep + marker |
 | BRW-013 | `core/gold-standard-testbed/browser_vulnerable.js` | HIT | Marker (testbed) |
+| CAM-001 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| CAM-002 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| CAM-003 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| CAM-004 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| CAM-005 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-006 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| CAM-007 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-008 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-009 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-010 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-011 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-012 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-013 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| CAM-014 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| CAM-015 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-016 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| CAM-017 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-018 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-019 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| CAM-020 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-021 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-022 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-023 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-024 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-025 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| CAM-026 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| CAM-027 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-028 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-029 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| CAM-030 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
 | CSH-001 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | CSH-002 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | CSH-003 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
@@ -355,6 +385,12 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | CWE-1336-JS-PUG-EJS-RTS | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | CWE-1336-PY-JINJA2-RTS | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | CWE-1336-PY-MAKO-RTS | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
+| DB-001 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| DB-002 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| DB-003 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| DB-006 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| DB-007 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| DB-008 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
 | DJA-001 | `core/gold-standard-testbed/django_vulnerable.py` | HIT | Semgrep + marker |
 | DJA-002 | `core/gold-standard-testbed/django_vulnerable.py` | HIT | Semgrep + marker |
 | DJA-003 | `core/gold-standard-testbed/django_vulnerable.py` | HIT | Semgrep + marker |
@@ -408,6 +444,10 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | DVS-019 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | DVS-020 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Semgrep + marker |
 | DVS-021 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
+| ES-001 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| ES-002 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| ES-003 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| ES-004 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
 | FAS-001 | `core/gold-standard-testbed/api_vulnerable.py` | HIT | Marker (testbed) |
 | FAS-002 | `core/gold-standard-testbed/api_vulnerable.py` | HIT | Marker (testbed) |
 | FAS-003 | `core/gold-standard-testbed/api_vulnerable.py` | HIT | Marker (testbed) |
@@ -503,12 +543,17 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | GO-038 | `core/gold-standard-testbed/multi_lang_vulnerable/go_vulnerable.go` | HIT | Semgrep + marker |
 | GO-039 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | GO-040 | `core/gold-standard-testbed/multi_lang_vulnerable/go_vulnerable.go` | HIT | Semgrep + marker |
+| INF-001 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
 | INF-1.2.1 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | INF-1.2.6 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | INF-1.2.33 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
+| INF-002 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
 | INF-2.5.1 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
+| INF-003 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| INF-004 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
 | INF-4.1 | `core/gold-standard-testbed/Dockerfile` | HIT | Marker (testbed) |
 | INF-4.4 | `core/gold-standard-testbed/Dockerfile` | HIT | Marker (testbed) |
+| INF-005 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
 | INF-5.1.1 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | INF-5.1.2-TLS | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | INF-5.2.1 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
@@ -521,6 +566,10 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | INF-5.6.2 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | INF-5.10 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | INF-5.25 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
+| INF-006 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| INF-007 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| INF-008 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| INF-009 | `core/gold-standard-testbed/deployment-test.yaml` | HIT | Semgrep + marker |
 | INF-010 | `core/gold-standard-testbed/infra_vulnerable.yaml` | HIT | Semgrep + marker |
 | INF-011 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | INF-012 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
@@ -991,6 +1040,93 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | SEC-015 | `core/gold-standard-testbed/cloud_secrets_vulnerable.py` | HIT | Marker (testbed) |
 | SEC-016 | `core/gold-standard-testbed/cloud_secrets_vulnerable.yaml` | HIT | Marker (testbed) |
 | SEC-017 | `core/gold-standard-testbed/cloud_secrets_vulnerable.yaml` | HIT | Semgrep + marker |
+| SPR-001 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-002 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-003 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-004 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-005 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-006 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-007 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-008 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-009 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-010 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-011 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-012 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-013 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-014 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-015 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-016 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-017 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-018 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-019 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-020 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-021 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-022 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-023 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-024 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-025 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-026 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-027 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-028 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-029 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-030 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-031 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-032 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-033 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-034 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-035 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-036 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-037 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-038 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-039 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-040 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-041 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-042 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-043 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-044 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-045 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-046 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-047 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-048 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-049 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-050 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-051 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-052 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-053 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-054 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-071 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-072 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-073 | `core/gold-standard-testbed/application-test.properties` | HIT | Semgrep + marker |
+| SPR-074 | `core/gold-standard-testbed/application-test.properties` | HIT | Semgrep + marker |
+| SPR-075 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-076 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-077 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-078 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-079 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-080 | `core/gold-standard-testbed/application-test.properties` | HIT | Semgrep + marker |
+| SPR-081 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-082 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-083 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-084 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-085 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-086 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-087 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-088 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-089 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-090 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-091 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-092 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-093 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-094 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-095 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-096 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-097 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-098 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-099 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
+| SPR-100 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-101 | `core/gold-standard-testbed/application-test.properties` | HIT | Semgrep + marker |
+| SPR-102 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
+| SPR-103 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Semgrep + marker |
 | SQD-001 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Semgrep + marker |
 | SQD-002 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Semgrep + marker |
 | SQD-003 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Semgrep + marker |
@@ -1011,12 +1147,12 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 
 | Metric | Value |
 |---|---|
-| Rules expected | 1000 |
-| HIT | 1000 |
+| Rules expected | 1136 |
+| HIT | 1136 |
 | MISS | 0 |
-| Semgrep + marker | 274 |
+| Semgrep + marker | 377 |
 | Semgrep only | 1 |
-| Marker only (Semgrep parse/skip) | 725 |
+| Marker only (Semgrep parse/skip) | 758 |
 
 ## Compliance status (Paladin — OWASP / MITRE / NIST)
 
@@ -1026,50 +1162,50 @@ Per-rule tags are inferred from CWE tokens in `core/skills/*/patterns.md` (see `
 
 | Category | Rules (tag count) |
 |---|---|
-| A01 | 15 |
-| A02 | 16 |
-| A03 | 106 |
-| A04 | 434 |
+| A01 | 30 |
+| A02 | 24 |
+| A03 | 119 |
+| A04 | 498 |
 | A05 | 194 |
 | A06 | 11 |
-| A07 | 95 |
-| A08 | 24 |
-| A09 | 33 |
-| A10 | 73 |
+| A07 | 96 |
+| A08 | 35 |
+| A09 | 42 |
+| A10 | 88 |
 
 ### MITRE ATT&CK Enterprise — technique frequency (top 25)
 
 | Technique | Rules |
 |---|---|
-| `T1190` | 701 |
-| `T1078` | 84 |
-| `T1059` | 79 |
-| `T1059.004` | 33 |
-| `T1005` | 26 |
-| `T1204` | 24 |
-| `T1562` | 23 |
-| `T1195` | 21 |
-| `T1552` | 21 |
-| `T1059.007` | 20 |
-| `T1189` | 13 |
-| `T1055` | 10 |
-| `T1083` | 10 |
-| `T1195.001` | 10 |
-| `T1499` | 10 |
-| `T1098` | 5 |
+| `T1190` | 781 |
+| `T1078` | 85 |
+| `T1059` | 83 |
+| `T1005` | 36 |
+| `T1059.004` | 36 |
+| `T1204` | 31 |
+| `T1562` | 31 |
+| `T1552` | 27 |
+| `T1195` | 23 |
+| `T1059.007` | 22 |
+| `T1098` | 19 |
+| `T1055` | 16 |
+| `T1189` | 16 |
+| `T1195.001` | 12 |
+| `T1083` | 11 |
+| `T1499` | 11 |
+| `T1556` | 6 |
 | `T1550` | 5 |
 | `T1110` | 3 |
 | `T1548` | 3 |
-| `T1556` | 3 |
 
 ### NIST SSDF (SP 800-218) — heuristic practice signal
 
 | Practice | Description | Rules (heuristic) |
 |---|---|---|
-| PO.1 | Prepare the organization — development security requirements are defined and tracked | 1000 |
-| PO.3 | Produce well-secured software — minimize vulnerabilities in releases | 229 |
-| PS.1 | Protect all forms of code — supply chain and integrity controls | 450 |
-| PS.2 | Provide verified security requirements — threat modeling & secure design | 121 |
-| PS.3 | Architect & produce secure software — configuration and hardening | 227 |
-| RB.1 | Review & assess security posture — assurance and monitoring | 106 |
-| RV.1 | Identify & respond to vulnerabilities — find, triage, remediate | 44 |
+| PO.1 | Prepare the organization — development security requirements are defined and tracked | 1136 |
+| PO.3 | Produce well-secured software — minimize vulnerabilities in releases | 240 |
+| PS.1 | Protect all forms of code — supply chain and integrity controls | 522 |
+| PS.2 | Provide verified security requirements — threat modeling & secure design | 149 |
+| PS.3 | Architect & produce secure software — configuration and hardening | 236 |
+| RB.1 | Review & assess security posture — assurance and monitoring | 130 |
+| RV.1 | Identify & respond to vulnerabilities — find, triage, remediate | 53 |

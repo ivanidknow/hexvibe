@@ -54,6 +54,8 @@ LANGUAGE_MAP = {
     "cloud-secrets": ["generic", "yaml", "python"],
     "devops-security": ["generic", "dockerfile", "yaml"],
     "integration-security": ["generic", "python", "yaml"],
+    # Mixed Java/XML/YAML/infra snippets; generic avoids parser skew per rule row.
+    "java-enterprise": ["generic"],
     "frontend-security": ["generic", "javascript", "typescript", "html"],
     "mobile-flutter": ["generic", "dart", "kotlin"],
     "python-backend-pro": ["python"],

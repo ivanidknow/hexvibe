@@ -3,18 +3,18 @@
 [![Platform](https://img.shields.io/badge/platform-AI--Security-blueviolet)](#capabilities)
 [![Architecture](https://img.shields.io/badge/arch-Threat%20Modeling%20Enabled-blue)](core/skills/)
 [![Compliance](https://img.shields.io/badge/compliance-Enterprise%20Ready-success)](core/skills/)
-[![Rules Count](https://img.shields.io/badge/rules-1000%20patterns-blue)](core/skills/index.md)
+[![Rules Count](https://img.shields.io/badge/rules-1136%20patterns-blue)](core/skills/index.md)
 [![Status](https://img.shields.io/badge/status-Production%20Ready-orange)](#development--extension)
 
 **HexVibe** is an MCP security server designed for full automation of Security Code Reviews and protection of the generative development lifecycle using a **Cognitive Guardrail**. The system ensures that only verified findings with high trust (confidence_score >= 0.8) reach the final logs.
 
-The current ruleset is regression-locked at **1000/1000 HIT** within the `core/gold-standard-testbed/` environment.
+The current ruleset is regression-locked at **1136/1136 HIT** within the `core/gold-standard-testbed/` environment.
 
 ---
 
 ```mermaid
 flowchart TD
-    A[Разработчик / AI Agent] -->|Код / Запрос| B(HexVibe MCP Server)
+    A[Developer / AI Agent] -->|Code / Request| B(Local LLM Orchestrator)
     B --> C{Cognitive Guardrail}
     C -->|Фаза 1| D[Архитектурный Context]
     C -->|Фаза 2| E[Threat Model STRIDE]
@@ -32,15 +32,27 @@ Execute in your terminal:
 bash scripts/docker-publish.sh
 python scripts/sync_semgrep.py
 
-### 2) Run (Docker)
+### 2) Configure .env (Self-hosted LLM Stack)
+Create `.env` in project root:
+```
+LOCAL_LLM_PROVIDER=local
+LOCAL_LLM_API_BASE=http://localhost:8000/v1
+LOCAL_LLM_API_KEY=<your-local-api-key>
+LOCAL_LLM_MODEL=strong
+LOCAL_LLM_MODEL_STRONG=strong
+LOCAL_LLM_MODEL_CODER=coder
+LOCAL_LLM_MODEL_FAST=fast
+```
+
+### 3) Run (Docker)
 docker run -i --rm -v "${PWD}:/app" hexvibe-ai:latest
 
-### 3) IDE Integration
+### 4) IDE Integration
 * **Cursor**: Settings -> Features -> MCP -> Add server. Name: HexVibe, Type: command, Command: docker run -i --rm -v "${PWD}:/app" hexvibe-ai:latest.
 * **Claude Desktop**: Copy settings from mcp-deployment.json into your MCP configuration file.
 
-### 4) Verification
-Ask the agent: "HexVibe, confirm current baseline." Expected response: confirmation of 1000 patterns and v1.0 cognitive metadata.
+### 5) Verification
+Ask the agent: "HexVibe, confirm current baseline." Expected response: confirmation of 1136 patterns and v1.0 cognitive metadata.
 
 ---
 
@@ -57,11 +69,11 @@ Implemented in server/cognitive_engine.py. The analysis process is divided into 
 
 | Metric | Value |
 | :--- | :--- |
-| Rule IDs | 1000 |
-| Accuracy (Gold matrix) | 1000 / 1000 HIT |
+| Rule IDs | 1136 |
+| Accuracy (Gold matrix) | 1136 / 1136 HIT |
 | Security Domains | 22 |
-| CWE Coverage (patterns) | >= 138 |
-| Auto-remediation (Autofix) | 1000 / 1000 |
+| CWE Coverage (patterns) | 150+ |
+| Auto-remediation (Autofix) | 1136 / 1136 |
 
 ---
 
@@ -70,7 +82,7 @@ Implemented in server/cognitive_engine.py. The analysis process is divided into 
 * **Interactive Threat Modeling (STRIDE)**: Automated generation of a threat model at the start of every review. The system independently identifies 5 priority attack vectors (Infrastructure & Business Logic) specific to the project architecture and verifies their presence in the code.
 * **Architectural Cross-check**: A unique verification mechanism that maps theoretical threats to real signals in the repository. Each finding is assigned a status: **[CONFIRMED]** or **[REQUIRES VERIFICATION]**, simulating an expert architect's conclusion.
 * **Cognitive Guardrail**: A three-phase analysis (research -> scoring -> self-critique) that filters false positives and suppresses noise based on the enterprise environment context.
-* **Smart Autofix (1000/1000)**: The system not only finds vulnerabilities but also provides context-aware fixes for all 1000 patterns, neutralizing anti-patterns directly during AI code generation.
+* **Smart Autofix (1136/1136)**: The system not only finds vulnerabilities but also provides context-aware fixes for all 1136 patterns, neutralizing anti-patterns directly during AI code generation.
 * **Advanced Stack Coverage**: Specialized protection for high-risk areas: IPC isolation, API security, Prompt Leakage in AI SDKs, and secure document processing.
 * **MCP + Docker Orchestration**: Seamless integration of Semgrep, TruffleHog, and Syft. The server/adapter.py module manages the full scan lifecycle.
 

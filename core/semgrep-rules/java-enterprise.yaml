@@ -1,0 +1,2681 @@
+rules:
+  - id: hexvibe.java-enterprise.cam-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String expr = request.getExpression();
+          runtimeService.startProcessInstanceByKey("payment", Variables.putValue("approvalExpr", expr));
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-001\\b'
+    message: |-
+      HexVibe Detection [CAM-001]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          runtimeService.setVariable(piId, "ssn", req.ssn());
+          historyService.createHistoricVariableInstanceQuery().list();
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-002\\b'
+    message: |-
+      HexVibe Detection [CAM-002]: CWE-200
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          RepositoryService repo = processEngine.getRepositoryService();
+          repo.createDeployment().addInputStream("process.bpmn", userUploadedXml).deploy();
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-003\\b'
+    message: |-
+      HexVibe Detection [CAM-003]: CWE-611
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          taskService.claim(taskId, currentUser);
+          taskService.complete(taskId, vars);
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-004\\b'
+    message: |-
+      HexVibe Detection [CAM-004]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          ObjectMapper mapper = new ObjectMapper();
+          mapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
+          Object body = mapper.readValue(json, Object.class);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-001\\b'
+    message: |-
+      HexVibe Detection [SPR-001]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          http.csrf(csrf -> csrf.disable())
+          .authorizeHttpRequests(a -> a.requestMatchers("/ui/**").authenticated());
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-002\\b'
+    message: |-
+      HexVibe Detection [SPR-002]: CWE-352
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @PatchMapping("/users/{id}")
+          public User update(@PathVariable Long id, @RequestBody Map<String, Object> in) {
+            BeanUtils.populate(userRepo.getReferenceById(id), in);
+            return userRepo.save(...);
+          }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-003\\b'
+    message: |-
+      HexVibe Detection [SPR-003]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @ExceptionHandler(Exception.class)
+          ResponseEntity<Map<String,String>> e(Exception ex){
+            return ResponseEntity.status(500).body(Map.of("error", ex.getMessage(), "trace", stackTrace(ex)));
+          }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-004\\b'
+    message: |-
+      HexVibe Detection [SPR-004]: CWE-209
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.db-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String q = "select * from orders where status = '" + status + "' and tenant_id=" + tenantId;
+          entityManager.createNativeQuery(q, Order.class).getResultList();
+      - pattern-regex: 'Vulnerable:\\s*DB\\-001\\b'
+    message: |-
+      HexVibe Detection [DB-001]: CWE-89
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.db-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          spring.datasource.username=app_owner
+          // app_owner owns tables, bypassing policy intent in many deployments
+      - pattern-regex: 'Vulnerable:\\s*DB\\-002\\b'
+    message: |-
+      HexVibe Detection [DB-002]: CWE-284
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.db-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          CREATE TABLE customer_secret (
+            id uuid primary key,
+            pan text not null
+          );
+      - pattern-regex: 'Vulnerable:\\s*DB\\-003\\b'
+    message: |-
+      HexVibe Detection [DB-003]: CWE-311
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.es-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String body = request.getParameter("q");
+          esClient.search(new SearchRequest("orders"), RequestOptions.DEFAULT, body);
+      - pattern-regex: 'Vulnerable:\\s*ES\\-001\\b'
+    message: |-
+      HexVibe Detection [ES-001]: CWE-74
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.es-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          xpack.security.enabled: false
+          http.host: 0.0.0.0
+      - pattern-regex: 'Vulnerable:\\s*ES\\-002\\b'
+    message: |-
+      HexVibe Detection [ES-002]: CWE-306
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.es-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          log.info("indexing customer payload={}", objectMapper.writeValueAsString(customer));
+          indexRequest.source(customerMap);
+      - pattern-regex: 'Vulnerable:\\s*ES\\-003\\b'
+    message: |-
+      HexVibe Detection [ES-003]: CWE-532
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @GetMapping("/api/orders/{id}")
+          Order o = orderRepo.findById(id).orElseThrow();
+          return OrderDto.of(o);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-005\\b'
+    message: |-
+      HexVibe Detection [SPR-005]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @DeleteMapping("/users/{uid}/cards/{cardId}")
+          cardRepo.deleteById(cardId);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-006\\b'
+    message: |-
+      HexVibe Detection [SPR-006]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @RepositoryRestResource(path="invoices")
+          interface InvoiceRepo extends JpaRepository<Invoice, UUID> {}
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-007\\b'
+    message: |-
+      HexVibe Detection [SPR-007]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @QueryMapping
+          Order order(@Argument UUID id){ return repo.findById(id).orElseThrow(); }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-008\\b'
+    message: |-
+      HexVibe Detection [SPR-008]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Path p = storage.resolve(request.getParameter("docId"));
+          return Files.readAllBytes(p);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-009\\b'
+    message: |-
+      HexVibe Detection [SPR-009]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @PostMapping("/accounts/lock")
+          void lock(@RequestBody List<Long> ids){ service.lock(ids); }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-010\\b'
+    message: |-
+      HexVibe Detection [SPR-010]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @Cacheable("profile")
+          public Profile getProfile(UUID id){ ... }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-011\\b'
+    message: |-
+      HexVibe Detection [SPR-011]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          registry.enableSimpleBroker("/topic");
+          // client subscribes /topic/orders.{orderId}
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-012\\b'
+    message: |-
+      HexVibe Detection [SPR-012]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          outboxPublisher.publish("APPROVED", execution.getProcessBusinessKey());
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-005\\b'
+    message: |-
+      HexVibe Detection [CAM-005]: CWE-440
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          paymentService.capture(execution.getBusinessKey());
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-006\\b'
+    message: |-
+      HexVibe Detection [CAM-006]: CWE-440
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          bankApi.debit(...);
+          throw new BpmnError("DECLINED");
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-007\\b'
+    message: |-
+      HexVibe Detection [CAM-007]: CWE-440
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          execution.setVariableLocal("approved", true);
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-008\\b'
+    message: |-
+      HexVibe Detection [CAM-008]: CWE-440
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          userService.promote(task.getAssignee());
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-009\\b'
+    message: |-
+      HexVibe Detection [CAM-009]: CWE-440
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          refund(execution.getVariable("amount"));
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-010\\b'
+    message: |-
+      HexVibe Detection [CAM-010]: CWE-440
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          StringEncryptor e = new PooledPBEStringEncryptor();
+          e.setAlgorithm("PBEWithMD5AndDES");
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-013\\b'
+    message: |-
+      HexVibe Detection [SPR-013]: CWE-327
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          byte[] salt = "fixed-salt-prod".getBytes(UTF_8);
+          var spec = new PBEKeySpec(pwd, salt, 10000, 128);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-014\\b'
+    message: |-
+      HexVibe Detection [SPR-014]: CWE-327
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          static SecretKey appKey;
+          if(appKey==null) appKey = derive(password);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-015\\b'
+    message: |-
+      HexVibe Detection [SPR-015]: CWE-327
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Unmarshaller u = JAXBContext.newInstance(Model.class).createUnmarshaller();
+          Model m = (Model) u.unmarshal(inputStream);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-016\\b'
+    message: |-
+      HexVibe Detection [SPR-016]: CWE-611
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Transformer t = TransformerFactory.newInstance().newTransformer(new StreamSource(userXslt));
+          t.transform(new StreamSource(xml), out);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-017\\b'
+    message: |-
+      HexVibe Detection [SPR-017]: CWE-91
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String user = req.getParameter("user");
+          String expr = "//account[user/text()='" + user + "']/@role";
+          xpath.evaluate(expr, doc);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-018\\b'
+    message: |-
+      HexVibe Detection [SPR-018]: CWE-91
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Element assertion = (Element) doc.getElementsByTagName("Assertion").item(0);
+          if (verifySignature(doc)) accept(assertion);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-019\\b'
+    message: |-
+      HexVibe Detection [SPR-019]: CWE-91
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          XMLInputFactory xif = XMLInputFactory.newFactory();
+          XMLStreamReader xsr = xif.createXMLStreamReader(input);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-020\\b'
+    message: |-
+      HexVibe Detection [SPR-020]: CWE-611
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          runtimeService.signalEventReceived("PaymentApproved");
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-011\\b'
+    message: |-
+      HexVibe Detection [CAM-011]: CWE-362
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          runtimeService.createMessageCorrelation("InvoicePaid")
+          .processInstanceBusinessKey(req.businessKey())
+          .correlate();
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-012\\b'
+    message: |-
+      HexVibe Detection [CAM-012]: CWE-362
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          gateway.charge();
+          runtimeService.createMessageCorrelation("ChargeAccepted").processInstanceId(piId).correlate();
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-013\\b'
+    message: |-
+      HexVibe Detection [CAM-013]: CWE-362
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String next = Objects.toString(execution.getVariable("nextProcess"), "");
+          runtimeService.startProcessInstanceByKey(next);
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-014\\b'
+    message: |-
+      HexVibe Detection [CAM-014]: CWE-400
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @Component("riskDelegate")
+          class RiskDelegate implements JavaDelegate {
+            private Map<String,Object> cache = new HashMap<>();
+          }
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-015\\b'
+    message: |-
+      HexVibe Detection [CAM-015]: CWE-362
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          managementService.setJobRetries(jobId, 999);
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-016\\b'
+    message: |-
+      HexVibe Detection [CAM-016]: CWE-400
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String expr = "hasRole('ADMIN') or " + req.rule();
+          methodSecurityExpressionHandler.setDefaultRolePrefix("");
+          @PreAuthorize("#{T(org.springframework.expression.spel.standard.SpelExpressionParser).new().parseExpression(@authz.expr()).getValue()}")
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-021\\b'
+    message: |-
+      HexVibe Detection [SPR-021]: CWE-917
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @Value("#{...}")
+          private String evaluated;
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-022\\b'
+    message: |-
+      HexVibe Detection [SPR-022]: CWE-917
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String route = parser.parseExpression(headers.get("route")).getValue(String.class);
+          jmsTemplate.convertAndSend(route, payload);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-023\\b'
+    message: |-
+      HexVibe Detection [SPR-023]: CWE-917
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          mapper.activateDefaultTyping(ptv, DefaultTyping.EVERYTHING);
+          mapper.addMixIn(Object.class, TrustAll.class);
+          Object o = mapper.readValue(json, Object.class);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-024\\b'
+    message: |-
+      HexVibe Detection [SPR-024]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Yaml yaml = new Yaml();
+          Object cfg = yaml.load(userYaml);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-025\\b'
+    message: |-
+      HexVibe Detection [SPR-025]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          XStream xs = new XStream();
+          xs.allowTypesByWildcard(new String[]{"**"});
+          Object o = xs.fromXML(xml);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-026\\b'
+    message: |-
+      HexVibe Detection [SPR-026]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Stream.iterate(seed, f).map(this::expand).forEach(this::store);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-027\\b'
+    message: |-
+      HexVibe Detection [SPR-027]: CWE-400
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @Async void run(){
+          EntityManager em = emf.createEntityManager();
+          while(true){ em.createQuery("...").getResultList(); }
+          }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-028\\b'
+    message: |-
+      HexVibe Detection [SPR-028]: CWE-400
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @Service class TokenService {
+            private long counter;
+            String next(){ return "T-" + (++counter); }
+          }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-029\\b'
+    message: |-
+      HexVibe Detection [SPR-029]: CWE-362
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          if(cache.get(k)==null){ cache.put(k, load(k)); }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-030\\b'
+    message: |-
+      HexVibe Detection [SPR-030]: CWE-362
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-031
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          public String update(@ModelAttribute User u){
+            userRepo.save(u);
+          }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-031\\b'
+    message: |-
+      HexVibe Detection [SPR-031]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-032
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          binder.setAutoGrowNestedPaths(true);
+          // attacker sets account.roles[999999].name
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-032\\b'
+    message: |-
+      HexVibe Detection [SPR-032]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.db-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String raw = rs.getString("payload");
+          Object o = mapper.readValue(raw, Object.class);
+      - pattern-regex: 'Vulnerable:\\s*DB\\-006\\b'
+    message: |-
+      HexVibe Detection [DB-006]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.db-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Stream<Order> s = repo.streamAll();
+          s.forEach(this::heavyWork); // never closed
+      - pattern-regex: 'Vulnerable:\\s*DB\\-007\\b'
+    message: |-
+      HexVibe Detection [DB-007]: CWE-400
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.es-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          static SearchSourceBuilder SHARED = new SearchSourceBuilder();
+          SHARED.query(userQuery);
+          client.search(new SearchRequest("idx").source(SHARED), DEFAULT);
+      - pattern-regex: 'Vulnerable:\\s*ES\\-004\\b'
+    message: |-
+      HexVibe Detection [ES-004]: CWE-362
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @PostMapping("/camunda/task/{id}/complete")
+          taskService.complete(id, vars);
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-017\\b'
+    message: |-
+      HexVibe Detection [CAM-017]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          processEngineConfiguration.setAuthorizationEnabled(false);
+          runtimeService.createProcessInstanceQuery().list();
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-018\\b'
+    message: |-
+      HexVibe Detection [CAM-018]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          runtimeService.getVariables(procInstId);
+          // procInstId from request path
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-019\\b'
+    message: |-
+      HexVibe Detection [CAM-019]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          runtimeService.createMessageCorrelation("ApprovePayment")
+          .processInstanceId(pid).correlate();
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-020\\b'
+    message: |-
+      HexVibe Detection [CAM-020]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-033
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @PostAuthorize("returnObject.ownerId == authentication.name")
+          public OrderDto get(UUID id){ return mapper.toDto(repo.findById(id).orElseThrow()); }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-033\\b'
+    message: |-
+      HexVibe Detection [SPR-033]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-034
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        t == null
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          public boolean hasPermission(Authentication a, Object t, Object p){
+            return t == null
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-034\\b'
+    message: |-
+      HexVibe Detection [SPR-034]: public boolean hasPermission(Authentication a, Object t, Object p){
+        if (a == null
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-035
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          SignedJWT jwt = SignedJWT.parse(token);
+          JWTClaimsSet c = jwt.getJWTClaimsSet();
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-035\\b'
+    message: |-
+      HexVibe Detection [SPR-035]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-036
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          JWSVerifier v = new MACVerifier(publicKeyBytes);
+          signedJwt.verify(v);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-036\\b'
+    message: |-
+      HexVibe Detection [SPR-036]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-037
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Jwt jwt = decoder.decode(token);
+          return jwt;
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-037\\b'
+    message: |-
+      HexVibe Detection [SPR-037]: CWE-345
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-038
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          decoder.setJwtValidator(token -> OAuth2TokenValidatorResult.success());
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-038\\b'
+    message: |-
+      HexVibe Detection [SPR-038]: CWE-345
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-039
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          oauth2Client.tokenUri(tokenUri);
+          // authorization request omits code_challenge
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-039\\b'
+    message: |-
+      HexVibe Detection [SPR-039]: CWE-345
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-040
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String state = UUID.randomUUID().toString();
+          redirect("/oauth2/authorization/keycloak?state=" + state);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-040\\b'
+    message: |-
+      HexVibe Detection [SPR-040]: CWE-352
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-041
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String redirect = req.getParameter("redirect_uri");
+          return "redirect:" + redirect;
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-041\\b'
+    message: |-
+      HexVibe Detection [SPR-041]: CWE-601
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-042
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          http.sessionManagement(s -> s.sessionFixation(f -> f.none()));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-042\\b'
+    message: |-
+      HexVibe Detection [SPR-042]: CWE-384
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-043
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          CompletableFuture.runAsync(() -> service.handle(SecurityContextHolder.getContext()));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-043\\b'
+    message: |-
+      HexVibe Detection [SPR-043]: CWE-384
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-044
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          http.csrf(csrf -> csrf.disable())
+          .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-044\\b'
+    message: |-
+      HexVibe Detection [SPR-044]: CWE-384
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.ak-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          JwtGrantedAuthoritiesConverter c = new JwtGrantedAuthoritiesConverter();
+          // only scope mapped, realm_access ignored
+      - pattern-regex: 'Vulnerable:\\s*AK\\-001\\b'
+    message: |-
+      HexVibe Detection [AK-001]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.ak-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Jwt jwt = decoder.decode(token);
+          // checks iss only
+      - pattern-regex: 'Vulnerable:\\s*AK\\-002\\b'
+    message: |-
+      HexVibe Detection [AK-002]: CWE-345
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.ak-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          OpaqueTokenIntrospector i = new NimbusOpaqueTokenIntrospector(uri, id, secret);
+          return i.introspect(token);
+      - pattern-regex: 'Vulnerable:\\s*AK\\-003\\b'
+    message: |-
+      HexVibe Detection [AK-003]: CWE-345
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.ak-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          keycloak.enabled=true
+          keycloak.bearer-only=true
+          // legacy adapter chain
+      - pattern-regex: 'Vulnerable:\\s*AK\\-004\\b'
+    message: |-
+      HexVibe Detection [AK-004]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.ak-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          NimbusJwtDecoder.withJwkSetUri("https://idp.example/protocol/openid-connect/certs").build();
+      - pattern-regex: 'Vulnerable:\\s*AK\\-005\\b'
+    message: |-
+      HexVibe Detection [AK-005]: CWE-345
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.ak-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          List<String> roles = jwt.getClaim("resource_access");
+          authorities.addAll(roles.stream().map(SimpleGrantedAuthority::new).toList());
+      - pattern-regex: 'Vulnerable:\\s*AK\\-006\\b'
+    message: |-
+      HexVibe Detection [AK-006]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @PostMapping("/process/{id}/pdf")
+          byte[] pdf = pdfService.renderFullAudit(id);
+          return ResponseEntity.ok(pdf);
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-021\\b'
+    message: |-
+      HexVibe Detection [CAM-021]: CWE-770
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          historyService.createHistoricTaskInstanceQuery().list();
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-022\\b'
+    message: |-
+      HexVibe Detection [CAM-022]: CWE-770
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          runtimeService.startProcessInstanceByKey("bulkImport", vars);
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-023\\b'
+    message: |-
+      HexVibe Detection [CAM-023]: CWE-770
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          log.info("vars={}", runtimeService.getVariables(piId));
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-024\\b'
+    message: |-
+      HexVibe Detection [CAM-024]: CWE-532
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-045
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @GetMapping("/api/search")
+          return service.heavyElasticSearch(q, filters);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-045\\b'
+    message: |-
+      HexVibe Detection [SPR-045]: CWE-770
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-046
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          return reportClient.fetchLargeReport(id);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-046\\b'
+    message: |-
+      HexVibe Detection [SPR-046]: CWE-770
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-047
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          log.info("auth={}", request.getHeader("Authorization"));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-047\\b'
+    message: |-
+      HexVibe Detection [SPR-047]: CWE-532
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-048
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          tracer.currentSpan().tag("user.email", user.getEmail());
+          tracer.currentSpan().tag("ssn", req.ssn());
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-048\\b'
+    message: |-
+      HexVibe Detection [SPR-048]: CWE-532
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-049
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          management.endpoints.web.exposure.include=health,info,heapdump
+          management.endpoint.heapdump.enabled=true
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-049\\b'
+    message: |-
+      HexVibe Detection [SPR-049]: CWE-532
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-050
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @PostMapping("/users")
+          public User create(@RequestBody User entity){ return repo.save(entity); }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-050\\b'
+    message: |-
+      HexVibe Detection [SPR-050]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-051
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          objectMapper.readerForUpdating(user).readValue(jsonPatchBody);
+          repo.save(user);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-051\\b'
+    message: |-
+      HexVibe Detection [SPR-051]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-052
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          return ResponseEntity.status(500).body(Map.of("error", ex.toString(), "trace", stackTrace(ex)));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-052\\b'
+    message: |-
+      HexVibe Detection [SPR-052]: CWE-209
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-053
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          server.error.include-stacktrace=always
+          server.error.include-message=always
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-053\\b'
+    message: |-
+      HexVibe Detection [SPR-053]: CWE-209
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-054
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @GetMapping("/api/es")
+          return es.search(query, request.getParameter("size"));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-054\\b'
+    message: |-
+      HexVibe Detection [SPR-054]: CWE-770
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.inf-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          FROM eclipse-temurin:21-jre
+          COPY app.jar /app.jar
+          ENTRYPOINT ["java","-jar","/app.jar"]
+      - pattern-regex: 'Vulnerable:\\s*INF\\-001\\b'
+    message: |-
+      HexVibe Detection [INF-001]: CWE-250
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.inf-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          docker run myapp:latest
+      - pattern-regex: 'Vulnerable:\\s*INF\\-002\\b'
+    message: |-
+      HexVibe Detection [INF-002]: CWE-250
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.inf-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          resources: {}
+      - pattern-regex: 'Vulnerable:\\s*INF\\-003\\b'
+    message: |-
+      HexVibe Detection [INF-003]: CWE-770
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.inf-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          securityContext: {}
+      - pattern-regex: 'Vulnerable:\\s*INF\\-004\\b'
+    message: |-
+      HexVibe Detection [INF-004]: CWE-250
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.inf-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          server {
+            listen 443 ssl;
+          }
+      - pattern-regex: 'Vulnerable:\\s*INF\\-005\\b'
+    message: |-
+      HexVibe Detection [INF-005]: CWE-693
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.inf-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          proxy_set_header Authorization ...;
+          log_format main '... ...';
+      - pattern-regex: 'Vulnerable:\\s*INF\\-006\\b'
+    message: |-
+      HexVibe Detection [INF-006]: CWE-532
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.inf-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        CWE-200
+    pattern-either:
+      - pattern: |-
+          paths:
+          - /actuator
+          - /
+      - pattern-regex: 'Vulnerable:\\s*INF\\-007\\b'
+    message: |-
+      HexVibe Detection [INF-007]: Kubernetes Ingress Security
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.inf-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          location /api/ { proxy_pass http://app; }
+      - pattern-regex: 'Vulnerable:\\s*INF\\-008\\b'
+    message: |-
+      HexVibe Detection [INF-008]: CWE-770
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String cb = (String) execution.getVariable("callbackUrl");
+          webClient.post().uri(cb).retrieve().toBodilessEntity().block();
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-025\\b'
+    message: |-
+      HexVibe Detection [CAM-025]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          runtimeService.createSignalEvent(signalName).send();
+          audit.log("forwarded signal=" + signalName);
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-026\\b'
+    message: |-
+      HexVibe Detection [CAM-026]: CWE-441
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          runtimeService.createMessageCorrelation("TenantEvent").processInstanceBusinessKey(key).correlate();
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-027\\b'
+    message: |-
+      HexVibe Detection [CAM-027]: CWE-441
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          historyService.createHistoricDetailQuery().list();
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-028\\b'
+    message: |-
+      HexVibe Detection [CAM-028]: CWE-209
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-071
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String u = req.url();
+          restTemplate.getForObject(u, String.class);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-071\\b'
+    message: |-
+      HexVibe Detection [SPR-071]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-072
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          webClient.get().uri(request.getTarget()).retrieve().bodyToMono(String.class);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-072\\b'
+    message: |-
+      HexVibe Detection [SPR-072]: CWE-918
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-073
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          eureka.client.serviceUrl.defaultZone=http://eureka.internal:8761/eureka
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-073\\b'
+    message: |-
+      HexVibe Detection [SPR-073]: CWE-441
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-074
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          spring.cloud.config.server.git.uri=https://git.example/config
+          spring.cloud.config.fail-fast=false
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-074\\b'
+    message: |-
+      HexVibe Detection [SPR-074]: CWE-441
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-075
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          requestTemplate.header("Authorization", inboundAuth);
+          return feignClient.call(target);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-075\\b'
+    message: |-
+      HexVibe Detection [SPR-075]: CWE-200
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-076
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          requestTemplate.header("X-Forwarded-Host", request.getHeader("X-Forwarded-Host"));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-076\\b'
+    message: |-
+      HexVibe Detection [SPR-076]: CWE-20
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-077
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Object evt = mapper.readValue(record.value(), Object.class);
+          handler.handle(evt);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-077\\b'
+    message: |-
+      HexVibe Detection [SPR-077]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-078
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          catch (Exception ex) { throw ex; }
+          container.setDefaultRequeueRejected(true);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-078\\b'
+    message: |-
+      HexVibe Detection [SPR-078]: CWE-20
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-079
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          log.warn("invalid message=" + record.value());
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-079\\b'
+    message: |-
+      HexVibe Detection [SPR-079]: CWE-117
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-080
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          spring.cloud.stream.kafka.binder.brokers=kafka:9092
+          spring.cloud.stream.bindings.input.group=orders
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-080\\b'
+    message: |-
+      HexVibe Detection [SPR-080]: CWE-319
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-081
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String sortExpr = prefRepo.findByUser(uid).getSortExpr();
+          entityManager.createNativeQuery("select * from invoice order by " + sortExpr).getResultList();
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-081\\b'
+    message: |-
+      HexVibe Detection [SPR-081]: CWE-89
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-082
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          String filter = reportTemplate.getFilter();
+          entityManager.createQuery("from Payment p where " + filter).getResultList();
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-082\\b'
+    message: |-
+      HexVibe Detection [SPR-082]: CWE-89
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-083
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          @JsonView(Views.Public.class)
+          public UserEntity getUser(...) { return repo.findById(id).orElseThrow(); }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-083\\b'
+    message: |-
+      HexVibe Detection [SPR-083]: CWE-209
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-084
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          auditReader.createQuery().forRevisionsOfEntity(Account.class, true, true).getResultList();
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-084\\b'
+    message: |-
+      HexVibe Detection [SPR-084]: CWE-200
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-085
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          return Mono.fromCallable(() -> repo.findAll()).map(this::toDto);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-085\\b'
+    message: |-
+      HexVibe Detection [SPR-085]: CWE-400
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-086
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          return webClient.get().uri(path).retrieve().bodyToMono(String.class).map(v -> legacyClient.blockingCall(v));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-086\\b'
+    message: |-
+      HexVibe Detection [SPR-086]: CWE-400
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-087
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          return authz.check().flatMap(ok -> service.read(accountId));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-087\\b'
+    message: |-
+      HexVibe Detection [SPR-087]: CWE-362
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-088
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          AtomicReference<String> principal = new AtomicReference<>();
+          flux.parallel().runOn(Schedulers.parallel()).doOnNext(x -> principal.set(x.user())).sequential();
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-088\\b'
+    message: |-
+      HexVibe Detection [SPR-088]: CWE-362
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-089
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Flux.interval(Duration.ofMillis(1)).map(this::expensive).subscribe();
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-089\\b'
+    message: |-
+      HexVibe Detection [SPR-089]: CWE-400
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-090
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          return Flux.generate(sink -> sink.next(loadHeavyPayload()));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-090\\b'
+    message: |-
+      HexVibe Detection [SPR-090]: CWE-400
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-091
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
+          c.init(Cipher.ENCRYPT_MODE, key);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-091\\b'
+    message: |-
+      HexVibe Detection [SPR-091]: CWE-327
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-092
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          PBEKeySpec spec = new PBEKeySpec(password, salt, 1000, 256);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-092\\b'
+    message: |-
+      HexVibe Detection [SPR-092]: CWE-327
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-093
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          HttpClient.create().secure(s -> s.sslContext(SslContextBuilder.forClient().trustManager(InsecureTrustManagerFactory.INSTANCE)));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-093\\b'
+    message: |-
+      HexVibe Detection [SPR-093]: CWE-295
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-094
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          eventRepo.save(new EventEntity(userId, payloadJson));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-094\\b'
+    message: |-
+      HexVibe Detection [SPR-094]: CWE-311
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-095
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          ManagedChannel ch = ManagedChannelBuilder.forAddress(host, 8443).useTransportSecurity().build();
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-095\\b'
+    message: |-
+      HexVibe Detection [SPR-095]: CWE-295
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-096
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          Transformer t = TransformerFactory.newInstance().newTransformer(new StreamSource(userXslt));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-096\\b'
+    message: |-
+      HexVibe Detection [SPR-096]: CWE-91
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-097
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          ZipEntry entry; while((entry = zis.getNextEntry()) != null) {
+            byte[] b = zis.readAllBytes();
+          }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-097\\b'
+    message: |-
+      HexVibe Detection [SPR-097]: CWE-409
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-098
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          File f = new File(outDir, entry.getName());
+          FileOutputStream fos = new FileOutputStream(f);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-098\\b'
+    message: |-
+      HexVibe Detection [SPR-098]: CWE-22
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-099
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          LocateRegistry.createRegistry(1099);
+          mbsc.createMBean("javax.management.loading.MLet", ...);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-099\\b'
+    message: |-
+      HexVibe Detection [SPR-099]: CWE-749
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-100
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          if (inputToken.equals(storedToken)) { return true; }
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-100\\b'
+    message: |-
+      HexVibe Detection [SPR-100]: CWE-208
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-101
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          management.endpoint.env.show-values=always
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-101\\b'
+    message: |-
+      HexVibe Detection [SPR-101]: CWE-497
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-102
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          logger.info("Context: " + request.getHeader("X-Context"));
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-102\\b'
+    message: |-
+      HexVibe Detection [SPR-102]: CWE-117
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.spr-103
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          BeanUtils.copyProperties(dest, orig);
+      - pattern-regex: 'Vulnerable:\\s*SPR\\-103\\b'
+    message: |-
+      HexVibe Detection [SPR-103]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          execution.setVariable("res", shell.evaluate(userScript));
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-029\\b'
+    message: |-
+      HexVibe Detection [CAM-029]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.cam-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          throw new BpmnError(request.getErrorCode());
+      - pattern-regex: 'Vulnerable:\\s*CAM\\-030\\b'
+    message: |-
+      HexVibe Detection [CAM-030]: CWE-20
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.db-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          copy table from program 'curl http://...';
+      - pattern-regex: 'Vulnerable:\\s*DB\\-008\\b'
+    message: |-
+      HexVibe Detection [DB-008]: CWE-78
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.java-enterprise.inf-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        N/A
+    pattern-either:
+      - pattern: |-
+          resources: {}
+          limits: {}
+      - pattern-regex: 'Vulnerable:\\s*INF\\-009\\b'
+    message: |-
+      HexVibe Detection [INF-009]: CWE-400
+    languages:
+      - generic
+    severity: WARNING

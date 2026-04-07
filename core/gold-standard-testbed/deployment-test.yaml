@@ -1,0 +1,20 @@
+# Vulnerable: INF-009
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vulnerable-java-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vulnerable-java-app
+  template:
+    metadata:
+      labels:
+        app: vulnerable-java-app
+    spec:
+      containers:
+        - name: app
+          image: vulnerable:latest
+          resources: {}
+          limits: {}

@@ -1,0 +1,26 @@
+{
+  "skill_id": "java-enterprise",
+  "name": "Java Enterprise Security",
+  "activation_triggers": [
+    "java-enterprise-camunda",
+    "java-enterprise-spring-security",
+    "java-enterprise-jwt-oauth2",
+    "java-enterprise-infra"
+  ],
+  "languages": ["java", "xml", "yaml", "dockerfile"],
+  "relevant_extensions": [
+    ".java",
+    ".xml",
+    ".yaml",
+    ".yml",
+    "Dockerfile"
+  ],
+  "tools": [
+    "semgrep",
+    "syft",
+    "trufflehog"
+  ],
+  "rules_path": "core/skills/java-enterprise/patterns.md",
+  "few_shot_examples": "core/gold-standard-testbed/enterprise_java_validation.java",
+  "security_priority": 5
+}

@@ -8651,6 +8651,1515 @@
       "attack:T1190"
     ]
   },
+  "CAM-001": {
+    "cwe": [
+      "CWE-94"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1059",
+      "attack:T1059.004",
+      "attack:T1059.007"
+    ]
+  },
+  "CAM-002": {
+    "cwe": [
+      "CWE-200"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1005"
+    ]
+  },
+  "CAM-003": {
+    "cwe": [
+      "CWE-611"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-004": {
+    "cwe": [
+      "CWE-285"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "SPR-001": {
+    "cwe": [
+      "CWE-502"
+    ],
+    "owasp": [
+      "owasp:A08"
+    ],
+    "attack": [
+      "attack:T1204",
+      "attack:T1055"
+    ]
+  },
+  "SPR-002": {
+    "cwe": [
+      "CWE-352"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-003": {
+    "cwe": [
+      "CWE-915"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-004": {
+    "cwe": [
+      "CWE-209"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1005"
+    ]
+  },
+  "DB-001": {
+    "cwe": [
+      "CWE-89"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "DB-002": {
+    "cwe": [
+      "CWE-284"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "DB-003": {
+    "cwe": [
+      "CWE-311"
+    ],
+    "owasp": [
+      "owasp:A02"
+    ],
+    "attack": [
+      "attack:T1005"
+    ]
+  },
+  "ES-001": {
+    "cwe": [
+      "CWE-74"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "ES-002": {
+    "cwe": [
+      "CWE-306"
+    ],
+    "owasp": [
+      "owasp:A07"
+    ],
+    "attack": [
+      "attack:T1078"
+    ]
+  },
+  "ES-003": {
+    "cwe": [
+      "CWE-532"
+    ],
+    "owasp": [
+      "owasp:A09"
+    ],
+    "attack": [
+      "attack:T1562"
+    ]
+  },
+  "SPR-005": {
+    "cwe": [
+      "CWE-639"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "SPR-006": {
+    "cwe": [
+      "CWE-639"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "SPR-007": {
+    "cwe": [
+      "CWE-639"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "SPR-008": {
+    "cwe": [
+      "CWE-639"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "SPR-009": {
+    "cwe": [
+      "CWE-639"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "SPR-010": {
+    "cwe": [
+      "CWE-639"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "SPR-011": {
+    "cwe": [
+      "CWE-639"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "SPR-012": {
+    "cwe": [
+      "CWE-639"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "CAM-005": {
+    "cwe": [
+      "CWE-440"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-006": {
+    "cwe": [
+      "CWE-440"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-007": {
+    "cwe": [
+      "CWE-440"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-008": {
+    "cwe": [
+      "CWE-440"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-009": {
+    "cwe": [
+      "CWE-440"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-010": {
+    "cwe": [
+      "CWE-440"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-013": {
+    "cwe": [
+      "CWE-327"
+    ],
+    "owasp": [
+      "owasp:A02"
+    ],
+    "attack": [
+      "attack:T1552"
+    ]
+  },
+  "SPR-014": {
+    "cwe": [
+      "CWE-327"
+    ],
+    "owasp": [
+      "owasp:A02"
+    ],
+    "attack": [
+      "attack:T1552"
+    ]
+  },
+  "SPR-015": {
+    "cwe": [
+      "CWE-327"
+    ],
+    "owasp": [
+      "owasp:A02"
+    ],
+    "attack": [
+      "attack:T1552"
+    ]
+  },
+  "SPR-016": {
+    "cwe": [
+      "CWE-611"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-017": {
+    "cwe": [
+      "CWE-91"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-018": {
+    "cwe": [
+      "CWE-91"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-019": {
+    "cwe": [
+      "CWE-91"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-020": {
+    "cwe": [
+      "CWE-611"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-011": {
+    "cwe": [
+      "CWE-362"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-012": {
+    "cwe": [
+      "CWE-362"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-013": {
+    "cwe": [
+      "CWE-362"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-014": {
+    "cwe": [
+      "CWE-400"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-015": {
+    "cwe": [
+      "CWE-362"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-016": {
+    "cwe": [
+      "CWE-400"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-021": {
+    "cwe": [
+      "CWE-917"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-022": {
+    "cwe": [
+      "CWE-917"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-023": {
+    "cwe": [
+      "CWE-917"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-024": {
+    "cwe": [
+      "CWE-502"
+    ],
+    "owasp": [
+      "owasp:A08"
+    ],
+    "attack": [
+      "attack:T1204",
+      "attack:T1055"
+    ]
+  },
+  "SPR-025": {
+    "cwe": [
+      "CWE-502"
+    ],
+    "owasp": [
+      "owasp:A08"
+    ],
+    "attack": [
+      "attack:T1204",
+      "attack:T1055"
+    ]
+  },
+  "SPR-026": {
+    "cwe": [
+      "CWE-502"
+    ],
+    "owasp": [
+      "owasp:A08"
+    ],
+    "attack": [
+      "attack:T1204",
+      "attack:T1055"
+    ]
+  },
+  "SPR-027": {
+    "cwe": [
+      "CWE-400"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-028": {
+    "cwe": [
+      "CWE-400"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-029": {
+    "cwe": [
+      "CWE-362"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-030": {
+    "cwe": [
+      "CWE-362"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-031": {
+    "cwe": [
+      "CWE-915"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-032": {
+    "cwe": [
+      "CWE-915"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "DB-006": {
+    "cwe": [
+      "CWE-502"
+    ],
+    "owasp": [
+      "owasp:A08"
+    ],
+    "attack": [
+      "attack:T1204",
+      "attack:T1055"
+    ]
+  },
+  "DB-007": {
+    "cwe": [
+      "CWE-400"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "ES-004": {
+    "cwe": [
+      "CWE-362"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-017": {
+    "cwe": [
+      "CWE-285"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "CAM-018": {
+    "cwe": [
+      "CWE-285"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "CAM-019": {
+    "cwe": [
+      "CWE-639"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "CAM-020": {
+    "cwe": [
+      "CWE-285"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "SPR-033": {
+    "cwe": [
+      "CWE-639"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1098"
+    ]
+  },
+  "SPR-034": {
+    "cwe": [],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-035": {
+    "cwe": [
+      "CWE-347"
+    ],
+    "owasp": [
+      "owasp:A08"
+    ],
+    "attack": [
+      "attack:T1195",
+      "attack:T1195.001"
+    ]
+  },
+  "SPR-036": {
+    "cwe": [
+      "CWE-347"
+    ],
+    "owasp": [
+      "owasp:A08"
+    ],
+    "attack": [
+      "attack:T1195",
+      "attack:T1195.001"
+    ]
+  },
+  "SPR-037": {
+    "cwe": [
+      "CWE-345"
+    ],
+    "owasp": [
+      "owasp:A08"
+    ],
+    "attack": [
+      "attack:T1556"
+    ]
+  },
+  "SPR-038": {
+    "cwe": [
+      "CWE-345"
+    ],
+    "owasp": [
+      "owasp:A08"
+    ],
+    "attack": [
+      "attack:T1556"
+    ]
+  },
+  "SPR-039": {
+    "cwe": [
+      "CWE-345"
+    ],
+    "owasp": [
+      "owasp:A08"
+    ],
+    "attack": [
+      "attack:T1556"
+    ]
+  },
+  "SPR-040": {
+    "cwe": [
+      "CWE-352"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-041": {
+    "cwe": [
+      "CWE-601"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-042": {
+    "cwe": [
+      "CWE-384"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-043": {
+    "cwe": [
+      "CWE-384"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-044": {
+    "cwe": [
+      "CWE-384"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-021": {
+    "cwe": [
+      "CWE-770"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-022": {
+    "cwe": [
+      "CWE-770"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-023": {
+    "cwe": [
+      "CWE-770"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-024": {
+    "cwe": [
+      "CWE-532"
+    ],
+    "owasp": [
+      "owasp:A09"
+    ],
+    "attack": [
+      "attack:T1562"
+    ]
+  },
+  "SPR-045": {
+    "cwe": [
+      "CWE-770"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-046": {
+    "cwe": [
+      "CWE-770"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-047": {
+    "cwe": [
+      "CWE-532"
+    ],
+    "owasp": [
+      "owasp:A09"
+    ],
+    "attack": [
+      "attack:T1562"
+    ]
+  },
+  "SPR-048": {
+    "cwe": [
+      "CWE-532"
+    ],
+    "owasp": [
+      "owasp:A09"
+    ],
+    "attack": [
+      "attack:T1562"
+    ]
+  },
+  "SPR-049": {
+    "cwe": [
+      "CWE-532"
+    ],
+    "owasp": [
+      "owasp:A09"
+    ],
+    "attack": [
+      "attack:T1562"
+    ]
+  },
+  "SPR-050": {
+    "cwe": [
+      "CWE-915"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-051": {
+    "cwe": [
+      "CWE-915"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-052": {
+    "cwe": [
+      "CWE-209"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1005"
+    ]
+  },
+  "SPR-053": {
+    "cwe": [
+      "CWE-209"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1005"
+    ]
+  },
+  "SPR-054": {
+    "cwe": [
+      "CWE-770"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "INF-001": {
+    "cwe": [
+      "CWE-250"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "INF-002": {
+    "cwe": [
+      "CWE-250"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "INF-003": {
+    "cwe": [
+      "CWE-770"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "INF-004": {
+    "cwe": [
+      "CWE-250"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "INF-005": {
+    "cwe": [
+      "CWE-693"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "INF-006": {
+    "cwe": [
+      "CWE-532"
+    ],
+    "owasp": [
+      "owasp:A09"
+    ],
+    "attack": [
+      "attack:T1562"
+    ]
+  },
+  "INF-007": {
+    "cwe": [],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "INF-008": {
+    "cwe": [
+      "CWE-770"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-025": {
+    "cwe": [
+      "CWE-918"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-026": {
+    "cwe": [
+      "CWE-441"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-027": {
+    "cwe": [
+      "CWE-441"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-028": {
+    "cwe": [
+      "CWE-209"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1005"
+    ]
+  },
+  "SPR-071": {
+    "cwe": [
+      "CWE-918"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-072": {
+    "cwe": [
+      "CWE-918"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-073": {
+    "cwe": [
+      "CWE-441"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-074": {
+    "cwe": [
+      "CWE-441"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-075": {
+    "cwe": [
+      "CWE-200"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1005"
+    ]
+  },
+  "SPR-076": {
+    "cwe": [
+      "CWE-20"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190",
+      "attack:T1189"
+    ]
+  },
+  "SPR-077": {
+    "cwe": [
+      "CWE-502"
+    ],
+    "owasp": [
+      "owasp:A08"
+    ],
+    "attack": [
+      "attack:T1204",
+      "attack:T1055"
+    ]
+  },
+  "SPR-078": {
+    "cwe": [
+      "CWE-20"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190",
+      "attack:T1189"
+    ]
+  },
+  "SPR-079": {
+    "cwe": [
+      "CWE-117"
+    ],
+    "owasp": [
+      "owasp:A09"
+    ],
+    "attack": [
+      "attack:T1562"
+    ]
+  },
+  "SPR-080": {
+    "cwe": [
+      "CWE-319"
+    ],
+    "owasp": [
+      "owasp:A02"
+    ],
+    "attack": [
+      "attack:T1552"
+    ]
+  },
+  "SPR-081": {
+    "cwe": [
+      "CWE-89"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-082": {
+    "cwe": [
+      "CWE-89"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-083": {
+    "cwe": [
+      "CWE-209"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1005"
+    ]
+  },
+  "SPR-084": {
+    "cwe": [
+      "CWE-200"
+    ],
+    "owasp": [
+      "owasp:A10"
+    ],
+    "attack": [
+      "attack:T1005"
+    ]
+  },
+  "SPR-085": {
+    "cwe": [
+      "CWE-400"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-086": {
+    "cwe": [
+      "CWE-400"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-087": {
+    "cwe": [
+      "CWE-362"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-088": {
+    "cwe": [
+      "CWE-362"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-089": {
+    "cwe": [
+      "CWE-400"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-090": {
+    "cwe": [
+      "CWE-400"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-091": {
+    "cwe": [
+      "CWE-327"
+    ],
+    "owasp": [
+      "owasp:A02"
+    ],
+    "attack": [
+      "attack:T1552"
+    ]
+  },
+  "SPR-092": {
+    "cwe": [
+      "CWE-327"
+    ],
+    "owasp": [
+      "owasp:A02"
+    ],
+    "attack": [
+      "attack:T1552"
+    ]
+  },
+  "SPR-093": {
+    "cwe": [
+      "CWE-295"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-094": {
+    "cwe": [
+      "CWE-311"
+    ],
+    "owasp": [
+      "owasp:A02"
+    ],
+    "attack": [
+      "attack:T1005"
+    ]
+  },
+  "SPR-095": {
+    "cwe": [
+      "CWE-295"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-096": {
+    "cwe": [
+      "CWE-91"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-097": {
+    "cwe": [
+      "CWE-409"
+    ],
+    "owasp": [
+      "owasp:A09"
+    ],
+    "attack": [
+      "attack:T1499"
+    ]
+  },
+  "SPR-098": {
+    "cwe": [
+      "CWE-22"
+    ],
+    "owasp": [
+      "owasp:A01"
+    ],
+    "attack": [
+      "attack:T1083"
+    ]
+  },
+  "SPR-099": {
+    "cwe": [
+      "CWE-749"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1059",
+      "attack:T1204"
+    ]
+  },
+  "SPR-100": {
+    "cwe": [
+      "CWE-208"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-101": {
+    "cwe": [
+      "CWE-497"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "SPR-102": {
+    "cwe": [
+      "CWE-117"
+    ],
+    "owasp": [
+      "owasp:A09"
+    ],
+    "attack": [
+      "attack:T1562"
+    ]
+  },
+  "SPR-103": {
+    "cwe": [
+      "CWE-915"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
+  "CAM-029": {
+    "cwe": [
+      "CWE-94"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1059",
+      "attack:T1059.004",
+      "attack:T1059.007"
+    ]
+  },
+  "CAM-030": {
+    "cwe": [
+      "CWE-20"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190",
+      "attack:T1189"
+    ]
+  },
+  "DB-008": {
+    "cwe": [
+      "CWE-78"
+    ],
+    "owasp": [
+      "owasp:A03"
+    ],
+    "attack": [
+      "attack:T1059",
+      "attack:T1059.004"
+    ]
+  },
+  "INF-009": {
+    "cwe": [
+      "CWE-400"
+    ],
+    "owasp": [
+      "owasp:A04"
+    ],
+    "attack": [
+      "attack:T1190"
+    ]
+  },
   "JAVA-001": {
     "cwe": [
       "CWE-94"
