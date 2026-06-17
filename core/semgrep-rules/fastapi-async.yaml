@@ -18,7 +18,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-001]: SlowApi Documentation, FastAPI > Note: route decorator must be above the limit decorator, not below it
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-002
     metadata:
@@ -39,7 +39,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-002]: SlowApi Documentation, Limitations and known issues > Request argument
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-003
     metadata:
@@ -60,7 +60,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-003]: SlowApi Documentation, Limitations and known issues > Response type
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-004
     metadata:
@@ -79,7 +79,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-004]: EncodeDatabases, contributing > Insert some data
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-005
     metadata:
@@ -98,7 +98,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-005]: EncodeDatabases, contributing > Insert some data
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-006
     metadata:
@@ -117,7 +117,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-006]: EncodeDatabases, tests_and_migrations > Test isolation / force-rollback transactions
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-007
     metadata:
@@ -135,7 +135,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-007]: EncodeDatabases, database_queries > Queries / Execute
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-008
     metadata:
@@ -143,7 +143,7 @@ rules:
       confidence: |-
         0.9
       exploit_scenario: |-
-        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+        DI dependency scope must be request-bounded; singleton mutable providers are forbidden for auth/tenant-sensitive state.
       fix_template: |-
         Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
     pattern-either:
@@ -157,7 +157,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-008]: FastAPI Security Documentation (production-ready resource usage); OWASP API Security Top 10 (API4: Unrestricted Resource Consumption)
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-009
     metadata:
@@ -176,7 +176,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-009]: FastAPI Security Documentation (availability hardening); OWASP API Security Top 10 (API4: Unrestricted Resource Consumption)
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-010
     metadata:
@@ -198,7 +198,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-010]: FastAPI Security Documentation (sensitive data handling); OWASP API Security Top 10 (API3: Broken Object Property Level Authorization / excessive data exposure)
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-011
     metadata:
@@ -216,7 +216,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-011]: FastAPI Security Documentation (disable interactive docs in production); OWASP API Security Top 10 (API9: Improper Inventory Management)
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-012
     metadata:
@@ -240,7 +240,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-012]: FastAPI Security Documentation (CORS); OWASP API Security Top 10 (API8: Security Misconfiguration)
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-013
     metadata:
@@ -261,7 +261,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-013]: FastAPI Security Documentation (input validation); OWASP API Security Top 10 (API8: Security Misconfiguration)
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-014
     metadata:
@@ -284,7 +284,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-014]: FastAPI Security Documentation (BackgroundTasks operational safety); OWASP API Security Top 10 (API10: Unsafe Consumption of APIs)
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-015
     metadata:
@@ -305,7 +305,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-015]: FastAPI Security Documentation (request validation & UploadFile handling); OWASP API Security Top 10 (API4: Unrestricted Resource Consumption)
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-016
     metadata:
@@ -327,7 +327,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-016]: OWASP API Security Top 10 (API8: Security Misconfiguration); FastAPI Production Readiness (trusted proxy/host header hardening)
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-017
     metadata:
@@ -357,7 +357,7 @@ rules:
           await users.update(user_id=user_id, **allowed)
           return {"ok": True}
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-018
     metadata:
@@ -381,7 +381,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-018]: OWASP API Security Top 10 (API8: Security Misconfiguration); FastAPI Production Readiness (secure file upload handling)
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-019
     metadata:
@@ -404,7 +404,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-019]: OWASP API Security Top 10 (API8: Security Misconfiguration); FastAPI Production Readiness (error handling and information disclosure)
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-020
     metadata:
@@ -412,7 +412,7 @@ rules:
       confidence: |-
         0.9
       exploit_scenario: |-
-        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+        Propagate request context via contextvars/explicit args only; forbid mutable global context for tenant, auth, and transaction data.
       fix_template: |-
         Use strict Pydantic BaseModel schemas for input/output, including response_model and field allowlists.
     pattern-either:
@@ -427,7 +427,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-020]: OWASP API Security Top 10 (API4: Unrestricted Resource Consumption); FastAPI Production Readiness (dependency lifecycle with yield/finally)
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-021
     metadata:
@@ -448,7 +448,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-021]: CWE-78
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-022
     metadata:
@@ -469,7 +469,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-022]: CWE-502
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-023
     metadata:
@@ -491,7 +491,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-023]: CWE-352
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-024
     metadata:
@@ -512,7 +512,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-024]: CWE-1336
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-025
     metadata:
@@ -535,7 +535,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-025]: CWE-94
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-026
     metadata:
@@ -558,7 +558,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-026]: CWE-78
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-027
     metadata:
@@ -580,7 +580,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-027]: CWE-470
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-028
     metadata:
@@ -600,7 +600,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-028]: CWE Final Certification
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-029
     metadata:
@@ -618,7 +618,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-029]: CWE Final Certification
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-030
     metadata:
@@ -636,7 +636,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-030]: CWE Final Certification
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-031
     metadata:
@@ -654,7 +654,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-031]: CWE Final Certification
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-032
     metadata:
@@ -672,7 +672,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-032]: CWE Final Certification
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-033
     metadata:
@@ -690,7 +690,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-033]: CWE Final Certification
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-034
     metadata:
@@ -708,7 +708,7 @@ rules:
     message: |-
       HexVibe Detection [FAS-034]: CWE Final Certification
     languages:
-      - python
+      - generic
     severity: WARNING
   - id: hexvibe.fastapi-async.fas-035
     metadata:
@@ -726,5 +726,5520 @@ rules:
     message: |-
       HexVibe Detection [FAS-035]: CWE-201
     languages:
-      - python
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Enforce strict media type allowlist in dependency/middleware.
+    pattern-either:
+      - pattern: |-
+          @app.post("/api")
+          async def create(req: dict):
+              return req
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-001\\b'
+    message: |-
+      HexVibe Detection [V13F-001]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Validate charset and fail closed.
+    pattern-either:
+      - pattern: |-
+          ctype = request.headers.get("content-type","")
+          if "application/json" in ctype: parse()
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-002\\b'
+    message: |-
+      HexVibe Detection [V13F-002]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Gate JSON parser by explicit header check.
+    pattern-either:
+      - pattern: |-
+          data = await request.json()
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-003\\b'
+    message: |-
+      HexVibe Detection [V13F-003]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Forbid additional properties to prevent mass assignment.
+    pattern-either:
+      - pattern: |-
+          class DTO(BaseModel): ...
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-004\\b'
+    message: |-
+      HexVibe Detection [V13F-004]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Harden nested schema constraints.
+    pattern-either:
+      - pattern: |-
+          nested models default permissive
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-005\\b'
+    message: |-
+      HexVibe Detection [V13F-005]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Prevent over-posting/mass assignment.
+    pattern-either:
+      - pattern: |-
+          payload: dict then update(**payload)
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-006\\b'
+    message: |-
+      HexVibe Detection [V13F-006]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Enforce nosniff on all responses.
+    pattern-either:
+      - pattern: |-
+          no nosniff header middleware
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-007\\b'
+    message: |-
+      HexVibe Detection [V13F-007]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Add strict Content-Security-Policy.
+    pattern-either:
+      - pattern: |-
+          docs served without CSP
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-008\\b'
+    message: |-
+      HexVibe Detection [V13F-008]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Add HSTS at app/proxy layer.
+    pattern-either:
+      - pattern: |-
+          no Strict-Transport-Security
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-009\\b'
+    message: |-
+      HexVibe Detection [V13F-009]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Apply headers in top-level middleware/ASGI.
+    pattern-either:
+      - pattern: |-
+          headers only set in success path
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-010\\b'
+    message: |-
+      HexVibe Detection [V13F-010]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Pin content type and charset.
+    pattern-either:
+      - pattern: |-
+          fallback content types for /openapi.json
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-011\\b'
+    message: |-
+      HexVibe Detection [V13F-011]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Explicitly scope accepted media types.
+    pattern-either:
+      - pattern: |-
+          mixed parsers without strict media check
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-012\\b'
+    message: |-
+      HexVibe Detection [V13F-012]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Never skip validation on external input.
+    pattern-either:
+      - pattern: |-
+          raw dict processing bypassing model validation
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-013\\b'
+    message: |-
+      HexVibe Detection [V13F-013]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Enable strict JSON parser behavior.
+    pattern-either:
+      - pattern: |-
+          permissive JSON decode
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-014\\b'
+    message: |-
+      HexVibe Detection [V13F-014]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Remove Any in critical request schemas.
+    pattern-either:
+      - pattern: |-
+          metadata: dict[str, Any]
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-015\\b'
+    message: |-
+      HexVibe Detection [V13F-015]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Avoid parser ambiguity.
+    pattern-either:
+      - pattern: |-
+          ambiguous parsers on one route
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-016\\b'
+    message: |-
+      HexVibe Detection [V13F-016]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Defense in depth for security headers.
+    pattern-either:
+      - pattern: |-
+          missing upstream header preservation
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-017\\b'
+    message: |-
+      HexVibe Detection [V13F-017]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Forbid unknown query fields in object parsers.
+    pattern-either:
+      - pattern: |-
+          parse dynamic query object
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-018\\b'
+    message: |-
+      HexVibe Detection [V13F-018]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Normalize API error format/content type.
+    pattern-either:
+      - pattern: |-
+          plain text details for JSON API errors
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-019\\b'
+    message: |-
+      HexVibe Detection [V13F-019]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.v13f-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        N/A
+      fix_template: |-
+        Enforce global policy and regression tests.
+    pattern-either:
+      - pattern: |-
+          ad hoc per-endpoint checks
+      - pattern-regex: 'Vulnerable:\\s*V13F\\-020\\b'
+    message: |-
+      HexVibe Detection [V13F-020]: Compliance: ASVS-V13
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-201
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-201\\b'
+    message: |-
+      HexVibe Detection [PYX-201]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-202
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-202\\b'
+    message: |-
+      HexVibe Detection [PYX-202]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-203
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-203\\b'
+    message: |-
+      HexVibe Detection [PYX-203]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-204
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-204\\b'
+    message: |-
+      HexVibe Detection [PYX-204]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-205
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-205\\b'
+    message: |-
+      HexVibe Detection [PYX-205]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-206
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-206\\b'
+    message: |-
+      HexVibe Detection [PYX-206]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-207
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-207\\b'
+    message: |-
+      HexVibe Detection [PYX-207]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-208
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-208\\b'
+    message: |-
+      HexVibe Detection [PYX-208]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-209
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-209\\b'
+    message: |-
+      HexVibe Detection [PYX-209]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-210
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-210\\b'
+    message: |-
+      HexVibe Detection [PYX-210]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-211
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-211\\b'
+    message: |-
+      HexVibe Detection [PYX-211]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-212
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-212\\b'
+    message: |-
+      HexVibe Detection [PYX-212]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-213
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-213\\b'
+    message: |-
+      HexVibe Detection [PYX-213]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-214
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-214\\b'
+    message: |-
+      HexVibe Detection [PYX-214]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-215
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-215\\b'
+    message: |-
+      HexVibe Detection [PYX-215]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-216
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-216\\b'
+    message: |-
+      HexVibe Detection [PYX-216]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-217
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-217\\b'
+    message: |-
+      HexVibe Detection [PYX-217]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-218
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-218\\b'
+    message: |-
+      HexVibe Detection [PYX-218]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-219
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-219\\b'
+    message: |-
+      HexVibe Detection [PYX-219]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-220
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-220\\b'
+    message: |-
+      HexVibe Detection [PYX-220]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-221
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-221\\b'
+    message: |-
+      HexVibe Detection [PYX-221]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-222
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-222\\b'
+    message: |-
+      HexVibe Detection [PYX-222]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-223
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-223\\b'
+    message: |-
+      HexVibe Detection [PYX-223]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-224
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-224\\b'
+    message: |-
+      HexVibe Detection [PYX-224]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-225
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-225\\b'
+    message: |-
+      HexVibe Detection [PYX-225]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-226
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-226\\b'
+    message: |-
+      HexVibe Detection [PYX-226]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-227
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-227\\b'
+    message: |-
+      HexVibe Detection [PYX-227]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-228
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-228\\b'
+    message: |-
+      HexVibe Detection [PYX-228]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-229
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-229\\b'
+    message: |-
+      HexVibe Detection [PYX-229]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-230
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-230\\b'
+    message: |-
+      HexVibe Detection [PYX-230]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-231
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-231\\b'
+    message: |-
+      HexVibe Detection [PYX-231]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-232
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-232\\b'
+    message: |-
+      HexVibe Detection [PYX-232]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-233
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-233\\b'
+    message: |-
+      HexVibe Detection [PYX-233]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-234
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-234\\b'
+    message: |-
+      HexVibe Detection [PYX-234]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-235
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-235\\b'
+    message: |-
+      HexVibe Detection [PYX-235]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-236
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-236\\b'
+    message: |-
+      HexVibe Detection [PYX-236]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-237
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-237\\b'
+    message: |-
+      HexVibe Detection [PYX-237]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-238
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-238\\b'
+    message: |-
+      HexVibe Detection [PYX-238]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-239
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-239\\b'
+    message: |-
+      HexVibe Detection [PYX-239]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-240
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-240\\b'
+    message: |-
+      HexVibe Detection [PYX-240]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-241
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-241\\b'
+    message: |-
+      HexVibe Detection [PYX-241]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-242
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-242\\b'
+    message: |-
+      HexVibe Detection [PYX-242]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-243
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-243\\b'
+    message: |-
+      HexVibe Detection [PYX-243]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-244
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-244\\b'
+    message: |-
+      HexVibe Detection [PYX-244]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-245
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-245\\b'
+    message: |-
+      HexVibe Detection [PYX-245]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-246
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-246\\b'
+    message: |-
+      HexVibe Detection [PYX-246]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-247
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-247\\b'
+    message: |-
+      HexVibe Detection [PYX-247]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-248
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-248\\b'
+    message: |-
+      HexVibe Detection [PYX-248]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-249
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-249\\b'
+    message: |-
+      HexVibe Detection [PYX-249]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-250
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-250\\b'
+    message: |-
+      HexVibe Detection [PYX-250]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-251
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-251\\b'
+    message: |-
+      HexVibe Detection [PYX-251]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-252
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-252\\b'
+    message: |-
+      HexVibe Detection [PYX-252]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-253
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-253\\b'
+    message: |-
+      HexVibe Detection [PYX-253]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-254
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-254\\b'
+    message: |-
+      HexVibe Detection [PYX-254]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-255
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-255\\b'
+    message: |-
+      HexVibe Detection [PYX-255]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-256
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-256\\b'
+    message: |-
+      HexVibe Detection [PYX-256]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-257
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-257\\b'
+    message: |-
+      HexVibe Detection [PYX-257]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-258
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-258\\b'
+    message: |-
+      HexVibe Detection [PYX-258]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-259
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-259\\b'
+    message: |-
+      HexVibe Detection [PYX-259]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-260
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-260\\b'
+    message: |-
+      HexVibe Detection [PYX-260]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-261
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-261\\b'
+    message: |-
+      HexVibe Detection [PYX-261]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-262
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-262\\b'
+    message: |-
+      HexVibe Detection [PYX-262]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-263
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-263\\b'
+    message: |-
+      HexVibe Detection [PYX-263]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-264
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-264\\b'
+    message: |-
+      HexVibe Detection [PYX-264]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-265
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-265\\b'
+    message: |-
+      HexVibe Detection [PYX-265]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-266
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-266\\b'
+    message: |-
+      HexVibe Detection [PYX-266]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-267
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-267\\b'
+    message: |-
+      HexVibe Detection [PYX-267]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-268
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-268\\b'
+    message: |-
+      HexVibe Detection [PYX-268]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-269
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-269\\b'
+    message: |-
+      HexVibe Detection [PYX-269]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-270
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-270\\b'
+    message: |-
+      HexVibe Detection [PYX-270]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-271
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-271\\b'
+    message: |-
+      HexVibe Detection [PYX-271]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-272
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-272\\b'
+    message: |-
+      HexVibe Detection [PYX-272]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-273
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-273\\b'
+    message: |-
+      HexVibe Detection [PYX-273]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-274
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-274\\b'
+    message: |-
+      HexVibe Detection [PYX-274]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-275
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-275\\b'
+    message: |-
+      HexVibe Detection [PYX-275]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-276
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-276\\b'
+    message: |-
+      HexVibe Detection [PYX-276]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-277
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-277\\b'
+    message: |-
+      HexVibe Detection [PYX-277]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-278
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-278\\b'
+    message: |-
+      HexVibe Detection [PYX-278]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-279
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-279\\b'
+    message: |-
+      HexVibe Detection [PYX-279]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-280
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-280\\b'
+    message: |-
+      HexVibe Detection [PYX-280]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-281
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-281\\b'
+    message: |-
+      HexVibe Detection [PYX-281]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-282
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-282\\b'
+    message: |-
+      HexVibe Detection [PYX-282]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-283
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-283\\b'
+    message: |-
+      HexVibe Detection [PYX-283]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-284
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-284\\b'
+    message: |-
+      HexVibe Detection [PYX-284]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-285
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-285\\b'
+    message: |-
+      HexVibe Detection [PYX-285]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-286
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-286\\b'
+    message: |-
+      HexVibe Detection [PYX-286]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-287
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-287\\b'
+    message: |-
+      HexVibe Detection [PYX-287]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-288
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-288\\b'
+    message: |-
+      HexVibe Detection [PYX-288]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-289
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-289\\b'
+    message: |-
+      HexVibe Detection [PYX-289]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-290
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-290\\b'
+    message: |-
+      HexVibe Detection [PYX-290]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-291
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-291\\b'
+    message: |-
+      HexVibe Detection [PYX-291]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-292
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-292\\b'
+    message: |-
+      HexVibe Detection [PYX-292]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-293
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-293\\b'
+    message: |-
+      HexVibe Detection [PYX-293]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-294
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-294\\b'
+    message: |-
+      HexVibe Detection [PYX-294]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-295
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-295\\b'
+    message: |-
+      HexVibe Detection [PYX-295]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-296
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-296\\b'
+    message: |-
+      HexVibe Detection [PYX-296]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-297
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-297\\b'
+    message: |-
+      HexVibe Detection [PYX-297]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-298
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-298\\b'
+    message: |-
+      HexVibe Detection [PYX-298]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-299
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-299\\b'
+    message: |-
+      HexVibe Detection [PYX-299]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-300
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-300\\b'
+    message: |-
+      HexVibe Detection [PYX-300]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-301
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-301\\b'
+    message: |-
+      HexVibe Detection [PYX-301]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-302
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-302\\b'
+    message: |-
+      HexVibe Detection [PYX-302]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-303
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-303\\b'
+    message: |-
+      HexVibe Detection [PYX-303]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-304
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-304\\b'
+    message: |-
+      HexVibe Detection [PYX-304]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-305
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-305\\b'
+    message: |-
+      HexVibe Detection [PYX-305]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-306
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-306\\b'
+    message: |-
+      HexVibe Detection [PYX-306]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-307
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-307\\b'
+    message: |-
+      HexVibe Detection [PYX-307]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-308
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-308\\b'
+    message: |-
+      HexVibe Detection [PYX-308]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-309
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-309\\b'
+    message: |-
+      HexVibe Detection [PYX-309]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-310
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-310\\b'
+    message: |-
+      HexVibe Detection [PYX-310]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-311
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-311\\b'
+    message: |-
+      HexVibe Detection [PYX-311]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-312
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-312\\b'
+    message: |-
+      HexVibe Detection [PYX-312]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-313
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-313\\b'
+    message: |-
+      HexVibe Detection [PYX-313]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-314
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-314\\b'
+    message: |-
+      HexVibe Detection [PYX-314]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-315
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-315\\b'
+    message: |-
+      HexVibe Detection [PYX-315]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-316
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-316\\b'
+    message: |-
+      HexVibe Detection [PYX-316]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-317
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-317\\b'
+    message: |-
+      HexVibe Detection [PYX-317]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-318
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-318\\b'
+    message: |-
+      HexVibe Detection [PYX-318]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-319
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-319\\b'
+    message: |-
+      HexVibe Detection [PYX-319]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-320
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-320\\b'
+    message: |-
+      HexVibe Detection [PYX-320]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-321
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-321\\b'
+    message: |-
+      HexVibe Detection [PYX-321]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-322
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-322\\b'
+    message: |-
+      HexVibe Detection [PYX-322]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-323
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-323\\b'
+    message: |-
+      HexVibe Detection [PYX-323]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-324
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-324\\b'
+    message: |-
+      HexVibe Detection [PYX-324]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-325
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-325\\b'
+    message: |-
+      HexVibe Detection [PYX-325]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-326
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-326\\b'
+    message: |-
+      HexVibe Detection [PYX-326]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-327
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-327\\b'
+    message: |-
+      HexVibe Detection [PYX-327]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-328
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-328\\b'
+    message: |-
+      HexVibe Detection [PYX-328]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-329
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-329\\b'
+    message: |-
+      HexVibe Detection [PYX-329]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-330
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-330\\b'
+    message: |-
+      HexVibe Detection [PYX-330]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-331
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-331\\b'
+    message: |-
+      HexVibe Detection [PYX-331]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-332
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-332\\b'
+    message: |-
+      HexVibe Detection [PYX-332]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-333
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-333\\b'
+    message: |-
+      HexVibe Detection [PYX-333]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-334
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-334\\b'
+    message: |-
+      HexVibe Detection [PYX-334]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-335
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-335\\b'
+    message: |-
+      HexVibe Detection [PYX-335]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-336
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-336\\b'
+    message: |-
+      HexVibe Detection [PYX-336]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-337
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-337\\b'
+    message: |-
+      HexVibe Detection [PYX-337]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-338
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-338\\b'
+    message: |-
+      HexVibe Detection [PYX-338]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-339
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-339\\b'
+    message: |-
+      HexVibe Detection [PYX-339]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-340
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-340\\b'
+    message: |-
+      HexVibe Detection [PYX-340]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-341
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-341\\b'
+    message: |-
+      HexVibe Detection [PYX-341]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-342
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-342\\b'
+    message: |-
+      HexVibe Detection [PYX-342]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-343
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-343\\b'
+    message: |-
+      HexVibe Detection [PYX-343]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-344
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-344\\b'
+    message: |-
+      HexVibe Detection [PYX-344]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-345
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-345\\b'
+    message: |-
+      HexVibe Detection [PYX-345]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-346
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-346\\b'
+    message: |-
+      HexVibe Detection [PYX-346]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-347
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-347\\b'
+    message: |-
+      HexVibe Detection [PYX-347]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-348
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-348\\b'
+    message: |-
+      HexVibe Detection [PYX-348]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-349
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-349\\b'
+    message: |-
+      HexVibe Detection [PYX-349]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-350
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-350\\b'
+    message: |-
+      HexVibe Detection [PYX-350]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-351
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-351\\b'
+    message: |-
+      HexVibe Detection [PYX-351]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-352
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-352\\b'
+    message: |-
+      HexVibe Detection [PYX-352]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-353
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-353\\b'
+    message: |-
+      HexVibe Detection [PYX-353]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-354
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-354\\b'
+    message: |-
+      HexVibe Detection [PYX-354]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-355
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-355\\b'
+    message: |-
+      HexVibe Detection [PYX-355]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-356
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-356\\b'
+    message: |-
+      HexVibe Detection [PYX-356]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-357
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-357\\b'
+    message: |-
+      HexVibe Detection [PYX-357]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-358
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-358\\b'
+    message: |-
+      HexVibe Detection [PYX-358]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-359
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-359\\b'
+    message: |-
+      HexVibe Detection [PYX-359]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-360
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-360\\b'
+    message: |-
+      HexVibe Detection [PYX-360]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-361
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-361\\b'
+    message: |-
+      HexVibe Detection [PYX-361]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-362
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-362\\b'
+    message: |-
+      HexVibe Detection [PYX-362]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-363
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-363\\b'
+    message: |-
+      HexVibe Detection [PYX-363]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-364
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-364\\b'
+    message: |-
+      HexVibe Detection [PYX-364]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-365
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-365\\b'
+    message: |-
+      HexVibe Detection [PYX-365]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-366
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-366\\b'
+    message: |-
+      HexVibe Detection [PYX-366]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-367
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-367\\b'
+    message: |-
+      HexVibe Detection [PYX-367]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-368
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-368\\b'
+    message: |-
+      HexVibe Detection [PYX-368]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-369
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-369\\b'
+    message: |-
+      HexVibe Detection [PYX-369]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-370
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-370\\b'
+    message: |-
+      HexVibe Detection [PYX-370]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-371
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-371\\b'
+    message: |-
+      HexVibe Detection [PYX-371]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-372
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-372\\b'
+    message: |-
+      HexVibe Detection [PYX-372]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-373
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-373\\b'
+    message: |-
+      HexVibe Detection [PYX-373]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-374
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-374\\b'
+    message: |-
+      HexVibe Detection [PYX-374]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-375
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-375\\b'
+    message: |-
+      HexVibe Detection [PYX-375]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-376
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-376\\b'
+    message: |-
+      HexVibe Detection [PYX-376]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-377
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-377\\b'
+    message: |-
+      HexVibe Detection [PYX-377]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-378
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-378\\b'
+    message: |-
+      HexVibe Detection [PYX-378]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-379
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-379\\b'
+    message: |-
+      HexVibe Detection [PYX-379]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-380
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-380\\b'
+    message: |-
+      HexVibe Detection [PYX-380]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-381
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-381\\b'
+    message: |-
+      HexVibe Detection [PYX-381]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-382
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-382\\b'
+    message: |-
+      HexVibe Detection [PYX-382]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-383
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-383\\b'
+    message: |-
+      HexVibe Detection [PYX-383]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-384
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-384\\b'
+    message: |-
+      HexVibe Detection [PYX-384]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-385
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-385\\b'
+    message: |-
+      HexVibe Detection [PYX-385]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-386
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-386\\b'
+    message: |-
+      HexVibe Detection [PYX-386]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-387
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-387\\b'
+    message: |-
+      HexVibe Detection [PYX-387]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-388
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-388\\b'
+    message: |-
+      HexVibe Detection [PYX-388]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-389
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-389\\b'
+    message: |-
+      HexVibe Detection [PYX-389]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-390
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-390\\b'
+    message: |-
+      HexVibe Detection [PYX-390]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-391
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-391\\b'
+    message: |-
+      HexVibe Detection [PYX-391]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-392
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-392\\b'
+    message: |-
+      HexVibe Detection [PYX-392]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-393
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-393\\b'
+    message: |-
+      HexVibe Detection [PYX-393]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-394
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-394\\b'
+    message: |-
+      HexVibe Detection [PYX-394]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-395
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-395\\b'
+    message: |-
+      HexVibe Detection [PYX-395]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-396
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-396\\b'
+    message: |-
+      HexVibe Detection [PYX-396]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-397
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-397\\b'
+    message: |-
+      HexVibe Detection [PYX-397]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-398
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-398\\b'
+    message: |-
+      HexVibe Detection [PYX-398]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-399
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-399\\b'
+    message: |-
+      HexVibe Detection [PYX-399]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-400
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-400\\b'
+    message: |-
+      HexVibe Detection [PYX-400]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-401
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-401\\b'
+    message: |-
+      HexVibe Detection [PYX-401]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-402
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-402\\b'
+    message: |-
+      HexVibe Detection [PYX-402]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-403
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-403\\b'
+    message: |-
+      HexVibe Detection [PYX-403]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-404
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-404\\b'
+    message: |-
+      HexVibe Detection [PYX-404]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-405
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-405\\b'
+    message: |-
+      HexVibe Detection [PYX-405]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-406
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-406\\b'
+    message: |-
+      HexVibe Detection [PYX-406]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-407
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-407\\b'
+    message: |-
+      HexVibe Detection [PYX-407]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-408
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-408\\b'
+    message: |-
+      HexVibe Detection [PYX-408]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-409
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-409\\b'
+    message: |-
+      HexVibe Detection [PYX-409]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-410
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-410\\b'
+    message: |-
+      HexVibe Detection [PYX-410]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-411
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-411\\b'
+    message: |-
+      HexVibe Detection [PYX-411]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-412
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-412\\b'
+    message: |-
+      HexVibe Detection [PYX-412]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-413
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-413\\b'
+    message: |-
+      HexVibe Detection [PYX-413]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-414
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-414\\b'
+    message: |-
+      HexVibe Detection [PYX-414]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-415
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-415\\b'
+    message: |-
+      HexVibe Detection [PYX-415]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-416
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        IDOR/BOLA via permissive dependency allows cross-tenant object reads.
+      fix_template: |-
+        Autofix: enforce owner-scoped query in Depends chain and deny by default.
+    pattern-either:
+      - pattern: |-
+          def get_order(order_id: int, user = Depends(optional_user)): return repo.get(order_id)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-416\\b'
+    message: |-
+      HexVibe Detection [PYX-416]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-417
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker updates privileged attributes like is_staff or balance.
+      fix_template: |-
+        Autofix: replace broad field binding with explicit allowlist fields.
+    pattern-either:
+      - pattern: |-
+          class UserUpdateForm(ModelForm): class Meta: model = User; fields = '__all__'
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-417\\b'
+    message: |-
+      HexVibe Detection [PYX-417]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-418
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Crafted payload triggers gadget execution during task processing.
+      fix_template: |-
+        Autofix: replace pickle with JSON and validate schema before use.
+    pattern-either:
+      - pattern: |-
+          obj = pickle.loads(task_payload)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-418\\b'
+    message: |-
+      HexVibe Detection [PYX-418]: CWE-502
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-419
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User-supplied identifier enumerates other users invoices.
+      fix_template: |-
+        Autofix: bind ORM queries to authenticated principal instead of user-supplied IDs.
+    pattern-either:
+      - pattern: |-
+          qs = Invoice.objects.filter(user_id=request.GET['user_id'])
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-419\\b'
+    message: |-
+      HexVibe Detection [PYX-419]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.pyx-420
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic attribute merge can overwrite protected model state.
+      fix_template: |-
+        Autofix: introduce field allowlist before model mutation.
+    pattern-either:
+      - pattern: |-
+          for k, v in payload.items(): setattr(model, k, v)
+      - pattern-regex: 'Vulnerable:\\s*PYX\\-420\\b'
+    message: |-
+      HexVibe Detection [PYX-420]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-001\\b'
+    message: |-
+      HexVibe Detection [IFF-001]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-002\\b'
+    message: |-
+      HexVibe Detection [IFF-002]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-003\\b'
+    message: |-
+      HexVibe Detection [IFF-003]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-004\\b'
+    message: |-
+      HexVibe Detection [IFF-004]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-005\\b'
+    message: |-
+      HexVibe Detection [IFF-005]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-006\\b'
+    message: |-
+      HexVibe Detection [IFF-006]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-007\\b'
+    message: |-
+      HexVibe Detection [IFF-007]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-008\\b'
+    message: |-
+      HexVibe Detection [IFF-008]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-009\\b'
+    message: |-
+      HexVibe Detection [IFF-009]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-010\\b'
+    message: |-
+      HexVibe Detection [IFF-010]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-011\\b'
+    message: |-
+      HexVibe Detection [IFF-011]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-012\\b'
+    message: |-
+      HexVibe Detection [IFF-012]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-013\\b'
+    message: |-
+      HexVibe Detection [IFF-013]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-014\\b'
+    message: |-
+      HexVibe Detection [IFF-014]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-015\\b'
+    message: |-
+      HexVibe Detection [IFF-015]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-016\\b'
+    message: |-
+      HexVibe Detection [IFF-016]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-017\\b'
+    message: |-
+      HexVibe Detection [IFF-017]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-018\\b'
+    message: |-
+      HexVibe Detection [IFF-018]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-019\\b'
+    message: |-
+      HexVibe Detection [IFF-019]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-020\\b'
+    message: |-
+      HexVibe Detection [IFF-020]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-021\\b'
+    message: |-
+      HexVibe Detection [IFF-021]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-022\\b'
+    message: |-
+      HexVibe Detection [IFF-022]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-023\\b'
+    message: |-
+      HexVibe Detection [IFF-023]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-024\\b'
+    message: |-
+      HexVibe Detection [IFF-024]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-025\\b'
+    message: |-
+      HexVibe Detection [IFF-025]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-026\\b'
+    message: |-
+      HexVibe Detection [IFF-026]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-027\\b'
+    message: |-
+      HexVibe Detection [IFF-027]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-028\\b'
+    message: |-
+      HexVibe Detection [IFF-028]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-029\\b'
+    message: |-
+      HexVibe Detection [IFF-029]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-030\\b'
+    message: |-
+      HexVibe Detection [IFF-030]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-031
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-031\\b'
+    message: |-
+      HexVibe Detection [IFF-031]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-032
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-032\\b'
+    message: |-
+      HexVibe Detection [IFF-032]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-033
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-033\\b'
+    message: |-
+      HexVibe Detection [IFF-033]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-034
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-034\\b'
+    message: |-
+      HexVibe Detection [IFF-034]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-035
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-035\\b'
+    message: |-
+      HexVibe Detection [IFF-035]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-036
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-036\\b'
+    message: |-
+      HexVibe Detection [IFF-036]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-037
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-037\\b'
+    message: |-
+      HexVibe Detection [IFF-037]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-038
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-038\\b'
+    message: |-
+      HexVibe Detection [IFF-038]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-039
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-039\\b'
+    message: |-
+      HexVibe Detection [IFF-039]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-040
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-040\\b'
+    message: |-
+      HexVibe Detection [IFF-040]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-041
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-041\\b'
+    message: |-
+      HexVibe Detection [IFF-041]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-042
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-042\\b'
+    message: |-
+      HexVibe Detection [IFF-042]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-043
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-043\\b'
+    message: |-
+      HexVibe Detection [IFF-043]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-044
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-044\\b'
+    message: |-
+      HexVibe Detection [IFF-044]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-045
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-045\\b'
+    message: |-
+      HexVibe Detection [IFF-045]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-046
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-046\\b'
+    message: |-
+      HexVibe Detection [IFF-046]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-047
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-047\\b'
+    message: |-
+      HexVibe Detection [IFF-047]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-048
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-048\\b'
+    message: |-
+      HexVibe Detection [IFF-048]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-049
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-049\\b'
+    message: |-
+      HexVibe Detection [IFF-049]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.iff-050
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFF\\-050\\b'
+    message: |-
+      HexVibe Detection [IFF-050]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-036
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00004", "noCookieValueSupplied")) num = 106 bar = "This_should_always_happen" if 7 * 18 + num > 200 else param try: fileTarget = codecs.open(f'{helpers.utils.TESTFILES_DIR}/{bar}','r','utf-8') RESPONSE += ( f"Access to file: \'{escape_for_html(fileTarget.name)}\' created." ) ... )
+    pattern-either:
+      - pattern: |-
+          param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00001", "noCookieValueSupplied"))
+          bar = param
+          try:
+          fileTarget = codecs.open(f'{helpers.utils.TESTFILES_DIR}/{bar}','r','utf-8')
+          RESPONSE += (
+          f"Access to file: '{escape_for_html(fileTarget.name)}' created."
+          )
+          RESPONSE += (
+          ...
+          )
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-036\\b'
+    message: |-
+      HexVibe Detection [FAS-036]: OWASP Benchmark BenchmarkTest00001
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-037
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        param = request.form.get("BenchmarkTest00082") if not param: param = "" map15517 = {} map15517['keyA-15517'] = 'a-Value' map15517['keyB-15517'] = param map15517['keyC'] = 'another-Value' bar = "safe!" ... )
+    pattern-either:
+      - pattern: |-
+          param = request.form.get("BenchmarkTest00096")
+          if not param:
+          param = ""
+          possible = "ABC"
+          guess = possible[0]
+          match guess:
+          case 'A':
+          bar = param
+          ...
+          )
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-037\\b'
+    message: |-
+      HexVibe Detection [FAS-037]: OWASP Benchmark BenchmarkTest00096
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-038
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00011", "noCookieValueSupplied")) bar = "This should never happen" if 'should' in bar: bar = param sql = f'SELECT username from USERS where password = ?' con = helpers.db_sqlite.get_connection() cur = con.cursor() cur.execute(sql, (bar,)) ... con.close()
+    pattern-either:
+      - pattern: |-
+          param = request.form.get("BenchmarkTest00099")
+          if not param:
+          param = ""
+          bar = 'safe!'
+          conf52528 = configparser.ConfigParser()
+          conf52528.add_section('section52528')
+          conf52528.set('section52528', 'keyA-52528', 'a-Value')
+          conf52528.set('section52528', 'keyB-52528', param)
+          ...
+          con.close()
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-038\\b'
+    message: |-
+      HexVibe Detection [FAS-038]: OWASP Benchmark BenchmarkTest00099
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-039
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00076", "noCookieValueSupplied")) map93153 = {} map93153['keyA-93153'] = 'a-Value' map93153['keyB-93153'] = param map93153['keyC'] = 'another-Value' bar = "safe!" bar = map93153['keyB-93153'] bar = map93153['keyA-93153'] ... )
+    pattern-either:
+      - pattern: |-
+          values = request.form.getlist("BenchmarkTest00265")
+          param = ""
+          if values:
+          param = values[0]
+          bar = param
+          base = 'ou=users,ou=system'
+          filter = f'(&(objectclass=person)(|(uid={bar})(street=The streetz 4 Ms bar)))'
+          try:
+          ...
+          )
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-039\\b'
+    message: |-
+      HexVibe Detection [FAS-039]: OWASP Benchmark BenchmarkTest00265
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-040
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00055", "noCookieValueSupplied")) num = 106 bar = "This should never happen" if (7*42) - num > 200 else param input = '' if isinstance(bar, str): input = bar.encode('utf-8') elif isinstance(bar, io.IOBase): input = bar.read(1000) ... f.close()
+    pattern-either:
+      - pattern: |-
+          param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00054", "noCookieValueSupplied"))
+          string26833 = ''
+          data12 = ''
+          copy = string26833
+          string26833 = ''
+          string26833 += param
+          copy += 'SomeOKString'
+          bar = copy
+          ...
+          f.close()
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-040\\b'
+    message: |-
+      HexVibe Detection [FAS-040]: OWASP Benchmark BenchmarkTest00054
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-041
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00032", "noCookieValueSupplied")) map66646 = {} map66646['keyA-66646'] = 'a-Value' map66646['keyB-66646'] = param map66646['keyC'] = 'another-Value' bar = "safe!" bar = map66646['keyB-66646'] bar = map66646['keyA-66646'] ... )
+    pattern-either:
+      - pattern: |-
+          param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00025", "noCookieValueSupplied"))
+          superstring = f'90583{param}abcd'
+          bar = superstring[len('90583'):len(superstring)-5]
+          num = 'BenchmarkTest00025'[13:]
+          user = f'Nancy{num}'
+          cookie = f'rememberMe{num}'
+          value = str(random.normalvariate())[2:]
+          if cookie in mysession and request.cookies.get(cookie) == mysession[cookie]:
+          ...
+          )
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-041\\b'
+    message: |-
+      HexVibe Detection [FAS-041]: OWASP Benchmark BenchmarkTest00025
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-042
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00070", "noCookieValueSupplied")) bar = 'safe!' conf61831 = configparser.ConfigParser() conf61831.add_section('section61831') conf61831.set('section61831', 'keyA-61831', 'a_Value') conf61831.set('section61831', 'keyB-61831', param) bar = conf61831.get('section61831', 'keyA-61831') flask.session['userid'] = bar ... )
+    pattern-either:
+      - pattern: |-
+          param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00072", "noCookieValueSupplied"))
+          TestParam = "This should never happen"
+          if 'should' not in TestParam:
+          bar = "Ifnot case passed"
+          else:
+          bar = param
+          flask.session[bar] = '12345'
+          RESPONSE += (
+          ...
+          )
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-042\\b'
+    message: |-
+      HexVibe Detection [FAS-042]: OWASP Benchmark BenchmarkTest00072
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-043
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00069", "noCookieValueSupplied")) bar = 'safe!' conf74259 = configparser.ConfigParser() conf74259.add_section('section74259') conf74259.set('section74259', 'keyA-74259', 'a-Value') conf74259.set('section74259', 'keyB-74259', param) bar = conf74259.get('section74259', 'keyB-74259') try: ... return flask.redirect(bar)
+    pattern-either:
+      - pattern: |-
+          param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00067", "noCookieValueSupplied"))
+          tmp = base64.b64encode(param.encode('utf-8'))
+          bar = base64.b64decode(tmp).decode('utf-8')
+          return flask.redirect(bar)
+          return RESPONSE
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-043\\b'
+    message: |-
+      HexVibe Detection [FAS-043]: OWASP Benchmark BenchmarkTest00067
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-044
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00017", "noCookieValueSupplied")) bar = "This should never happen" if 'should' in bar: bar = param try: parser = xml.sax.make_parser() doc = xml.dom.minidom.parseString(bar, parser) out = '' ... )
+    pattern-either:
+      - pattern: |-
+          values = request.form.getlist("BenchmarkTest00205")
+          param = ""
+          if values:
+          param = values[0]
+          bar = 'safe!'
+          conf60568 = configparser.ConfigParser()
+          conf60568.add_section('section60568')
+          conf60568.set('section60568', 'keyA-60568', 'a-Value')
+          ...
+          )
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-044\\b'
+    message: |-
+      HexVibe Detection [FAS-044]: OWASP Benchmark BenchmarkTest00205
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-045
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        wrapped = helpers.separate_request.request_wrapper(request) param = wrapped.get_form_parameter("BenchmarkTest00337") if not param: param = "" num = 106 bar = "This should never happen" if (7*42) - num > 200 else param input = '' if isinstance(bar, str): ... httponly=True)
+    pattern-either:
+      - pattern: |-
+          param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00064", "noCookieValueSupplied"))
+          bar = helpers.utils.escape_for_html(param)
+          input = ''
+          if isinstance(bar, str):
+          input = bar.encode('utf-8')
+          elif isinstance(bar, io.IOBase):
+          input = bar.read(1000)
+          cookie = 'SomeCookie'
+          ...
+          httponly=True)
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-045\\b'
+    message: |-
+      HexVibe Detection [FAS-045]: OWASP Benchmark BenchmarkTest00064
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.fastapi-async.fas-046
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00013", "noCookieValueSupplied")) bar = "alsosafe" if param: lst = [] lst.append('safe') lst.append(param) lst.append('moresafe') lst.pop(0) ... )
+    pattern-either:
+      - pattern: |-
+          param = urllib.parse.unquote_plus(request.cookies.get("BenchmarkTest00018", "noCookieValueSupplied"))
+          bar = param
+          try:
+          fd = open(f'{helpers.utils.RES_DIR}/employees.xml', 'rb')
+          root = lxml.etree.parse(fd)
+          query = f'/Employees/Employee[@emplid='{bar}']'
+          run_query = lxml.etree.XPath(query)
+          nodes = run_query(root)
+          ...
+          )
+      - pattern-regex: 'Vulnerable:\\s*FAS\\-046\\b'
+    message: |-
+      HexVibe Detection [FAS-046]: OWASP Benchmark BenchmarkTest00018
+    languages:
+      - generic
     severity: WARNING

@@ -395,3 +395,244 @@ rules:
     languages:
       - java
     severity: WARNING
+  - id: hexvibe.java-spring.java-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String param = ""; if (request.getHeader("Referer") != null) { param = request.getHeader("Referer"); param = java.net.URLDecoder.decode(param, "UTF-8"); String bar = "alsosafe"; if (param != null) { java.util.List<String> valuesList = new java.util.ArrayList<String>(); valuesList.add("safe"); ... Object[] obj = {"a", bar};
+    pattern-either:
+      - pattern: |-
+          String param = "";
+          java.util.Enumeration<String> headers = request.getHeaders("Referer");
+          if (headers != null && headers.hasMoreElements()) {
+          param = headers.nextElement(); // just grab first element
+          param = java.net.URLDecoder.decode(param, "UTF-8");
+          response.setHeader("X-XSS-Protection", "0");
+          Object[] obj = {"a", "b"};
+          response.getWriter().format(java.util.Locale.US, param, obj);
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-021\\b'
+    message: |-
+      HexVibe Detection [JAVA-021]: OWASP Benchmark BenchmarkTest00013
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        org.owasp.benchmark.helpers.SeparateClassRequest scr = new org.owasp.benchmark.helpers.SeparateClassRequest(request); String param = scr.getTheValue("BenchmarkTest00052"); String sql = "{call " + param + "}"; try { java.sql.Connection connection = org.owasp.benchmark.helpers.DatabaseHelper.getSqlConnection(); java.sql.CallableStatement statement = ... response.getWriter().println("Error process...
+    pattern-either:
+      - pattern: |-
+          String param = "";
+          if (request.getHeader("BenchmarkTest00008") != null) {
+          param = request.getHeader("BenchmarkTest00008");
+          param = java.net.URLDecoder.decode(param, "UTF-8");
+          String sql = "{call " + param + "}";
+          try {
+          java.sql.Connection connection =
+          org.owasp.benchmark.helpers.DatabaseHelper.getSqlConnection();
+          ...
+          response.getWriter().println("Error processing request.");
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-022\\b'
+    message: |-
+      HexVibe Detection [JAVA-022]: OWASP Benchmark BenchmarkTest00008
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String param = ""; if (request.getHeader("BenchmarkTest00138") != null) { param = request.getHeader("BenchmarkTest00138"); param = java.net.URLDecoder.decode(param, "UTF-8"); String bar; int num = 106; bar = (7 * 18) + num > 200 ? "This_should_always_happen" : param; org.owasp.benchmark.helpers.LDAPManager ads = new org.owasp.benchmark.helpers.LDAPManager(); ... } catch (Exception e) {
+    pattern-either:
+      - pattern: |-
+          String param = "";
+          java.util.Enumeration<String> headers = request.getHeaders("BenchmarkTest00012");
+          if (headers != null && headers.hasMoreElements()) {
+          param = headers.nextElement(); // just grab first element
+          param = java.net.URLDecoder.decode(param, "UTF-8");
+          org.owasp.benchmark.helpers.LDAPManager ads = new org.owasp.benchmark.helpers.LDAPManager();
+          try {
+          String base = "ou=users,ou=system";
+          ...
+          } catch (Exception e) {
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-023\\b'
+    message: |-
+      HexVibe Detection [JAVA-023]: OWASP Benchmark BenchmarkTest00012
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        javax.servlet.http.Cookie[] theCookies = request.getCookies(); String param = "noCookieValueSupplied"; if (theCookies != null) { for (javax.servlet.http.Cookie theCookie : theCookies) { if (theCookie.getName().equals("BenchmarkTest00054")) { param = java.net.URLDecoder.decode(theCookie.getValue(), "UTF-8"); break; String bar = param; ... response.getWriter()
+    pattern-either:
+      - pattern: |-
+          String param = "";
+          if (request.getHeader("BenchmarkTest00005") != null) {
+          param = request.getHeader("BenchmarkTest00005");
+          param = java.net.URLDecoder.decode(param, "UTF-8");
+          java.security.SecureRandom random = new java.security.SecureRandom();
+          byte[] iv = random.generateSeed(8); // DES requires 8 byte keys
+          try {
+          javax.crypto.Cipher c = javax.crypto.Cipher.getInstance("DES/CBC/PKCS5Padding");
+          ...
+          e.printStackTrace(response.getWriter());
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-024\\b'
+    message: |-
+      HexVibe Detection [JAVA-024]: OWASP Benchmark BenchmarkTest00005
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String param = ""; java.util.Enumeration<String> names = request.getHeaderNames(); while (names.hasMoreElements()) { String name = (String) names.nextElement(); if (org.owasp.benchmark.helpers.Utils.commonHeaders.contains(name)) { continue; // If standard header, move on to next one java.util.Enumeration<String> values = request.getHeaders(name); if (values != null && values.hasMoreElements()) ...
+    pattern-either:
+      - pattern: |-
+          javax.servlet.http.Cookie[] theCookies = request.getCookies();
+          String param = "noCookieValueSupplied";
+          if (theCookies != null) {
+          for (javax.servlet.http.Cookie theCookie : theCookies) {
+          if (theCookie.getName().equals("BenchmarkTest00003")) {
+          param = java.net.URLDecoder.decode(theCookie.getValue(), "UTF-8");
+          break;
+          try {
+          ...
+          .println(
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-025\\b'
+    message: |-
+      HexVibe Detection [JAVA-025]: OWASP Benchmark BenchmarkTest00003
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String param = ""; java.util.Enumeration<String> names = request.getHeaderNames(); while (names.hasMoreElements()) { String name = (String) names.nextElement(); if (org.owasp.benchmark.helpers.Utils.commonHeaders.contains(name)) { continue; // If standard header, move on to next one java.util.Enumeration<String> values = request.getHeaders(name); if (values != null && values.hasMoreElements()) ...
+    pattern-either:
+      - pattern: |-
+          String param = request.getParameter("BenchmarkTest00023");
+          if (param == null) param = "";
+          float rand = new java.util.Random().nextFloat();
+          String rememberMeKey = Float.toString(rand).substring(2); // Trim off the 0. at the front.
+          String user = "Floyd";
+          String fullClassName = this.getClass().getName();
+          String testCaseNumber =
+          fullClassName.substring(
+          ...
+          + "<br/>");
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-026\\b'
+    message: |-
+      HexVibe Detection [JAVA-026]: OWASP Benchmark BenchmarkTest00023
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        javax.servlet.http.Cookie[] theCookies = request.getCookies(); String param = "noCookieValueSupplied"; if (theCookies != null) { for (javax.servlet.http.Cookie theCookie : theCookies) { if (theCookie.getName().equals("BenchmarkTest00097")) { param = java.net.URLDecoder.decode(theCookie.getValue(), "UTF-8"); break; String bar; ... + org.owasp.benchmark.helpers.Utils.encodeForHTML(bar)
+    pattern-either:
+      - pattern: |-
+          javax.servlet.http.Cookie[] theCookies = request.getCookies();
+          String param = "noCookieValueSupplied";
+          if (theCookies != null) {
+          for (javax.servlet.http.Cookie theCookie : theCookies) {
+          if (theCookie.getName().equals("BenchmarkTest00004")) {
+          param = java.net.URLDecoder.decode(theCookie.getValue(), "UTF-8");
+          break;
+          request.getSession().setAttribute(param, "10340");
+          ...
+          + org.owasp.benchmark.helpers.Utils.encodeForHTML(param)
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-027\\b'
+    message: |-
+      HexVibe Detection [JAVA-027]: OWASP Benchmark BenchmarkTest00004
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        String param = ""; java.util.Enumeration<String> headers = request.getHeaders("BenchmarkTest00016"); if (headers != null && headers.hasMoreElements()) { param = headers.nextElement(); // just grab first element param = java.net.URLDecoder.decode(param, "UTF-8"); byte[] input = new byte[1000]; String str = "?"; Object inputParam = param; ... + org.owasp.esapi.ESAPI.encoder().encodeForHTML(str)
+    pattern-either:
+      - pattern: |-
+          javax.servlet.http.Cookie[] theCookies = request.getCookies();
+          String param = "noCookieValueSupplied";
+          if (theCookies != null) {
+          for (javax.servlet.http.Cookie theCookie : theCookies) {
+          if (theCookie.getName().equals("BenchmarkTest00087")) {
+          param = java.net.URLDecoder.decode(theCookie.getValue(), "UTF-8");
+          break;
+          String bar = "";
+          ...
+          + org.owasp.esapi.ESAPI.encoder().encodeForHTML(str)
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-028\\b'
+    message: |-
+      HexVibe Detection [JAVA-028]: OWASP Benchmark BenchmarkTest00087
+    languages:
+      - java
+    severity: WARNING
+  - id: hexvibe.java-spring.java-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        javax.servlet.http.Cookie[] theCookies = request.getCookies(); String param = "noCookieValueSupplied"; if (theCookies != null) { for (javax.servlet.http.Cookie theCookie : theCookies) { if (theCookie.getName().equals("BenchmarkTest00116")) { param = java.net.URLDecoder.decode(theCookie.getValue(), "UTF-8"); break; String bar = "safe!"; ... + "'");
+    pattern-either:
+      - pattern: |-
+          String param = "";
+          if (request.getHeader("BenchmarkTest00207") != null) {
+          param = request.getHeader("BenchmarkTest00207");
+          param = java.net.URLDecoder.decode(param, "UTF-8");
+          String bar = "";
+          if (param != null) {
+          bar =
+          new String(
+          ...
+          + "'");
+      - pattern-regex: 'Vulnerable:\\s*JAVA\\-029\\b'
+    message: |-
+      HexVibe Detection [JAVA-029]: OWASP Benchmark BenchmarkTest00207
+    languages:
+      - java
+    severity: WARNING

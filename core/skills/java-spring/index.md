@@ -36,6 +36,15 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 | `JAVA-018` | Hardcoded Secrets in config/code | `String jwtSecret = System.getenv("JWT_SECRET");` `if (jwtSecret == null) throw new IllegalStateException();` |
 | `JAVA-019` | Unbounded Multipart Upload (DoS risk) | `if (file.getSize() > 5 * 1024 * 1024) throw new IllegalArgumentException();` `...` `byte[] data = file.getBytes();` |
 | `JAVA-020` | Path Traversal in file download | `String p = request.getParameter("path");` `Path target = Paths.get(root, p).normalize();` `if (!target.startsWith(Paths.get(root))) throw new SecurityException();` |
+| `JAVA-021` | OWASP Benchmark Java: Cross-Site Scripting (XSS) (CWE-79) | Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия. |
+| `JAVA-022` | OWASP Benchmark Java: SQL Injection (CWE-89) | Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия. |
+| `JAVA-023` | OWASP Benchmark Java: LDAP Injection (CWE-90) | Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия. |
+| `JAVA-024` | OWASP Benchmark Java: Weak Cryptography (CWE-327) | Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия. |
+| `JAVA-025` | OWASP Benchmark Java: Weak Hash (CWE-328) | Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия. |
+| `JAVA-026` | OWASP Benchmark Java: Weak Randomness (CWE-330) | Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия. |
+| `JAVA-027` | OWASP Benchmark Java: Trust Boundary Violation (CWE-501) | Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия. |
+| `JAVA-028` | OWASP Benchmark Java: Insecure Cookie (CWE-614) | Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия. |
+| `JAVA-029` | OWASP Benchmark Java: XPath Injection (CWE-643) | Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия. |
 
 ## Verification
 
