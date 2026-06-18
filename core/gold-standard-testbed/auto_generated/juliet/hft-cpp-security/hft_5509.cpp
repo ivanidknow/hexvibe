@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5509
+void CWE134_Uncontrolled_Format_String__char_listen_socket_snprintf_53c_badSink(char * data);
+void CWE134_Uncontrolled_Format_String__char_listen_socket_snprintf_53b_badSink(char * data)
+CWE134_Uncontrolled_Format_String__char_listen_socket_snprintf_53c_badSink(data);

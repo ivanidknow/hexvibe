@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-104
+HARNESS_API_KEY = "zA-Z0FAKEZA"

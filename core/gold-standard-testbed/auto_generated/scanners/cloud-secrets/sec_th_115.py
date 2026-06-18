@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-115
+CASHBOARD_TOKEN = "F1A-NEI-HY4-PZKts7z"

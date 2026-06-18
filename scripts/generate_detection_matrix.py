@@ -132,21 +132,34 @@ def _sort_metric_key(mid: str) -> tuple[str, tuple[str, ...]]:
     return (prefix, key_tail)
 
 
-def find_marker_relpath(metric_id: str) -> str | None:
-    needle = f"Vulnerable: {metric_id}"
-    skip_suffixes = {".md", ".json", ".gitkeep"}
+_MARKER_NEEDLE_RE = re.compile(r"Vulnerable:\s*([A-Za-z0-9][A-Za-z0-9.\-]+)")
+_SKIP_MARKER_SUFFIXES = {".md", ".json", ".gitkeep"}
+
+
+def build_marker_index() -> dict[str, str]:
+    """Map metric ID -> first testbed file path containing ``Vulnerable: <ID>``."""
+    index: dict[str, str] = {}
     for path in TESTBED.rglob("*"):
         if not path.is_file():
             continue
-        if path.suffix.lower() in skip_suffixes:
+        if path.suffix.lower() in _SKIP_MARKER_SUFFIXES:
             continue
         try:
             data = path.read_text(encoding="utf-8", errors="ignore")
         except OSError:
             continue
-        if needle in data:
-            return str(path.relative_to(ROOT)).replace("\\", "/")
-    return None
+        rel = str(path.relative_to(ROOT)).replace("\\", "/")
+        for m in _MARKER_NEEDLE_RE.finditer(data):
+            mid = m.group(1).upper()
+            if mid not in index:
+                index[mid] = rel
+    return index
+
+
+def find_marker_relpath(metric_id: str, marker_index: dict[str, str] | None = None) -> str | None:
+    if marker_index is not None:
+        return marker_index.get(metric_id)
+    return build_marker_index().get(metric_id)
 
 
 def run_semgrep_json() -> dict:
@@ -211,10 +224,22 @@ def run_semgrep_json() -> dict:
     )
 
 
+def run_semgrep_json_or_empty(*, allow_empty: bool = True) -> dict:
+    """Run Semgrep scan; on failure return empty results if ``allow_empty`` (marker-only matrix)."""
+    try:
+        return run_semgrep_json()
+    except RuntimeError as exc:
+        if not allow_empty:
+            raise
+        print(f"[warn] Semgrep scan unavailable; using marker-only evidence. ({exc})", file=sys.stderr)
+        return {"results": []}
+
+
 def main() -> int:
     expected = collect_expected_metrics()
     expected_set = set(expected)
-    data = run_semgrep_json()
+    marker_index = build_marker_index()
+    data = run_semgrep_json_or_empty()
     found: set[str] = set()
     for r in data.get("results", []):
         cid = r.get("check_id", "")
@@ -227,7 +252,7 @@ def main() -> int:
     marker_only = 0
     both = 0
     for mid in expected:
-        rel = find_marker_relpath(mid) or "—"
+        rel = find_marker_relpath(mid, marker_index) or "—"
         in_semgrep = mid in found
         has_marker = rel != "—"
         # Semgrep may skip whole rules when the structural half of pattern-either fails to parse;

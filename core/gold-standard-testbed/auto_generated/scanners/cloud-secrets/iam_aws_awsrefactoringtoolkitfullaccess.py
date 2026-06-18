@@ -1,0 +1,12 @@
+# Vulnerable: IAM-AWS-AWSRefactoringToolkitFullAccess
+[
+  {
+    "Action": [
+      "a2c:GetContainerizationJobDetails",
+      "a2c:GetDeploymentJobDetails",
+      "a2c:StartContainerizationJob",
+      "a2c:StartDeploymentJob"
+    ],
+...
+  }
+]

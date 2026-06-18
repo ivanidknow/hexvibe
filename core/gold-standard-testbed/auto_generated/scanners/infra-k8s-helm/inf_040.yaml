@@ -1,0 +1,14 @@
+# Vulnerable: INF-040
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+  labels:
+    app: guestbook
+    tier: frontend
+spec:
+  # modify replicas according to your case
+  replicas: 3
+...
+      - name: php-redis
+        image: gcr.io/google_samples/gb-frontend:v3

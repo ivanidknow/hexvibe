@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5684
+void CWE134_Uncontrolled_Format_String__wchar_t_console_printf_54e_badSink(wchar_t * data);
+void CWE134_Uncontrolled_Format_String__wchar_t_console_printf_54d_badSink(wchar_t * data)
+CWE134_Uncontrolled_Format_String__wchar_t_console_printf_54e_badSink(data);

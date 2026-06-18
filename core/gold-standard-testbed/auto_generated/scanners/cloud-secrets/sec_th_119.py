@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-119
+CEXIO_TOKEN = "CEXIO_FAKE_CEXIO"

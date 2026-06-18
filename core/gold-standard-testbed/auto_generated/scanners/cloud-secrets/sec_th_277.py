@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-277
+FXMARKET_TOKEN = "DyB2QCacJ_D8bk1W7PlG"

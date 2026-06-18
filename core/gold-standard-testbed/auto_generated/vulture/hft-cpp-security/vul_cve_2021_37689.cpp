@@ -1,0 +1,4 @@
+// Vulnerable: VUL-CVE-2021-37689
+bool L2NormalizeReduceAxis(Value sq_op, DenseElementsAttr axis) {
+  if (sq_op.getType().cast<ShapedType>().getRank() - 1 ==
+          *axis.getValues<int>().begin() ||

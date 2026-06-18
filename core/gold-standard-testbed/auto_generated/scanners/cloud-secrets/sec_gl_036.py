@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-036
+COHERE_API_TOKEN = "CO_API_FAKE_CO_API"

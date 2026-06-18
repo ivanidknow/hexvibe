@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-055
+AUDD_TOKEN = "AUDD_FAKE_AUDD"

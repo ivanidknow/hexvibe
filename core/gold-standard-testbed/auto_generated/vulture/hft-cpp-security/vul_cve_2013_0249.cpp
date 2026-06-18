@@ -1,0 +1,16 @@
+// Vulnerable: VUL-CVE-2013-0249
+* RFC2195 CRAM-MD5 authentication
+ * RFC2222 Simple Authentication and Security Layer (SASL)
+ * RFC3501 IMAPv4 protocol
+ * RFC4616 PLAIN authentication
+...
+    "AUTHENTICATE_LOGIN_PASSWD",
+    "AUTHENTICATE_CRAMMD5",
+    "AUTHENTICATE_NTLM",
+    "AUTHENTICATE_NTLM_TYPE2MSG",
+...
+     security */
+...
+  IMAP_AUTHENTICATE_CRAMMD5,
+  IMAP_AUTHENTICATE_NTLM,
+  IMAP_AUTHENTICATE_NTLM_TYPE2MSG,

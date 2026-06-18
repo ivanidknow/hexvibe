@@ -1,0 +1,14 @@
+# Vulnerable: INF-044
+# Source: https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+...
+          hostIPC: true
+          hostNetwork: true

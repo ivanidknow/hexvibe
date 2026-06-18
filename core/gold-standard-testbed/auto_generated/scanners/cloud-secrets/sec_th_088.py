@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-088
+BOX_TOKEN = "BOX_FAKE_BOX"

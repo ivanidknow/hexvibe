@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5768
+void CWE134_Uncontrolled_Format_String__wchar_t_environment_printf_67b_badSink(CWE134_Uncontrolled_Format_String__wchar_t_environment_printf_67_structType myStruct)
+wchar_t * data = myStruct.structFirst;
+wprintf(data);

@@ -1,0 +1,14 @@
+# Vulnerable: INF-077
+#Vulnerable Role
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: assembly-prod
+  name: testRoleVulnerable
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "watch", "list"]
+...
+  name: testClusterRoleVulnerable
+  apiGroup: rbac.authorization.k8s.io

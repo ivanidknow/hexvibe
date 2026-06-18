@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-182
+SHIPPO_API_TOKEN = "fA-F0FAKEFA"

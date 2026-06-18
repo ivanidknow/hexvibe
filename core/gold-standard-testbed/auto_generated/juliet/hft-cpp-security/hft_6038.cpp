@@ -1,0 +1,4 @@
+// Vulnerable: HFT-6038
+void CWE190_Integer_Overflow__char_fscanf_add_53c_badSink(char data);
+void CWE190_Integer_Overflow__char_fscanf_add_53b_badSink(char data)
+CWE190_Integer_Overflow__char_fscanf_add_53c_badSink(data);

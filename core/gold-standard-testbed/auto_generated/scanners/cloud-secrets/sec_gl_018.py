@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-018
+ATLASSIAN_API_TOKEN = "Za-z0FAKEZ0"

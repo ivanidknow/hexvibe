@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-564
+ROOTLY_TOKEN = "ROOTLY__FAKE_ROOTLY"

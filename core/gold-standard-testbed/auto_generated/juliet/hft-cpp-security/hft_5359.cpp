@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5359
+void CWE134_Uncontrolled_Format_String__char_environment_snprintf_53d_badSink(char * data);
+void CWE134_Uncontrolled_Format_String__char_environment_snprintf_53c_badSink(char * data)
+CWE134_Uncontrolled_Format_String__char_environment_snprintf_53d_badSink(data);

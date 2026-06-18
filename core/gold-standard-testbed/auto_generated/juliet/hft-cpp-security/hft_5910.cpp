@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5910
+void CWE134_Uncontrolled_Format_String__wchar_t_listen_socket_printf_53c_badSink(wchar_t * data);
+void CWE134_Uncontrolled_Format_String__wchar_t_listen_socket_printf_53b_badSink(wchar_t * data)
+CWE134_Uncontrolled_Format_String__wchar_t_listen_socket_printf_53c_badSink(data);

@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-349
+JDBC_TOKEN = "JDBC_FAKE_JDBC"

@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-766
+XAI_TOKEN = "XAI-_FAKE_XAI"

@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-214
+TWITTER_BEARER_TOKEN = "zA-Z0FAKEZA"

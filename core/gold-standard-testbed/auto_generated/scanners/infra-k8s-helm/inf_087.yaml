@@ -1,0 +1,14 @@
+# Vulnerable: INF-087
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: helm
+    name: tiller
+  name: tiller-deploy
+spec:
+  containers:
+...
+              protocol: TCP
+      serviceAccountName: tiller

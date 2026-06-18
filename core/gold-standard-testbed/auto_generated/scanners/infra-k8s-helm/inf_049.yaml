@@ -1,0 +1,14 @@
+# Vulnerable: INF-049
+#this is a problematic code where the query should report a result(s)
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+...
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure

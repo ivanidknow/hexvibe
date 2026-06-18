@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-046
+ARTSY_TOKEN = "ARTSY_FAKE_ARTSY"

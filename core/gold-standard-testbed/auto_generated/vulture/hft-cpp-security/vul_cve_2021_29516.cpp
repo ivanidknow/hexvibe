@@ -1,0 +1,5 @@
+// Vulnerable: VUL-CVE-2021-29516
+// Unbatch the Ragged Tensor and encode the components.
+std::vector<RaggedTensorVariant> unbatched_ragged_input;
+OP_REQUIRES_OK(context, UnbatchRaggedZerothDim<VALUE_TYPE, SPLIT_TYPE>(
+                            batched_ragged_input, &unbatched_ragged_input));

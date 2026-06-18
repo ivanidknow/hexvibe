@@ -1,0 +1,6 @@
+// Vulnerable: VUL-CVE-2021-41216
+for (int32_t i = 0; i < rank; ++i) {
+  int64_t in_idx = data[i];
+  if (in_idx >= rank) {
+    return errors::InvalidArgument("perm dim ", in_idx,
+                                   " is out of range of input rank ", rank);

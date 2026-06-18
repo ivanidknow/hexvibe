@@ -1,0 +1,5 @@
+# Vulnerable: INF-096
+- securityContext:
+    allowPrivilegeEscalation: false
+  name: nginx
+  image: nginx

@@ -1,0 +1,14 @@
+# Vulnerable: INF-035
+---
+# Source: kubernetes-dashboard/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: kubernetes-dashboard
+    chart: kubernetes-dashboard-1.10.1
+    heritage: Helm
+    release: helm
+...
+      - name: tmp-volume
+        emptyDir: {}

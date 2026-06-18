@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5998
+void CWE176_Improper_Handling_of_Unicode_Encoding__w32_53c_badSink(wchar_t * data);
+void CWE176_Improper_Handling_of_Unicode_Encoding__w32_53b_badSink(wchar_t * data)
+CWE176_Improper_Handling_of_Unicode_Encoding__w32_53c_badSink(data);

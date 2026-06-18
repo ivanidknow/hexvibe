@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-219
+YANDEX_API_KEY = "Za-z0FAKEZA"

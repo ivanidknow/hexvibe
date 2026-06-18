@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-166
+PULUMI_API_TOKEN = "PUL_FAKE_PUL"

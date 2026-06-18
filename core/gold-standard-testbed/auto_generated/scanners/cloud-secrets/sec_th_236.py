@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-236
+ETHPLORER_TOKEN = "QGp6JMwswjqb5FJFGuslKQ"

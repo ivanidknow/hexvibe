@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-146
+NEW_RELIC_USER_API_KEY = "NEW_FAKE_NEW"

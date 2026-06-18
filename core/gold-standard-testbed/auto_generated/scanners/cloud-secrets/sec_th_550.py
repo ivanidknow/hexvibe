@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-550
+RENTMAN_TOKEN = "eytuZDhcszM3EZO7iPeRfJfZMoRMLXe7qoNV.eyA3uoaQ3ttxNcElupuqjIGN2K-bLTq_RVtB6w6ySxFCOttLniQBf84yvwaBBjw4W1veuikC2uWzoW5Gtw-"

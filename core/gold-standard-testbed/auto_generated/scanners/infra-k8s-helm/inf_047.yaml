@@ -1,0 +1,14 @@
+# Vulnerable: INF-047
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod4
+spec:
+  containers:
+  - name: app
+    image: images.my-company.example/app:v4
+    securityContext:
+      allowPrivilegeEscalation: false
+...
+        memory: "128Mi"
+        cpu: "500m"

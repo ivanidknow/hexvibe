@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-111
+CAPSULECRM_TOKEN = "ULeIqU-4ss+YImZYsyjPLSsm.9H.SZJ1v.KxT1D-zbaW6sg5b0R5g=koBH4X62hC"

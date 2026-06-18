@@ -1,0 +1,5 @@
+// Vulnerable: HFT-5258
+extern int CWE134_Uncontrolled_Format_String__char_console_printf_22_badGlobal;
+void CWE134_Uncontrolled_Format_String__char_console_printf_22_badSink(char * data)
+if(CWE134_Uncontrolled_Format_String__char_console_printf_22_badGlobal)
+printf(data);

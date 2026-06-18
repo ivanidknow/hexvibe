@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-189
+SLACK_APP_TOKEN = "XAPP_FAKE_XAPP"

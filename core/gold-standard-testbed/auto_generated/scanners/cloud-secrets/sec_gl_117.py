@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-117
+JWT_TOKEN = "zA-Z0FAKEZA"

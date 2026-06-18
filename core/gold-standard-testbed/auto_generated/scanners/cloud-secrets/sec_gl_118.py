@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-118
+JWT_BASE64_TOKEN = "KEY_FAKE_KEY"

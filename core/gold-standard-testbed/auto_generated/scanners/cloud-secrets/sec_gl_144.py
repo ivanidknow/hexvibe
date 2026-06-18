@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-144
+NEW_RELIC_INSERT_KEY = "NEW_FAKE_NEW"

@@ -1,0 +1,14 @@
+# Vulnerable: INF-051
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: label-mismatch
+spec:
+  selector:
+    matchLabels:
+      app: web-store
+  replicas: 3
+  template:
+...
+      - name: web-app
+        image: nginx:1.16-alpine

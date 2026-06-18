@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-361
+KLAVIYO_TOKEN = "PK__FAKE_KLAVIYO"

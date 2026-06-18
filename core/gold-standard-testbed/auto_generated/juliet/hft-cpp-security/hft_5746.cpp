@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5746
+void CWE134_Uncontrolled_Format_String__wchar_t_environment_fprintf_53c_badSink(wchar_t * data);
+void CWE134_Uncontrolled_Format_String__wchar_t_environment_fprintf_53b_badSink(wchar_t * data)
+CWE134_Uncontrolled_Format_String__wchar_t_environment_fprintf_53c_badSink(data);

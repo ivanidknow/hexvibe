@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5977
+void CWE15_External_Control_of_System_or_Configuration_Setting__w32_54d_badSink(char * data);
+void CWE15_External_Control_of_System_or_Configuration_Setting__w32_54c_badSink(char * data)
+CWE15_External_Control_of_System_or_Configuration_Setting__w32_54d_badSink(data);

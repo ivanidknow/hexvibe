@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-481
+PAPERFORM_TOKEN = "NvBbE5vYVPhidc-tiZ7E6DvP.z4bAQj29KEZOCv_XEl1pIn.Y1q8JoeGNoSelGj.db1iQpLM0fsype86LD.Vk.p6yweF5A2MlfxXDrEd7nz2SBExnTpp4QRN"

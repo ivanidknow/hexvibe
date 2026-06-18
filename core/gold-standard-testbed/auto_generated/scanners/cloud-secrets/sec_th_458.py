@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-458
+NVAPI_TOKEN = "NVAPI-_FAKE_NVAPI"

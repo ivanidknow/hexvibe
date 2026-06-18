@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-300
+GRAFANASERVICEACCOUNT_TOKEN = "1VV04Zn7iJ0B8w2nBWqG5rB-dVUL3ELSE0zMqnMHjWp-AecPbpdwSde.grafana.net:glsa_HU0WvVk_sl4PunHK8JtC7U6fywRm3FJuEFJwct3qi"

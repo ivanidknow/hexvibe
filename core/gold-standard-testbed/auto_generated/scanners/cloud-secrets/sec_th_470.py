@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-470
+OPENVPN_TOKEN = "H-IyMCPZj4DJhmri60908NY.TqE0u"

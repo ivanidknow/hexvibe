@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-765
+WRIKE_TOKEN = "eyHrUMIkHqmEhqDBTWcuk5kL.tRiP-uQD9ZZSHfYYzdqRYHgkfiPEplgL1INSyA_c9VgbpVIzvFhVx0vzWzhxv9CdyLTr6FCvmDDrxM5BU0gQdyDGgXosink"

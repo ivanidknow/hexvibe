@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5583
+void CWE134_Uncontrolled_Format_String__wchar_t_connect_socket_printf_67b_badSink(CWE134_Uncontrolled_Format_String__wchar_t_connect_socket_printf_67_structType myStruct)
+wchar_t * data = myStruct.structFirst;
+wprintf(data);

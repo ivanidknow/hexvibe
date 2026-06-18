@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-101
+GRAFANA_API_KEY = "Za-z0FAKEZA"

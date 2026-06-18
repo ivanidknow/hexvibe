@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-627
+SMARTYSTREETS_TOKEN = "UzwkWoJlOqT5q9pXbX2n"

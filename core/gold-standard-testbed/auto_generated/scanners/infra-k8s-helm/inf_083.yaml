@@ -1,0 +1,14 @@
+# Vulnerable: INF-083
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zk-mismatch
+spec:
+  selector:
+    matchLabels:
+      app: zk
+  serviceName: zk-hs
+  replicas: 3
+...
+            memory: "1Gi"
+            cpu: "0.5"

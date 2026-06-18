@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-218
+YANDEX_ACCESS_TOKEN = "Z0-9aFAKET1"

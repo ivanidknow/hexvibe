@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-163
+PREFECT_API_TOKEN = "PNU_FAKE_PNU"

@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-087
+GITLAB_FEED_TOKEN = "GLFT_FAKE_GLFT"

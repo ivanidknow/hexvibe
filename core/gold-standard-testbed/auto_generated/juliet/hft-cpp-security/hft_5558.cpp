@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5558
+void CWE134_Uncontrolled_Format_String__wchar_t_connect_socket_fprintf_54c_badSink(wchar_t * data);
+void CWE134_Uncontrolled_Format_String__wchar_t_connect_socket_fprintf_54b_badSink(wchar_t * data)
+CWE134_Uncontrolled_Format_String__wchar_t_connect_socket_fprintf_54c_badSink(data);

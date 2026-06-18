@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-169
+README_API_TOKEN = "RDME_FAKE_RDME"

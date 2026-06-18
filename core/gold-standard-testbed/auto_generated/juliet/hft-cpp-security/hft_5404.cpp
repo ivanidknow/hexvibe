@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5404
+void CWE134_Uncontrolled_Format_String__char_file_fprintf_52c_badSink(char * data);
+void CWE134_Uncontrolled_Format_String__char_file_fprintf_52b_badSink(char * data)
+CWE134_Uncontrolled_Format_String__char_file_fprintf_52c_badSink(data);

@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-138
+MAXMIND_LICENSE_KEY = "Za-z0FAKEZA"

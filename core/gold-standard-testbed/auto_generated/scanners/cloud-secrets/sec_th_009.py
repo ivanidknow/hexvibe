@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-009
+AGORA_TOKEN = "AGORA_FAKE_AGORA"

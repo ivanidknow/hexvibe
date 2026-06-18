@@ -1,0 +1,14 @@
+# Vulnerable: INF-021
+kind: DaemonSet
+apiVersion: extensions/v1beta1
+metadata:
+  name: nginx-ingress-controller
+  namespace: example-ns
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+spec:
+  selector:
+...
+            successThreshold: 1
+            timeoutSeconds: 10

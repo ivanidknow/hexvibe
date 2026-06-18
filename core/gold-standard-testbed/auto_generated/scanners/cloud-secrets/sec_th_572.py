@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-572
+SALESFORCE_TOKEN = "00MMW9rRmrlVvBi!gZTTPUfk_nkghR_01qsw3NdcHTeDF8dQKWJmiOcfSjfdymrqXH0_vMci6VmxHzrlw07JSfeyMJrA_N89fUJU9vrAYWn_isTE"

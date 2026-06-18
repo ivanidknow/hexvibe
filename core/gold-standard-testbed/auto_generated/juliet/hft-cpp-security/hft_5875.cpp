@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5875
+void CWE134_Uncontrolled_Format_String__wchar_t_file_vprintf_52c_badSink(wchar_t * data);
+void CWE134_Uncontrolled_Format_String__wchar_t_file_vprintf_52b_badSink(wchar_t * data)
+CWE134_Uncontrolled_Format_String__wchar_t_file_vprintf_52c_badSink(data);

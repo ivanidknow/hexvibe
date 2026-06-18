@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-249
+FIBERY_TOKEN = "42b2eda8.3fe6b086bb21be7e3548368626d01aaf2cd"

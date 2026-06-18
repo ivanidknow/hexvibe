@@ -1,0 +1,14 @@
+# Vulnerable: INF-046
+#this is a problematic code where the query should report a result(s)
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  annotations:
+    kubernetes.io/description: 'restricted psp for all standard use-cases'
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: docker/default
+    seccomp.security.alpha.kubernetes.io/defaultProfileName: docker/default
+  name: restricted
+spec:
+...
+  - projected
+  - secret

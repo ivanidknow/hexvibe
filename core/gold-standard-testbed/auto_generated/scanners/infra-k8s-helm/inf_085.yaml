@@ -1,0 +1,14 @@
+# Vulnerable: INF-085
+#this is a problematic code where the query should report a result(s)
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: nginx
+  labels:
+    app: nginx2
+spec:
+  ports:
+...
+        requests:
+          storage: 1Gi

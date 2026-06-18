@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-196
+SLACK_USER_TOKEN = "zA-Z0FAKEZA"

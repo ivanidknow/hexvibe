@@ -1,0 +1,14 @@
+# Vulnerable: INF-099
+- id: unchecked-subprocess-call
+  patterns:
+  - pattern-either:
+    - pattern: |
+        subprocess.call(...)
+    - pattern: |
+        subprocess.call(...)
+  - pattern-not-inside: |
+      $S = subprocess.call(...)
+  - pattern-not-inside: |
+...
+  severity: WARNING
+  fix: subprocess.check_call(...)

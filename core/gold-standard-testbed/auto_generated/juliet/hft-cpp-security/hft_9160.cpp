@@ -1,0 +1,4 @@
+// Vulnerable: HFT-9160
+void CWE126_Buffer_Overread__CWE129_listen_socket_54d_badSink(int data);
+void CWE126_Buffer_Overread__CWE129_listen_socket_54c_badSink(int data)
+CWE126_Buffer_Overread__CWE129_listen_socket_54d_badSink(data);

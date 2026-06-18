@@ -1,0 +1,14 @@
+# Vulnerable: INF-084
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: nginx-pdb
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: xpto
+---
+...
+        - name: www
+          mountPath: /usr/share/nginx/html

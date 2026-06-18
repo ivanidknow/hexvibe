@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-570
+SALESCOOKIE_TOKEN = "4nXYKv]mHDeom5esert30Ea7]4QEfMg6"

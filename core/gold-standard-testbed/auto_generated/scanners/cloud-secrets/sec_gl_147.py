@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-147
+NOTION_API_TOKEN = "NTN_FAKE_NTN"

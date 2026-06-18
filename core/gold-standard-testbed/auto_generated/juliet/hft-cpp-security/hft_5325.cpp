@@ -1,0 +1,5 @@
+// Vulnerable: HFT-5325
+extern int CWE134_Uncontrolled_Format_String__char_environment_fprintf_22_badGlobal;
+void CWE134_Uncontrolled_Format_String__char_environment_fprintf_22_badSink(char * data)
+if(CWE134_Uncontrolled_Format_String__char_environment_fprintf_22_badGlobal)
+fprintf(stdout, data);

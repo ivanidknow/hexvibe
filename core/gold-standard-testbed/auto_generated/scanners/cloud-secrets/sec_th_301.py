@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-301
+GRAPHCMS_TOKEN = "eyQLdHMLjpK5snSPYf6ZCiXXxQRlie2wMITSkTjuzywCiga696mNUt2k2nEL4mv70CKQD9STxcN@eyr4kx6eWKut5zTR6Ei9o94jSCNWjkjQgYoD1pihdbTr"

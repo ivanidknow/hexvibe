@@ -1,0 +1,2 @@
+# Vulnerable: RUB-057
+Rails4::Application.config.secret_key_base = '3d90f727dcc14992232b9461fac5d31cf2bc184854e0afd90ae67e0ae48f22b676ee2529c84d4c23bc2a9c7be6eeefcf202b91ccb8d04e7b87a85c852f6784d6'

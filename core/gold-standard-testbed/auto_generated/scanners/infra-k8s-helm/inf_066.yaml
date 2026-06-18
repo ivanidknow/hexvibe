@@ -1,0 +1,14 @@
+# Vulnerable: INF-066
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: example
+spec:
+  hostIPC: true
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+...
+  fsGroup:
+    rule: RunAsAny

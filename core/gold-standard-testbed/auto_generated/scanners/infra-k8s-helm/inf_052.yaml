@@ -1,0 +1,14 @@
+# Vulnerable: INF-052
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: nginx-pdb
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: xpto
+---
+...
+        ports:
+        - containerPort: 80

@@ -1,0 +1,11 @@
+// Vulnerable: VUL-CVE-2018-7751
+const uint8_t *b = p->buf;
+    const uint8_t *end = p->buf + p->buf_size;
+    if (memcmp(p->buf, "<?xml", 5))
+        return 0;
+...
+        return 0;
+    while (b < end) {
+        b += ff_subtitles_next_line(b);
+        if (b >= end - 4)
+            return 0;

@@ -1,0 +1,14 @@
+# Vulnerable: INF-064
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd-elasticsearch
+  namespace: logs
+  labels:
+    k8s-app: fluentd-logging
+spec:
+  selector:
+    matchLabels:
+...
+      hostPath:
+        path: /var/redis/data

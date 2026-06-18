@@ -1,0 +1,2 @@
+# Vulnerable: ITS-125
+POST /XMLCHART

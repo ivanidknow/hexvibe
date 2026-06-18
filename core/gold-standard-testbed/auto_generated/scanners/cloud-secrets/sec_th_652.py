@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-652
+STORYCHIEF_TOKEN = "OjhRmEboKs5kYVWJOrpTrloSRsAdkEl8PK-eHrSID5TRR.59-m5ezCY1dcJqJCxbV.2.LeGuqnhuouYkaiJ-iq90X-XX0J3IcT-ReLn.lAU0FfkvHOoOFp4k"

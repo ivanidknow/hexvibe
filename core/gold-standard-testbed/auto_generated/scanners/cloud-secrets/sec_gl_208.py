@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-208
+TWILIO_API_KEY = "9a-fAFAKE9A"

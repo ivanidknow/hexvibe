@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-171
+SCALINGO_API_TOKEN = "tk-usFAKETK"

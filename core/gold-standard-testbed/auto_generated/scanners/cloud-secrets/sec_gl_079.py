@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-079
+GITHUB_APP_TOKEN = "9a-zAFAKE9A"

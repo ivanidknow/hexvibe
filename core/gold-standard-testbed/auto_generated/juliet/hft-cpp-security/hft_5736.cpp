@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5736
+void CWE134_Uncontrolled_Format_String__wchar_t_console_w32_vsnprintf_54e_badSink(wchar_t * data);
+void CWE134_Uncontrolled_Format_String__wchar_t_console_w32_vsnprintf_54d_badSink(wchar_t * data)
+CWE134_Uncontrolled_Format_String__wchar_t_console_w32_vsnprintf_54e_badSink(data);

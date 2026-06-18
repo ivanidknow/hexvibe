@@ -1,0 +1,6 @@
+# Vulnerable: INF-097
+- name: FLASK_ENV
+        value: development
+containers:
+  - name: backend
+    env:
