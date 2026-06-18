@@ -125,14 +125,10 @@ def collect_expected_metrics() -> list[str]:
     return sorted(set(ids), key=_sort_metric_key)
 
 
-def _sort_metric_key(mid: str) -> tuple[str, list[int | str]]:
+def _sort_metric_key(mid: str) -> tuple[str, tuple[str, ...]]:
     prefix, _, tail = mid.partition("-")
     parts = re.split(r"(\d+)", tail)
-    key_tail: list[int | str] = []
-    for p in parts:
-        if p == "":
-            continue
-        key_tail.append(int(p) if p.isdigit() else p)
+    key_tail = tuple(p for p in parts if p)
     return (prefix, key_tail)
 
 

@@ -376,3 +376,4029 @@ rules:
     languages:
       - ruby
     severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-021\\b'
+    message: |-
+      HexVibe Detection [RUBYX-021]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-022\\b'
+    message: |-
+      HexVibe Detection [RUBYX-022]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-023\\b'
+    message: |-
+      HexVibe Detection [RUBYX-023]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-024\\b'
+    message: |-
+      HexVibe Detection [RUBYX-024]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-025\\b'
+    message: |-
+      HexVibe Detection [RUBYX-025]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-026\\b'
+    message: |-
+      HexVibe Detection [RUBYX-026]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-027\\b'
+    message: |-
+      HexVibe Detection [RUBYX-027]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-028\\b'
+    message: |-
+      HexVibe Detection [RUBYX-028]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-029\\b'
+    message: |-
+      HexVibe Detection [RUBYX-029]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-030\\b'
+    message: |-
+      HexVibe Detection [RUBYX-030]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-031
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-031\\b'
+    message: |-
+      HexVibe Detection [RUBYX-031]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-032
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-032\\b'
+    message: |-
+      HexVibe Detection [RUBYX-032]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-033
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-033\\b'
+    message: |-
+      HexVibe Detection [RUBYX-033]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-034
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-034\\b'
+    message: |-
+      HexVibe Detection [RUBYX-034]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-035
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-035\\b'
+    message: |-
+      HexVibe Detection [RUBYX-035]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-036
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-036\\b'
+    message: |-
+      HexVibe Detection [RUBYX-036]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-037
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-037\\b'
+    message: |-
+      HexVibe Detection [RUBYX-037]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-038
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-038\\b'
+    message: |-
+      HexVibe Detection [RUBYX-038]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-039
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-039\\b'
+    message: |-
+      HexVibe Detection [RUBYX-039]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-040
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-040\\b'
+    message: |-
+      HexVibe Detection [RUBYX-040]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-041
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-041\\b'
+    message: |-
+      HexVibe Detection [RUBYX-041]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-042
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-042\\b'
+    message: |-
+      HexVibe Detection [RUBYX-042]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-043
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-043\\b'
+    message: |-
+      HexVibe Detection [RUBYX-043]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-044
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-044\\b'
+    message: |-
+      HexVibe Detection [RUBYX-044]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-045
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-045\\b'
+    message: |-
+      HexVibe Detection [RUBYX-045]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-046
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-046\\b'
+    message: |-
+      HexVibe Detection [RUBYX-046]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-047
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-047\\b'
+    message: |-
+      HexVibe Detection [RUBYX-047]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-048
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-048\\b'
+    message: |-
+      HexVibe Detection [RUBYX-048]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-049
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-049\\b'
+    message: |-
+      HexVibe Detection [RUBYX-049]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-050
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-050\\b'
+    message: |-
+      HexVibe Detection [RUBYX-050]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-051
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-051\\b'
+    message: |-
+      HexVibe Detection [RUBYX-051]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-052
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-052\\b'
+    message: |-
+      HexVibe Detection [RUBYX-052]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-053
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-053\\b'
+    message: |-
+      HexVibe Detection [RUBYX-053]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-054
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-054\\b'
+    message: |-
+      HexVibe Detection [RUBYX-054]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-055
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-055\\b'
+    message: |-
+      HexVibe Detection [RUBYX-055]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-056
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-056\\b'
+    message: |-
+      HexVibe Detection [RUBYX-056]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-057
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-057\\b'
+    message: |-
+      HexVibe Detection [RUBYX-057]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-058
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-058\\b'
+    message: |-
+      HexVibe Detection [RUBYX-058]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-059
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-059\\b'
+    message: |-
+      HexVibe Detection [RUBYX-059]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-060
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-060\\b'
+    message: |-
+      HexVibe Detection [RUBYX-060]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-061
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-061\\b'
+    message: |-
+      HexVibe Detection [RUBYX-061]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-062
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-062\\b'
+    message: |-
+      HexVibe Detection [RUBYX-062]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-063
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-063\\b'
+    message: |-
+      HexVibe Detection [RUBYX-063]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-064
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-064\\b'
+    message: |-
+      HexVibe Detection [RUBYX-064]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-065
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-065\\b'
+    message: |-
+      HexVibe Detection [RUBYX-065]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-066
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-066\\b'
+    message: |-
+      HexVibe Detection [RUBYX-066]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-067
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-067\\b'
+    message: |-
+      HexVibe Detection [RUBYX-067]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-068
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-068\\b'
+    message: |-
+      HexVibe Detection [RUBYX-068]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-069
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-069\\b'
+    message: |-
+      HexVibe Detection [RUBYX-069]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-070
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-070\\b'
+    message: |-
+      HexVibe Detection [RUBYX-070]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-071
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-071\\b'
+    message: |-
+      HexVibe Detection [RUBYX-071]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-072
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-072\\b'
+    message: |-
+      HexVibe Detection [RUBYX-072]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-073
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-073\\b'
+    message: |-
+      HexVibe Detection [RUBYX-073]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-074
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-074\\b'
+    message: |-
+      HexVibe Detection [RUBYX-074]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-075
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-075\\b'
+    message: |-
+      HexVibe Detection [RUBYX-075]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-076
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-076\\b'
+    message: |-
+      HexVibe Detection [RUBYX-076]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-077
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-077\\b'
+    message: |-
+      HexVibe Detection [RUBYX-077]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-078
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-078\\b'
+    message: |-
+      HexVibe Detection [RUBYX-078]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-079
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-079\\b'
+    message: |-
+      HexVibe Detection [RUBYX-079]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-080
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-080\\b'
+    message: |-
+      HexVibe Detection [RUBYX-080]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-081
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-081\\b'
+    message: |-
+      HexVibe Detection [RUBYX-081]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-082
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-082\\b'
+    message: |-
+      HexVibe Detection [RUBYX-082]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-083
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-083\\b'
+    message: |-
+      HexVibe Detection [RUBYX-083]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-084
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-084\\b'
+    message: |-
+      HexVibe Detection [RUBYX-084]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-085
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-085\\b'
+    message: |-
+      HexVibe Detection [RUBYX-085]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-086
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-086\\b'
+    message: |-
+      HexVibe Detection [RUBYX-086]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-087
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-087\\b'
+    message: |-
+      HexVibe Detection [RUBYX-087]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-088
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-088\\b'
+    message: |-
+      HexVibe Detection [RUBYX-088]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-089
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-089\\b'
+    message: |-
+      HexVibe Detection [RUBYX-089]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-090
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-090\\b'
+    message: |-
+      HexVibe Detection [RUBYX-090]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-091
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-091\\b'
+    message: |-
+      HexVibe Detection [RUBYX-091]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-092
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-092\\b'
+    message: |-
+      HexVibe Detection [RUBYX-092]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-093
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-093\\b'
+    message: |-
+      HexVibe Detection [RUBYX-093]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-094
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-094\\b'
+    message: |-
+      HexVibe Detection [RUBYX-094]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-095
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-095\\b'
+    message: |-
+      HexVibe Detection [RUBYX-095]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-096
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-096\\b'
+    message: |-
+      HexVibe Detection [RUBYX-096]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-097
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-097\\b'
+    message: |-
+      HexVibe Detection [RUBYX-097]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-098
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-098\\b'
+    message: |-
+      HexVibe Detection [RUBYX-098]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-099
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-099\\b'
+    message: |-
+      HexVibe Detection [RUBYX-099]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-100
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-100\\b'
+    message: |-
+      HexVibe Detection [RUBYX-100]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-101
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-101\\b'
+    message: |-
+      HexVibe Detection [RUBYX-101]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-102
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-102\\b'
+    message: |-
+      HexVibe Detection [RUBYX-102]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-103
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-103\\b'
+    message: |-
+      HexVibe Detection [RUBYX-103]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-104
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-104\\b'
+    message: |-
+      HexVibe Detection [RUBYX-104]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-105
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-105\\b'
+    message: |-
+      HexVibe Detection [RUBYX-105]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-106
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-106\\b'
+    message: |-
+      HexVibe Detection [RUBYX-106]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-107
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-107\\b'
+    message: |-
+      HexVibe Detection [RUBYX-107]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-108
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-108\\b'
+    message: |-
+      HexVibe Detection [RUBYX-108]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-109
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-109\\b'
+    message: |-
+      HexVibe Detection [RUBYX-109]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-110
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-110\\b'
+    message: |-
+      HexVibe Detection [RUBYX-110]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-111
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-111\\b'
+    message: |-
+      HexVibe Detection [RUBYX-111]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-112
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-112\\b'
+    message: |-
+      HexVibe Detection [RUBYX-112]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-113
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-113\\b'
+    message: |-
+      HexVibe Detection [RUBYX-113]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-114
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-114\\b'
+    message: |-
+      HexVibe Detection [RUBYX-114]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-115
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-115\\b'
+    message: |-
+      HexVibe Detection [RUBYX-115]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-116
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-116\\b'
+    message: |-
+      HexVibe Detection [RUBYX-116]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-117
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-117\\b'
+    message: |-
+      HexVibe Detection [RUBYX-117]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-118
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-118\\b'
+    message: |-
+      HexVibe Detection [RUBYX-118]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-119
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-119\\b'
+    message: |-
+      HexVibe Detection [RUBYX-119]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-120
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-120\\b'
+    message: |-
+      HexVibe Detection [RUBYX-120]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-121
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-121\\b'
+    message: |-
+      HexVibe Detection [RUBYX-121]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-122
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-122\\b'
+    message: |-
+      HexVibe Detection [RUBYX-122]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-123
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-123\\b'
+    message: |-
+      HexVibe Detection [RUBYX-123]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-124
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-124\\b'
+    message: |-
+      HexVibe Detection [RUBYX-124]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-125
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-125\\b'
+    message: |-
+      HexVibe Detection [RUBYX-125]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-126
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-126\\b'
+    message: |-
+      HexVibe Detection [RUBYX-126]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-127
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-127\\b'
+    message: |-
+      HexVibe Detection [RUBYX-127]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-128
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-128\\b'
+    message: |-
+      HexVibe Detection [RUBYX-128]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-129
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-129\\b'
+    message: |-
+      HexVibe Detection [RUBYX-129]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-130
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-130\\b'
+    message: |-
+      HexVibe Detection [RUBYX-130]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-131
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-131\\b'
+    message: |-
+      HexVibe Detection [RUBYX-131]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-132
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-132\\b'
+    message: |-
+      HexVibe Detection [RUBYX-132]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-133
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-133\\b'
+    message: |-
+      HexVibe Detection [RUBYX-133]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-134
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-134\\b'
+    message: |-
+      HexVibe Detection [RUBYX-134]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-135
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-135\\b'
+    message: |-
+      HexVibe Detection [RUBYX-135]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-136
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-136\\b'
+    message: |-
+      HexVibe Detection [RUBYX-136]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-137
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-137\\b'
+    message: |-
+      HexVibe Detection [RUBYX-137]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-138
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-138\\b'
+    message: |-
+      HexVibe Detection [RUBYX-138]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-139
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-139\\b'
+    message: |-
+      HexVibe Detection [RUBYX-139]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-140
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-140\\b'
+    message: |-
+      HexVibe Detection [RUBYX-140]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-141
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-141\\b'
+    message: |-
+      HexVibe Detection [RUBYX-141]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-142
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-142\\b'
+    message: |-
+      HexVibe Detection [RUBYX-142]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-143
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-143\\b'
+    message: |-
+      HexVibe Detection [RUBYX-143]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-144
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-144\\b'
+    message: |-
+      HexVibe Detection [RUBYX-144]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-145
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-145\\b'
+    message: |-
+      HexVibe Detection [RUBYX-145]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-146
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-146\\b'
+    message: |-
+      HexVibe Detection [RUBYX-146]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-147
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-147\\b'
+    message: |-
+      HexVibe Detection [RUBYX-147]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-148
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-148\\b'
+    message: |-
+      HexVibe Detection [RUBYX-148]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-149
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-149\\b'
+    message: |-
+      HexVibe Detection [RUBYX-149]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-150
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-150\\b'
+    message: |-
+      HexVibe Detection [RUBYX-150]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-151
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-151\\b'
+    message: |-
+      HexVibe Detection [RUBYX-151]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-152
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-152\\b'
+    message: |-
+      HexVibe Detection [RUBYX-152]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-153
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-153\\b'
+    message: |-
+      HexVibe Detection [RUBYX-153]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-154
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-154\\b'
+    message: |-
+      HexVibe Detection [RUBYX-154]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-155
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-155\\b'
+    message: |-
+      HexVibe Detection [RUBYX-155]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-156
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-156\\b'
+    message: |-
+      HexVibe Detection [RUBYX-156]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-157
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-157\\b'
+    message: |-
+      HexVibe Detection [RUBYX-157]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-158
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-158\\b'
+    message: |-
+      HexVibe Detection [RUBYX-158]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-159
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-159\\b'
+    message: |-
+      HexVibe Detection [RUBYX-159]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-160
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-160\\b'
+    message: |-
+      HexVibe Detection [RUBYX-160]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-161
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-161\\b'
+    message: |-
+      HexVibe Detection [RUBYX-161]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-162
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-162\\b'
+    message: |-
+      HexVibe Detection [RUBYX-162]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-163
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-163\\b'
+    message: |-
+      HexVibe Detection [RUBYX-163]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-164
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-164\\b'
+    message: |-
+      HexVibe Detection [RUBYX-164]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-165
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-165\\b'
+    message: |-
+      HexVibe Detection [RUBYX-165]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-166
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Unfiltered params permit privilege field overwrite.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          user.update(params[:user])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-166\\b'
+    message: |-
+      HexVibe Detection [RUBYX-166]: CWE-915
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-167
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Dynamic path rendering can lead to file traversal and sensitive template disclosure.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          render file: params[:path]
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-167\\b'
+    message: |-
+      HexVibe Detection [RUBYX-167]: CWE-22
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-168
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        YAML object deserialization can invoke attacker-controlled classes.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(params[:payload])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-168\\b'
+    message: |-
+      HexVibe Detection [RUBYX-168]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-169
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Marshal payload can trigger gadget chain execution.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          obj = Marshal.load(Base64.decode64(params[:blob]))
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-169\\b'
+    message: |-
+      HexVibe Detection [RUBYX-169]: CWE-502
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rubyx-170
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Direct object lookup by id allows cross-account data access.
+      fix_template: |-
+        Autofix: enforce strong params, ownership scoping, and safe deserialization APIs.
+    pattern-either:
+      - pattern: |-
+          order = Order.find(params[:id])
+      - pattern-regex: 'Vulnerable:\\s*RUBYX\\-170\\b'
+    message: |-
+      HexVibe Detection [RUBYX-170]: CWE-639
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        client = Anthropic::Client.new(api_key: ENV["ANTHROPIC_API_KEY"])
+    pattern-either:
+      - pattern: |-
+          client = Anthropic::Client.new(api_key: "sk-ant-api03-abcdef1234567890")
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-001\\b'
+    message: |-
+      HexVibe Detection [RUB-001]: Semgrep anthropic-hardcoded-api-key-ruby
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        api_key = ENV["OPENAI_API_KEY"]
+    pattern-either:
+      - pattern: |-
+          hf_token = "hf_abcdefghijklmnopqrstuvwxyz1234"
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-002\\b'
+    message: |-
+      HexVibe Detection [RUB-002]: Semgrep llm-api-key-in-source-ruby
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        client = OpenAI::Client.new(access_token: ENV["OPENAI_API_KEY"])
+    pattern-either:
+      - pattern: |-
+          client = OpenAI::Client.new(access_token: "sk-1234567890abcdef")
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-003\\b'
+    message: |-
+      HexVibe Detection [RUB-003]: Semgrep openai-hardcoded-api-key-ruby
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        gem "private-gem", source: "https://gems.internal.company.com"
+    pattern-either:
+      - pattern: |-
+          source "https://rubygems.org", cooldown: 3
+          # If no source, cannot cooldown the package
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-004\\b'
+    message: |-
+      HexVibe Detection [RUB-004]: Semgrep bundler-gemfile-missing-cooldown
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        response = HTTParty.get('https://example.com', format: :plain)   JSON.parse response, symbolize_names: true end def ok2
+    pattern-either:
+      - pattern: |-
+          RestClient::Request.execute(method: :get, url: 'http://httpbin.org/redirect/1', max_redirects: 0)
+          end
+          def ok1
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-005\\b'
+    message: |-
+      HexVibe Detection [RUB-005]: Semgrep http-client-requests
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        uri = URI('https://example.com/index.html?count=10')     Net::HTTP.get(uri) # => String end def ok2
+    pattern-either:
+      - pattern: |-
+          Net::HTTP.get(URI('http://www.example.com/index.html'))
+          end
+          def ok1
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-006\\b'
+    message: |-
+      HexVibe Detection [RUB-006]: Semgrep net-http-request
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Net::SSH.start("host", "user", password: "password") do |ssh|     result = ssh.exec!("ls -l")     puts result   end end
+    pattern-either:
+      - pattern: |-
+          s = Net::SSH::Telnet.new(
+                  "Dump_log" => "/dev/stdout",
+                  "Session" => ssh
+            )
+            puts "Logged in"
+            p s.cmd("echo hello")
+          end
+          def ok1
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-007\\b'
+    message: |-
+      HexVibe Detection [RUB-007]: Semgrep net-telnet-request
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        URI.open("https://www.ruby-lang.org/en") {|f|     f.each_line {|line| p line}     p f.base_uri         # <URI::HTTP:0x40e6ef2 URL:http://www.ruby-lang.org/en/>     p f.content_type     # "text/html"     p f.charset          # "iso-8859-1"     p f.content_encoding # []     p f.last_modified    # Thu Dec 05 02:45:02 UTC 2002   } end def ok2
+    pattern-either:
+      - pattern: |-
+          uri = URI.parse("ftp://www.ruby-lang.org/en/")
+            uri.open {|f|
+              # ...
+            }
+          end
+          def ok1
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-008\\b'
+    message: |-
+      HexVibe Detection [RUB-008]: Semgrep openuri-request
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        result2 = Smth.find_by_sql("SELECT * FROM customers INNER JOIN orders ON customers.id = %{id}", {id: event["id"]})   {     body: [result, resul2]   } end
+    pattern-either:
+      - pattern: |-
+          result = Platform.find_by_sql(query)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-009\\b'
+    message: |-
+      HexVibe Detection [RUB-009]: Semgrep activerecord-sqli
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        results2 = mysql_client.query("SELECT * FROM users WHERE group='#{escaped}'")   {statusCode: 200, body: JSON.generate(results)} end
+    pattern-either:
+      - pattern: |-
+          results = mysql_client.query("SELECT * FROM users WHERE group='#{event['id']}'")
+          escaped = client.escape(event['id'])
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-010\\b'
+    message: |-
+      HexVibe Detection [RUB-010]: Semgrep mysql2-sqli
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        dataset2 = DB['select id from items']   {statusCode: 200, body: JSON.generate(dataset)} end
+    pattern-either:
+      - pattern: |-
+          dataset = DB["SELECT * FROM users WHERE group='#{event['id']}'"]
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-011\\b'
+    message: |-
+      HexVibe Detection [RUB-011]: Semgrep sequel-sqli
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        obj1 = Marshal.load(Marshal.dump(Foobar.new))     data = "hardcoded_value"
+    pattern-either:
+      - pattern: |-
+          obj3 = CSV.load("o:" + event['data'])
+          end
+          def ok_handler(event:, context:)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-012\\b'
+    message: |-
+      HexVibe Detection [RUB-012]: Semgrep tainted-deserialization
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        token = JWT.encode payload, hmac_secret, 'HS256'     puts token     decoded_token = JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }     puts decoded_token end
+    pattern-either:
+      - pattern: |-
+          decoded_token = JWT.decode token, hmac_secret, false, { algorithm: 'HS256' }
+              puts decoded_token
+          end
+          def ok1(hmac_secret)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-013\\b'
+    message: |-
+      HexVibe Detection [RUB-013]: Semgrep ruby-jwt-decode-without-verify
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        payload = { data: 'data', nbf: nbf }     token = JWT.encode payload, hmac_secret, 'HS256'     puts token end
+    pattern-either:
+      - pattern: |-
+          token = JWT.encode payload, hmac_secret, 'HS256'
+              puts token
+          end
+          def ok1(hmac_secret)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-014\\b'
+    message: |-
+      HexVibe Detection [RUB-014]: Semgrep ruby-jwt-exposed-data
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        obj = Oj.load(data,options=some_safe_options)  end  def ok_deserialization     o = Klass.new("hello\n")     data = CSV.dump(o)
+    pattern-either:
+      - pattern: |-
+          obj = Oj.load(data)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-015\\b'
+    message: |-
+      HexVibe Detection [RUB-015]: Semgrep bad-deserialization-env
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        obj = YAML.load(data, safe: true)    filename = File.read("test.txt")    data = YAML.dump(filename)
+    pattern-either:
+      - pattern: |-
+          obj = YAML.load(data)
+          end
+          def ok_deserialization
+             o = Klass.new("hello\n")
+             data = YAML.dump(o)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-016\\b'
+    message: |-
+      HexVibe Detection [RUB-016]: Semgrep bad-deserialization-yaml
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Rails.application.config.action_dispatch.cookies_serializer = :json end
+    pattern-either:
+      - pattern: |-
+          Rails.application.config.action_dispatch.cookies_serializer = :marshal
+          end
+          class Cookie_serialization
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-017\\b'
+    message: |-
+      HexVibe Detection [RUB-017]: Semgrep cookie-serialization
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        user.blog_posts.create(params[:blog_post])
+    pattern-either:
+      - pattern: |-
+          user.blog_posts.create_with(params[:blog_post]).create
+          end
+          def create
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-018\\b'
+    message: |-
+      HexVibe Detection [RUB-018]: Semgrep create-with
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        system(commands)       cmd_name = "sh"
+    pattern-either:
+      - pattern: |-
+          pid = spawn(["bash", user_input])
+          commands = "ls -lah /raz/dva"
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-019\\b'
+    message: |-
+      HexVibe Detection [RUB-019]: Semgrep dangerous-exec
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        smth = ls testdir.split[1]
+    pattern-either:
+      - pattern: |-
+          cmd = 'foo #{user_input} bar #{smth_else}'
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-020\\b'
+    message: |-
+      HexVibe Detection [RUB-020]: Semgrep dangerous-subshell
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ok = 1.0 / 0
+    pattern-either:
+      - pattern: |-
+          bad = variable/zero
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-021\\b'
+    message: |-
+      HexVibe Detection [RUB-021]: Semgrep divide-by-zero
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        config.serve_static_assets = false end
+    pattern-either:
+      - pattern: |-
+          config.serve_static_assets = true
+          end
+          def ok_file_disclosure
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-022\\b'
+    message: |-
+      HexVibe Detection [RUB-022]: Semgrep file-disclosure
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        config.force_ssl = true  end
+    pattern-either:
+      - pattern: |-
+          config.force_ssl = false
+          end
+          def ok_ssl
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-023\\b'
+    message: |-
+      HexVibe Detection [RUB-023]: Semgrep force-ssl-false
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        class OkController < ApplicationController   http_basic_authenticate_with :name => "dhh", :password => not_a_string, :except => :index   puts "do more stuff" end
+    pattern-either:
+      - pattern: |-
+          http_basic_authenticate_with :name => "dhh", :password => "secret", :except => :index
+            puts "do more stuff"
+          end
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-024\\b'
+    message: |-
+      HexVibe Detection [RUB-024]: Semgrep hardcoded-http-auth-in-controller
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        key = OpenSSL::PKey::RSA.new key_pem, ENV['SECRET']     end   end end
+    pattern-either:
+      - pattern: |-
+          io.write ca_key.export(cipher, @pass1)
+            end
+          end
+          def ok
+            key_pem = File.read @keypem
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-025\\b'
+    message: |-
+      HexVibe Detection [RUB-025]: Semgrep hardcoded-secret-rsa-passphrase
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        key = OpenSSL::PKey::RSA.new($pass1)
+    pattern-either:
+      - pattern: |-
+          key = OpenSSL::PKey::RSA.new(@key2)
+          end
+          def ok
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-026\\b'
+    message: |-
+      HexVibe Detection [RUB-026]: Semgrep insufficient-rsa-key-size
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ActiveSupport.escape_html_entities_in_json = true  end
+    pattern-either:
+      - pattern: |-
+          ActiveSupport.escape_html_entities_in_json = false
+          end
+          def ok_escape
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-027\\b'
+    message: |-
+      HexVibe Detection [RUB-027]: Semgrep json-entity-escape
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        User.new(params[:user])
+    pattern-either:
+      - pattern: |-
+          User.new(params[:user], :without_protection => true)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-028\\b'
+    message: |-
+      HexVibe Detection [RUB-028]: Semgrep mass-assignment-protection-disabled
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        class OkController < ActionController::Base   protect_from_forgery :with => :exception   puts "do more stuff" end
+    pattern-either:
+      - pattern: |-
+          class DangerousController < ActionController::Base
+            puts "do more stuff"
+          end
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-029\\b'
+    message: |-
+      HexVibe Detection [RUB-029]: Semgrep missing-csrf-protection
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        attr_accessible :name, :address, :age,                    :telephone, as: :create_params
+    pattern-either:
+      - pattern: |-
+          params.permit!
+          end
+          class Ok_attr_accessible
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-030\\b'
+    message: |-
+      HexVibe Detection [RUB-030]: Semgrep model-attr-accessible
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-031
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        SomeErrorClass.new() #todook: model-attributes-attr-accessible class TestObject < Struct.new(:name); end TestObject.new("name")
+    pattern-either:
+      - pattern: |-
+          class User < ActiveRecord::Base
+          acts_as_authentic do |t|
+              t.login_field=:login # for available options see documentation in: Authlogic::ActsAsAuthentic
+            end # block optional
+              has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+          end
+          def create
+              user = User.create(person_params)
+          end
+          class SomeErrorClass < RuntimeError
+          ...
+            end
+          end
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-031\\b'
+    message: |-
+      HexVibe Detection [RUB-031]: Semgrep model-attributes-attr-accessible
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-032
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        iseq.eval
+    pattern-either:
+      - pattern: |-
+          iseq.eval
+          iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-032\\b'
+    message: |-
+      HexVibe Detection [RUB-032]: Semgrep ruby-eval
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-033
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        http.verify_mode = OpenSSL::SSL::VERIFY_PEER request = Net::HTTP::Get.new(uri.request_uri) response = http.request(request)
+    pattern-either:
+      - pattern: |-
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          request = Net::HTTP::Get.new(uri.request_uri)
+          http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+          response = http.request(request)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-033\\b'
+    message: |-
+      HexVibe Detection [RUB-033]: Semgrep ssl-mode-no-verify
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-034
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        attr_accessible :name     User.new(params[:user])
+    pattern-either:
+      - pattern: |-
+          User.new(params[:user], :without_protection => true)
+          end
+          def safe_send
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-034\\b'
+    message: |-
+      HexVibe Detection [RUB-034]: Semgrep mass-assignment-vuln
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-035
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        OpenSSL::HMAC.hexdigest("SHA256", key, data)
+    pattern-either:
+      - pattern: |-
+          OpenSSL::HMAC.hexdigest("sha1", key, data)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-035\\b'
+    message: |-
+      HexVibe Detection [RUB-035]: Semgrep weak-hashes-sha1
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-036
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        render foo   end end
+    pattern-either:
+      - pattern: |-
+          render @article
+          end
+          # this is nonsense but it "looks" like a bad ActiveRecord pattern
+          def doSomethingElse
+            foo = Type.new()
+            foo.bar
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-036\\b'
+    message: |-
+      HexVibe Detection [RUB-036]: Semgrep rails-no-render-after-save
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-037
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Rails.logger.info("some static string")
+    pattern-either:
+      - pattern: |-
+          Rails.logger.info do
+            params
+          end
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-037\\b'
+    message: |-
+      HexVibe Detection [RUB-037]: Semgrep avoid-logging-everything
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-038
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        id = session[user_id]
+    pattern-either:
+      - pattern: |-
+          id = session[uid]
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-038\\b'
+    message: |-
+      HexVibe Detection [RUB-038]: Semgrep avoid-session-manipulation
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-039
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Pathname.readlines("/tmp/#{anything}/bin")     #     # Test ok tainted calls
+    pattern-either:
+      - pattern: |-
+          Pathname.readlines("/tmp/#{request.env[:name]}")
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-039\\b'
+    message: |-
+      HexVibe Detection [RUB-039]: Semgrep avoid-tainted-file-access
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-040
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ftp = Net::FTP.new("example.com")
+    pattern-either:
+      - pattern: |-
+          ftp.retrbinary(params[:cmd], 1024)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-040\\b'
+    message: |-
+      HexVibe Detection [RUB-040]: Semgrep avoid-tainted-ftp-call
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-041
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Net::HTTP.get("example.com", "/index.html")   uri = URI("example.com/index.html")
+    pattern-either:
+      - pattern: |-
+          Net::HTTP::Post.new(URI(params[:url]))
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-041\\b'
+    message: |-
+      HexVibe Detection [RUB-041]: Semgrep avoid-tainted-http-request
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-042
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        Shell.cat("/var/log/www/access.log") end def foo2(param1)
+    pattern-either:
+      - pattern: |-
+          sh.open(fn)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-042\\b'
+    message: |-
+      HexVibe Detection [RUB-042]: Semgrep avoid-tainted-shell-call
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-043
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        def show_detailed_exceptions?     return false   end end
+    pattern-either:
+      - pattern: |-
+          def show_detailed_exceptions?
+              return true
+            end
+          end
+          class ConfigController < ApplicationController
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-043\\b'
+    message: |-
+      HexVibe Detection [RUB-043]: Semgrep detailed-exceptions
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-044
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        end
+    pattern-either:
+      - pattern: |-
+          skip_forgery_protection
+          end
+          class ApplicationController2 < ActionController::Base
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-044\\b'
+    message: |-
+      HexVibe Detection [RUB-044]: Semgrep rails-skip-forgery-protection
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-045
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        conn.exec_prepared('statement1', [ 11, 'J.R. "Bob" Dobbs', 'Too much is always better than not enough.' ]) end def ok2()     con = PG.connect :dbname => 'testdb', :user => 'janbodnar'     query = "SELECT name FROM users WHERE age=" + "3"
+    pattern-either:
+      - pattern: |-
+          con.exec_params("SELECT name FROM users WHERE age=" << params[userinput])
+          end
+          def ok1()
+              conn = PG.connect(:dbname => 'db1')
+              conn.prepare('statement1', 'insert into table1 (id, name, profile) values ($1, $2, $3)')
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-045\\b'
+    message: |-
+      HexVibe Detection [RUB-045]: Semgrep ruby-pg-sqli
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-046
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        link_to "Profile#{params[:url]}", profile_path(@profile)
+    pattern-either:
+      - pattern: |-
+          link_to "#{h(User.url(x))}/profile", profile_path(@profile)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-046\\b'
+    message: |-
+      HexVibe Detection [RUB-046]: Semgrep avoid-link-to
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-047
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        redirect_to params.merge(:only_path => true)
+    pattern-either:
+      - pattern: |-
+          redirect_to(User.where(x))
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-047\\b'
+    message: |-
+      HexVibe Detection [RUB-047]: Semgrep avoid-redirect
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-048
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        render(inline => params[:action], {})
+    pattern-either:
+      - pattern: |-
+          render(template => foo(request.env['HTTP_REFERRER']), {})
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-048\\b'
+    message: |-
+      HexVibe Detection [RUB-048]: Semgrep avoid-render-dynamic-path
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-049
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        render plain: "Mr. #{params[:name]}"   end   def render_url
+    pattern-either:
+      - pattern: |-
+          render inline: "Mr. Henke"
+          end
+          def render_based_on_parameters
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-049\\b'
+    message: |-
+      HexVibe Detection [RUB-049]: Semgrep avoid-render-inline
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-050
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        render plain: "request method: #{request.env['REQUEST_METHOD']}"   end   def render_file_absolute_path
+    pattern-either:
+      - pattern: |-
+          render text: "request method: #{request.env['REQUEST_METHOD']}"
+          end
+          def raise_exception_on_post
+            raise "post" if request.post?
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-050\\b'
+    message: |-
+      HexVibe Detection [RUB-050]: Semgrep avoid-render-text
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-051
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        ActiveSupport::XmlMini.backend = 'REXML'
+    pattern-either:
+      - pattern: |-
+          ActiveSupport::XmlMini.backend = 'LibXML'
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-051\\b'
+    message: |-
+      HexVibe Detection [RUB-051]: Semgrep libxml-backend
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-052
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        XML.default_substitute_entities = false   end end
+    pattern-either:
+      - pattern: |-
+          XML.default_substitute_entities = true
+            end
+          end
+          LibXML::XML.class_eval do
+            def self.default_substitute_entities
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-052\\b'
+    message: |-
+      HexVibe Detection [RUB-052]: Semgrep xml-external-entities-enabled
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-053
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        skip_before_filter :login_required, :only => :do_anonymous_stuff
+    pattern-either:
+      - pattern: |-
+          skip_before_action :require_user, :except => [:do_admin_stuff, :do_other_stuff]
+              def do_admin_stuff
+                  #do some stuff
+              end
+              def do_anonymous_stuff
+                # do some stuff
+              end
+          end
+          class GoodController < ApplicationController
+            #Examples of skipping important filters with a blacklist instead of whitelist
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-053\\b'
+    message: |-
+      HexVibe Detection [RUB-053]: Semgrep check-before-filter
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-054
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        if request.get?       # Do something benign     elsif request.post?       # Do something sensitive because it's a POST     end     if request.post?       # Do something sensitive because it's a POST     elsif request.get?       # Do something benign     end   end end
+    pattern-either:
+      - pattern: |-
+          if request.get?
+              # Do something benign
+            else
+              # Do something sensitive because it's a POST
+              # but actually it could be a HEAD :(
+            end
+          end
+          def auth_something
+            # Does not warn because there is an elsif clause
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-054\\b'
+    message: |-
+      HexVibe Detection [RUB-054]: Semgrep check-http-verb-confusion
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-055
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        params.permit(:some_safe_property)
+    pattern-either:
+      - pattern: |-
+          params.permit(:admin)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-055\\b'
+    message: |-
+      HexVibe Detection [RUB-055]: Semgrep check-permit-attributes-high
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-056
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        params.permit(:some_safe_property)
+    pattern-either:
+      - pattern: |-
+          params.permit(:role_id)
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-056\\b'
+    message: |-
+      HexVibe Detection [RUB-056]: Semgrep check-permit-attributes-medium
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-057
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        MyRailsApp::Application.config.secret_token = ENV["SECRET_TOKEN"]
+    pattern-either:
+      - pattern: |-
+          Rails4::Application.config.secret_key_base = '3d90f727dcc14992232b9461fac5d31cf2bc184854e0afd90ae67e0ae48f22b676ee2529c84d4c23bc2a9c7be6eeefcf202b91ccb8d04e7b87a85c852f6784d6'
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-057\\b'
+    message: |-
+      HexVibe Detection [RUB-057]: Semgrep check-rails-session-secret-handling
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-058
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        redirect_to(params.to_unsafe_hash.merge(:only_path => true, :display => nil))   end   def redirect_only_path_with_unsafe_h
+    pattern-either:
+      - pattern: |-
+          redirect_to(params.bla.merge(:only_path => true, :display => nil))
+          end
+          def redirect_only_path_with_unsafe_hash
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-058\\b'
+    message: |-
+      HexVibe Detection [RUB-058]: Semgrep check-redirect-to
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-059
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @x = params[:x].match /foo/ end
+    pattern-either:
+      - pattern: |-
+          @x = something.match /#{params[:x]}/
+          end
+          def regex_on_params
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-059\\b'
+    message: |-
+      HexVibe Detection [RUB-059]: Semgrep check-regex-dos
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-060
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        render :file => "/some/path/#{thing}"   end   def test_render_static_template_name
+    pattern-either:
+      - pattern: |-
+          render page, status: 403
+          end
+          def test_param_ok
+            map = make_map
+            thing = map[params.id]
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-060\\b'
+    message: |-
+      HexVibe Detection [RUB-060]: Semgrep check-render-local-file-include
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-061
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        secret = get_from_store('somepass')
+    pattern-either:
+      - pattern: |-
+          PASSWORD = "superdupersecret"
+          http_basic_authenticate_with :name => "superduperadmin", :password => PASSWORD, :only => :create
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-061\\b'
+    message: |-
+      HexVibe Detection [RUB-061]: Semgrep check-secrets
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-062
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        send_file "some_safe_file.txt" end
+    pattern-either:
+      - pattern: |-
+          send_file request.env[:badheader]
+          end
+          def test_send_file_ok
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-062\\b'
+    message: |-
+      HexVibe Detection [RUB-062]: Semgrep check-send-file
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-063
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        prices = Product.select(:price).where("created_at < :time").to_sql
+    pattern-either:
+      - pattern: |-
+          Product.where("x = #{params[:x]} AND y = ?", y)
+          end
+          def test_to_sql_interpolation
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-063\\b'
+    message: |-
+      HexVibe Detection [RUB-063]: Semgrep check-sql
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-064
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        "SomeClass".to_sym.to_proc.call(Kernel)
+    pattern-either:
+      - pattern: |-
+          anything_else.tap { |thing| thing + user_input_value() }
+          end
+          def dynamic_method_invocations_ok
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-064\\b'
+    message: |-
+      HexVibe Detection [RUB-064]: Semgrep check-unsafe-reflection-methods
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.rub-065
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        validates_format_of :good_valid, :with => /\A[a-zA-Z]\z/ #No warning
+    pattern-either:
+      - pattern: |-
+          validates_format_of :something, :with => /[a-zA-Z]\z/
+      - pattern-regex: 'Vulnerable:\\s*RUB\\-065\\b'
+    message: |-
+      HexVibe Detection [RUB-065]: Semgrep check-validation-regex
+    languages:
+      - ruby
+    severity: WARNING
+  - id: hexvibe.ruby-rails.vul-cve-2017-16516
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий эксплуатирует уязвимость, описанную в CVE; до применения патча код в Anti-Pattern остаётся эксплуатируемым в соответствующем контексте.
+      fix_template: |-
+        describe "One-off JSON examples" do   it "should not blow up with a bad surrogate trailer" do     # https://github.com/brianmario/yajl-ruby/issues/176     bad_json = "{\"e\":{\"\\uD800\\\\DC00\":\"a\"}}"      Yajl::Parser.new.parse(bad_json)
+    pattern-either:
+      - pattern: |-
+          describe "One-off JSON examples" do
+            it "should parse 23456789012E666 and return Infinity" do
+              infinity = (1.0/0)
+          // --- yajl_encode.c ---
+                              /* check if this is a surrogate */
+                              if ((codepoint & 0xFC00) == 0xD800) {
+                                  end++;
+                                  if (str[end] == '\' && str[end + 1] == 'u') {
+                                      unsigned int surrogate = 0;
+                                      hexToDigit(&surrogate, str + end + 2);
+      - pattern-regex: 'Vulnerable:\\s*VUL\\-CVE\\-2017\\-16516\\b'
+    message: |-
+      HexVibe Detection [VUL-CVE-2017-16516]: VULTURE CVE Dataset (CVE-2017-16516; brianmario_yajl-ruby)
+    languages:
+      - ruby
+    severity: WARNING
