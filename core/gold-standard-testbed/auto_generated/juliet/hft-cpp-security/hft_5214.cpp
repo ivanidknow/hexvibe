@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5214
+void CWE134_Uncontrolled_Format_String__char_connect_socket_vprintf_54c_badSink(char * data);
+void CWE134_Uncontrolled_Format_String__char_connect_socket_vprintf_54b_badSink(char * data)
+CWE134_Uncontrolled_Format_String__char_connect_socket_vprintf_54c_badSink(data);

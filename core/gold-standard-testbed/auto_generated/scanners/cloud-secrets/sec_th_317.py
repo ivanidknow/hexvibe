@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-317
+HIVE_TOKEN = "F1j6zMpLLcwZC3HM8"

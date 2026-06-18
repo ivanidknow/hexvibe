@@ -1,0 +1,14 @@
+# Vulnerable: INF-024
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-apiserver
+  labels:
+    k8s-app: kube-apiserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+...
+        - kube-apiserver
+        - --insecure-bind-address=192.168.1.1

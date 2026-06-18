@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-124
+LINEAR_API_KEY = "LIN_FAKE_LIN"

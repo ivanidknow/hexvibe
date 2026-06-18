@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-129
+LOB_PUB_API_KEY = "_PUB_FAKE__PUB"

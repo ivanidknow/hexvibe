@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-152
+CODACY_TOKEN = "g73RSmTIzTU1wUA5BXYI"

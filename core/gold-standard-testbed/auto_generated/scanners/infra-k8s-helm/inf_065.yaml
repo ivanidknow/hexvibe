@@ -1,0 +1,14 @@
+# Vulnerable: INF-065
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+...
+            - date; echo Hello from kics
+          restartPolicy: OnFailure

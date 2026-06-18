@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-006
+AGE_SECRET_KEY = "AGE_FAKE_AGE"

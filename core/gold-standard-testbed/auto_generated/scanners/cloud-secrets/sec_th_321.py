@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-321
+HONEYCOMB_TOKEN = "kZKcr8xUYHJQajRYQLuT8x"

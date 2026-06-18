@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-203
+STRIPE_ACCESS_TOKEN = "zA-Z0FAKEZA"

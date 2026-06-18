@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5317
+void CWE134_Uncontrolled_Format_String__char_console_w32_vsnprintf_54d_badSink(char * data);
+void CWE134_Uncontrolled_Format_String__char_console_w32_vsnprintf_54c_badSink(char * data)
+CWE134_Uncontrolled_Format_String__char_console_w32_vsnprintf_54d_badSink(data);

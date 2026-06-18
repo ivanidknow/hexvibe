@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-760
+WIZ_TOKEN = "WIZ_FAKE_WIZ"

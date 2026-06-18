@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-166
+CONVERTAPI_TOKEN = "secret_H9ZGTfAERfN5W0AX"

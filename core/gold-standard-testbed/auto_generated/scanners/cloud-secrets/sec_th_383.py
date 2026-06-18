@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-383
+LIVESTORM_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhcGkubGl2ZXN0b3JtLmNvIiwianRpIjoiOaFI2p8Vo2dnHiy5OxrjkJ8wRE1LW4rTyWzChczEu3lAmcD1maSawW7"

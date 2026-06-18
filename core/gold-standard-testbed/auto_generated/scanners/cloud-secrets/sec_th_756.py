@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-756
+WEPAY_TOKEN = "WEPAY_FAKE_WEPAY"

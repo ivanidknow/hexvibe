@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5974
+void CWE15_External_Control_of_System_or_Configuration_Setting__w32_53c_badSink(char * data);
+void CWE15_External_Control_of_System_or_Configuration_Setting__w32_53b_badSink(char * data)
+CWE15_External_Control_of_System_or_Configuration_Setting__w32_53c_badSink(data);

@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-529
+PROXYCRAWL_TOKEN = "wjXKCFzOWEPRqhTmmbWtVQ"

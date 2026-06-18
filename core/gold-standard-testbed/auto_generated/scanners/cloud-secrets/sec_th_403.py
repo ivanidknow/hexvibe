@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-403
+MANDRILL_TOKEN = "z8A3Owe1WRrHmg4AHQZlwK"

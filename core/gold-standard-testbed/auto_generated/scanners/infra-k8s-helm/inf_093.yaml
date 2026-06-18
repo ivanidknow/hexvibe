@@ -1,0 +1,2 @@
+# Vulnerable: INF-093
+http.request(options, onResponseCallback);

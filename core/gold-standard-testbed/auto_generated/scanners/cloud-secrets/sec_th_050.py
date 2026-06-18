@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-050
+ATERA_TOKEN = "ATERA_FAKE_ATERA"

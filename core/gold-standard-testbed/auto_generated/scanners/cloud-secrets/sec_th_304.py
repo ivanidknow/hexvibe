@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-304
+GROQ_TOKEN = "GSK__FAKE_GROQ"

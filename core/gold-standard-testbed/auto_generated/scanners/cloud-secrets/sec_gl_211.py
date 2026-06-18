@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-211
+TWITTER_ACCESS_TOKEN = "zA-Z0FAKEZA"

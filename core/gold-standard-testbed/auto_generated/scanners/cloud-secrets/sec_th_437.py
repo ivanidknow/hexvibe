@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-437
+NASDAQDATALINK_TOKEN = "ZvwCOm0nMD1mHo-wVTpJ"

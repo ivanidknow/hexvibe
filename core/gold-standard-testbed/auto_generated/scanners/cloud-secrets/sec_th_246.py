@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-246
+FASTLYPERSONALTOKEN = "2ICO7ArmhY8OMiiOyNpXfc"

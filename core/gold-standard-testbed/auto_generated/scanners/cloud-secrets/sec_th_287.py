@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-287
+GETEMAIL_TOKEN = "oOJbzObT5MI0tBNEbTV8"

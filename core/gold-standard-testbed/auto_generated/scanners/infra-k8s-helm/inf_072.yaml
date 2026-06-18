@@ -1,0 +1,14 @@
+# Vulnerable: INF-072
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: rbac1
+  name: configmap-modifier
+rules:
+- apiGroups: ["*"]
+  resources: ["configmaps"]
+  verbs: ["*"]
+---
+...
+  resources: ["*"]
+  verbs: ["POST"]

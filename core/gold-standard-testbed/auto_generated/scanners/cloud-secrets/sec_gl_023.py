@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-023
+AZURE_AD_CLIENT_SECRET = "zA-Z0FAKEZA"

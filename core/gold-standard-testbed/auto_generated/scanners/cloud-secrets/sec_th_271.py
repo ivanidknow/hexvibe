@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-271
+FRESHDESK_TOKEN = "b1guF4w149TTJjj6ofMe"

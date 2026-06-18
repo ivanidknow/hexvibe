@@ -1,0 +1,5 @@
+// Vulnerable: HFT-5340
+extern int CWE134_Uncontrolled_Format_String__char_environment_printf_22_badGlobal;
+void CWE134_Uncontrolled_Format_String__char_environment_printf_22_badSink(char * data)
+if(CWE134_Uncontrolled_Format_String__char_environment_printf_22_badGlobal)
+printf(data);

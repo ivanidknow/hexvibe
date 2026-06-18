@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-014
+ARTIFACTORY_API_KEY = "Za-z0FAKEZA"

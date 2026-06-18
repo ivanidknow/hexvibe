@@ -1,0 +1,4 @@
+// Vulnerable: HFT-6002
+void CWE176_Improper_Handling_of_Unicode_Encoding__w32_54e_badSink(wchar_t * data);
+void CWE176_Improper_Handling_of_Unicode_Encoding__w32_54d_badSink(wchar_t * data)
+CWE176_Improper_Handling_of_Unicode_Encoding__w32_54e_badSink(data);

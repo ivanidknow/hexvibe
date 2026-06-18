@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-356
+KANBAN_TOKEN = "11XQ98FVS8WI"

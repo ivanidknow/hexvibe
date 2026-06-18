@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5808
+void CWE134_Uncontrolled_Format_String__wchar_t_environment_w32_vsnprintf_53c_badSink(wchar_t * data);
+void CWE134_Uncontrolled_Format_String__wchar_t_environment_w32_vsnprintf_53b_badSink(wchar_t * data)
+CWE134_Uncontrolled_Format_String__wchar_t_environment_w32_vsnprintf_53c_badSink(data);

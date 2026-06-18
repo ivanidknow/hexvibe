@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5262
+void CWE134_Uncontrolled_Format_String__char_console_printf_53c_badSink(char * data);
+void CWE134_Uncontrolled_Format_String__char_console_printf_53b_badSink(char * data)
+CWE134_Uncontrolled_Format_String__char_console_printf_53c_badSink(data);

@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-278
+GCPAPPLICATIONDEFAULTCREDENTIALS_TOKEN = "191375729402-oiuj2498ry3497gjveoierj8294jfj41.apps.googleusercontent.com"

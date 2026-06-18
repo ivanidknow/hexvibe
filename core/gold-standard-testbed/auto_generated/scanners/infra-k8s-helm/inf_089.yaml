@@ -1,0 +1,14 @@
+# Vulnerable: INF-089
+apiVersion: v1
+kind: Pod
+metadata:
+  name: firstpod
+spec:
+  containers:
+  - name: container
+    image: nginx
+    ports:
+    - containerPort: 80
+...
+    matchLabels:
+      app: nginx

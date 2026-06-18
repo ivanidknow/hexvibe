@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5646
+void CWE134_Uncontrolled_Format_String__wchar_t_connect_socket_w32_vsnprintf_53c_badSink(wchar_t * data);
+void CWE134_Uncontrolled_Format_String__wchar_t_connect_socket_w32_vsnprintf_53b_badSink(wchar_t * data)
+CWE134_Uncontrolled_Format_String__wchar_t_connect_socket_w32_vsnprintf_53c_badSink(data);

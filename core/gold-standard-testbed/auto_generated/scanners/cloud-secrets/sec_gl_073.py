@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-073
+FLYIO_ACCESS_TOKEN = "FO1_FAKE_FO1"

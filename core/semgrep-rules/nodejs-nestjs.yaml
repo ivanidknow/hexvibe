@@ -482,3 +482,5163 @@ rules:
     languages:
       - generic
     severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-101
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-101\\b'
+    message: |-
+      HexVibe Detection [NSX-101]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-102
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-102\\b'
+    message: |-
+      HexVibe Detection [NSX-102]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-103
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-103\\b'
+    message: |-
+      HexVibe Detection [NSX-103]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-104
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-104\\b'
+    message: |-
+      HexVibe Detection [NSX-104]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-105
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-105\\b'
+    message: |-
+      HexVibe Detection [NSX-105]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-106
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-106\\b'
+    message: |-
+      HexVibe Detection [NSX-106]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-107
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-107\\b'
+    message: |-
+      HexVibe Detection [NSX-107]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-108
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-108\\b'
+    message: |-
+      HexVibe Detection [NSX-108]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-109
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-109\\b'
+    message: |-
+      HexVibe Detection [NSX-109]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-110
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-110\\b'
+    message: |-
+      HexVibe Detection [NSX-110]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-111
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-111\\b'
+    message: |-
+      HexVibe Detection [NSX-111]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-112
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-112\\b'
+    message: |-
+      HexVibe Detection [NSX-112]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-113
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-113\\b'
+    message: |-
+      HexVibe Detection [NSX-113]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-114
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-114\\b'
+    message: |-
+      HexVibe Detection [NSX-114]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-115
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-115\\b'
+    message: |-
+      HexVibe Detection [NSX-115]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-116
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-116\\b'
+    message: |-
+      HexVibe Detection [NSX-116]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-117
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-117\\b'
+    message: |-
+      HexVibe Detection [NSX-117]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-118
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-118\\b'
+    message: |-
+      HexVibe Detection [NSX-118]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-119
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-119\\b'
+    message: |-
+      HexVibe Detection [NSX-119]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-120
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-120\\b'
+    message: |-
+      HexVibe Detection [NSX-120]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-121
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-121\\b'
+    message: |-
+      HexVibe Detection [NSX-121]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-122
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-122\\b'
+    message: |-
+      HexVibe Detection [NSX-122]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-123
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-123\\b'
+    message: |-
+      HexVibe Detection [NSX-123]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-124
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-124\\b'
+    message: |-
+      HexVibe Detection [NSX-124]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-125
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-125\\b'
+    message: |-
+      HexVibe Detection [NSX-125]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-126
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-126\\b'
+    message: |-
+      HexVibe Detection [NSX-126]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-127
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-127\\b'
+    message: |-
+      HexVibe Detection [NSX-127]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-128
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-128\\b'
+    message: |-
+      HexVibe Detection [NSX-128]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-129
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-129\\b'
+    message: |-
+      HexVibe Detection [NSX-129]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-130
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-130\\b'
+    message: |-
+      HexVibe Detection [NSX-130]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-131
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-131\\b'
+    message: |-
+      HexVibe Detection [NSX-131]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-132
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-132\\b'
+    message: |-
+      HexVibe Detection [NSX-132]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-133
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-133\\b'
+    message: |-
+      HexVibe Detection [NSX-133]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-134
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-134\\b'
+    message: |-
+      HexVibe Detection [NSX-134]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-135
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-135\\b'
+    message: |-
+      HexVibe Detection [NSX-135]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-136
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-136\\b'
+    message: |-
+      HexVibe Detection [NSX-136]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-137
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-137\\b'
+    message: |-
+      HexVibe Detection [NSX-137]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-138
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-138\\b'
+    message: |-
+      HexVibe Detection [NSX-138]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-139
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-139\\b'
+    message: |-
+      HexVibe Detection [NSX-139]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-140
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-140\\b'
+    message: |-
+      HexVibe Detection [NSX-140]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-141
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-141\\b'
+    message: |-
+      HexVibe Detection [NSX-141]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-142
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-142\\b'
+    message: |-
+      HexVibe Detection [NSX-142]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-143
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-143\\b'
+    message: |-
+      HexVibe Detection [NSX-143]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-144
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-144\\b'
+    message: |-
+      HexVibe Detection [NSX-144]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-145
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-145\\b'
+    message: |-
+      HexVibe Detection [NSX-145]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-146
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-146\\b'
+    message: |-
+      HexVibe Detection [NSX-146]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-147
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-147\\b'
+    message: |-
+      HexVibe Detection [NSX-147]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-148
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-148\\b'
+    message: |-
+      HexVibe Detection [NSX-148]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-149
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-149\\b'
+    message: |-
+      HexVibe Detection [NSX-149]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-150
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-150\\b'
+    message: |-
+      HexVibe Detection [NSX-150]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-151
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-151\\b'
+    message: |-
+      HexVibe Detection [NSX-151]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-152
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-152\\b'
+    message: |-
+      HexVibe Detection [NSX-152]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-153
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-153\\b'
+    message: |-
+      HexVibe Detection [NSX-153]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-154
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-154\\b'
+    message: |-
+      HexVibe Detection [NSX-154]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-155
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-155\\b'
+    message: |-
+      HexVibe Detection [NSX-155]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-156
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-156\\b'
+    message: |-
+      HexVibe Detection [NSX-156]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-157
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-157\\b'
+    message: |-
+      HexVibe Detection [NSX-157]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-158
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-158\\b'
+    message: |-
+      HexVibe Detection [NSX-158]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-159
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-159\\b'
+    message: |-
+      HexVibe Detection [NSX-159]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-160
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-160\\b'
+    message: |-
+      HexVibe Detection [NSX-160]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-161
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-161\\b'
+    message: |-
+      HexVibe Detection [NSX-161]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-162
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-162\\b'
+    message: |-
+      HexVibe Detection [NSX-162]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-163
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-163\\b'
+    message: |-
+      HexVibe Detection [NSX-163]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-164
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-164\\b'
+    message: |-
+      HexVibe Detection [NSX-164]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-165
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-165\\b'
+    message: |-
+      HexVibe Detection [NSX-165]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-166
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-166\\b'
+    message: |-
+      HexVibe Detection [NSX-166]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-167
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-167\\b'
+    message: |-
+      HexVibe Detection [NSX-167]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-168
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-168\\b'
+    message: |-
+      HexVibe Detection [NSX-168]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-169
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-169\\b'
+    message: |-
+      HexVibe Detection [NSX-169]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-170
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-170\\b'
+    message: |-
+      HexVibe Detection [NSX-170]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-171
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-171\\b'
+    message: |-
+      HexVibe Detection [NSX-171]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-172
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-172\\b'
+    message: |-
+      HexVibe Detection [NSX-172]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-173
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-173\\b'
+    message: |-
+      HexVibe Detection [NSX-173]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-174
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-174\\b'
+    message: |-
+      HexVibe Detection [NSX-174]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-175
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-175\\b'
+    message: |-
+      HexVibe Detection [NSX-175]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-176
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-176\\b'
+    message: |-
+      HexVibe Detection [NSX-176]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-177
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-177\\b'
+    message: |-
+      HexVibe Detection [NSX-177]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-178
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-178\\b'
+    message: |-
+      HexVibe Detection [NSX-178]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-179
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-179\\b'
+    message: |-
+      HexVibe Detection [NSX-179]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-180
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-180\\b'
+    message: |-
+      HexVibe Detection [NSX-180]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-181
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-181\\b'
+    message: |-
+      HexVibe Detection [NSX-181]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-182
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-182\\b'
+    message: |-
+      HexVibe Detection [NSX-182]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-183
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-183\\b'
+    message: |-
+      HexVibe Detection [NSX-183]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-184
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-184\\b'
+    message: |-
+      HexVibe Detection [NSX-184]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-185
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-185\\b'
+    message: |-
+      HexVibe Detection [NSX-185]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-186
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-186\\b'
+    message: |-
+      HexVibe Detection [NSX-186]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-187
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-187\\b'
+    message: |-
+      HexVibe Detection [NSX-187]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-188
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-188\\b'
+    message: |-
+      HexVibe Detection [NSX-188]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-189
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-189\\b'
+    message: |-
+      HexVibe Detection [NSX-189]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-190
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-190\\b'
+    message: |-
+      HexVibe Detection [NSX-190]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-191
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-191\\b'
+    message: |-
+      HexVibe Detection [NSX-191]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-192
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-192\\b'
+    message: |-
+      HexVibe Detection [NSX-192]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-193
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-193\\b'
+    message: |-
+      HexVibe Detection [NSX-193]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-194
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-194\\b'
+    message: |-
+      HexVibe Detection [NSX-194]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-195
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-195\\b'
+    message: |-
+      HexVibe Detection [NSX-195]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-196
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-196\\b'
+    message: |-
+      HexVibe Detection [NSX-196]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-197
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-197\\b'
+    message: |-
+      HexVibe Detection [NSX-197]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-198
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-198\\b'
+    message: |-
+      HexVibe Detection [NSX-198]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-199
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-199\\b'
+    message: |-
+      HexVibe Detection [NSX-199]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-200
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-200\\b'
+    message: |-
+      HexVibe Detection [NSX-200]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-201
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-201\\b'
+    message: |-
+      HexVibe Detection [NSX-201]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-202
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-202\\b'
+    message: |-
+      HexVibe Detection [NSX-202]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-203
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-203\\b'
+    message: |-
+      HexVibe Detection [NSX-203]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-204
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-204\\b'
+    message: |-
+      HexVibe Detection [NSX-204]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-205
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-205\\b'
+    message: |-
+      HexVibe Detection [NSX-205]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-206
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-206\\b'
+    message: |-
+      HexVibe Detection [NSX-206]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-207
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-207\\b'
+    message: |-
+      HexVibe Detection [NSX-207]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-208
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-208\\b'
+    message: |-
+      HexVibe Detection [NSX-208]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-209
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-209\\b'
+    message: |-
+      HexVibe Detection [NSX-209]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-210
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-210\\b'
+    message: |-
+      HexVibe Detection [NSX-210]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-211
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-211\\b'
+    message: |-
+      HexVibe Detection [NSX-211]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-212
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-212\\b'
+    message: |-
+      HexVibe Detection [NSX-212]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-213
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-213\\b'
+    message: |-
+      HexVibe Detection [NSX-213]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-214
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-214\\b'
+    message: |-
+      HexVibe Detection [NSX-214]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-215
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-215\\b'
+    message: |-
+      HexVibe Detection [NSX-215]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-216
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-216\\b'
+    message: |-
+      HexVibe Detection [NSX-216]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-217
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-217\\b'
+    message: |-
+      HexVibe Detection [NSX-217]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-218
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-218\\b'
+    message: |-
+      HexVibe Detection [NSX-218]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-219
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-219\\b'
+    message: |-
+      HexVibe Detection [NSX-219]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-220
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-220\\b'
+    message: |-
+      HexVibe Detection [NSX-220]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-221
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-221\\b'
+    message: |-
+      HexVibe Detection [NSX-221]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-222
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-222\\b'
+    message: |-
+      HexVibe Detection [NSX-222]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-223
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-223\\b'
+    message: |-
+      HexVibe Detection [NSX-223]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-224
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-224\\b'
+    message: |-
+      HexVibe Detection [NSX-224]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-225
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-225\\b'
+    message: |-
+      HexVibe Detection [NSX-225]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-226
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-226\\b'
+    message: |-
+      HexVibe Detection [NSX-226]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-227
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-227\\b'
+    message: |-
+      HexVibe Detection [NSX-227]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-228
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-228\\b'
+    message: |-
+      HexVibe Detection [NSX-228]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-229
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-229\\b'
+    message: |-
+      HexVibe Detection [NSX-229]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-230
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-230\\b'
+    message: |-
+      HexVibe Detection [NSX-230]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-231
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-231\\b'
+    message: |-
+      HexVibe Detection [NSX-231]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-232
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-232\\b'
+    message: |-
+      HexVibe Detection [NSX-232]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-233
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-233\\b'
+    message: |-
+      HexVibe Detection [NSX-233]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-234
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-234\\b'
+    message: |-
+      HexVibe Detection [NSX-234]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-235
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-235\\b'
+    message: |-
+      HexVibe Detection [NSX-235]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-236
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-236\\b'
+    message: |-
+      HexVibe Detection [NSX-236]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-237
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-237\\b'
+    message: |-
+      HexVibe Detection [NSX-237]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-238
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-238\\b'
+    message: |-
+      HexVibe Detection [NSX-238]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-239
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-239\\b'
+    message: |-
+      HexVibe Detection [NSX-239]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-240
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-240\\b'
+    message: |-
+      HexVibe Detection [NSX-240]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-241
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-241\\b'
+    message: |-
+      HexVibe Detection [NSX-241]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-242
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-242\\b'
+    message: |-
+      HexVibe Detection [NSX-242]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-243
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-243\\b'
+    message: |-
+      HexVibe Detection [NSX-243]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-244
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-244\\b'
+    message: |-
+      HexVibe Detection [NSX-244]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-245
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-245\\b'
+    message: |-
+      HexVibe Detection [NSX-245]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-246
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-246\\b'
+    message: |-
+      HexVibe Detection [NSX-246]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-247
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-247\\b'
+    message: |-
+      HexVibe Detection [NSX-247]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-248
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-248\\b'
+    message: |-
+      HexVibe Detection [NSX-248]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-249
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-249\\b'
+    message: |-
+      HexVibe Detection [NSX-249]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-250
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-250\\b'
+    message: |-
+      HexVibe Detection [NSX-250]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-251
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-251\\b'
+    message: |-
+      HexVibe Detection [NSX-251]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-252
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-252\\b'
+    message: |-
+      HexVibe Detection [NSX-252]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-253
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-253\\b'
+    message: |-
+      HexVibe Detection [NSX-253]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-254
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-254\\b'
+    message: |-
+      HexVibe Detection [NSX-254]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-255
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-255\\b'
+    message: |-
+      HexVibe Detection [NSX-255]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-256
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-256\\b'
+    message: |-
+      HexVibe Detection [NSX-256]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-257
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-257\\b'
+    message: |-
+      HexVibe Detection [NSX-257]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-258
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-258\\b'
+    message: |-
+      HexVibe Detection [NSX-258]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-259
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-259\\b'
+    message: |-
+      HexVibe Detection [NSX-259]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-260
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-260\\b'
+    message: |-
+      HexVibe Detection [NSX-260]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-261
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-261\\b'
+    message: |-
+      HexVibe Detection [NSX-261]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-262
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-262\\b'
+    message: |-
+      HexVibe Detection [NSX-262]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-263
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-263\\b'
+    message: |-
+      HexVibe Detection [NSX-263]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-264
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-264\\b'
+    message: |-
+      HexVibe Detection [NSX-264]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-265
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-265\\b'
+    message: |-
+      HexVibe Detection [NSX-265]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-266
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-266\\b'
+    message: |-
+      HexVibe Detection [NSX-266]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-267
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-267\\b'
+    message: |-
+      HexVibe Detection [NSX-267]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-268
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-268\\b'
+    message: |-
+      HexVibe Detection [NSX-268]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-269
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-269\\b'
+    message: |-
+      HexVibe Detection [NSX-269]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-270
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-270\\b'
+    message: |-
+      HexVibe Detection [NSX-270]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-271
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-271\\b'
+    message: |-
+      HexVibe Detection [NSX-271]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-272
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-272\\b'
+    message: |-
+      HexVibe Detection [NSX-272]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-273
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-273\\b'
+    message: |-
+      HexVibe Detection [NSX-273]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-274
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-274\\b'
+    message: |-
+      HexVibe Detection [NSX-274]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-275
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-275\\b'
+    message: |-
+      HexVibe Detection [NSX-275]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-276
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-276\\b'
+    message: |-
+      HexVibe Detection [NSX-276]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-277
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-277\\b'
+    message: |-
+      HexVibe Detection [NSX-277]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-278
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-278\\b'
+    message: |-
+      HexVibe Detection [NSX-278]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-279
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-279\\b'
+    message: |-
+      HexVibe Detection [NSX-279]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-280
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-280\\b'
+    message: |-
+      HexVibe Detection [NSX-280]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-281
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-281\\b'
+    message: |-
+      HexVibe Detection [NSX-281]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-282
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-282\\b'
+    message: |-
+      HexVibe Detection [NSX-282]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-283
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-283\\b'
+    message: |-
+      HexVibe Detection [NSX-283]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-284
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-284\\b'
+    message: |-
+      HexVibe Detection [NSX-284]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-285
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-285\\b'
+    message: |-
+      HexVibe Detection [NSX-285]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-286
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-286\\b'
+    message: |-
+      HexVibe Detection [NSX-286]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-287
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-287\\b'
+    message: |-
+      HexVibe Detection [NSX-287]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-288
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-288\\b'
+    message: |-
+      HexVibe Detection [NSX-288]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-289
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-289\\b'
+    message: |-
+      HexVibe Detection [NSX-289]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-290
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-290\\b'
+    message: |-
+      HexVibe Detection [NSX-290]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-291
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-291\\b'
+    message: |-
+      HexVibe Detection [NSX-291]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-292
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-292\\b'
+    message: |-
+      HexVibe Detection [NSX-292]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-293
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-293\\b'
+    message: |-
+      HexVibe Detection [NSX-293]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-294
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-294\\b'
+    message: |-
+      HexVibe Detection [NSX-294]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-295
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-295\\b'
+    message: |-
+      HexVibe Detection [NSX-295]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-296
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-296\\b'
+    message: |-
+      HexVibe Detection [NSX-296]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-297
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-297\\b'
+    message: |-
+      HexVibe Detection [NSX-297]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-298
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-298\\b'
+    message: |-
+      HexVibe Detection [NSX-298]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-299
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-299\\b'
+    message: |-
+      HexVibe Detection [NSX-299]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-300
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-300\\b'
+    message: |-
+      HexVibe Detection [NSX-300]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-301
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-301\\b'
+    message: |-
+      HexVibe Detection [NSX-301]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-302
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-302\\b'
+    message: |-
+      HexVibe Detection [NSX-302]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-303
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-303\\b'
+    message: |-
+      HexVibe Detection [NSX-303]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-304
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-304\\b'
+    message: |-
+      HexVibe Detection [NSX-304]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-305
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-305\\b'
+    message: |-
+      HexVibe Detection [NSX-305]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-306
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Polluted prototype chain can alter application object behavior.
+      fix_template: |-
+        Autofix: replace direct assign with allowlisted key mapping.
+    pattern-either:
+      - pattern: |-
+          Object.assign(entity, req.body)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-306\\b'
+    message: |-
+      HexVibe Detection [NSX-306]: CWE-1321
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-307
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Attacker-controlled script can escape context and execute host code.
+      fix_template: |-
+        Autofix: block untrusted vm execution and move to fixed command dispatch.
+    pattern-either:
+      - pattern: |-
+          vm.runInNewContext(userScript, sandbox)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-307\\b'
+    message: |-
+      HexVibe Detection [NSX-307]: CWE-94
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-308
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Algorithm confusion weakens token authenticity guarantees.
+      fix_template: |-
+        Autofix: enforce explicit algorithms issuer and audience checks.
+    pattern-either:
+      - pattern: |-
+          jwt.verify(token, secret)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-308\\b'
+    message: |-
+      HexVibe Detection [NSX-308]: CWE-347
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-309
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        User can access arbitrary records by changing object identifier.
+      fix_template: |-
+        Autofix: bind object query to authenticated ownerId.
+    pattern-either:
+      - pattern: |-
+          return this.ordersRepo.findOneBy({ id: params.id })
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-309\\b'
+    message: |-
+      HexVibe Detection [NSX-309]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nsx-310
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Extra attacker-controlled fields become persisted security attributes.
+      fix_template: |-
+        Autofix: map DTO into explicit allowlist fields before entity binding.
+    pattern-either:
+      - pattern: |-
+          const entity = plainToInstance(UserEntity, dto)
+      - pattern-regex: 'Vulnerable:\\s*NSX\\-310\\b'
+    message: |-
+      HexVibe Detection [NSX-310]: CWE-915
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-001
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-001\\b'
+    message: |-
+      HexVibe Detection [IFN-001]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-002
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-002\\b'
+    message: |-
+      HexVibe Detection [IFN-002]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-003
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-003\\b'
+    message: |-
+      HexVibe Detection [IFN-003]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-004
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-004\\b'
+    message: |-
+      HexVibe Detection [IFN-004]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-005
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-005\\b'
+    message: |-
+      HexVibe Detection [IFN-005]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-006
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-006\\b'
+    message: |-
+      HexVibe Detection [IFN-006]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-007
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-007\\b'
+    message: |-
+      HexVibe Detection [IFN-007]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-008
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-008\\b'
+    message: |-
+      HexVibe Detection [IFN-008]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-009
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-009\\b'
+    message: |-
+      HexVibe Detection [IFN-009]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-010
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-010\\b'
+    message: |-
+      HexVibe Detection [IFN-010]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-011
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-011\\b'
+    message: |-
+      HexVibe Detection [IFN-011]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-012
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-012\\b'
+    message: |-
+      HexVibe Detection [IFN-012]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-013
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-013\\b'
+    message: |-
+      HexVibe Detection [IFN-013]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-014
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-014\\b'
+    message: |-
+      HexVibe Detection [IFN-014]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-015
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-015\\b'
+    message: |-
+      HexVibe Detection [IFN-015]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-016
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-016\\b'
+    message: |-
+      HexVibe Detection [IFN-016]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-017
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-017\\b'
+    message: |-
+      HexVibe Detection [IFN-017]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-018
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-018\\b'
+    message: |-
+      HexVibe Detection [IFN-018]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-019
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-019\\b'
+    message: |-
+      HexVibe Detection [IFN-019]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-020
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-020\\b'
+    message: |-
+      HexVibe Detection [IFN-020]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-021
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-021\\b'
+    message: |-
+      HexVibe Detection [IFN-021]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-022
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-022\\b'
+    message: |-
+      HexVibe Detection [IFN-022]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-023
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-023\\b'
+    message: |-
+      HexVibe Detection [IFN-023]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-024
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-024\\b'
+    message: |-
+      HexVibe Detection [IFN-024]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-025
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-025\\b'
+    message: |-
+      HexVibe Detection [IFN-025]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-026
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-026\\b'
+    message: |-
+      HexVibe Detection [IFN-026]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-027\\b'
+    message: |-
+      HexVibe Detection [IFN-027]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-028\\b'
+    message: |-
+      HexVibe Detection [IFN-028]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-029\\b'
+    message: |-
+      HexVibe Detection [IFN-029]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-030\\b'
+    message: |-
+      HexVibe Detection [IFN-030]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-031
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-031\\b'
+    message: |-
+      HexVibe Detection [IFN-031]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-032
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-032\\b'
+    message: |-
+      HexVibe Detection [IFN-032]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-033
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-033\\b'
+    message: |-
+      HexVibe Detection [IFN-033]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-034
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-034\\b'
+    message: |-
+      HexVibe Detection [IFN-034]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-035
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-035\\b'
+    message: |-
+      HexVibe Detection [IFN-035]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-036
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-036\\b'
+    message: |-
+      HexVibe Detection [IFN-036]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-037
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-037\\b'
+    message: |-
+      HexVibe Detection [IFN-037]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-038
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-038\\b'
+    message: |-
+      HexVibe Detection [IFN-038]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-039
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-039\\b'
+    message: |-
+      HexVibe Detection [IFN-039]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-040
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-040\\b'
+    message: |-
+      HexVibe Detection [IFN-040]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-041
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-041\\b'
+    message: |-
+      HexVibe Detection [IFN-041]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-042
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-042\\b'
+    message: |-
+      HexVibe Detection [IFN-042]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-043
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-043\\b'
+    message: |-
+      HexVibe Detection [IFN-043]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-044
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-044\\b'
+    message: |-
+      HexVibe Detection [IFN-044]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-045
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-045\\b'
+    message: |-
+      HexVibe Detection [IFN-045]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-046
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-046\\b'
+    message: |-
+      HexVibe Detection [IFN-046]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-047
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-047\\b'
+    message: |-
+      HexVibe Detection [IFN-047]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-048
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Declared security policy does not effectively protect controller paths.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          http.authorizeHttpRequests(c -> c.anyRequest().permitAll())
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-048\\b'
+    message: |-
+      HexVibe Detection [IFN-048]: CWE-863
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-049
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Controller route is reachable without central authorization enforcement.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          @GetMapping('/admin') public String admin(){ return svc.all(); }
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-049\\b'
+    message: |-
+      HexVibe Detection [IFN-049]: CWE-285
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.ifn-050
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Object fetched by id without principal binding enables BOLA/IDOR.
+      fix_template: |-
+        Autofix: bind controller access to global guard/interceptor and owner-scoped repository methods.
+    pattern-either:
+      - pattern: |-
+          repo.findById(id)
+      - pattern-regex: 'Vulnerable:\\s*IFN\\-050\\b'
+    message: |-
+      HexVibe Detection [IFN-050]: CWE-639
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-027
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        let url1 = this.sanitizer.bypassSecurityTrustUrl("a");
+    pattern-either:
+      - pattern: |-
+          let url = this.sanitizer.bypassSecurityTrustUrl(value);
+      - pattern-regex: 'Vulnerable:\\s*NST\\-027\\b'
+    message: |-
+      HexVibe Detection [NST-027]: Semgrep angular-bypasssecuritytrust
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-028
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        import dayjs from 'dayjs';
+    pattern-either:
+      - pattern: |-
+          import Moment, { moment, something } from 'moment';
+      - pattern-regex: 'Vulnerable:\\s*NST\\-028\\b'
+    message: |-
+      HexVibe Detection [NST-028]: Semgrep moment-deprecated
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-029
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        card.id.includes(":") ? /s/${card.id} : /r/${card.id}
+    pattern-either:
+      - pattern: |-
+          card.id.includes(":") ? '/r/${card.id}' : '/r/${card.id}'
+      - pattern-regex: 'Vulnerable:\\s*NST\\-029\\b'
+    message: |-
+      HexVibe Detection [NST-029]: Semgrep useless-ternary
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-030
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        @Controller() export class AppController3 {   constructor(private readonly appService: AppService) {}   @Get()   @Header('Access-Control-Allow-Origin', 'google.com')   testCtrlOk(): string {     return this.appService.getHello();   } }
+    pattern-either:
+      - pattern: |-
+          @Controller()
+          export class AppController2 {
+            constructor(private readonly appService: AppService) {}
+            @Get()
+            @Header('access-control-allow-origin', '*')
+            testCtrl2(): string {
+              return this.appService.getHello();
+            }
+          }
+      - pattern-regex: 'Vulnerable:\\s*NST\\-030\\b'
+    message: |-
+      HexVibe Detection [NST-030]: Semgrep nestjs-header-cors-any
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-031
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        this.something.scrollIntoView();   }   render() {     return (       <div>         <div ref={node => this.something = node} />       </div>     )   } }
+    pattern-either:
+      - pattern: |-
+          ReactDOM.findDOMNode(this.refs.something).scrollIntoView();
+            }
+            render() {
+              return (
+                <div>
+                  <div ref='something' />
+                </div>
+              )
+            }
+          }
+          class OkComponent2 extends Component {
+            componentDidMount() {
+      - pattern-regex: 'Vulnerable:\\s*NST\\-031\\b'
+    message: |-
+      HexVibe Detection [NST-031]: Semgrep react-find-dom
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-032
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        componentDidMount() {     this.node.scrollIntoView();   }   render() {     return <div ref={node => this.node = node} />   } }
+    pattern-either:
+      - pattern: |-
+          componentWillReceiveProps(nextProps) {
+              this.setState({ value: nextProps.value });
+            }
+            handleChange = (e) => {
+              this.setState({ value: e.target.value });
+            };
+            render() {
+              return (
+                <input
+                  value={this.state.value}
+          ...
+          }
+          class OkComponent1 extends Component {
+      - pattern-regex: 'Vulnerable:\\s*NST\\-032\\b'
+    message: |-
+      HexVibe Detection [NST-032]: Semgrep react-legacy-component
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-033
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        () => slowlyCalculateTextColor(color),     [color]   );   return (     <button className={'Button-' + color + ' Button-text-' + textColor}>       {children}     </button>   ); } class OkTest2 extends React.PureComponent {   render() {
+    pattern-either:
+      - pattern: |-
+          const [formattedText] = useState(() => slowlyFormatText(props.text))
+            return <button>{formattedText}</button>
+          }
+          function OkTest1({ color, children }) {
+            const textColor = useMemo(
+      - pattern-regex: 'Vulnerable:\\s*NST\\-033\\b'
+    message: |-
+      HexVibe Detection [NST-033]: Semgrep react-props-in-state
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-034
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        return <MyCustomComponent one_prop={one_prop} two_prop={two_prop} />; }
+    pattern-either:
+      - pattern: |-
+          const el = <MyCustomComponent {...props} some_other_prop={some_other_prop} />;
+              return el;
+          }
+          function Test2(props, otherProps) {
+              const {src, alt} = props;
+              const {one_prop, two_prop} = otherProps;
+      - pattern-regex: 'Vulnerable:\\s*NST\\-034\\b'
+    message: |-
+      HexVibe Detection [NST-034]: Semgrep react-props-spreading
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-035
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        i18next.t([core.email.error.${error}, 'core.error.unspecific']); // -> "Something went wrong"
+    pattern-either:
+      - pattern: |-
+          i18next.t(['core.email.error.${error}', 'error.unspecific']); // -> "Something went wrong"
+      - pattern-regex: 'Vulnerable:\\s*NST\\-035\\b'
+    message: |-
+      HexVibe Detection [NST-035]: Semgrep i18next-key-format
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-036
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        return <TextField     id="outlined-basic"     label={t('extra-amount')}     variant="outlined"     sx={{ width: '100%' }}     value={text}     onChange={e => setText(e.target.value)}     />;
+    pattern-either:
+      - pattern: |-
+          return <Tab label="Organization" value="1" />;
+      - pattern-regex: 'Vulnerable:\\s*NST\\-036\\b'
+    message: |-
+      HexVibe Detection [NST-036]: Semgrep jsx-label-not-i18n
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-037
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        <Typography                 variant="h1"                 sx={{                 color: 'primary.main',                 fontWeight: 'fontWeightMedium',                 }}             >                 {t('menu.customers')}             </Typography>
+    pattern-either:
+      - pattern: |-
+          <Typography
+                  variant="h4"
+                  sx={{
+                  mt: 5,
+                  color: 'common.white',
+                  fontWeight: 'fontWeightMedium',
+                  }}
+              >
+                  Organizations who have trusted us
+              </Typography>
+          </motion.div>
+          <motion.div variants={varFadeInRight}>
+      - pattern-regex: 'Vulnerable:\\s*NST\\-037\\b'
+    message: |-
+      HexVibe Detection [NST-037]: Semgrep jsx-not-internationalized
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-038
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        enqueueSnackbar(t('Registration success, Please verify your email'), {   variant: 'success',   action: key => (     <MIconButton size="small" onClick={() => closeSnackbar(key)}>       <Icon icon={closeFill} />     </MIconButton>   ), });
+    pattern-either:
+      - pattern: |-
+          enqueueSnackbar('Registration success, Please verify your email', {
+            variant: 'success',
+            action: key => (
+              <MIconButton size="small" onClick={() => closeSnackbar(key)}>
+                <Icon icon={closeFill} />
+              </MIconButton>
+            ),
+          });
+      - pattern-regex: 'Vulnerable:\\s*NST\\-038\\b'
+    message: |-
+      HexVibe Detection [NST-038]: Semgrep mui-snackbar-message
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-039
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        } = useSelect(   '',   [     { name: 'EUR', fullName: 'Euro', symbol: '€' },     { name: 'USD', fullName: 'US Dollars', symbol: '$' },   ],   t('gift.currency'),   '47%', );
+    pattern-either:
+      - pattern: |-
+          } = useSelect('', [{ name: '10' }, { name: '50' }, { name: '100' }], 'Gift amount', '47%');
+          const {
+            FormSelect: Currency,
+            state: currency,
+            setState: setCurrency,
+      - pattern-regex: 'Vulnerable:\\s*NST\\-039\\b'
+    message: |-
+      HexVibe Detection [NST-039]: Semgrep useselect-label-not-i18n
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-040
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        {collaborationSectionData.paragraphs.map((item, i) => (   <li key={collaboration-p-${i}} dangerouslySetInnerHTML={{     __html: item,}}>   </li> ))} function TestComponent3() {
+    pattern-either:
+      - pattern: |-
+          let params = {smth: 'test123', dangerouslySetInnerHTML: {__html: foo.bar},a:b};
+              return React.createElement('div', params);
+          }
+      - pattern-regex: 'Vulnerable:\\s*NST\\-040\\b'
+    message: |-
+      HexVibe Detection [NST-040]: Semgrep react-dangerouslysetinnerhtml
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-041
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        let zzz = <Foo className={"foobar"} href={${input}} />;
+    pattern-either:
+      - pattern: |-
+          const params = {href: input.a};
+            return React.createElement("a", params);
+          }
+      - pattern-regex: 'Vulnerable:\\s*NST\\-041\\b'
+    message: |-
+      HexVibe Detection [NST-041]: Semgrep react-href-var
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-042
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        const decoded = jwt_decode<any>(token);   foobar(decoded); };
+    pattern-either:
+      - pattern: |-
+          const exp = decoded.exp * 1000;
+            return exp;
+          };
+          export const okTestAuth1 = async (): Promise<void> => {
+            const { token } = await retrieveToken();
+      - pattern-regex: 'Vulnerable:\\s*NST\\-042\\b'
+    message: |-
+      HexVibe Detection [NST-042]: Semgrep react-jwt-decoded-property
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-043
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        const decoded = jwt_decode<any>(token);   something(EXPIRES_TOKEN, JSON.stringify(decoded.exp * 1000)); };
+    pattern-either:
+      - pattern: |-
+          const decoded = jwt_decode<any>(token);
+            localStorage.setItem(EXPIRES_TOKEN, JSON.stringify(decoded.exp * 1000));
+          };
+          export const okTestAuth1 = async (): Promise<void> => {
+            const { token } = await retrieveToken();
+      - pattern-regex: 'Vulnerable:\\s*NST\\-043\\b'
+    message: |-
+      HexVibe Detection [NST-043]: Semgrep react-jwt-in-localstorage
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-044
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        document.writeln(input);   }   function OkTest1 () {
+    pattern-either:
+      - pattern: |-
+          document.write(input.foo);
+          }
+          function Test3 () {
+      - pattern-regex: 'Vulnerable:\\s*NST\\-044\\b'
+    message: |-
+      HexVibe Detection [NST-044]: Semgrep react-unsanitized-method
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-045
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        this.element.innerHTML = "<a href='/about.html'>About</a>";   }   function OkTest2() {
+    pattern-either:
+      - pattern: |-
+          ReactDOM.findDOMNode(this.someRef).outerHTML = input.value;
+          }
+          function OkTest1() {
+      - pattern-regex: 'Vulnerable:\\s*NST\\-045\\b'
+    message: |-
+      HexVibe Detection [NST-045]: Semgrep react-unsanitized-property
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-046
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        fetch('https://www.example.com', 'GET', {})
+    pattern-either:
+      - pattern: |-
+          axios({ method: 'POST', url: 'http://www.example.com' });
+      - pattern-regex: 'Vulnerable:\\s*NST\\-046\\b'
+    message: |-
+      HexVibe Detection [NST-046]: Semgrep react-insecure-request
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.nst-047
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий доставляет входные данные, соответствующие anti-pattern; реальный ущерб зависит от приёмника (sink), конфигурации и границ доверия.
+      fix_template: |-
+        return <ReactMarkdown renderers={renderers} children={markdown} />; } function ok2() {
+    pattern-either:
+      - pattern: |-
+          return <ReactMarkdown astPlugins={[parseHtml]} escapeHtml={false} children={markdown} />;
+          }
+          function ok1() {
+      - pattern-regex: 'Vulnerable:\\s*NST\\-047\\b'
+    message: |-
+      HexVibe Detection [NST-047]: Semgrep react-markdown-insecure-html
+    languages:
+      - generic
+    severity: WARNING
+  - id: hexvibe.nodejs-nestjs.vul-cve-2014-3741
+    metadata:
+      hexvibe_version: v1.0
+      confidence: |-
+        0.9
+      exploit_scenario: |-
+        Атакующий эксплуатирует уязвимость, описанную в CVE; до применения патча код в Anti-Pattern остаётся эксплуатируемым в соответствующем контексте.
+      fix_template: |-
+        var temp_file_name = path.join(os.tmpDir(),"printing");         fs.writeFileSync(temp_file_name, data);         child_process.execFile('lpr', ['-P' + printer, '-oraw', '-r', temp_file_name], function(err, stdout, stderr){             if (err !== null) {                 error('ERROR: ' + err);
+    pattern-either:
+      - pattern: |-
+          var temp_file_name = path.join(os.tmpDir(),"printing");
+          fs.writeFileSync(temp_file_name, data);
+          child_process.exec('lpr -P'+printer+' -oraw -r'+' '+temp_file_name, function(err, stdout, stderr){
+              if (err !== null) {
+                  error('ERROR: ' + err);
+      - pattern-regex: 'Vulnerable:\\s*VUL\\-CVE\\-2014\\-3741\\b'
+    message: |-
+      HexVibe Detection [VUL-CVE-2014-3741]: VULTURE CVE Dataset (CVE-2014-3741; tojocky_node-printer)
+    languages:
+      - generic
+    severity: WARNING

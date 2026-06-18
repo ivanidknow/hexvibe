@@ -1,0 +1,14 @@
+# Vulnerable: INF-026
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fail-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: blog
+...
+      - name: test
+        emptyDir: {}

@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-133
+CLICKSENDSMS_TOKEN = "G9TXU2YD-NOYB-LLSX-21NU-5CX5SIA330Z7user-test@clicksend.sms"

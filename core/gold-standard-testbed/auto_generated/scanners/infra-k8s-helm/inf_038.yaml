@@ -1,0 +1,14 @@
+# Vulnerable: INF-038
+# Access worker node file system from within a pod
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: privileged
+spec:
+  selector:
+    matchLabels:
+      name: privileged-container
+  template:
+...
+      restartPolicy: Always
+# And access host: kubectl exec -ti privileged-xxxxx chroot /host

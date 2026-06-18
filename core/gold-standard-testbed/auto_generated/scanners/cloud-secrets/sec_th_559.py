@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-559
+RINGCENTRAL_TOKEN = "OTXwnia5kOs-SlF3kZEFJK"

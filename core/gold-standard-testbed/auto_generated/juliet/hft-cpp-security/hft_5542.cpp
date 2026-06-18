@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5542
+void CWE134_Uncontrolled_Format_String__char_listen_socket_w32_vsnprintf_53d_badSink(char * data);
+void CWE134_Uncontrolled_Format_String__char_listen_socket_w32_vsnprintf_53c_badSink(char * data)
+CWE134_Uncontrolled_Format_String__char_listen_socket_w32_vsnprintf_53d_badSink(data);

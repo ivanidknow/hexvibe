@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-217
+VAULT_SERVICE_TOKEN = "HVS_FAKE_HVS"

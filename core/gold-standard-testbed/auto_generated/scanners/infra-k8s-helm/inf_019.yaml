@@ -1,0 +1,14 @@
+# Vulnerable: INF-019
+# Source: https://kubernetes.io/docs/tutorials/stateful-application/cassandra/
+# https://github.com/kubernetes/examples/tree/master/cassandra
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cassandra
+  name: cassandra
+spec:
+  clusterIP: None
+...
+parameters:
+  type: pd-ssd

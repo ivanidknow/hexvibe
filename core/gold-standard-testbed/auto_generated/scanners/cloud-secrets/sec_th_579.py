@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-579
+SAUCELABS_TOKEN = "nBpeh2YF3tjMNmKAUHrDpfXJZJ.ZUhWmObRC735zdh99LeJh4Kcr_2"

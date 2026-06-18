@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-308
+GURU_TOKEN = "434EWv@Z7KcKlP6M5FO0"

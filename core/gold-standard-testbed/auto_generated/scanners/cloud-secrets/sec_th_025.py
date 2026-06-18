@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-025
+AMBEE_TOKEN = "AMBEE_FAKE_AMBEE"

@@ -1,0 +1,14 @@
+# Vulnerable: INF-023
+apiVersion: apiserver.config.k8s.io/v1
+kind: AdmissionConfiguration
+metadata:
+  name: "admission-configuration-failed"
+plugins:
+  - name: ValidatingAdmissionWebhook
+    configuration:
+      apiVersion: apiserver.config.k8s.io/v1
+      kind: WebhookAdmissionConfiguration
+      kubeConfigFile: "<path-to-kubeconfig-file>"
+...
+      kind: WebhookAdmissionConfiguration
+      kubeConfigFile: "<path-to-kubeconfig-file>"

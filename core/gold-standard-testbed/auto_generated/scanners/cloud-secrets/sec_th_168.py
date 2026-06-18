@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-168
+CONVIER_TOKEN = "49|07KJBwfPzF2ESyNui5yBw9OVB6eWj0iXkssEKC7b"

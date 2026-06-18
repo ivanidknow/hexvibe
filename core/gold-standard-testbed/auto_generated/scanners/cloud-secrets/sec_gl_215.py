@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-215
+TYPEFORM_API_TOKEN = "TFP_FAKE_TFP"

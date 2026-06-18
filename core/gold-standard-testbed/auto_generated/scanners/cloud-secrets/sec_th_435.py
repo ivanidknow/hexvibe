@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-435
+MYFRESHWORKS_TOKEN = "SEeNW8bM_Rref-UFdiBKio"

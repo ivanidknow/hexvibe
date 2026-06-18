@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5343
+void CWE134_Uncontrolled_Format_String__char_environment_printf_53d_badSink(char * data);
+void CWE134_Uncontrolled_Format_String__char_environment_printf_53c_badSink(char * data)
+CWE134_Uncontrolled_Format_String__char_environment_printf_53d_badSink(data);

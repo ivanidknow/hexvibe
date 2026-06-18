@@ -1,0 +1,14 @@
+# Vulnerable: INF-090
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: prometheus
+    chart: prometheus-11.1.2
+    component: node-exporter
+    heritage: Helm
+    release: exporter
+  name: exporter-prometheus-node-exporter
+...
+          hostPath:
+            path: /

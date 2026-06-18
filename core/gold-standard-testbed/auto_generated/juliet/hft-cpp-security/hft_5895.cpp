@@ -1,0 +1,5 @@
+// Vulnerable: HFT-5895
+extern int CWE134_Uncontrolled_Format_String__wchar_t_listen_socket_fprintf_22_badGlobal;
+void CWE134_Uncontrolled_Format_String__wchar_t_listen_socket_fprintf_22_badSink(wchar_t * data)
+if(CWE134_Uncontrolled_Format_String__wchar_t_listen_socket_fprintf_22_badGlobal)
+fwprintf(stdout, data);

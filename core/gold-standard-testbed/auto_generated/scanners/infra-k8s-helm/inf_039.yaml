@@ -1,0 +1,14 @@
+# Vulnerable: INF-039
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: privileged
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
+spec:
+  privileged: true
+  allowPrivilegeEscalation: true
+  allowedCapabilities:
+...
+  fsGroup:
+    rule: 'RunAsAny'

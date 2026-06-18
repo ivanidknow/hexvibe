@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5663
+void CWE134_Uncontrolled_Format_String__wchar_t_console_fprintf_52c_badSink(wchar_t * data);
+void CWE134_Uncontrolled_Format_String__wchar_t_console_fprintf_52b_badSink(wchar_t * data)
+CWE134_Uncontrolled_Format_String__wchar_t_console_fprintf_52c_badSink(data);

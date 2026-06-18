@@ -1,0 +1,14 @@
+# Vulnerable: INF-057
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  labels:
+    app: app
+spec:
+  type: ClusterIP
+  ports:
+  - port: 3000
+...
+          serviceName: app
+          servicePort: 3000

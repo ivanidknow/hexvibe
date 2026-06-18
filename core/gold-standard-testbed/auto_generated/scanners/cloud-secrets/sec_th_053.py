@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-053
+ATLASSIANDATACENTER_CONFLUENCEDATACENTER_TOKEN = "fake_sanitize_credential"

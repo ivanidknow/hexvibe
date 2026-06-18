@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-033
+APIFY_TOKEN = "APIFY_FAKE_APIFY"

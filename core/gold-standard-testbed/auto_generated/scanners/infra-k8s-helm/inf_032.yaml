@@ -1,0 +1,14 @@
+# Vulnerable: INF-032
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: prometheus-node-exporter
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: prometheus-node-exporter
+  template:
+...
+      maxUnavailable: 1
+    type: RollingUpdate

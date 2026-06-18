@@ -1,0 +1,5 @@
+# Vulnerable: INF-098
+apiKeyAuthQuery:
+  type: apiKey
+  in: query
+  name: api_key

@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-190
+DEBOUNCE_TOKEN = "OTM0Bp42sFTRB"

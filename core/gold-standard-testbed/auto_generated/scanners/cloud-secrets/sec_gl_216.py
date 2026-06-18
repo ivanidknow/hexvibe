@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-216
+VAULT_BATCH_TOKEN = "HVB_FAKE_HVB"

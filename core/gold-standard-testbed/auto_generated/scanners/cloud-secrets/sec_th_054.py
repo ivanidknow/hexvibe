@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-054
+ATLASSIANDATACENTER_JIRADATACENTERPAT_TOKEN = "fake_sanitize_credential"

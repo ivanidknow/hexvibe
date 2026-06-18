@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-598
+SENTRYORGTOKEN = "sntrys_eyJFAKE-OjE3NDIzNjM1NTIuNTAzMzA5LCJ1cmwiOiJodHRwczovL3NlbnRyeS5pbyIsInJlZ2lvbl91cmwiOiJodHRwczovL3VzLnNlbnRyeS5pb"

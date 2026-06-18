@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-077
+GCP_API_KEY = "AIZA_FAKE_GCP_API_KEY"

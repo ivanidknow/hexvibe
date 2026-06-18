@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-112
+INFRACOST_API_TOKEN = "ICO_FAKE_ICO"

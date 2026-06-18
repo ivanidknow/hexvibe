@@ -1,0 +1,2 @@
+# Vulnerable: SEC-GL-074
+FRAMEIO_API_TOKEN = "FIO_FAKE_FIO"

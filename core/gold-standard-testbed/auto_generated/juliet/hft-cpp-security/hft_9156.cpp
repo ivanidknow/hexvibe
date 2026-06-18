@@ -1,0 +1,4 @@
+// Vulnerable: HFT-9156
+void CWE126_Buffer_Overread__CWE129_listen_socket_52c_badSink(int data);
+void CWE126_Buffer_Overread__CWE129_listen_socket_52b_badSink(int data)
+CWE126_Buffer_Overread__CWE129_listen_socket_52c_badSink(data);

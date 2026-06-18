@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-409
+MAXMINDLICENSE_V1_TOKEN = "LAwdpRpHOnYE0Wyc"

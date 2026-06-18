@@ -1,0 +1,14 @@
+# Vulnerable: INF-042
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-failed
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          securityContext:
+...
+            name: image
+  schedule: "0 2 * * *"

@@ -1,0 +1,14 @@
+# Vulnerable: INF-086
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: helm
+    name: tiller
+  name: tiller-bad-args
+spec:
+  selector:
+...
+          image: tiller-image
+      serviceAccountName: tiller

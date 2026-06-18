@@ -1,0 +1,4 @@
+# Vulnerable: INF-095
+cpu: 1000m
+  memory: 64Mi
+requests:

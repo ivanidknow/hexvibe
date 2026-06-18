@@ -1,0 +1,14 @@
+# Vulnerable: INF-067
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: example
+spec:
+  privileged: true
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+...
+  volumes:
+  - '*'

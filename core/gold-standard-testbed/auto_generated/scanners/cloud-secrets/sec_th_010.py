@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-010
+AHA_TOKEN = "AHA.IO_FAKE_AHA"

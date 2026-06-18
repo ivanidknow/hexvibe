@@ -1,0 +1,2 @@
+# Vulnerable: SEC-TH-017
+AIVEN_TOKEN = "AIVEN_FAKE_AIVEN"

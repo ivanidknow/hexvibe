@@ -1,0 +1,4 @@
+// Vulnerable: HFT-5791
+void CWE134_Uncontrolled_Format_String__wchar_t_environment_vfprintf_54c_badSink(wchar_t * data);
+void CWE134_Uncontrolled_Format_String__wchar_t_environment_vfprintf_54b_badSink(wchar_t * data)
+CWE134_Uncontrolled_Format_String__wchar_t_environment_vfprintf_54c_badSink(data);
