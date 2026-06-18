@@ -82,6 +82,7 @@ _METRIC_ID_RE = re.compile(
     r"|SEC-GL-\d+"
     r"|SEC-TH-\d+"
     r"|IAM-AWS-[A-Za-z0-9][A-Za-z0-9_-]*"
+    r"|LLM-INJ-\d+"
     r")$"
 )
 
