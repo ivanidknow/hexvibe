@@ -1,6 +1,6 @@
 # HexVibe detection matrix
 
-**Total rules:** 4020 (generated from `semgrep-rules/*.yaml`)
+**Total rules:** 4728 (generated from `semgrep-rules/*.yaml`)
 
 A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker exists in the gold testbed (structural patterns may be skipped if the first `pattern-either` branch fails to parse).
 
@@ -756,6 +756,35 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | CSH-056 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | CSH-057 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | CSH-058 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
+| CSH-059 | — | MISS | — |
+| CSH-060 | — | MISS | — |
+| CSH-061 | — | MISS | — |
+| CSH-062 | — | MISS | — |
+| CSH-063 | — | MISS | — |
+| CSH-064 | — | MISS | — |
+| CSH-065 | — | MISS | — |
+| CSH-066 | — | MISS | — |
+| CSH-067 | — | MISS | — |
+| CSH-068 | — | MISS | — |
+| CSH-069 | — | MISS | — |
+| CSH-070 | — | MISS | — |
+| CSH-071 | — | MISS | — |
+| CSH-072 | — | MISS | — |
+| CSH-073 | — | MISS | — |
+| CSH-074 | — | MISS | — |
+| CSH-075 | — | MISS | — |
+| CSH-076 | — | MISS | — |
+| CSH-077 | — | MISS | — |
+| CSH-078 | — | MISS | — |
+| CSH-079 | — | MISS | — |
+| CSH-080 | — | MISS | — |
+| CSH-081 | — | MISS | — |
+| CSH-082 | — | MISS | — |
+| CSH-083 | — | MISS | — |
+| CSH-084 | — | MISS | — |
+| CSH-085 | — | MISS | — |
+| CSH-086 | — | MISS | — |
+| CSH-087 | — | MISS | — |
 | CWE-20-HPP | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | CWE-20-JS-VAL-EXTRA-01 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | CWE-20-JS-VAL-EXTRA-02 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
@@ -1212,6 +1241,13 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | DVS-019 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | DVS-020 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Semgrep + marker |
 | DVS-021 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
+| DVS-022 | — | MISS | — |
+| DVS-023 | — | MISS | — |
+| DVS-024 | — | MISS | — |
+| DVS-025 | — | MISS | — |
+| DVS-026 | — | MISS | — |
+| DVS-027 | — | MISS | — |
+| DVS-028 | — | MISS | — |
 | ENV-001 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
 | ENV-002 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
 | ENV-003 | `core/gold-standard-testbed/enterprise_java_validation.java` | HIT | Marker (testbed) |
@@ -1299,6 +1335,207 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | FAS-044 | — | MISS | — |
 | FAS-045 | — | MISS | — |
 | FAS-046 | — | MISS | — |
+| FAS-047 | — | MISS | — |
+| FAS-048 | — | MISS | — |
+| FAS-049 | — | MISS | — |
+| FAS-050 | — | MISS | — |
+| FAS-051 | — | MISS | — |
+| FAS-052 | — | MISS | — |
+| FAS-053 | — | MISS | — |
+| FAS-054 | — | MISS | — |
+| FAS-055 | — | MISS | — |
+| FAS-056 | — | MISS | — |
+| FAS-057 | — | MISS | — |
+| FAS-058 | — | MISS | — |
+| FAS-059 | — | MISS | — |
+| FAS-060 | — | MISS | — |
+| FAS-061 | — | MISS | — |
+| FAS-062 | — | MISS | — |
+| FAS-063 | — | MISS | — |
+| FAS-064 | — | MISS | — |
+| FAS-065 | — | MISS | — |
+| FAS-066 | — | MISS | — |
+| FAS-067 | — | MISS | — |
+| FAS-068 | — | MISS | — |
+| FAS-069 | — | MISS | — |
+| FAS-070 | — | MISS | — |
+| FAS-071 | — | MISS | — |
+| FAS-072 | — | MISS | — |
+| FAS-073 | — | MISS | — |
+| FAS-074 | — | MISS | — |
+| FAS-075 | — | MISS | — |
+| FAS-076 | — | MISS | — |
+| FAS-077 | — | MISS | — |
+| FAS-078 | — | MISS | — |
+| FAS-079 | — | MISS | — |
+| FAS-080 | — | MISS | — |
+| FAS-081 | — | MISS | — |
+| FAS-082 | — | MISS | — |
+| FAS-083 | — | MISS | — |
+| FAS-084 | — | MISS | — |
+| FAS-085 | — | MISS | — |
+| FAS-086 | — | MISS | — |
+| FAS-087 | — | MISS | — |
+| FAS-088 | — | MISS | — |
+| FAS-089 | — | MISS | — |
+| FAS-090 | — | MISS | — |
+| FAS-091 | — | MISS | — |
+| FAS-092 | — | MISS | — |
+| FAS-093 | — | MISS | — |
+| FAS-094 | — | MISS | — |
+| FAS-095 | — | MISS | — |
+| FAS-096 | — | MISS | — |
+| FAS-097 | — | MISS | — |
+| FAS-098 | — | MISS | — |
+| FAS-099 | — | MISS | — |
+| FAS-100 | — | MISS | — |
+| FAS-101 | — | MISS | — |
+| FAS-102 | — | MISS | — |
+| FAS-103 | — | MISS | — |
+| FAS-104 | — | MISS | — |
+| FAS-105 | — | MISS | — |
+| FAS-106 | — | MISS | — |
+| FAS-107 | — | MISS | — |
+| FAS-108 | — | MISS | — |
+| FAS-109 | — | MISS | — |
+| FAS-110 | — | MISS | — |
+| FAS-111 | — | MISS | — |
+| FAS-112 | — | MISS | — |
+| FAS-113 | — | MISS | — |
+| FAS-114 | — | MISS | — |
+| FAS-115 | — | MISS | — |
+| FAS-116 | — | MISS | — |
+| FAS-117 | — | MISS | — |
+| FAS-118 | — | MISS | — |
+| FAS-119 | — | MISS | — |
+| FAS-120 | — | MISS | — |
+| FAS-121 | — | MISS | — |
+| FAS-122 | — | MISS | — |
+| FAS-123 | — | MISS | — |
+| FAS-124 | — | MISS | — |
+| FAS-125 | — | MISS | — |
+| FAS-126 | — | MISS | — |
+| FAS-127 | — | MISS | — |
+| FAS-128 | — | MISS | — |
+| FAS-129 | — | MISS | — |
+| FAS-130 | — | MISS | — |
+| FAS-131 | — | MISS | — |
+| FAS-132 | — | MISS | — |
+| FAS-133 | — | MISS | — |
+| FAS-134 | — | MISS | — |
+| FAS-135 | — | MISS | — |
+| FAS-136 | — | MISS | — |
+| FAS-137 | — | MISS | — |
+| FAS-138 | — | MISS | — |
+| FAS-139 | — | MISS | — |
+| FAS-140 | — | MISS | — |
+| FAS-141 | — | MISS | — |
+| FAS-143 | — | MISS | — |
+| FAS-144 | — | MISS | — |
+| FAS-145 | — | MISS | — |
+| FAS-146 | — | MISS | — |
+| FAS-147 | — | MISS | — |
+| FAS-148 | — | MISS | — |
+| FAS-149 | — | MISS | — |
+| FAS-150 | — | MISS | — |
+| FAS-151 | — | MISS | — |
+| FAS-152 | — | MISS | — |
+| FAS-153 | — | MISS | — |
+| FAS-154 | — | MISS | — |
+| FAS-155 | — | MISS | — |
+| FAS-156 | — | MISS | — |
+| FAS-157 | — | MISS | — |
+| FAS-158 | — | MISS | — |
+| FAS-159 | — | MISS | — |
+| FAS-160 | — | MISS | — |
+| FAS-161 | — | MISS | — |
+| FAS-162 | — | MISS | — |
+| FAS-163 | — | MISS | — |
+| FAS-164 | — | MISS | — |
+| FAS-165 | — | MISS | — |
+| FAS-166 | — | MISS | — |
+| FAS-167 | — | MISS | — |
+| FAS-168 | — | MISS | — |
+| FAS-169 | — | MISS | — |
+| FAS-170 | — | MISS | — |
+| FAS-171 | — | MISS | — |
+| FAS-172 | — | MISS | — |
+| FAS-173 | — | MISS | — |
+| FAS-174 | — | MISS | — |
+| FAS-175 | — | MISS | — |
+| FAS-176 | — | MISS | — |
+| FAS-177 | — | MISS | — |
+| FAS-178 | — | MISS | — |
+| FAS-179 | — | MISS | — |
+| FAS-180 | — | MISS | — |
+| FAS-181 | — | MISS | — |
+| FAS-182 | — | MISS | — |
+| FAS-183 | — | MISS | — |
+| FAS-184 | — | MISS | — |
+| FAS-185 | — | MISS | — |
+| FAS-186 | — | MISS | — |
+| FAS-187 | — | MISS | — |
+| FAS-188 | — | MISS | — |
+| FAS-189 | — | MISS | — |
+| FAS-190 | — | MISS | — |
+| FAS-191 | — | MISS | — |
+| FAS-192 | — | MISS | — |
+| FAS-193 | — | MISS | — |
+| FAS-194 | — | MISS | — |
+| FAS-195 | — | MISS | — |
+| FAS-196 | — | MISS | — |
+| FAS-197 | — | MISS | — |
+| FAS-198 | — | MISS | — |
+| FAS-199 | — | MISS | — |
+| FAS-200 | — | MISS | — |
+| FAS-201 | — | MISS | — |
+| FAS-202 | — | MISS | — |
+| FAS-203 | — | MISS | — |
+| FAS-204 | — | MISS | — |
+| FAS-205 | — | MISS | — |
+| FAS-206 | — | MISS | — |
+| FAS-207 | — | MISS | — |
+| FAS-208 | — | MISS | — |
+| FAS-209 | — | MISS | — |
+| FAS-210 | — | MISS | — |
+| FAS-211 | — | MISS | — |
+| FAS-212 | — | MISS | — |
+| FAS-213 | — | MISS | — |
+| FAS-214 | — | MISS | — |
+| FAS-215 | — | MISS | — |
+| FAS-216 | — | MISS | — |
+| FAS-217 | — | MISS | — |
+| FAS-218 | — | MISS | — |
+| FAS-219 | — | MISS | — |
+| FAS-220 | — | MISS | — |
+| FAS-221 | — | MISS | — |
+| FAS-222 | — | MISS | — |
+| FAS-223 | — | MISS | — |
+| FAS-224 | — | MISS | — |
+| FAS-225 | — | MISS | — |
+| FAS-226 | — | MISS | — |
+| FAS-227 | — | MISS | — |
+| FAS-228 | — | MISS | — |
+| FAS-229 | — | MISS | — |
+| FAS-230 | — | MISS | — |
+| FAS-231 | — | MISS | — |
+| FAS-232 | — | MISS | — |
+| FAS-233 | — | MISS | — |
+| FAS-234 | — | MISS | — |
+| FAS-235 | — | MISS | — |
+| FAS-236 | — | MISS | — |
+| FAS-237 | — | MISS | — |
+| FAS-238 | — | MISS | — |
+| FAS-239 | — | MISS | — |
+| FAS-240 | — | MISS | — |
+| FAS-241 | — | MISS | — |
+| FAS-242 | — | MISS | — |
+| FAS-243 | — | MISS | — |
+| FAS-244 | — | MISS | — |
+| FAS-245 | — | MISS | — |
+| FAS-246 | — | MISS | — |
+| FAS-247 | — | MISS | — |
+| FAS-248 | — | MISS | — |
 | FR-001 | `core/gold-standard-testbed/typescript/frontend_react_marker.ts` | HIT | Semgrep + marker |
 | FR-002 | `core/gold-standard-testbed/typescript/frontend_react_marker.ts` | HIT | Marker (testbed) |
 | FR-003 | `core/gold-standard-testbed/typescript/frontend_react_marker.ts` | HIT | Marker (testbed) |
@@ -1603,6 +1840,65 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | GO-058 | `core/gold-standard-testbed/multi_lang_vulnerable/go_vulnerable.go` | HIT | Marker (testbed) |
 | GO-059 | `core/gold-standard-testbed/grpc_stream_deadlock_vulnerable.go` | HIT | Marker (testbed) |
 | GO-060 | `core/gold-standard-testbed/grpc_auth_bypass.go` | HIT | Marker (testbed) |
+| GO-061 | — | MISS | — |
+| GO-062 | — | MISS | — |
+| GO-063 | — | MISS | — |
+| GO-064 | — | MISS | — |
+| GO-065 | — | MISS | — |
+| GO-066 | — | MISS | — |
+| GO-067 | — | MISS | — |
+| GO-068 | — | MISS | — |
+| GO-069 | — | MISS | — |
+| GO-070 | — | MISS | — |
+| GO-071 | — | MISS | — |
+| GO-072 | — | MISS | — |
+| GO-073 | — | MISS | — |
+| GO-074 | — | MISS | — |
+| GO-075 | — | MISS | — |
+| GO-076 | — | MISS | — |
+| GO-077 | — | MISS | — |
+| GO-078 | — | MISS | — |
+| GO-079 | — | MISS | — |
+| GO-080 | — | MISS | — |
+| GO-081 | — | MISS | — |
+| GO-082 | — | MISS | — |
+| GO-083 | — | MISS | — |
+| GO-084 | — | MISS | — |
+| GO-085 | — | MISS | — |
+| GO-086 | — | MISS | — |
+| GO-087 | — | MISS | — |
+| GO-088 | — | MISS | — |
+| GO-089 | — | MISS | — |
+| GO-090 | — | MISS | — |
+| GO-091 | — | MISS | — |
+| GO-092 | — | MISS | — |
+| GO-093 | — | MISS | — |
+| GO-094 | — | MISS | — |
+| GO-095 | — | MISS | — |
+| GO-096 | — | MISS | — |
+| GO-097 | — | MISS | — |
+| GO-098 | — | MISS | — |
+| GO-099 | — | MISS | — |
+| GO-100 | — | MISS | — |
+| GO-101 | — | MISS | — |
+| GO-102 | — | MISS | — |
+| GO-103 | — | MISS | — |
+| GO-104 | — | MISS | — |
+| GO-105 | — | MISS | — |
+| GO-106 | — | MISS | — |
+| GO-107 | — | MISS | — |
+| GO-108 | — | MISS | — |
+| GO-109 | — | MISS | — |
+| GO-110 | — | MISS | — |
+| GO-111 | — | MISS | — |
+| GO-112 | — | MISS | — |
+| GO-113 | — | MISS | — |
+| GO-114 | — | MISS | — |
+| GO-115 | — | MISS | — |
+| GO-116 | — | MISS | — |
+| GO-117 | — | MISS | — |
+| GO-118 | — | MISS | — |
+| GO-119 | — | MISS | — |
 | GOX-101 | `core/gold-standard-testbed/go_mutex_race.go` | HIT | Marker (testbed) |
 | GOX-102 | `core/gold-standard-testbed/multistack_surge_validation.py` | HIT | Marker (testbed) |
 | GOX-103 | `core/gold-standard-testbed/multistack_surge_validation.py` | HIT | Marker (testbed) |
@@ -2054,6 +2350,87 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | INF-016 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | INF-017 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | INF-018 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
+| INF-019 | — | HIT | Semgrep |
+| INF-020 | — | HIT | Semgrep |
+| INF-021 | — | MISS | — |
+| INF-022 | — | HIT | Semgrep |
+| INF-023 | — | MISS | — |
+| INF-024 | — | HIT | Semgrep |
+| INF-025 | — | HIT | Semgrep |
+| INF-026 | — | HIT | Semgrep |
+| INF-027 | — | HIT | Semgrep |
+| INF-028 | — | HIT | Semgrep |
+| INF-029 | — | HIT | Semgrep |
+| INF-030 | — | HIT | Semgrep |
+| INF-031 | — | HIT | Semgrep |
+| INF-032 | — | MISS | — |
+| INF-033 | — | MISS | — |
+| INF-034 | — | HIT | Semgrep |
+| INF-035 | — | HIT | Semgrep |
+| INF-036 | — | HIT | Semgrep |
+| INF-037 | — | HIT | Semgrep |
+| INF-038 | — | HIT | Semgrep |
+| INF-039 | — | MISS | — |
+| INF-040 | — | HIT | Semgrep |
+| INF-041 | — | HIT | Semgrep |
+| INF-042 | — | MISS | — |
+| INF-043 | — | HIT | Semgrep |
+| INF-044 | — | MISS | — |
+| INF-045 | — | HIT | Semgrep |
+| INF-046 | — | MISS | — |
+| INF-047 | — | HIT | Semgrep |
+| INF-048 | — | HIT | Semgrep |
+| INF-049 | — | MISS | — |
+| INF-050 | — | HIT | Semgrep |
+| INF-051 | — | HIT | Semgrep |
+| INF-052 | — | MISS | — |
+| INF-053 | — | HIT | Semgrep |
+| INF-054 | — | HIT | Semgrep |
+| INF-055 | — | HIT | Semgrep |
+| INF-056 | — | HIT | Semgrep |
+| INF-057 | — | HIT | Semgrep |
+| INF-058 | — | HIT | Semgrep |
+| INF-059 | — | HIT | Semgrep |
+| INF-060 | — | HIT | Semgrep |
+| INF-061 | — | MISS | — |
+| INF-062 | — | HIT | Semgrep |
+| INF-063 | — | MISS | — |
+| INF-064 | — | HIT | Semgrep |
+| INF-065 | — | MISS | — |
+| INF-066 | — | MISS | — |
+| INF-067 | — | MISS | — |
+| INF-068 | — | HIT | Semgrep |
+| INF-069 | — | HIT | Semgrep |
+| INF-070 | — | HIT | Semgrep |
+| INF-071 | — | HIT | Semgrep |
+| INF-072 | — | HIT | Semgrep |
+| INF-073 | — | HIT | Semgrep |
+| INF-074 | — | HIT | Semgrep |
+| INF-075 | — | MISS | — |
+| INF-076 | — | HIT | Semgrep |
+| INF-077 | — | HIT | Semgrep |
+| INF-078 | — | HIT | Semgrep |
+| INF-079 | — | HIT | Semgrep |
+| INF-080 | — | HIT | Semgrep |
+| INF-081 | — | HIT | Semgrep |
+| INF-082 | — | HIT | Semgrep |
+| INF-083 | — | HIT | Semgrep |
+| INF-084 | — | MISS | — |
+| INF-085 | — | HIT | Semgrep |
+| INF-086 | — | HIT | Semgrep |
+| INF-087 | — | MISS | — |
+| INF-088 | — | HIT | Semgrep |
+| INF-089 | — | HIT | Semgrep |
+| INF-090 | — | HIT | Semgrep |
+| INF-091 | — | MISS | — |
+| INF-092 | — | MISS | — |
+| INF-093 | — | MISS | — |
+| INF-094 | — | MISS | — |
+| INF-095 | — | MISS | — |
+| INF-096 | — | HIT | Semgrep |
+| INF-097 | — | MISS | — |
+| INF-098 | — | MISS | — |
+| INF-099 | — | HIT | Semgrep |
 | INF-200 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | INF-201 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | INF-202 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
@@ -2286,6 +2663,206 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | JAVA-027 | — | MISS | — |
 | JAVA-028 | — | MISS | — |
 | JAVA-029 | — | MISS | — |
+| JAVA-030 | — | MISS | — |
+| JAVA-031 | — | MISS | — |
+| JAVA-032 | — | MISS | — |
+| JAVA-033 | — | MISS | — |
+| JAVA-034 | — | MISS | — |
+| JAVA-035 | — | MISS | — |
+| JAVA-036 | — | MISS | — |
+| JAVA-037 | — | MISS | — |
+| JAVA-038 | — | MISS | — |
+| JAVA-039 | — | MISS | — |
+| JAVA-040 | — | MISS | — |
+| JAVA-041 | — | MISS | — |
+| JAVA-042 | — | MISS | — |
+| JAVA-043 | — | MISS | — |
+| JAVA-044 | — | MISS | — |
+| JAVA-045 | — | MISS | — |
+| JAVA-046 | — | MISS | — |
+| JAVA-047 | — | MISS | — |
+| JAVA-048 | — | MISS | — |
+| JAVA-049 | — | MISS | — |
+| JAVA-050 | — | MISS | — |
+| JAVA-051 | — | MISS | — |
+| JAVA-052 | — | MISS | — |
+| JAVA-053 | — | MISS | — |
+| JAVA-054 | — | MISS | — |
+| JAVA-055 | — | MISS | — |
+| JAVA-056 | — | MISS | — |
+| JAVA-057 | — | MISS | — |
+| JAVA-058 | — | MISS | — |
+| JAVA-059 | — | MISS | — |
+| JAVA-060 | — | MISS | — |
+| JAVA-061 | — | MISS | — |
+| JAVA-062 | — | MISS | — |
+| JAVA-063 | — | MISS | — |
+| JAVA-064 | — | MISS | — |
+| JAVA-065 | — | MISS | — |
+| JAVA-066 | — | MISS | — |
+| JAVA-067 | — | MISS | — |
+| JAVA-068 | — | MISS | — |
+| JAVA-069 | — | MISS | — |
+| JAVA-070 | — | MISS | — |
+| JAVA-071 | — | MISS | — |
+| JAVA-072 | — | MISS | — |
+| JAVA-073 | — | MISS | — |
+| JAVA-074 | — | MISS | — |
+| JAVA-075 | — | MISS | — |
+| JAVA-076 | — | MISS | — |
+| JAVA-077 | — | MISS | — |
+| JAVA-078 | — | MISS | — |
+| JAVA-079 | — | MISS | — |
+| JAVA-080 | — | MISS | — |
+| JAVA-081 | — | MISS | — |
+| JAVA-082 | — | MISS | — |
+| JAVA-083 | — | MISS | — |
+| JAVA-084 | — | MISS | — |
+| JAVA-085 | — | MISS | — |
+| JAVA-086 | — | MISS | — |
+| JAVA-087 | — | MISS | — |
+| JAVA-088 | — | MISS | — |
+| JAVA-089 | — | MISS | — |
+| JAVA-090 | — | MISS | — |
+| JAVA-091 | — | MISS | — |
+| JAVA-092 | — | MISS | — |
+| JAVA-093 | — | MISS | — |
+| JAVA-094 | — | MISS | — |
+| JAVA-095 | — | MISS | — |
+| JAVA-096 | — | MISS | — |
+| JAVA-097 | — | MISS | — |
+| JAVA-098 | — | MISS | — |
+| JAVA-099 | — | MISS | — |
+| JAVA-100 | — | MISS | — |
+| JAVA-101 | — | MISS | — |
+| JAVA-102 | — | MISS | — |
+| JAVA-103 | — | MISS | — |
+| JAVA-104 | — | MISS | — |
+| JAVA-105 | — | MISS | — |
+| JAVA-106 | — | MISS | — |
+| JAVA-107 | — | MISS | — |
+| JAVA-108 | — | MISS | — |
+| JAVA-109 | — | MISS | — |
+| JAVA-110 | — | MISS | — |
+| JAVA-111 | — | MISS | — |
+| JAVA-112 | — | MISS | — |
+| JAVA-113 | — | MISS | — |
+| JAVA-114 | — | MISS | — |
+| JAVA-115 | — | MISS | — |
+| JAVA-116 | — | MISS | — |
+| JAVA-117 | — | MISS | — |
+| JAVA-118 | — | MISS | — |
+| JAVA-119 | — | MISS | — |
+| JAVA-120 | — | MISS | — |
+| JAVA-121 | — | MISS | — |
+| JAVA-122 | — | MISS | — |
+| JAVA-123 | — | MISS | — |
+| JAVA-124 | — | MISS | — |
+| JAVA-125 | — | MISS | — |
+| JAVA-126 | — | MISS | — |
+| JAVA-127 | — | MISS | — |
+| JAVA-128 | — | MISS | — |
+| JAVA-129 | — | MISS | — |
+| JAVA-130 | — | MISS | — |
+| JAVA-131 | — | MISS | — |
+| JAVA-132 | — | MISS | — |
+| JAVA-133 | — | MISS | — |
+| JAVA-134 | — | MISS | — |
+| JAVA-135 | — | MISS | — |
+| JAVA-136 | — | MISS | — |
+| JAVA-137 | — | MISS | — |
+| JAVA-138 | — | MISS | — |
+| JAVA-139 | — | MISS | — |
+| JAVA-140 | — | MISS | — |
+| JAVA-141 | — | MISS | — |
+| JAVA-142 | — | MISS | — |
+| JAVA-143 | — | MISS | — |
+| JAVA-144 | — | MISS | — |
+| JAVA-145 | — | MISS | — |
+| JAVA-146 | — | MISS | — |
+| JAVA-147 | — | MISS | — |
+| JAVA-148 | — | MISS | — |
+| JAVA-149 | — | MISS | — |
+| JAVA-150 | — | MISS | — |
+| JAVA-151 | — | MISS | — |
+| JAVA-152 | — | MISS | — |
+| JAVA-153 | — | MISS | — |
+| JAVA-154 | — | MISS | — |
+| JAVA-155 | — | MISS | — |
+| JAVA-156 | — | MISS | — |
+| JAVA-157 | — | MISS | — |
+| JAVA-158 | — | MISS | — |
+| JAVA-159 | — | MISS | — |
+| JAVA-160 | — | MISS | — |
+| JAVA-161 | — | MISS | — |
+| JAVA-162 | — | MISS | — |
+| JAVA-163 | — | MISS | — |
+| JAVA-164 | — | MISS | — |
+| JAVA-165 | — | MISS | — |
+| JAVA-166 | — | MISS | — |
+| JAVA-167 | — | MISS | — |
+| JAVA-168 | — | MISS | — |
+| JAVA-169 | — | MISS | — |
+| JAVA-170 | — | MISS | — |
+| JAVA-171 | — | MISS | — |
+| JAVA-172 | — | MISS | — |
+| JAVA-173 | — | MISS | — |
+| JAVA-174 | — | MISS | — |
+| JAVA-175 | — | MISS | — |
+| JAVA-176 | — | MISS | — |
+| JAVA-177 | — | MISS | — |
+| JAVA-178 | — | MISS | — |
+| JAVA-179 | — | MISS | — |
+| JAVA-180 | — | MISS | — |
+| JAVA-181 | — | MISS | — |
+| JAVA-182 | — | MISS | — |
+| JAVA-183 | — | MISS | — |
+| JAVA-184 | — | MISS | — |
+| JAVA-185 | — | MISS | — |
+| JAVA-186 | — | MISS | — |
+| JAVA-187 | — | MISS | — |
+| JAVA-188 | — | MISS | — |
+| JAVA-189 | — | MISS | — |
+| JAVA-190 | — | MISS | — |
+| JAVA-191 | — | MISS | — |
+| JAVA-192 | — | MISS | — |
+| JAVA-193 | — | MISS | — |
+| JAVA-194 | — | MISS | — |
+| JAVA-195 | — | MISS | — |
+| JAVA-196 | — | MISS | — |
+| JAVA-197 | — | MISS | — |
+| JAVA-198 | — | MISS | — |
+| JAVA-199 | — | MISS | — |
+| JAVA-200 | — | MISS | — |
+| JAVA-201 | — | MISS | — |
+| JAVA-202 | — | MISS | — |
+| JAVA-203 | — | MISS | — |
+| JAVA-204 | — | MISS | — |
+| JAVA-205 | — | MISS | — |
+| JAVA-206 | — | MISS | — |
+| JAVA-207 | — | MISS | — |
+| JAVA-208 | — | MISS | — |
+| JAVA-209 | — | MISS | — |
+| JAVA-210 | — | MISS | — |
+| JAVA-211 | — | MISS | — |
+| JAVA-212 | — | MISS | — |
+| JAVA-213 | — | MISS | — |
+| JAVA-214 | — | MISS | — |
+| JAVA-215 | — | MISS | — |
+| JAVA-216 | — | MISS | — |
+| JAVA-217 | — | MISS | — |
+| JAVA-218 | — | MISS | — |
+| JAVA-219 | — | MISS | — |
+| JAVA-220 | — | MISS | — |
+| JAVA-221 | — | MISS | — |
+| JAVA-222 | — | MISS | — |
+| JAVA-223 | — | MISS | — |
+| JAVA-224 | — | MISS | — |
+| JAVA-225 | — | MISS | — |
+| JAVA-226 | — | MISS | — |
+| JAVA-227 | — | MISS | — |
+| JAVA-228 | — | MISS | — |
+| JAVA-229 | — | MISS | — |
 | K8S-010 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Semgrep + marker |
 | K8S-011 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Semgrep + marker |
 | K8S-012 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Semgrep + marker |
@@ -2549,6 +3126,27 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | NST-024 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Semgrep + marker |
 | NST-025 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Semgrep + marker |
 | NST-026 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Semgrep + marker |
+| NST-027 | — | MISS | — |
+| NST-028 | — | MISS | — |
+| NST-029 | — | MISS | — |
+| NST-030 | — | MISS | — |
+| NST-031 | — | MISS | — |
+| NST-032 | — | MISS | — |
+| NST-033 | — | MISS | — |
+| NST-034 | — | MISS | — |
+| NST-035 | — | MISS | — |
+| NST-036 | — | MISS | — |
+| NST-037 | — | MISS | — |
+| NST-038 | — | MISS | — |
+| NST-039 | — | MISS | — |
+| NST-040 | — | MISS | — |
+| NST-041 | — | MISS | — |
+| NST-042 | — | MISS | — |
+| NST-043 | — | MISS | — |
+| NST-044 | — | MISS | — |
+| NST-045 | — | MISS | — |
+| NST-046 | — | MISS | — |
+| NST-047 | — | MISS | — |
 | NSX-101 | `core/gold-standard-testbed/multistack_surge_validation.py` | HIT | Marker (testbed) |
 | NSX-102 | `core/gold-standard-testbed/multistack_surge_validation.py` | HIT | Marker (testbed) |
 | NSX-103 | `core/gold-standard-testbed/multistack_surge_validation.py` | HIT | Semgrep + marker |
@@ -2759,6 +3357,51 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | NSX-308 | `core/gold-standard-testbed/multistack_surge_validation.py` | HIT | Semgrep + marker |
 | NSX-309 | `core/gold-standard-testbed/multistack_surge_validation.py` | HIT | Marker (testbed) |
 | NSX-310 | `core/gold-standard-testbed/multistack_surge_validation.py` | HIT | Marker (testbed) |
+| PHP-001 | — | MISS | — |
+| PHP-002 | — | MISS | — |
+| PHP-003 | — | MISS | — |
+| PHP-004 | — | MISS | — |
+| PHP-005 | — | MISS | — |
+| PHP-006 | — | MISS | — |
+| PHP-007 | — | MISS | — |
+| PHP-008 | — | MISS | — |
+| PHP-009 | — | MISS | — |
+| PHP-010 | — | MISS | — |
+| PHP-011 | — | MISS | — |
+| PHP-012 | — | MISS | — |
+| PHP-013 | — | MISS | — |
+| PHP-014 | — | MISS | — |
+| PHP-015 | — | MISS | — |
+| PHP-016 | — | MISS | — |
+| PHP-017 | — | MISS | — |
+| PHP-018 | — | MISS | — |
+| PHP-019 | — | MISS | — |
+| PHP-020 | — | MISS | — |
+| PHP-021 | — | MISS | — |
+| PHP-022 | — | MISS | — |
+| PHP-023 | — | MISS | — |
+| PHP-024 | — | MISS | — |
+| PHP-025 | — | MISS | — |
+| PHP-026 | — | MISS | — |
+| PHP-027 | — | MISS | — |
+| PHP-028 | — | MISS | — |
+| PHP-029 | — | MISS | — |
+| PHP-030 | — | MISS | — |
+| PHP-031 | — | MISS | — |
+| PHP-032 | — | MISS | — |
+| PHP-033 | — | MISS | — |
+| PHP-034 | — | MISS | — |
+| PHP-035 | — | MISS | — |
+| PHP-036 | — | MISS | — |
+| PHP-037 | — | MISS | — |
+| PHP-038 | — | MISS | — |
+| PHP-039 | — | MISS | — |
+| PHP-040 | — | MISS | — |
+| PHP-041 | — | MISS | — |
+| PHP-042 | — | MISS | — |
+| PHP-043 | — | MISS | — |
+| PHP-044 | — | MISS | — |
+| PHP-045 | — | MISS | — |
 | PHPX-001 | `core/gold-standard-testbed/final500_validation.py` | HIT | Marker (testbed) |
 | PHPX-002 | `core/gold-standard-testbed/final500_validation.py` | HIT | Marker (testbed) |
 | PHPX-003 | `core/gold-standard-testbed/final500_validation.py` | HIT | Marker (testbed) |
@@ -3474,6 +4117,71 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 | RSX-148 | `core/gold-standard-testbed/final500_validation.py` | HIT | Marker (testbed) |
 | RSX-149 | `core/gold-standard-testbed/final500_validation.py` | HIT | Marker (testbed) |
 | RSX-150 | `core/gold-standard-testbed/final500_validation.py` | HIT | Marker (testbed) |
+| RUB-001 | — | MISS | — |
+| RUB-002 | — | MISS | — |
+| RUB-003 | — | MISS | — |
+| RUB-004 | — | MISS | — |
+| RUB-005 | — | MISS | — |
+| RUB-006 | — | MISS | — |
+| RUB-007 | — | MISS | — |
+| RUB-008 | — | MISS | — |
+| RUB-009 | — | MISS | — |
+| RUB-010 | — | MISS | — |
+| RUB-011 | — | MISS | — |
+| RUB-012 | — | MISS | — |
+| RUB-013 | — | MISS | — |
+| RUB-014 | — | MISS | — |
+| RUB-015 | — | MISS | — |
+| RUB-016 | — | MISS | — |
+| RUB-017 | — | MISS | — |
+| RUB-018 | — | MISS | — |
+| RUB-019 | — | MISS | — |
+| RUB-020 | — | MISS | — |
+| RUB-021 | — | MISS | — |
+| RUB-022 | — | MISS | — |
+| RUB-023 | — | MISS | — |
+| RUB-024 | — | MISS | — |
+| RUB-025 | — | MISS | — |
+| RUB-026 | — | MISS | — |
+| RUB-027 | — | MISS | — |
+| RUB-028 | — | MISS | — |
+| RUB-029 | — | MISS | — |
+| RUB-030 | — | MISS | — |
+| RUB-031 | — | MISS | — |
+| RUB-032 | — | MISS | — |
+| RUB-033 | — | MISS | — |
+| RUB-034 | — | MISS | — |
+| RUB-035 | — | MISS | — |
+| RUB-036 | — | MISS | — |
+| RUB-037 | — | MISS | — |
+| RUB-038 | — | MISS | — |
+| RUB-039 | — | MISS | — |
+| RUB-040 | — | MISS | — |
+| RUB-041 | — | MISS | — |
+| RUB-042 | — | MISS | — |
+| RUB-043 | — | MISS | — |
+| RUB-044 | — | MISS | — |
+| RUB-045 | — | MISS | — |
+| RUB-046 | — | MISS | — |
+| RUB-047 | — | MISS | — |
+| RUB-048 | — | MISS | — |
+| RUB-049 | — | MISS | — |
+| RUB-050 | — | MISS | — |
+| RUB-051 | — | MISS | — |
+| RUB-052 | — | MISS | — |
+| RUB-053 | — | MISS | — |
+| RUB-054 | — | MISS | — |
+| RUB-055 | — | MISS | — |
+| RUB-056 | — | MISS | — |
+| RUB-057 | — | MISS | — |
+| RUB-058 | — | MISS | — |
+| RUB-059 | — | MISS | — |
+| RUB-060 | — | MISS | — |
+| RUB-061 | — | MISS | — |
+| RUB-062 | — | MISS | — |
+| RUB-063 | — | MISS | — |
+| RUB-064 | — | MISS | — |
+| RUB-065 | — | MISS | — |
 | RUBY-001 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | RUBY-002 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
 | RUBY-003 | `core/gold-standard-testbed/gap_fill_vulnerable.py` | HIT | Marker (testbed) |
@@ -4031,11 +4739,11 @@ A row is **HIT** when Semgrep reports the rule *or* a `Vulnerable: <ID>` marker 
 
 | Metric | Value |
 |---|---|
-| Rules expected | 4020 |
-| HIT | 4000 |
-| MISS | 20 |
+| Rules expected | 4728 |
+| HIT | 4056 |
+| MISS | 672 |
 | Semgrep + marker | 626 |
-| Semgrep only | 0 |
+| Semgrep only | 56 |
 | Marker only (Semgrep parse/skip) | 3374 |
 
 ## Compliance status (Paladin — OWASP / MITRE / NIST)
@@ -4049,8 +4757,8 @@ Per-rule tags are inferred from CWE tokens in `core/skills/*/patterns.md` (see `
 | A01 | 505 |
 | A02 | 110 |
 | A03 | 422 |
-| A04 | 1851 |
-| A05 | 325 |
+| A04 | 2471 |
+| A05 | 413 |
 | A06 | 34 |
 | A07 | 184 |
 | A08 | 336 |
@@ -4061,7 +4769,7 @@ Per-rule tags are inferred from CWE tokens in `core/skills/*/patterns.md` (see `
 
 | Technique | Rules |
 |---|---|
-| `T1190` | 2391 |
+| `T1190` | 3099 |
 | `T1098` | 457 |
 | `T1059` | 286 |
 | `T1059.004` | 237 |
@@ -4086,10 +4794,10 @@ Per-rule tags are inferred from CWE tokens in `core/skills/*/patterns.md` (see `
 
 | Practice | Description | Rules (heuristic) |
 |---|---|---|
-| PO.1 | Prepare the organization — development security requirements are defined and tracked | 4020 |
-| PO.3 | Produce well-secured software — minimize vulnerabilities in releases | 695 |
-| PS.1 | Protect all forms of code — supply chain and integrity controls | 1961 |
+| PO.1 | Prepare the organization — development security requirements are defined and tracked | 4728 |
+| PO.3 | Produce well-secured software — minimize vulnerabilities in releases | 783 |
+| PS.1 | Protect all forms of code — supply chain and integrity controls | 2581 |
 | PS.2 | Provide verified security requirements — threat modeling & secure design | 927 |
-| PS.3 | Architect & produce secure software — configuration and hardening | 382 |
+| PS.3 | Architect & produce secure software — configuration and hardening | 470 |
 | RB.1 | Review & assess security posture — assurance and monitoring | 254 |
 | RV.1 | Identify & respond to vulnerabilities — find, triage, remediate | 91 |
